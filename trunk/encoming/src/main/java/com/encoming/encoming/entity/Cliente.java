@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByEncomiendasEnviadas", query = "SELECT c FROM Cliente c WHERE c.encomiendasEnviadas = :encomiendasEnviadas"),
     @NamedQuery(name = "Cliente.findByEncomiendasRecibidas", query = "SELECT c FROM Cliente c WHERE c.encomiendasRecibidas = :encomiendasRecibidas"),
     @NamedQuery(name = "Cliente.findByPersonadocumento", query = "SELECT c FROM Cliente c WHERE c.clientePK.personadocumento = :personadocumento")})
-public class Cliente implements Serializable {
+public class Cliente extends Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ClientePK clientePK;

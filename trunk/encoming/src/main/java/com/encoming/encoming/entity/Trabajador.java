@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Trabajador.findByCodigo", query = "SELECT t FROM Trabajador t WHERE t.trabajadorPK.codigo = :codigo"),
     @NamedQuery(name = "Trabajador.findBySalario", query = "SELECT t FROM Trabajador t WHERE t.salario = :salario"),
     @NamedQuery(name = "Trabajador.findByPersonadocumento", query = "SELECT t FROM Trabajador t WHERE t.trabajadorPK.personadocumento = :personadocumento")})
-public class Trabajador implements Serializable {
+public class Trabajador extends Persona implements Serializable{
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected TrabajadorPK trabajadorPK;
@@ -50,7 +50,7 @@ public class Trabajador implements Serializable {
     @ManyToOne(optional = false)
     private Persona persona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trabajador")
-    private List<Administrador> administradorList;
+    private List<Counter> administradorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trabajador")
     private List<Counter> counterList;
 
@@ -104,11 +104,11 @@ public class Trabajador implements Serializable {
     }
 
     @XmlTransient
-    public List<Administrador> getAdministradorList() {
+    public List<Counter> getAdministradorList() {
         return administradorList;
     }
 
-    public void setAdministradorList(List<Administrador> administradorList) {
+    public void setAdministradorList(List<Counter> administradorList) {
         this.administradorList = administradorList;
     }
 
