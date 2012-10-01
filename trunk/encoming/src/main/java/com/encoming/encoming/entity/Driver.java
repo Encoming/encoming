@@ -45,10 +45,10 @@ public class Driver implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "license")
     private String license;
-    @JoinColumn(name = "Worker_idWorker", referencedColumnName = "idWorker")
+    @JoinColumn(name = "worker", referencedColumnName = "idWorker")
     @ManyToOne(optional = false)
-    private Worker workeridWorker;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driveridDriver")
+    private Worker worker;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
     private List<Vehicle> vehicleList;
 
     public Driver() {
@@ -79,12 +79,12 @@ public class Driver implements Serializable {
         this.license = license;
     }
 
-    public Worker getWorkeridWorker() {
-        return workeridWorker;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setWorkeridWorker(Worker workeridWorker) {
-        this.workeridWorker = workeridWorker;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     @XmlTransient

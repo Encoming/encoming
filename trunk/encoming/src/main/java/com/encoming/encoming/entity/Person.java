@@ -5,32 +5,28 @@
 package com.encoming.encoming.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author juanmanuelmartinezromero
  */
 @Entity
-@Table(name = "Person")
+@Table(name = "person")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByIdPerson", query = "SELECT p FROM Person p WHERE p.idPerson = :idPerson"),
-    @NamedQuery(name = "Person.findByNames", query = "SELECT p FROM Person p WHERE p.names = :names"),
+    @NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p WHERE p.name = :name"),
     @NamedQuery(name = "Person.findByLastanames", query = "SELECT p FROM Person p WHERE p.lastanames = :lastanames"),
     @NamedQuery(name = "Person.findByMail", query = "SELECT p FROM Person p WHERE p.mail = :mail"),
     @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
@@ -42,11 +38,9 @@ public class Person implements Serializable {
     @NotNull
     @Column(name = "idPerson")
     private Integer idPerson;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 25)
-    @Column(name = "names")
-    private String names;
+    @Size(max = 25)
+    @Column(name = "name")
+    private String name;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
@@ -60,10 +54,6 @@ public class Person implements Serializable {
     @Size(max = 25)
     @Column(name = "adress")
     private String adress;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
-    private List<Worker> workerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
-    private List<Client> clientList;
 
     public Person() {
     }
@@ -72,9 +62,8 @@ public class Person implements Serializable {
         this.idPerson = idPerson;
     }
 
-    public Person(Integer idPerson, String names, String lastanames) {
+    public Person(Integer idPerson, String lastanames) {
         this.idPerson = idPerson;
-        this.names = names;
         this.lastanames = lastanames;
     }
 
@@ -86,12 +75,12 @@ public class Person implements Serializable {
         this.idPerson = idPerson;
     }
 
-    public String getNames() {
-        return names;
+    public String getName() {
+        return name;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastanames() {
@@ -124,24 +113,6 @@ public class Person implements Serializable {
 
     public void setAdress(String adress) {
         this.adress = adress;
-    }
-
-    @XmlTransient
-    public List<Worker> getWorkerList() {
-        return workerList;
-    }
-
-    public void setWorkerList(List<Worker> workerList) {
-        this.workerList = workerList;
-    }
-
-    @XmlTransient
-    public List<Client> getClientList() {
-        return clientList;
-    }
-
-    public void setClientList(List<Client> clientList) {
-        this.clientList = clientList;
     }
 
     @Override

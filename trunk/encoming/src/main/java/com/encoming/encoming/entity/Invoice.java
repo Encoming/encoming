@@ -33,9 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Invoice.findByIdInvoice", query = "SELECT i FROM Invoice i WHERE i.idInvoice = :idInvoice"),
     @NamedQuery(name = "Invoice.findBySender", query = "SELECT i FROM Invoice i WHERE i.sender = :sender"),
     @NamedQuery(name = "Invoice.findByReceiver", query = "SELECT i FROM Invoice i WHERE i.receiver = :receiver"),
-    @NamedQuery(name = "Invoice.findByDate", query = "SELECT i FROM Invoice i WHERE i.date = :date"),
-    @NamedQuery(name = "Invoice.findByEncomiendaRutaidRuta", query = "SELECT i FROM Invoice i WHERE i.encomiendaRutaidRuta = :encomiendaRutaidRuta"),
-    @NamedQuery(name = "Invoice.findByEncomiendaClienteidCliente", query = "SELECT i FROM Invoice i WHERE i.encomiendaClienteidCliente = :encomiendaClienteidCliente")})
+    @NamedQuery(name = "Invoice.findByMoment", query = "SELECT i FROM Invoice i WHERE i.moment = :moment")})
 public class Invoice implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,22 +51,12 @@ public class Invoice implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "receiver")
     private String receiver;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date")
+    @Column(name = "moment")
     @Temporal(TemporalType.DATE)
-    private Date date;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Encomienda_Ruta_idRuta")
-    private int encomiendaRutaidRuta;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Encomienda_Cliente_idCliente")
-    private int encomiendaClienteidCliente;
-    @JoinColumn(name = "Encoming_idEncoming", referencedColumnName = "idEncoming")
+    private Date moment;
+    @JoinColumn(name = "encoming", referencedColumnName = "idEncoming")
     @ManyToOne(optional = false)
-    private Encoming encomingidEncoming;
+    private Encoming encoming;
 
     public Invoice() {
     }
@@ -77,13 +65,10 @@ public class Invoice implements Serializable {
         this.idInvoice = idInvoice;
     }
 
-    public Invoice(Integer idInvoice, String sender, String receiver, Date date, int encomiendaRutaidRuta, int encomiendaClienteidCliente) {
+    public Invoice(Integer idInvoice, String sender, String receiver) {
         this.idInvoice = idInvoice;
         this.sender = sender;
         this.receiver = receiver;
-        this.date = date;
-        this.encomiendaRutaidRuta = encomiendaRutaidRuta;
-        this.encomiendaClienteidCliente = encomiendaClienteidCliente;
     }
 
     public Integer getIdInvoice() {
@@ -110,36 +95,20 @@ public class Invoice implements Serializable {
         this.receiver = receiver;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getMoment() {
+        return moment;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMoment(Date moment) {
+        this.moment = moment;
     }
 
-    public int getEncomiendaRutaidRuta() {
-        return encomiendaRutaidRuta;
+    public Encoming getEncoming() {
+        return encoming;
     }
 
-    public void setEncomiendaRutaidRuta(int encomiendaRutaidRuta) {
-        this.encomiendaRutaidRuta = encomiendaRutaidRuta;
-    }
-
-    public int getEncomiendaClienteidCliente() {
-        return encomiendaClienteidCliente;
-    }
-
-    public void setEncomiendaClienteidCliente(int encomiendaClienteidCliente) {
-        this.encomiendaClienteidCliente = encomiendaClienteidCliente;
-    }
-
-    public Encoming getEncomingidEncoming() {
-        return encomingidEncoming;
-    }
-
-    public void setEncomingidEncoming(Encoming encomingidEncoming) {
-        this.encomingidEncoming = encomingidEncoming;
+    public void setEncoming(Encoming encoming) {
+        this.encoming = encoming;
     }
 
     @Override

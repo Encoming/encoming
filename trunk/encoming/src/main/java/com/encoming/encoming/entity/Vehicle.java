@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Vehicle.findByManufacturer", query = "SELECT v FROM Vehicle v WHERE v.manufacturer = :manufacturer"),
     @NamedQuery(name = "Vehicle.findByModel", query = "SELECT v FROM Vehicle v WHERE v.model = :model"),
     @NamedQuery(name = "Vehicle.findByCapacity", query = "SELECT v FROM Vehicle v WHERE v.capacity = :capacity"),
-    @NamedQuery(name = "Vehicle.findByState", query = "SELECT v FROM Vehicle v WHERE v.state = :state")})
+    @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status")})
 public class Vehicle implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -64,13 +64,13 @@ public class Vehicle implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "state")
-    private String state;
+    @Column(name = "status")
+    private String status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle")
     private List<Encoming> encomingList;
-    @JoinColumn(name = "Driver_idDriver", referencedColumnName = "idDriver")
+    @JoinColumn(name = "driver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
-    private Driver driveridDriver;
+    private Driver driver;
 
     public Vehicle() {
     }
@@ -79,13 +79,13 @@ public class Vehicle implements Serializable {
         this.vehiclePK = vehiclePK;
     }
 
-    public Vehicle(VehiclePK vehiclePK, String type, String manufacturer, String model, int capacity, String state) {
+    public Vehicle(VehiclePK vehiclePK, String type, String manufacturer, String model, int capacity, String status) {
         this.vehiclePK = vehiclePK;
         this.type = type;
         this.manufacturer = manufacturer;
         this.model = model;
         this.capacity = capacity;
-        this.state = state;
+        this.status = status;
     }
 
     public Vehicle(int plateNumber, String plateLetters) {
@@ -132,12 +132,12 @@ public class Vehicle implements Serializable {
         this.capacity = capacity;
     }
 
-    public String getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @XmlTransient
@@ -149,12 +149,12 @@ public class Vehicle implements Serializable {
         this.encomingList = encomingList;
     }
 
-    public Driver getDriveridDriver() {
-        return driveridDriver;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setDriveridDriver(Driver driveridDriver) {
-        this.driveridDriver = driveridDriver;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     @Override

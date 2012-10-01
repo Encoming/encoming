@@ -4,7 +4,10 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.ClientVo;
+import com.encoming.encoming.vo.EncomingVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -31,40 +34,31 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
     @NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient"),
-    @NamedQuery(name = "Client.findBySendedEncomiendas", query = "SELECT c FROM Client c WHERE c.sendedEncomiendas = :sendedEncomiendas"),
-    @NamedQuery(name = "Client.findByReceivedEncomiendas", query = "SELECT c FROM Client c WHERE c.receivedEncomiendas = :receivedEncomiendas")})
-public class Client implements Serializable {
+    @NamedQuery(name = "Client.findBySendedEncoming", query = "SELECT c FROM Client c WHERE c.sendedEncoming = :sendedEncoming"),
+    @NamedQuery(name = "Client.findByReceivedEncoming", query = "SELECT c FROM Client c WHERE c.receivedEncoming = :receivedEncoming")})
+public class Client implements Serializable, IEntity<ClientVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "idClient")
     private Integer idClient;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sendedEncomiendas")
-    private int sendedEncomiendas;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "receivedEncomiendas")
-    private int receivedEncomiendas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientidClient")
+    @Column(name = "sendedEncoming")
+    private Integer sendedEncoming;
+    @Column(name = "receivedEncoming")
+    private Integer receivedEncoming;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<Encoming> encomingList;
-    @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
+    @JoinColumn(name = "person", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)
-    private Person personidPerson;
+    private Person person;
 
     public Client() {
     }
 
     public Client(Integer idClient) {
         this.idClient = idClient;
-    }
-
-    public Client(Integer idClient, int sendedEncomiendas, int receivedEncomiendas) {
-        this.idClient = idClient;
-        this.sendedEncomiendas = sendedEncomiendas;
-        this.receivedEncomiendas = receivedEncomiendas;
     }
 
     public Integer getIdClient() {
@@ -75,20 +69,20 @@ public class Client implements Serializable {
         this.idClient = idClient;
     }
 
-    public int getSendedEncomiendas() {
-        return sendedEncomiendas;
+    public Integer getSendedEncoming() {
+        return sendedEncoming;
     }
 
-    public void setSendedEncomiendas(int sendedEncomiendas) {
-        this.sendedEncomiendas = sendedEncomiendas;
+    public void setSendedEncoming(Integer sendedEncoming) {
+        this.sendedEncoming = sendedEncoming;
     }
 
-    public int getReceivedEncomiendas() {
-        return receivedEncomiendas;
+    public Integer getReceivedEncoming() {
+        return receivedEncoming;
     }
 
-    public void setReceivedEncomiendas(int receivedEncomiendas) {
-        this.receivedEncomiendas = receivedEncomiendas;
+    public void setReceivedEncoming(Integer receivedEncoming) {
+        this.receivedEncoming = receivedEncoming;
     }
 
     @XmlTransient
@@ -100,12 +94,12 @@ public class Client implements Serializable {
         this.encomingList = encomingList;
     }
 
-    public Person getPersonidPerson() {
-        return personidPerson;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonidPerson(Person personidPerson) {
-        this.personidPerson = personidPerson;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override
@@ -132,5 +126,19 @@ public class Client implements Serializable {
     public String toString() {
         return "com.encoming.encoming.entity.Client[ idClient=" + idClient + " ]";
     }
-    
+
+    @Override
+    public ClientVo toVo() {
+        ClientVo clientVo = new ClientVo();
+        List<EncomingVo> encomingVos = new ArrayList<EncomingVo>();
+        for (Encoming entity : getEncomingList()) {
+            encomingVos.add(entity.toVo());
+        }
+        clientVo.setEncomingList(encomingVos);
+        clientVo.setIdClient(getIdClient());
+        clientVo.setIdPerson(getPerson().getIdPerson());
+        clientVo.setReceivedEncoming(getReceivedEncoming());
+        clientVo.setSendedEncoming(getSendedEncoming());
+        return clientVo;
+    }
 }

@@ -5,6 +5,7 @@
 package com.encoming.encoming.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,7 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Worker.findAll", query = "SELECT w FROM Worker w"),
     @NamedQuery(name = "Worker.findByIdWorker", query = "SELECT w FROM Worker w WHERE w.idWorker = :idWorker"),
-    @NamedQuery(name = "Worker.findBySalario", query = "SELECT w FROM Worker w WHERE w.salario = :salario")})
+    @NamedQuery(name = "Worker.findBySalary", query = "SELECT w FROM Worker w WHERE w.salary = :salary")})
 public class Worker implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,17 +40,15 @@ public class Worker implements Serializable {
     @NotNull
     @Column(name = "idWorker")
     private Integer idWorker;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "salario")
-    private String salario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workeridWorker")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "salary")
+    private BigDecimal salary;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "worker")
     private List<Driver> driverList;
-    @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
+    @JoinColumn(name = "person", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)
-    private Person personidPerson;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workeridWorker")
+    private Person person;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "worker")
     private List<Administrator> administratorList;
 
     public Worker() {
@@ -58,11 +56,6 @@ public class Worker implements Serializable {
 
     public Worker(Integer idWorker) {
         this.idWorker = idWorker;
-    }
-
-    public Worker(Integer idWorker, String salario) {
-        this.idWorker = idWorker;
-        this.salario = salario;
     }
 
     public Integer getIdWorker() {
@@ -73,12 +66,12 @@ public class Worker implements Serializable {
         this.idWorker = idWorker;
     }
 
-    public String getSalario() {
-        return salario;
+    public BigDecimal getSalary() {
+        return salary;
     }
 
-    public void setSalario(String salario) {
-        this.salario = salario;
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
     }
 
     @XmlTransient
@@ -90,12 +83,12 @@ public class Worker implements Serializable {
         this.driverList = driverList;
     }
 
-    public Person getPersonidPerson() {
-        return personidPerson;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonidPerson(Person personidPerson) {
-        this.personidPerson = personidPerson;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @XmlTransient

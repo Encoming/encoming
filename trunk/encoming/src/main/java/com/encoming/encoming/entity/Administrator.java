@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.AdministratorVo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -32,9 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Administrator.findAll", query = "SELECT a FROM Administrator a"),
     @NamedQuery(name = "Administrator.findByIdAdministrator", query = "SELECT a FROM Administrator a WHERE a.idAdministrator = :idAdministrator"),
-    @NamedQuery(name = "Administrator.findByUser", query = "SELECT a FROM Administrator a WHERE a.user = :user"),
+    @NamedQuery(name = "Administrator.findByUsername", query = "SELECT a FROM Administrator a WHERE a.username = :username"),
     @NamedQuery(name = "Administrator.findByPassword", query = "SELECT a FROM Administrator a WHERE a.password = :password")})
-public class Administrator implements Serializable {
+public class Administrator implements Serializable, IEntity<AdministratorVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,18 +46,18 @@ public class Administrator implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "user")
-    private String user;
+    @Column(name = "username")
+    private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "administratoridAdministrator")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "administrator")
     private List<Encoming> encomingList;
-    @JoinColumn(name = "Worker_idWorker", referencedColumnName = "idWorker")
+    @JoinColumn(name = "worker", referencedColumnName = "idWorker")
     @ManyToOne(optional = false)
-    private Worker workeridWorker;
+    private Worker worker;
 
     public Administrator() {
     }
@@ -64,9 +66,9 @@ public class Administrator implements Serializable {
         this.idAdministrator = idAdministrator;
     }
 
-    public Administrator(Integer idAdministrator, String user, String password) {
+    public Administrator(Integer idAdministrator, String username, String password) {
         this.idAdministrator = idAdministrator;
-        this.user = user;
+        this.username = username;
         this.password = password;
     }
 
@@ -78,12 +80,12 @@ public class Administrator implements Serializable {
         this.idAdministrator = idAdministrator;
     }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -103,12 +105,12 @@ public class Administrator implements Serializable {
         this.encomingList = encomingList;
     }
 
-    public Worker getWorkeridWorker() {
-        return workeridWorker;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setWorkeridWorker(Worker workeridWorker) {
-        this.workeridWorker = workeridWorker;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     @Override
@@ -135,5 +137,15 @@ public class Administrator implements Serializable {
     public String toString() {
         return "com.encoming.encoming.entity.Administrator[ idAdministrator=" + idAdministrator + " ]";
     }
-    
+
+    @Override
+    public AdministratorVo toVo() {
+        AdministratorVo administratorVo = new AdministratorVo();
+        administratorVo.setIdAdministrator(getIdAdministrator());
+        administratorVo.setIdWorker(getWorker().getIdWorker());
+        administratorVo.setPassword(getPassword());
+        administratorVo.setUsername(getUsername());
+        return administratorVo;
+
+    }
 }

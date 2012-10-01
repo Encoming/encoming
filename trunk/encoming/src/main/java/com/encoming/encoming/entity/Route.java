@@ -16,7 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,8 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Route.findAll", query = "SELECT r FROM Route r"),
     @NamedQuery(name = "Route.findByIdRoute", query = "SELECT r FROM Route r WHERE r.idRoute = :idRoute"),
     @NamedQuery(name = "Route.findByNumberKilometers", query = "SELECT r FROM Route r WHERE r.numberKilometers = :numberKilometers"),
-    @NamedQuery(name = "Route.findByNumberTolls", query = "SELECT r FROM Route r WHERE r.numberTolls = :numberTolls"),
-    @NamedQuery(name = "Route.findByPointsList", query = "SELECT r FROM Route r WHERE r.pointsList = :pointsList")})
+    @NamedQuery(name = "Route.findByNumberTolls", query = "SELECT r FROM Route r WHERE r.numberTolls = :numberTolls")})
 public class Route implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,13 +46,10 @@ public class Route implements Serializable {
     @NotNull
     @Column(name = "numberTolls")
     private int numberTolls;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "pointsList")
-    private String pointsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeidRoute")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
     private List<Encoming> encomingList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
+    private List<Point> pointList;
 
     public Route() {
     }
@@ -63,11 +58,10 @@ public class Route implements Serializable {
         this.idRoute = idRoute;
     }
 
-    public Route(Integer idRoute, int numberKilometers, int numberTolls, String pointsList) {
+    public Route(Integer idRoute, int numberKilometers, int numberTolls) {
         this.idRoute = idRoute;
         this.numberKilometers = numberKilometers;
         this.numberTolls = numberTolls;
-        this.pointsList = pointsList;
     }
 
     public Integer getIdRoute() {
@@ -94,14 +88,6 @@ public class Route implements Serializable {
         this.numberTolls = numberTolls;
     }
 
-    public String getPointsList() {
-        return pointsList;
-    }
-
-    public void setPointsList(String pointsList) {
-        this.pointsList = pointsList;
-    }
-
     @XmlTransient
     public List<Encoming> getEncomingList() {
         return encomingList;
@@ -109,6 +95,15 @@ public class Route implements Serializable {
 
     public void setEncomingList(List<Encoming> encomingList) {
         this.encomingList = encomingList;
+    }
+
+    @XmlTransient
+    public List<Point> getPointList() {
+        return pointList;
+    }
+
+    public void setPointList(List<Point> pointList) {
+        this.pointList = pointList;
     }
 
     @Override
