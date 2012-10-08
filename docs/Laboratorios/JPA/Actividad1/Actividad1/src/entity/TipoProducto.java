@@ -35,7 +35,7 @@ public class TipoProducto implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tiposProductoID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoProducto")
     private List<Producto> productosList;
 
     public TipoProducto() {
@@ -66,7 +66,7 @@ public class TipoProducto implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Producto> getProductoList() {
+    public List<Producto> getProductosList() {
         return productosList;
     }
 

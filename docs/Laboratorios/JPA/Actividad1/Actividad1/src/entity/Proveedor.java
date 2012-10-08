@@ -47,8 +47,8 @@ public class Proveedor implements Serializable {
     @Basic(optional = false)
     @Column(name = "EMAIL")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedoresID")
-    private List<ProductoMateriaPrima> productosMateriaPrimaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
+    private List<ProductoMateriaPrima> productosMateriasPrimasList;
 
     public Proveedor() {
     }
@@ -105,12 +105,12 @@ public class Proveedor implements Serializable {
         this.email = email;
     }
 
-    public List<ProductoMateriaPrima> getProductoMateriaPrimaList() {
-        return productosMateriaPrimaList;
+    public List<ProductoMateriaPrima> getProductosMateriasPrimasList() {
+        return productosMateriasPrimasList;
     }
 
-    public void setProductoMateriaPrimaList(List<ProductoMateriaPrima> productosMateriaPrimaList) {
-        this.productosMateriaPrimaList = productosMateriaPrimaList;
+    public void setProductoMateriaPrimaList(List<ProductoMateriaPrima> productosMateriasPrimasList) {
+        this.productosMateriasPrimasList = productosMateriasPrimasList;
     }
 
     @Override

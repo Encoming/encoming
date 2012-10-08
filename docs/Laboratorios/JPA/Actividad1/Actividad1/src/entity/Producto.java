@@ -55,10 +55,10 @@ public class Producto implements Serializable {
         @JoinColumn(name = "Producto_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "Materia_Prima_ID", referencedColumnName = "ID")})
     @ManyToMany
-    private List<ProductoMateriaPrima> productosMateriaPrimaList;
+    private List<ProductoMateriaPrima> productosMateriasPrimasList;
     @JoinColumn(name = "Tipo_Producto_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private TipoProducto tiposProductoID;
+    private TipoProducto tipoProducto;
 
     public Producto() {
     }
@@ -119,24 +119,24 @@ public class Producto implements Serializable {
         return facturasList;
     }
 
-    public void setFacturaList(List<Factura> facturasList) {
-        this.facturasList = facturasList;
+    public void setFacturaList(List<Factura> facturaList) {
+        this.facturasList = facturaList;
     }
 
     public List<ProductoMateriaPrima> getProductoMateriaPrimaList() {
-        return productosMateriaPrimaList;
+        return productosMateriasPrimasList;
     }
 
-    public void setProductoMateriaPrimaList(List<ProductoMateriaPrima> productosMateriaPrimaList) {
-        this.productosMateriaPrimaList = productosMateriaPrimaList;
+    public void setProductoMateriaPrimaList(List<ProductoMateriaPrima> productoMateriaPrimaList) {
+        this.productosMateriasPrimasList = productoMateriaPrimaList;
     }
 
-    public TipoProducto getTipoProductoID() {
-        return tiposProductoID;
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
     }
 
-    public void setTipoProductoID(TipoProducto tiposProductoID) {
-        this.tiposProductoID = tiposProductoID;
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
 
     @Override

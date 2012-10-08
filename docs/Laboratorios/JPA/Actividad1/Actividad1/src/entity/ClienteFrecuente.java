@@ -41,7 +41,7 @@ public class ClienteFrecuente implements Serializable {
     //@ManyToOne(optional = false)
     @OneToOne
     @JoinColumn(name="clienteFrecuente")
-    private Cliente clientesID;
+    private Cliente cliente;
 
     public ClienteFrecuente() {
     }
@@ -74,12 +74,12 @@ public class ClienteFrecuente implements Serializable {
         this.direccion = direccion;
     }
 
-    public Cliente getClienteID() {
-        return clientesID;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteID(Cliente clientesID) {
-        this.clientesID = clientesID;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

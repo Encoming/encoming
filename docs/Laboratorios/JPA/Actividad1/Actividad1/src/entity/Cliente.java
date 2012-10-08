@@ -68,7 +68,7 @@ public class Cliente implements Serializable {
     @Column(name = "EMAIL")
     private String email;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientesID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Factura> facturasList;
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "clientesID")
     //@OneToOne
@@ -131,7 +131,7 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    public List<Factura> getFacturaList() {
+    public List<Factura> getFacturasList() {
         return getFacturasList();
     }
 
@@ -162,13 +162,6 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "entity.Cliente[ id=" + getId() + " ]";
-    }
-
-    /**
-     * @return the facturasList
-     */
-    public List<Factura> getFacturasList() {
-        return facturasList;
     }
 
     /**

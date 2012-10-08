@@ -44,11 +44,11 @@ public class ProductoMateriaPrima implements Serializable {
     @Basic(optional = false)
     @Column(name = "PRECIO")
     private Long precio;
-    @ManyToMany(mappedBy = "productosMateriaPrimaList")
+    @ManyToMany(mappedBy = "productosMateriasPrimasList")
     private List<Producto> productosList;
     @JoinColumn(name = "Proveedor_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Proveedor proveedoresID;
+    private Proveedor proveedor;
 
     public ProductoMateriaPrima() {
     }
@@ -96,7 +96,7 @@ public class ProductoMateriaPrima implements Serializable {
         this.precio = precio;
     }
 
-    public List<Producto> getProductoList() {
+    public List<Producto> getProductosList() {
         return productosList;
     }
 
@@ -104,12 +104,12 @@ public class ProductoMateriaPrima implements Serializable {
         this.productosList = productosList;
     }
 
-    public Proveedor getProveedorID() {
-        return proveedoresID;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setProveedorID(Proveedor proveedoresID) {
-        this.proveedoresID = proveedoresID;
+    public void setProveedorID(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     @Override

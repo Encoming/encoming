@@ -48,7 +48,7 @@ public class Factura implements Serializable {
     private List<Producto> productosList;
     @JoinColumn(name = "Cliente_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Cliente clientesID;
+    private Cliente cliente;
 
     public Factura() {
     }
@@ -82,16 +82,16 @@ public class Factura implements Serializable {
         return productosList;
     }
 
-    public void setProductoList(List<Producto> productosList) {
-        this.productosList = productosList;
+    public void setProductoList(List<Producto> productoList) {
+        this.productosList = productoList;
     }
 
-    public Cliente getClienteID() {
-        return clientesID;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteID(Cliente clientesID) {
-        this.clientesID = clientesID;
+    public void setCliente(Cliente clientesID) {
+        this.cliente = clientesID;
     }
 
     @Override
