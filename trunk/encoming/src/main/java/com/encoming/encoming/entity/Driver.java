@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Driver.findAll", query = "SELECT d FROM Driver d"),
     @NamedQuery(name = "Driver.findByIdDriver", query = "SELECT d FROM Driver d WHERE d.idDriver = :idDriver"),
     @NamedQuery(name = "Driver.findByLicense", query = "SELECT d FROM Driver d WHERE d.license = :license")})
-public class Driver implements Serializable {
+public class Driver extends Worker implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

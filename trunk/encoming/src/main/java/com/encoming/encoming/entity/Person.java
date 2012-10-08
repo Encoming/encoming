@@ -9,6 +9,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -20,8 +23,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author juanmanuelmartinezromero
  */
-@Entity
-@Table(name = "person")
+//@Entity
+//@Table(name = "person")
+@MappedSuperclass
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
@@ -31,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Person.findByMail", query = "SELECT p FROM Person p WHERE p.mail = :mail"),
     @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
     @NamedQuery(name = "Person.findByAdress", query = "SELECT p FROM Person p WHERE p.adress = :adress")})
-public class Person implements Serializable {
+public abstract class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
