@@ -5,6 +5,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -15,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import vo.ProductoMateriaPrimaVo;
+import vo.ProveedorVo;
 
 /**
  *
@@ -29,7 +32,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Proveedor.findByTelefono", query = "SELECT p FROM Proveedor p WHERE p.telefono = :telefono"),
     @NamedQuery(name = "Proveedor.findByDireccion", query = "SELECT p FROM Proveedor p WHERE p.direccion = :direccion"),
     @NamedQuery(name = "Proveedor.findByEmail", query = "SELECT p FROM Proveedor p WHERE p.email = :email")})
-public class Proveedor implements Serializable {
+public class Proveedor implements Serializable, IEntity<ProveedorVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -136,6 +139,23 @@ public class Proveedor implements Serializable {
     @Override
     public String toString() {
         return "entity.Proveedor[ id=" + id + " ]";
+    }
+
+    @Override
+    public ProveedorVo toVo() {
+        ProveedorVo proveedorVo=new ProveedorVo();
+        proveedorVo.setNombre(getNombre());
+        proveedorVo.setDireccion(getDireccion());
+        proveedorVo.setTelefono(getTelefono());
+        proveedorVo.setEmail(getEmail());
+        proveedorVo.setIdProveedor(getId());
+        List<ProductoMateriaPrimaVo> productosMateriasPrimasVos = new ArrayList<ProductoMateriaPrimaVo>();
+        for(ProductoMateriaPrima entity:getProductosMateriasPrimasList()){
+            productosMateriasPrimasVos.add(entity.toVo());
+        }
+        proveedorVo.setProductosMateriasPrimasList(productosMateriasPrimasVos);
+        
+        return null;
     }
     
 }

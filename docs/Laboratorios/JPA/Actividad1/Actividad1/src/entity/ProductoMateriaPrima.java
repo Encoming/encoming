@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import vo.ProductoMateriaPrimaVo;
 
 /**
  *
@@ -29,7 +30,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "ProductoMateriaPrima.findByNombre", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "ProductoMateriaPrima.findByCantidad", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.cantidad = :cantidad"),
     @NamedQuery(name = "ProductoMateriaPrima.findByPrecio", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.precio = :precio")})
-public class ProductoMateriaPrima implements Serializable {
+public class ProductoMateriaPrima implements Serializable, IEntity<ProductoMateriaPrimaVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -135,6 +136,11 @@ public class ProductoMateriaPrima implements Serializable {
     @Override
     public String toString() {
         return "entity.ProductoMateriaPrima[ id=" + id + " ]";
+    }
+
+    @Override
+    public ProductoMateriaPrimaVo toVo() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
