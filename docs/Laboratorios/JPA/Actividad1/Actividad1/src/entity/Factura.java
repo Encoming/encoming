@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import vo.FacturaVo;
 
 /**
  *
@@ -31,7 +32,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f"),
     @NamedQuery(name = "Factura.findById", query = "SELECT f FROM Factura f WHERE f.id = :id"),
     @NamedQuery(name = "Factura.findByFecha", query = "SELECT f FROM Factura f WHERE f.fecha = :fecha")})
-public class Factura implements Serializable {
+public class Factura implements Serializable, IEntity<FacturaVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -117,6 +118,11 @@ public class Factura implements Serializable {
     @Override
     public String toString() {
         return "entity.Factura[ id=" + id + " ]";
+    }
+
+    @Override
+    public FacturaVo toVo() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

@@ -5,6 +5,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import vo.ClienteVo;
+import vo.FacturaVo;
 
 /**
  *
@@ -30,7 +33,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Cliente.findByDocumento", query = "SELECT c FROM Cliente c WHERE c.documento = :documento"),
     @NamedQuery(name = "Cliente.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono"),
     @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")})
-public class Cliente implements Serializable {
+public class Cliente implements Serializable, IEntity<ClienteVo> {
     private static long serialVersionUID = 1L;
 
     /**
@@ -183,6 +186,25 @@ public class Cliente implements Serializable {
      */
     public void setClienteFrecuente(ClienteFrecuente clienteFrecuente) {
         this.clienteFrecuente = clienteFrecuente;
+    }
+
+    @Override
+    public ClienteVo toVo() {
+        ClienteVo clienteVo = new ClienteVo();
+        clienteVo.setClienteFrecuenteId(getClienteFrecuente().getId());
+        clienteVo.setDocumento(getDocumento());
+        clienteVo.setEmail(getEmail());
+        
+        List<FacturaVo> facturaVos = new ArrayList<FacturaVo>();
+        for (Factura entity:getFacturasList()){
+            facturaVos.add(entity.toVo());
+        }
+        
+        clienteVo.setFacturasList(facturaVos);
+        clienteVo.setId(getId());
+        clienteVo.setNombreCompleto(getNombreCompleto());
+        clienteVo.setTelefono(getTelefono());
+        return clienteVo;
     }
     
 }
