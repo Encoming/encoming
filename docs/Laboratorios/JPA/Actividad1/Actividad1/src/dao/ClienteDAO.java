@@ -25,7 +25,7 @@ public class ClienteDAO implements IDAO<Cliente> {
 
     @Override
     public void persist(Cliente entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }
 
     @Override

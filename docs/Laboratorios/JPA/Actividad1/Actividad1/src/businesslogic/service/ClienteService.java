@@ -4,6 +4,8 @@
  */
 package businesslogic.service;
 
+import dao.DAOFactory;
+import entity.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import vo.ClienteVo;
@@ -24,8 +26,15 @@ public class ClienteService implements IService<ClienteVo> {
     }
 
     @Override
-    public void persist(ClienteVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void create(ClienteVo vo, EntityManager em) {
+        Cliente entity = new Cliente();
+        entity.setDocumento(vo.getDocumento());
+        entity.setEmail(vo.getEmail());
+        entity.setId(vo.getId());
+        entity.setNombreCompleto(vo.getNombreCompleto());
+        entity.setTelefono(vo.getTelefono());
+        
+        DAOFactory.getInstance().getClienteDAO().persist(entity, em);
     }
 
     @Override

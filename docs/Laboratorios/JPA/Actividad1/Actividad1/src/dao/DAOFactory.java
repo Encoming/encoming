@@ -10,7 +10,7 @@ package dao;
  */
 public class DAOFactory {
 
-    public ClienteDAO getAdministratorDAO() {
+    public ClienteDAO getClienteDAO() {
         return ClienteDAO.getInstance();
     }
     private static DAOFactory instance;

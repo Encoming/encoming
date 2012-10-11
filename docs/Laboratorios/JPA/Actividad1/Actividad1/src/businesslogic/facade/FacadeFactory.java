@@ -13,7 +13,7 @@ import businesslogic.service.ServiceFactory;
  */
 public class FacadeFactory {
 
-    private String PU = "Actividad1PU";
+    private String PU = "ActividadPU";
     private static FacadeFactory instance;
 
     public static synchronized FacadeFactory getInstance() {
