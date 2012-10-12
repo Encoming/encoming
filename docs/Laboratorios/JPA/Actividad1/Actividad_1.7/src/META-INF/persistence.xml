@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="Actividad_1.7PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entity.Cliente</class>
+    <class>entity.ClienteFrecuente</class>
+    <class>entity.Factura</class>
+    <class>entity.Producto</class>
+    <class>entity.ProductoMateriaPrima</class>
+    <class>entity.Proveedor</class>
+    <class>entity.TipoProducto</class>
+    <class>entity.ProductosMateriasPrimas</class>
+    <class>entity.Clientes</class>
+    <class>entity.Proveedores</class>
+    <class>entity.TiposProductos</class>
+    <class>entity.Productos</class>
+    <class>entity.Facturas</class>
+    <class>entity.ClientesFrecuentes</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Actividad1_7?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>
