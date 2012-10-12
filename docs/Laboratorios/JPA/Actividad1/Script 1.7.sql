@@ -122,9 +122,10 @@ CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Facturas_Productos` (
   `Facturas_ID` INT(10) NOT NULL ,
   `Productos_ID` INT(10) NOT NULL ,
   `cantidad` INT(10) NOT NULL ,
-  PRIMARY KEY (`Facturas_ID`, `Productos_ID`) ,
+  `Facturas_Productos_ID` INT(10) NOT NULL ,
   INDEX `fk_Facturas_has_Productos_Productos1_idx` (`Productos_ID` ASC) ,
   INDEX `fk_Facturas_has_Productos_Facturas1_idx` (`Facturas_ID` ASC) ,
+  PRIMARY KEY (`Facturas_Productos_ID`) ,
   CONSTRAINT `fk_Facturas_has_Productos_Facturas1`
     FOREIGN KEY (`Facturas_ID` )
     REFERENCES `Actividad1_7`.`Facturas` (`ID` )
@@ -143,9 +144,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Materias_Primas` (
   `Productos_ID` INT(10) NOT NULL ,
+  `Productos_Materias_Primas_ID` INT(10) NOT NULL ,
   `Materias_Primas_ID` INT(10) NOT NULL ,
-  PRIMARY KEY (`Productos_ID`, `Materias_Primas_ID`) ,
-  INDEX `fk_Productos_has_Materias_Primas_Materias_Primas1_idx` (`Materias_Primas_ID` ASC) ,
+  PRIMARY KEY (`Materias_Primas_ID`) ,
+  INDEX `fk_Productos_has_Materias_Primas_Materias_Primas1_idx` (`Productos_Materias_Primas_ID` ASC) ,
   INDEX `fk_Productos_has_Materias_Primas_Productos1_idx` (`Productos_ID` ASC) ,
   CONSTRAINT `fk_Productos_has_Materias_Primas_Productos1`
     FOREIGN KEY (`Productos_ID` )
@@ -153,7 +155,7 @@ CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Materias_Primas` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Productos_has_Materias_Primas_Materias_Primas1`
-    FOREIGN KEY (`Materias_Primas_ID` )
+    FOREIGN KEY (`Productos_Materias_Primas_ID` )
     REFERENCES `Actividad1_7`.`Productos_Materias_Primas` (`ID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -165,11 +167,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Proveedores_has_Materias_Primas` (
   `Proveedores_ID` INT(10) NOT NULL ,
-  `Materias_Primas_Productos_ID` INT(10) NOT NULL ,
-  `Materias_Primas_Materias_Primas_ID` INT(10) NOT NULL ,
+  `Materias_Primas_ID` INT(10) NOT NULL ,
+  `Proveedores_has_Materias_Primas_ID` INT(10) NOT NULL ,
   `precio` BIGINT(20) NOT NULL ,
-  PRIMARY KEY (`Proveedores_ID`, `Materias_Primas_Productos_ID`, `Materias_Primas_Materias_Primas_ID`) ,
-  INDEX `fk_Proveedores_has_Materias_Primas_Materias_Primas1_idx` (`Materias_Primas_Productos_ID` ASC, `Materias_Primas_Materias_Primas_ID` ASC) ,
+  PRIMARY KEY (`Proveedores_has_Materias_Primas_ID`) ,
+  INDEX `fk_Proveedores_has_Materias_Primas_Materias_Primas1_idx` (`Materias_Primas_ID` ASC) ,
   INDEX `fk_Proveedores_has_Materias_Primas_Proveedores1_idx` (`Proveedores_ID` ASC) ,
   CONSTRAINT `fk_Proveedores_has_Materias_Primas_Proveedores1`
     FOREIGN KEY (`Proveedores_ID` )
@@ -177,8 +179,8 @@ CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Proveedores_has_Materias_Primas` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Proveedores_has_Materias_Primas_Materias_Primas1`
-    FOREIGN KEY (`Materias_Primas_Productos_ID` , `Materias_Primas_Materias_Primas_ID` )
-    REFERENCES `Actividad1_7`.`Materias_Primas` (`Productos_ID` , `Materias_Primas_ID` )
+    FOREIGN KEY (`Materias_Primas_ID` )
+    REFERENCES `Actividad1_7`.`Materias_Primas` (`Materias_Primas_ID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
