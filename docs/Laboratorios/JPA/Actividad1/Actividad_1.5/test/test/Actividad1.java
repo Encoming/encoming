@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 public class Actividad1 {
 
     public void agregarCliente(Cliente cliente) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Actividad1PU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Actividad_1.5PU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
