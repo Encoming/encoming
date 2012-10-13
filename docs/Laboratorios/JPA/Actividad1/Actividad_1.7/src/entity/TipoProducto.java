@@ -27,6 +27,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "TiposProductos.findById", query = "SELECT t FROM TipoProducto t WHERE t.id = :id"),
     @NamedQuery(name = "TiposProductos.findByNombre", query = "SELECT t FROM TipoProducto t WHERE t.nombre = :nombre")})
 public class TipoProducto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -35,7 +36,7 @@ public class TipoProducto implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tiposProducto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoProducto")
     private List<Producto> productos;
 
     public TipoProducto() {
@@ -98,5 +99,4 @@ public class TipoProducto implements Serializable {
     public String toString() {
         return "entity.TiposProductos[ id=" + id + " ]";
     }
-    
 }

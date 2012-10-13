@@ -33,6 +33,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Productos.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta"),
     @NamedQuery(name = "Productos.findByUnidad", query = "SELECT p FROM Producto p WHERE p.unidad = :unidad")})
 public class Producto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,15 +50,14 @@ public class Producto implements Serializable {
     private Long precioVenta;
     @Basic(optional = false)
     @Column(name = "UNIDAD")
-    private String unidad; 
+    private String unidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<Factura_Producto> factura_ProductoList;
-    @ManyToMany(mappedBy = "productosList")
-    private List<ProductoMateriaPrima> productosMateriasPrimasList;
-    
     @JoinColumn(name = "Tipos_Productos_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private TipoProducto tiposProducto;
+    private TipoProducto tipoProducto;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<MateriaPrima> materiasPrimasList;
 
     public Producto() {
     }
@@ -123,27 +123,27 @@ public class Producto implements Serializable {
     }
 
     public TipoProducto getTiposProducto() {
-        return tiposProducto;
+        return tipoProducto;
     }
 
     public void setTiposProducto(TipoProducto tiposProducto) {
-        this.tiposProducto = tiposProducto;
+        this.tipoProducto = tiposProducto;
     }
 
-    public List<ProductoMateriaPrima> getProductosMateriasPrimasList() {
-        return productosMateriasPrimasList;
+    public List<MateriaPrima> getMateriasPrimasList() {
+        return materiasPrimasList;
     }
 
-    public void setProductosMateriasPrimasList(List<ProductoMateriaPrima> productosMateriasPrimasList) {
-        this.productosMateriasPrimasList = productosMateriasPrimasList;
+    public void setMateriasPrimasList(List<MateriaPrima> materiasPrimasList) {
+        this.materiasPrimasList = materiasPrimasList;
     }
 
     public TipoProducto getTipoProducto() {
-        return tiposProducto;
+        return tipoProducto;
     }
 
     public void setTipoProducto(TipoProducto tipoProducto) {
-        this.tiposProducto = tipoProducto;
+        this.tipoProducto = tipoProducto;
     }
 
     @Override
@@ -170,5 +170,4 @@ public class Producto implements Serializable {
     public String toString() {
         return "entity.Productos[ id=" + id + " ]";
     }
-    
 }

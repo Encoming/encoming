@@ -7,6 +7,7 @@ package entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +33,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "ProductosMateriasPrimas.findByCantidad", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.cantidad = :cantidad"),
     @NamedQuery(name = "ProductosMateriasPrimas.findByPrecio", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.precio = :precio")})
 public class ProductoMateriaPrima implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -45,11 +48,8 @@ public class ProductoMateriaPrima implements Serializable {
     @Basic(optional = false)
     @Column(name = "PRECIO")
     private Long precio;
-    @JoinTable(name = "Materias_Primas", joinColumns = {
-        @JoinColumn(name = "Materias_Primas_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "Productos_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private List<Producto> productosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoMateriaPrima")
+    private List<MateriaPrima> materiasPrimasList;
     @JoinColumn(name = "Proveedores_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Proveedor proveedor;
@@ -100,12 +100,12 @@ public class ProductoMateriaPrima implements Serializable {
         this.precio = precio;
     }
 
-    public List<Producto> getProductosList() {
-        return productosList;
+    public List<MateriaPrima> getMateriasPrimasList() {
+        return materiasPrimasList;
     }
 
-    public void setProductosList(List<Producto> productosList) {
-        this.productosList = productosList;
+    public void setMateriasPrimasList(List<MateriaPrima> materiasPrimasList) {
+        this.materiasPrimasList = materiasPrimasList;
     }
 
     public Proveedor getProveedor() {
@@ -140,5 +140,4 @@ public class ProductoMateriaPrima implements Serializable {
     public String toString() {
         return "entity.ProductosMateriasPrimas[ id=" + id + " ]";
     }
-    
 }

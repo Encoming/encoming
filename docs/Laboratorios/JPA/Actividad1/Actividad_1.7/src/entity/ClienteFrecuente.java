@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -21,23 +22,27 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "clientes_frecuentes")
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamedQueries({
     @NamedQuery(name = "ClientesFrecuentes.findAll", query = "SELECT c FROM ClienteFrecuente c"),
     @NamedQuery(name = "ClientesFrecuentes.findById", query = "SELECT c FROM ClienteFrecuente c WHERE c.id = :id"),
     @NamedQuery(name = "ClientesFrecuentes.findByNumCuenta", query = "SELECT c FROM ClienteFrecuente c WHERE c.numCuenta = :numCuenta"),
     @NamedQuery(name = "ClientesFrecuentes.findByDireccion", query = "SELECT c FROM ClienteFrecuente c WHERE c.direccion = :direccion")})
-public class ClienteFrecuente extends Cliente implements Serializable {
+public class ClienteFrecuente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
     @Column(name = "NUM_CUENTA")
+    @Basic(optional = false)
     private String numCuenta;
     @Column(name = "DIRECCION")
+    @Basic(optional = false)
     private String direccion;
-
     @OneToOne
+    @JoinColumn(name = "Clientes_ID")
     private Cliente cliente;
 
     public ClienteFrecuente() {
@@ -45,6 +50,13 @@ public class ClienteFrecuente extends Cliente implements Serializable {
 
     public ClienteFrecuente(Integer id) {
         this.id = id;
+    }
+
+    public ClienteFrecuente(Integer id, String numCuenta, String direccion, Cliente cliente) {
+        this.id = id;
+        this.numCuenta = numCuenta;
+        this.direccion = direccion;
+        this.cliente = cliente;
     }
 
     public Integer getId() {
@@ -109,5 +121,4 @@ public class ClienteFrecuente extends Cliente implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
 }

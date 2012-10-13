@@ -16,6 +16,9 @@
     <class>entity.Productos</class>
     <class>entity.Facturas</class>
     <class>entity.ClientesFrecuentes</class>
+    <class>entity.Factura_Producto</class>
+    <class>entity.MateriaPrima</class>
+    <class>entity.ProveedorhasMateriaPrima</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Actividad1_7?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>

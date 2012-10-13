@@ -9,6 +9,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -25,6 +27,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "TIPO")
 @Table(name = "clientes")
 @NamedQueries({
     @NamedQuery(name = "Clientes.findAll", query = "SELECT c FROM Cliente c"),
@@ -34,6 +37,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Clientes.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono"),
     @NamedQuery(name = "Clientes.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")})
 public class Cliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -53,8 +57,8 @@ public class Cliente implements Serializable {
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Factura> facturas;
-    @OneToOne(mappedBy = "cliente")
-    private ClienteFrecuente clienteFrecuente;
+    @Column(name = "TIPO")
+    private String tipo;
 
     public Cliente() {
     }
@@ -111,8 +115,6 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-
-
     public List<Factura> getFacturas() {
         return facturas;
     }
@@ -145,19 +147,4 @@ public class Cliente implements Serializable {
     public String toString() {
         return "entity.Clientes[ id=" + id + " ]";
     }
-
-    /**
-     * @return the clienteFrecuente
-     */
-    public ClienteFrecuente getClienteFrecuente() {
-        return clienteFrecuente;
-    }
-
-    /**
-     * @param clienteFrecuente the clienteFrecuente to set
-     */
-    public void setClienteFrecuente(ClienteFrecuente clienteFrecuente) {
-        this.clienteFrecuente = clienteFrecuente;
-    }
-    
 }
