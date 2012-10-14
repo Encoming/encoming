@@ -9,6 +9,8 @@
     <class>entity.Proveedor</class>
     <class>entity.TipoProducto</class>
     <class>entity.MateriaPrima</class>
+    <class>entity.Factura_Producto</class>
+    <class>entity.ProveedorMateriaPrima</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Actividad1_7?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>

@@ -9,10 +9,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -21,16 +20,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "clientes_frecuentes")
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 @NamedQueries({
     @NamedQuery(name = "ClientesFrecuentes.findAll", query = "SELECT c FROM ClienteFrecuente c"),
     @NamedQuery(name = "ClientesFrecuentes.findById", query = "SELECT c FROM ClienteFrecuente c WHERE c.id = :id"),
     @NamedQuery(name = "ClientesFrecuentes.findByNumCuenta", query = "SELECT c FROM ClienteFrecuente c WHERE c.numCuenta = :numCuenta"),
     @NamedQuery(name = "ClientesFrecuentes.findByDireccion", query = "SELECT c FROM ClienteFrecuente c WHERE c.direccion = :direccion")})
-public class ClienteFrecuente implements Serializable {
+public class ClienteFrecuente extends Cliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID")
+    @Column(name = "Cliente_ID")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "NUM_CUENTA")
@@ -39,21 +40,20 @@ public class ClienteFrecuente implements Serializable {
     @Column(name = "DIRECCION")
     private String direccion;
 
-    @OneToOne
-    @JoinColumn(name = "Cliente_ID")
-    private Cliente cliente;
-
-    public ClienteFrecuente() {
-    }
-
-    public ClienteFrecuente(Integer id) {
+    public ClienteFrecuente(Integer id, String numCuenta, String direccion, String nombreCompleto, String documento, int telefono, String email) {
+        super(id, nombreCompleto, documento, telefono, email);
         this.id = id;
+        this.numCuenta = numCuenta;
+        this.direccion = direccion;
     }
-
+    
+    
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
@@ -98,19 +98,4 @@ public class ClienteFrecuente implements Serializable {
     public String toString() {
         return "entity.ClientesFrecuentes[ id=" + id + " ]";
     }
-
-    /**
-     * @return the cliente
-     */
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-    
 }
