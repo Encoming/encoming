@@ -35,7 +35,7 @@ public class TipoProducto implements Serializable {
     @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tiposProducto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoProducto")
     private List<Producto> productos;
 
     public TipoProducto() {

@@ -46,7 +46,7 @@ public class Factura implements Serializable {
         @JoinColumn(name = "Productos_ID", referencedColumnName = "ID")})
     @ManyToMany
     private List<Producto> productosList;
-    @JoinColumn(name = "Clientes_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "Cliente_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Cliente cliente;
 

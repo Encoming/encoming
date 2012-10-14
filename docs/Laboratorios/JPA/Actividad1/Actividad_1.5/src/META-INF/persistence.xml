@@ -6,9 +6,9 @@
     <class>entity.ClienteFrecuente</class>
     <class>entity.Factura</class>
     <class>entity.Producto</class>
-    <class>entity.ProductoMateriaPrima</class>
     <class>entity.Proveedor</class>
     <class>entity.TipoProducto</class>
+    <class>entity.MateriaPrima</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Actividad1?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>

@@ -22,14 +22,14 @@ import javax.persistence.Table;
  * @author Familia Martinez
  */
 @Entity
-@Table(name = "productos_materias_primas")
+@Table(name = "materias_primas")
 @NamedQueries({
-    @NamedQuery(name = "ProductosMateriasPrimas.findAll", query = "SELECT p FROM ProductoMateriaPrima p"),
-    @NamedQuery(name = "ProductosMateriasPrimas.findById", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.id = :id"),
-    @NamedQuery(name = "ProductosMateriasPrimas.findByNombre", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "ProductosMateriasPrimas.findByCantidad", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.cantidad = :cantidad"),
-    @NamedQuery(name = "ProductosMateriasPrimas.findByPrecio", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.precio = :precio")})
-public class ProductoMateriaPrima implements Serializable {
+    @NamedQuery(name = "MateriasPrimas.findAll", query = "SELECT p FROM MateriaPrima p"),
+    @NamedQuery(name = "MateriasPrimas.findById", query = "SELECT p FROM MateriaPrima p WHERE p.id = :id"),
+    @NamedQuery(name = "MateriasPrimas.findByNombre", query = "SELECT p FROM MateriaPrima p WHERE p.nombre = :nombre"),
+    @NamedQuery(name = "MateriasPrimas.findByCantidad", query = "SELECT p FROM MateriaPrima p WHERE p.cantidad = :cantidad"),
+    @NamedQuery(name = "MateriasPrimas.findByPrecio", query = "SELECT p FROM MateriaPrima p WHERE p.precio = :precio")})
+public class MateriaPrima implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,20 +44,20 @@ public class ProductoMateriaPrima implements Serializable {
     @Basic(optional = false)
     @Column(name = "PRECIO")
     private Long precio;
-    @ManyToMany(mappedBy = "productosMateriasPrimasList")
+    @ManyToMany(mappedBy = "MateriasPrimasList")
     private List<Producto> productosList;
-    @JoinColumn(name = "Proveedores_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "Proveedor_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Proveedor proveedor;
 
-    public ProductoMateriaPrima() {
+    public MateriaPrima() {
     }
 
-    public ProductoMateriaPrima(Integer id) {
+    public MateriaPrima(Integer id) {
         this.id = id;
     }
 
-    public ProductoMateriaPrima(Integer id, String nombre, Integer cantidad, long precio) {
+    public MateriaPrima(Integer id, String nombre, Integer cantidad, long precio) {
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -122,10 +122,10 @@ public class ProductoMateriaPrima implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductoMateriaPrima)) {
+        if (!(object instanceof MateriaPrima)) {
             return false;
         }
-        ProductoMateriaPrima other = (ProductoMateriaPrima) object;
+        MateriaPrima other = (MateriaPrima) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

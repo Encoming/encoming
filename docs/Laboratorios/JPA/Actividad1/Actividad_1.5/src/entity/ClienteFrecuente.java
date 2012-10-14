@@ -9,7 +9,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -32,8 +31,10 @@ public class ClienteFrecuente implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
     @Column(name = "NUM_CUENTA")
     private String numCuenta;
+    @Basic(optional = false)
     @Column(name = "DIRECCION")
     private String direccion;
 

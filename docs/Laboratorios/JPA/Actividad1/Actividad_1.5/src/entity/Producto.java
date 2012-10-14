@@ -42,7 +42,7 @@ public class Producto implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @Column(name = "CANTIDAD")
-    private String cantidad;
+    private Integer cantidad;
     @Basic(optional = false)
     @Column(name = "PRECIO_VENTA")
     private Long precioVenta;
@@ -51,14 +51,16 @@ public class Producto implements Serializable {
     private String unidad;
     @ManyToMany(mappedBy = "productosList")
     private List<Factura> facturasList;
-    @JoinTable(name = "materias_primas", joinColumns = {
-        @JoinColumn(name = "Productos_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "Materias_Primas_ID", referencedColumnName = "ID")})
+    
+    @JoinTable(name = "productos_materias_primas", joinColumns = {
+        @JoinColumn(name = "Producto_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "Materia_Prima_ID", referencedColumnName = "ID")})
     @ManyToMany
-    private List<ProductoMateriaPrima> productosMateriasPrimasList;
-    @JoinColumn(name = "Tipos_Productos_ID", referencedColumnName = "ID")
+    private List<MateriaPrima> MateriasPrimasList;
+    
+    @JoinColumn(name = "Tipo_Producto_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private TipoProducto tiposProducto;
+    private TipoProducto tipoProducto;
 
     public Producto() {
     }
@@ -67,7 +69,7 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
-    public Producto(Integer id, String nombre, String cantidad, Long precioVenta, String unidad) {
+    public Producto(Integer id, String nombre, Integer cantidad, Long precioVenta, String unidad) {
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -91,11 +93,11 @@ public class Producto implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -123,20 +125,20 @@ public class Producto implements Serializable {
         this.facturasList = facturasList;
     }
 
-    public List<ProductoMateriaPrima> getProductosMateriasPrimasList() {
-        return productosMateriasPrimasList;
+    public List<MateriaPrima> getProductosMateriasPrimasList() {
+        return MateriasPrimasList;
     }
 
-    public void setProductosMateriasPrimasList(List<ProductoMateriaPrima> productosMateriasPrimasList) {
-        this.productosMateriasPrimasList = productosMateriasPrimasList;
+    public void setProductosMateriasPrimasList(List<MateriaPrima> productosMateriasPrimasList) {
+        this.MateriasPrimasList = productosMateriasPrimasList;
     }
 
     public TipoProducto getTipoProducto() {
-        return tiposProducto;
+        return tipoProducto;
     }
 
     public void setTipoProducto(TipoProducto tipoProducto) {
-        this.tiposProducto = tipoProducto;
+        this.tipoProducto = tipoProducto;
     }
 
     @Override
