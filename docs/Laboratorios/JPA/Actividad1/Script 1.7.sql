@@ -44,6 +44,7 @@ CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Clientes` (
   `DOCUMENTO` VARCHAR(15) NOT NULL ,
   `TELEFONO` INT(10) NOT NULL ,
   `EMAIL` VARCHAR(45) NOT NULL ,
+  `TIPO` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`ID`) )
 ENGINE = InnoDB;
 
@@ -70,8 +71,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Clientes_Frecuentes` (
   `ID` INT(10) NOT NULL ,
-  `NUM_CUENTA` VARCHAR(45) NULL ,
-  `DIRECCION` VARCHAR(45) NULL ,
+  `NUM_CUENTA` VARCHAR(45) NOT NULL ,
+  `DIRECCION` VARCHAR(45) NOT NULL ,
   `Clientes_ID` INT(10) NOT NULL ,
   PRIMARY KEY (`ID`) ,
   INDEX `fk_Clientes_Frecuentes_Clientes1_idx` (`Clientes_ID` ASC) ,
