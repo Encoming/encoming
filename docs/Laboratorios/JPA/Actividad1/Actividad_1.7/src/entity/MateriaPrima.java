@@ -12,6 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,83 +22,115 @@ import javax.persistence.Table;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author Familia Martinez
  */
 @Entity
-@Table(name = "Materias_Primas")
+@Table(name = "productos_materias_primas")
 @NamedQueries({
-    @NamedQuery(name = "MateriasPrimas.findAll", query = "SELECT m FROM MateriaPrima m"),
-    @NamedQuery(name = "MateriasPrimas.findByMateriasPrimasID", query = "SELECT m FROM MateriaPrima m WHERE m.materiasPrimasID = :materiasPrimasID")})
-public class MateriaPrima implements Serializable {
+    @NamedQuery(name = "ProductosMateriasPrimas.findAll", query = "SELECT p FROM ProductoMateriaPrima p"),
+    @NamedQuery(name = "ProductosMateriasPrimas.findById", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.id = :id"),
+    @NamedQuery(name = "ProductosMateriasPrimas.findByNombre", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.nombre = :nombre"),
+    @NamedQuery(name = "ProductosMateriasPrimas.findByCantidad", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.cantidad = :cantidad"),
+    @NamedQuery(name = "ProductosMateriasPrimas.findByPrecio", query = "SELECT p FROM ProductoMateriaPrima p WHERE p.precio = :precio")})
+public class ProductoMateriaPrima implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "Materias_Primas_ID")
-    private Integer materiasPrimasID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materiaPrima")
-    private List<ProveedorhasMateriaPrima> proveedoreshasMateriasPrimas;
-    @JoinColumn(name = "Productos_Materias_Primas_ID", referencedColumnName = "ID")
+    @Column(name = "ID")
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "NOMBRE")
+    private String nombre;
+    @Basic(optional = false)
+    @Column(name = "CANTIDAD")
+    private Integer cantidad;
+    @Basic(optional = false)
+    @Column(name = "PRECIO")
+    private Long precio;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoMateriaPrima")
+    private List<MateriaPrima> materiasPrimasList;
+    @JoinColumn(name = "Proveedores_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private ProductoMateriaPrima productoMateriaPrima;
-    @JoinColumn(name = "Productos_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Producto producto;
+    private Proveedor proveedor;
 
-    public MateriaPrima() {
+    public ProductoMateriaPrima() {
     }
 
-    public MateriaPrima(Integer materiasPrimasID) {
-        this.materiasPrimasID = materiasPrimasID;
+    public ProductoMateriaPrima(Integer id) {
+        this.id = id;
     }
 
-    public Integer getMateriasPrimasID() {
-        return materiasPrimasID;
+    public ProductoMateriaPrima(Integer id, String nombre, Integer cantidad, long precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
     }
 
-    public void setMateriasPrimasID(Integer materiasPrimasID) {
-        this.materiasPrimasID = materiasPrimasID;
+    public Integer getId() {
+        return id;
     }
 
-    public List<ProveedorhasMateriaPrima> getProveedoreshasMateriasPrimasList() {
-        return proveedoreshasMateriasPrimas;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setProveedoreshasMateriasPrimasList(List<ProveedorhasMateriaPrima> proveedoreshasMateriasPrimasList) {
-        this.proveedoreshasMateriasPrimas = proveedoreshasMateriasPrimasList;
+    public String getNombre() {
+        return nombre;
     }
 
-    public ProductoMateriaPrima getProductoMateriaPrimaID() {
-        return productoMateriaPrima;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setProductosMateriasPrimasID(ProductoMateriaPrima productoMateriaPrimas) {
-        this.productoMateriaPrima = productoMateriaPrimas;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public Producto getProductoID() {
-        return producto;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public void setProductoID(Producto producto) {
-        this.producto = producto;
+    public Long getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Long precio) {
+        this.precio = precio;
+    }
+
+    public List<MateriaPrima> getMateriasPrimasList() {
+        return materiasPrimasList;
+    }
+
+    public void setMateriasPrimasList(List<MateriaPrima> materiasPrimasList) {
+        this.materiasPrimasList = materiasPrimasList;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (materiasPrimasID != null ? materiasPrimasID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MateriaPrima)) {
+        if (!(object instanceof ProductoMateriaPrima)) {
             return false;
         }
-        MateriaPrima other = (MateriaPrima) object;
-        if ((this.materiasPrimasID == null && other.materiasPrimasID != null) || (this.materiasPrimasID != null && !this.materiasPrimasID.equals(other.materiasPrimasID))) {
+        ProductoMateriaPrima other = (ProductoMateriaPrima) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -104,6 +138,6 @@ public class MateriaPrima implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.MateriasPrimas[ materiasPrimasID=" + materiasPrimasID + " ]";
+        return "entity.ProductosMateriasPrimas[ id=" + id + " ]";
     }
 }
