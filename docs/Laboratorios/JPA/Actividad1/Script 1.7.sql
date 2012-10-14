@@ -44,6 +44,7 @@ CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Clientes` (
   `DOCUMENTO` VARCHAR(15) NOT NULL ,
   `TELEFONO` INT(10) NOT NULL ,
   `EMAIL` VARCHAR(45) NOT NULL ,
+  `TIPO` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`ID`) )
 ENGINE = InnoDB;
 
@@ -69,11 +70,9 @@ ENGINE = InnoDB;
 -- Table `Actividad1_7`.`Clientes_Frecuentes`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Clientes_Frecuentes` (
-  `ID` INT(10) NOT NULL ,
   `NUM_CUENTA` VARCHAR(45) NOT NULL ,
   `DIRECCION` VARCHAR(45) NOT NULL ,
   `Cliente_ID` INT(10) NOT NULL ,
-  PRIMARY KEY (`ID`) ,
   INDEX `fk_Clientes_Frecuentes_Clientes1_idx` (`Cliente_ID` ASC) ,
   CONSTRAINT `fk_Clientes_Frecuentes_Clientes1`
     FOREIGN KEY (`Cliente_ID` )
@@ -155,13 +154,13 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Actividad1_7`.`Proveedor_has_Materia_Prima`
+-- Table `Actividad1_7`.`Proveedor_Materia_Prima`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Proveedor_has_Materia_Prima` (
+CREATE  TABLE IF NOT EXISTS `Actividad1_7`.`Proveedor_Materia_Prima` (
   `Proveedor_ID` INT(10) NOT NULL ,
   `Materia_Prima_ID` INT(10) NOT NULL ,
   `precio` INT(10) NOT NULL ,
-  `Proveedor_Materia_Prima_ID` VARCHAR(45) NOT NULL ,
+  `Proveedor_Materia_Prima_ID` INT(10) NOT NULL ,
   PRIMARY KEY (`Proveedor_Materia_Prima_ID`) ,
   INDEX `fk_Proveedores_has_Materias_Primas_Materias_Primas1_idx` (`Materia_Prima_ID` ASC) ,
   INDEX `fk_Proveedores_has_Materias_Primas_Proveedores1_idx` (`Proveedor_ID` ASC) ,
