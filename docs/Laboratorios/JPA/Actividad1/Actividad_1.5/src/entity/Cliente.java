@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +30,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Clientes.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono"),
     @NamedQuery(name = "Clientes.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")})
 public class Cliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -48,15 +48,8 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "EMAIL")
     private String email;
-    
-    
-    //@OneToOne(optional=false)
-    
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Factura> facturas;
-    @OneToOne(mappedBy = "cliente")
-    private ClienteFrecuente clienteFrecuente;
 
     public Cliente() {
     }
@@ -113,8 +106,6 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-
-
     public List<Factura> getFacturas() {
         return facturas;
     }
@@ -147,19 +138,4 @@ public class Cliente implements Serializable {
     public String toString() {
         return "entity.Clientes[ id=" + id + " ]";
     }
-
-    /**
-     * @return the clienteFrecuente
-     */
-    public ClienteFrecuente getClienteFrecuente() {
-        return clienteFrecuente;
-    }
-
-    /**
-     * @param clienteFrecuente the clienteFrecuente to set
-     */
-    public void setClienteFrecuente(ClienteFrecuente clienteFrecuente) {
-        this.clienteFrecuente = clienteFrecuente;
-    }
-    
 }

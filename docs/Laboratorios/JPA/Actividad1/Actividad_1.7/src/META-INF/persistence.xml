@@ -6,19 +6,9 @@
     <class>entity.ClienteFrecuente</class>
     <class>entity.Factura</class>
     <class>entity.Producto</class>
-    <class>entity.ProductoMateriaPrima</class>
     <class>entity.Proveedor</class>
     <class>entity.TipoProducto</class>
-    <class>entity.ProductosMateriasPrimas</class>
-    <class>entity.Clientes</class>
-    <class>entity.Proveedores</class>
-    <class>entity.TiposProductos</class>
-    <class>entity.Productos</class>
-    <class>entity.Facturas</class>
-    <class>entity.ClientesFrecuentes</class>
-    <class>entity.Factura_Producto</class>
     <class>entity.MateriaPrima</class>
-    <class>entity.ProveedorhasMateriaPrima</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Actividad1_7?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>

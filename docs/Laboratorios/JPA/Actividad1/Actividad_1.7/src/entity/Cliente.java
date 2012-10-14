@@ -9,11 +9,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,8 +21,6 @@ import javax.persistence.Table;
  * @author Familia Martinez
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "TIPO")
 @Table(name = "clientes")
 @NamedQueries({
     @NamedQuery(name = "Clientes.findAll", query = "SELECT c FROM Cliente c"),
@@ -55,8 +50,6 @@ public class Cliente implements Serializable {
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Factura> facturas;
-    @Column(name = "TIPO")
-    private String tipo;
 
     public Cliente() {
     }

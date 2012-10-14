@@ -22,44 +22,45 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Proveedores_has_Materias_Primas")
 @NamedQueries({
-    @NamedQuery(name = "ProveedoreshasMateriasPrimas.findAll", query = "SELECT p FROM ProveedorhasMateriaPrima p"),
-    @NamedQuery(name = "ProveedoreshasMateriasPrimas.findByProveedoreshasMateriasPrimasID", query = "SELECT p FROM ProveedorhasMateriaPrima p WHERE p.proveedorhasMateriaPrimaID = :proveedoreshasMateriasPrimasID"),
-    @NamedQuery(name = "ProveedoreshasMateriasPrimas.findByPrecio", query = "SELECT p FROM ProveedorhasMateriaPrima p WHERE p.precio = :precio")})
-public class ProveedorhasMateriaPrima implements Serializable {
+    @NamedQuery(name = "ProveedoreshasMateriasPrimas.findAll", query = "SELECT p FROM ProveedorMateriaPrima p"),
+    @NamedQuery(name = "ProveedoreshasMateriasPrimas.findByPrecio", query = "SELECT p FROM ProveedorMateriaPrima p WHERE p.precio = :precio")})
+public class ProveedorMateriaPrima implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "Proveedores_has_Materias_Primas_ID")
-    private Integer proveedorhasMateriaPrimaID;
+    @Column(name = "Proveedor_Materia_Prima_ID")
+    private Integer proveedorMateriaPrimaID;
     @Basic(optional = false)
     @Column(name = "precio")
+    
     private Long precio;
-    @JoinColumn(name = "Materias_Primas_ID", referencedColumnName = "Materias_Primas_ID")
+    @JoinColumn(name = "Materia_Prima_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private MateriaPrima materiaPrima;
+    
     @JoinColumn(name = "Proveedores_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Proveedor proveedor;
 
-    public ProveedorhasMateriaPrima() {
+    public ProveedorMateriaPrima() {
     }
 
-    public ProveedorhasMateriaPrima(Integer proveedoreshasMateriasPrimasID) {
-        this.proveedorhasMateriaPrimaID = proveedoreshasMateriasPrimasID;
+    public ProveedorMateriaPrima(Integer proveedoreshasMateriasPrimasID) {
+        this.proveedorMateriaPrimaID = proveedoreshasMateriasPrimasID;
     }
 
-    public ProveedorhasMateriaPrima(Integer proveedoreshasMateriasPrimasID, Long precio) {
-        this.proveedorhasMateriaPrimaID = proveedoreshasMateriasPrimasID;
+    public ProveedorMateriaPrima(Integer proveedoreshasMateriasPrimasID, Long precio) {
+        this.proveedorMateriaPrimaID = proveedoreshasMateriasPrimasID;
         this.precio = precio;
     }
 
     public Integer getProveedoreshasMateriasPrimasID() {
-        return proveedorhasMateriaPrimaID;
+        return proveedorMateriaPrimaID;
     }
 
     public void setProveedoreshasMateriasPrimasID(Integer proveedoreshasMateriasPrimasID) {
-        this.proveedorhasMateriaPrimaID = proveedoreshasMateriasPrimasID;
+        this.proveedorMateriaPrimaID = proveedoreshasMateriasPrimasID;
     }
 
     public Long getPrecio() {
@@ -70,12 +71,28 @@ public class ProveedorhasMateriaPrima implements Serializable {
         this.precio = precio;
     }
 
-    public MateriaPrima getMateriaPrimaID() {
+    public Integer getProveedorMateriaPrimaID() {
+        return proveedorMateriaPrimaID;
+    }
+
+    public void setProveedorMateriaPrimaID(Integer proveedorMateriaPrimaID) {
+        this.proveedorMateriaPrimaID = proveedorMateriaPrimaID;
+    }
+
+    public MateriaPrima getMateriaPrima() {
         return materiaPrima;
     }
 
-    public void setMateriaPrimaID(MateriaPrima materiaPrima) {
+    public void setMateriaPrima(MateriaPrima materiaPrima) {
         this.materiaPrima = materiaPrima;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     public Proveedor getProveedoresID() {
@@ -89,18 +106,18 @@ public class ProveedorhasMateriaPrima implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (proveedorhasMateriaPrimaID != null ? proveedorhasMateriaPrimaID.hashCode() : 0);
+        hash += (proveedorMateriaPrimaID != null ? proveedorMateriaPrimaID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProveedorhasMateriaPrima)) {
+        if (!(object instanceof ProveedorMateriaPrima)) {
             return false;
         }
-        ProveedorhasMateriaPrima other = (ProveedorhasMateriaPrima) object;
-        if ((this.proveedorhasMateriaPrimaID == null && other.proveedorhasMateriaPrimaID != null) || (this.proveedorhasMateriaPrimaID != null && !this.proveedorhasMateriaPrimaID.equals(other.proveedorhasMateriaPrimaID))) {
+        ProveedorMateriaPrima other = (ProveedorMateriaPrima) object;
+        if ((this.proveedorMateriaPrimaID == null && other.proveedorMateriaPrimaID != null) || (this.proveedorMateriaPrimaID != null && !this.proveedorMateriaPrimaID.equals(other.proveedorMateriaPrimaID))) {
             return false;
         }
         return true;
@@ -108,6 +125,6 @@ public class ProveedorhasMateriaPrima implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.ProveedoreshasMateriasPrimas[ proveedoreshasMateriasPrimasID=" + proveedorhasMateriaPrimaID + " ]";
+        return "entity.ProveedoreshasMateriasPrimas[ proveedoreshasMateriasPrimasID=" + proveedorMateriaPrimaID + " ]";
     }
 }

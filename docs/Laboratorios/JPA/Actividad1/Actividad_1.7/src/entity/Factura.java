@@ -40,11 +40,12 @@ public class Factura implements Serializable {
     @Basic(optional = false)
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
-    private Date fecha;    
+    private Date fecha;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
     private List<Factura_Producto> factura_ProductoList;
-    
-    @JoinColumn(name = "Clientes_ID", referencedColumnName = "ID")
+        
+    @JoinColumn(name = "Cliente_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Cliente cliente;
 
@@ -91,7 +92,7 @@ public class Factura implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
+    
     public Cliente getClientesID() {
         return cliente;
     }

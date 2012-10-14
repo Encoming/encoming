@@ -41,11 +41,13 @@ public class Factura implements Serializable {
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    
     @JoinTable(name = "facturas_productos", joinColumns = {
         @JoinColumn(name = "Facturas_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "Productos_ID", referencedColumnName = "ID")})
     @ManyToMany
     private List<Producto> productosList;
+    
     @JoinColumn(name = "Cliente_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Cliente cliente;

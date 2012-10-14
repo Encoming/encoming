@@ -30,7 +30,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "Proveedores.findByDireccion", query = "SELECT p FROM Proveedor p WHERE p.direccion = :direccion"),
     @NamedQuery(name = "Proveedores.findByEmail", query = "SELECT p FROM Proveedor p WHERE p.email = :email")})
 public class Proveedor implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,9 +48,7 @@ public class Proveedor implements Serializable {
     @Column(name = "EMAIL")
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
-    private List<ProveedorhasMateriaPrima> proveedoreshasMateriasPrimasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
-    private List<ProductoMateriaPrima> productoMateriaPrima;
+    private List<ProveedorMateriaPrima> proveedorMateriaPrima;
 
     public Proveedor() {
     }
@@ -108,30 +105,14 @@ public class Proveedor implements Serializable {
         this.email = email;
     }
 
-    public List<ProductoMateriaPrima> getProductosMateriasPrimas() {
-        return productoMateriaPrima;
+    public List<ProveedorMateriaPrima> getProveedorMateriaPrima() {
+        return proveedorMateriaPrima;
     }
 
-    public void setProductosMateriasPrimas(List<ProductoMateriaPrima> productosMateriasPrimas) {
-        this.productoMateriaPrima = productosMateriasPrimas;
+    public void setProveedorMateriaPrima(List<ProveedorMateriaPrima> proveedorMateriaPrima) {
+        this.proveedorMateriaPrima = proveedorMateriaPrima;
     }
-
-    public List<ProveedorhasMateriaPrima> getProveedoreshasMateriasPrimasList() {
-        return proveedoreshasMateriasPrimasList;
-    }
-
-    public void setProveedoreshasMateriasPrimasList(List<ProveedorhasMateriaPrima> proveedoreshasMateriasPrimasList) {
-        this.proveedoreshasMateriasPrimasList = proveedoreshasMateriasPrimasList;
-    }
-
-    public List<ProductoMateriaPrima> getProductoMateriaPrima() {
-        return productoMateriaPrima;
-    }
-
-    public void setProductoMateriaPrima(List<ProductoMateriaPrima> productoMateriaPrima) {
-        this.productoMateriaPrima = productoMateriaPrima;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -156,4 +137,5 @@ public class Proveedor implements Serializable {
     public String toString() {
         return "entity.Proveedores[ id=" + id + " ]";
     }
+    
 }

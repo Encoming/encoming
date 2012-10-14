@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -21,21 +19,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Facturas_Productos")
-@NamedQueries({
-    @NamedQuery(name = "Facturas_Productos.findAll", query = "SELECT d FROM Factura_Producto d"),
-    @NamedQuery(name = "Facturas_Productos.findBycantidad", query = "SELECT d FROM Factura_Producto d WHERE d.cantidad = :cantidad"),
-    @NamedQuery(name = "Facturas_Productos.findByFacturaProductoId", query = "SELECT d FROM Factura_Producto d WHERE d.facturaProductoId = :facturaProductoId")})
 public class Factura_Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "Facturas_Productos_ID")
+    @Column(name = "Factura_Producto_ID")
     private Integer facturaProductoId;
-    @JoinColumn(name = "Facturas_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "Factura_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Factura factura;
-    @JoinColumn(name = "Productos_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "Producto_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Producto producto;
     @Basic(optional = false)

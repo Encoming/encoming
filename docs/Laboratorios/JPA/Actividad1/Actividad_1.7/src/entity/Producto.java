@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,7 +34,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "Productos.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta"),
     @NamedQuery(name = "Productos.findByUnidad", query = "SELECT p FROM Producto p WHERE p.unidad = :unidad")})
 public class Producto implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,20 +44,26 @@ public class Producto implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @Column(name = "CANTIDAD")
-    private String cantidad;
+    private Integer cantidad;
     @Basic(optional = false)
     @Column(name = "PRECIO_VENTA")
     private Long precioVenta;
     @Basic(optional = false)
     @Column(name = "UNIDAD")
     private String unidad;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<Factura_Producto> factura_ProductoList;
-    @JoinColumn(name = "Tipos_Productos_ID", referencedColumnName = "ID")
+    
+     @JoinTable(name = "productos_materias_primas", joinColumns = {
+        @JoinColumn(name = "Producto_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "Materia_Prima_ID", referencedColumnName = "ID")})
+    @ManyToMany
+    private List<MateriaPrima> MateriasPrimasList;
+    
+    @JoinColumn(name = "Tipo_Producto_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TipoProducto tipoProducto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
-    private List<MateriaPrima> materiasPrimasList;
 
     public Producto() {
     }
@@ -66,7 +72,7 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
-    public Producto(Integer id, String nombre, String cantidad, Long precioVenta, String unidad) {
+    public Producto(Integer id, String nombre, Integer cantidad, Long precioVenta, String unidad) {
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -90,11 +96,11 @@ public class Producto implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -122,21 +128,14 @@ public class Producto implements Serializable {
         this.factura_ProductoList = factura_ProductoList;
     }
 
-    public TipoProducto getTiposProducto() {
-        return tipoProducto;
-    }
-
-    public void setTiposProducto(TipoProducto tiposProducto) {
-        this.tipoProducto = tiposProducto;
-    }
-
     public List<MateriaPrima> getMateriasPrimasList() {
-        return materiasPrimasList;
+        return MateriasPrimasList;
     }
 
-    public void setMateriasPrimasList(List<MateriaPrima> materiasPrimasList) {
-        this.materiasPrimasList = materiasPrimasList;
+    public void setMateriasPrimasList(List<MateriaPrima> MateriasPrimasList) {
+        this.MateriasPrimasList = MateriasPrimasList;
     }
+
 
     public TipoProducto getTipoProducto() {
         return tipoProducto;
@@ -170,4 +169,5 @@ public class Producto implements Serializable {
     public String toString() {
         return "entity.Productos[ id=" + id + " ]";
     }
+    
 }
