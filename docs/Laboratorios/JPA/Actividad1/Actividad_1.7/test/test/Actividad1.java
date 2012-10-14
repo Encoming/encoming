@@ -52,7 +52,10 @@ public class Actividad1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         Cliente cliente = new Cliente(258012, "Juan", "1018451342", 5290587, "jmmartinezro@gmail.com");
+        Actividad1 actividad1=new Actividad1();
+        actividad1.agregarCliente(cliente);
         
     }
 }

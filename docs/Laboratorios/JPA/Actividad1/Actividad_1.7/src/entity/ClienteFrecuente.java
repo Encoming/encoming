@@ -40,6 +40,9 @@ public class ClienteFrecuente extends Cliente implements Serializable {
     @Column(name = "DIRECCION")
     private String direccion;
 
+    public ClienteFrecuente() {
+    }
+
     public ClienteFrecuente(Integer id, String numCuenta, String direccion, String nombreCompleto, String documento, int telefono, String email) {
         super(id, nombreCompleto, documento, telefono, email);
         this.id = id;
