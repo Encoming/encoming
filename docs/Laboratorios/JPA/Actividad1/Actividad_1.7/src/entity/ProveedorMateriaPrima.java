@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author juanmanuelmartinezromero
  */
 @Entity
-@Table(name = "Proveedores_has_Materias_Primas")
+@Table(name = "Proveedor_Materia_Prima")
 @NamedQueries({
     @NamedQuery(name = "ProveedoreshasMateriasPrimas.findAll", query = "SELECT p FROM ProveedorMateriaPrima p"),
     @NamedQuery(name = "ProveedoreshasMateriasPrimas.findByPrecio", query = "SELECT p FROM ProveedorMateriaPrima p WHERE p.precio = :precio")})
