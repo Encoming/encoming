@@ -12,10 +12,11 @@ public class PersonVo implements IValueObject {
     
     private Integer idPerson;
     private String name;
-    private String lastanames;
+    private String lastName;
     private String mail;
     private Integer phone;
     private String adress;
+    private String password;
 
     /**
      * @return the idPerson
@@ -46,17 +47,17 @@ public class PersonVo implements IValueObject {
     }
 
     /**
-     * @return the lastanames
+     * @return the lastName
      */
-    public String getLastanames() {
-        return lastanames;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
-     * @param lastanames the lastanames to set
+     * @param lastName the lastName to set
      */
-    public void setLastanames(String lastanames) {
-        this.lastanames = lastanames;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
@@ -100,5 +101,18 @@ public class PersonVo implements IValueObject {
     public void setAdress(String adress) {
         this.adress = adress;
     }
-    
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }    
 }

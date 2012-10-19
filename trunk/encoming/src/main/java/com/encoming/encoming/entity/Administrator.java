@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Administrator.findByIdAdministrator", query = "SELECT a FROM Administrator a WHERE a.idAdministrator = :idAdministrator"),
     @NamedQuery(name = "Administrator.findByUsername", query = "SELECT a FROM Administrator a WHERE a.username = :username"),
     @NamedQuery(name = "Administrator.findByPassword", query = "SELECT a FROM Administrator a WHERE a.password = :password")})
-public class Administrator extends Worker implements Serializable, IEntity<AdministratorVo> {
+public class Administrator implements Serializable, IEntity<AdministratorVo> {
 
     private static final long serialVersionUID = 1L;
     @Id

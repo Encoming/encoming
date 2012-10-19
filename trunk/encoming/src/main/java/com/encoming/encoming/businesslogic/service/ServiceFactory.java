@@ -22,4 +22,8 @@ public class ServiceFactory {
     public AdministratorService getAdministratorService() {
         return AdministratorService.getInstance();
     }
+
+    public PersonService getPersonService() {
+        return PersonService.getInstance();
+    }
 }

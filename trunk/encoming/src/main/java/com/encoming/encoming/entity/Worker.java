@@ -5,7 +5,6 @@
 package com.encoming.encoming.entity;
 
 import java.io.Serializable;
-import java.lang.annotation.Inherited;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
@@ -13,15 +12,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -32,13 +28,13 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 //@Entity
 //@Table(name = "Worker")
-@MappedSuperclass
+@Entity
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Worker.findAll", query = "SELECT w FROM Worker w"),
     @NamedQuery(name = "Worker.findByIdWorker", query = "SELECT w FROM Worker w WHERE w.idWorker = :idWorker"),
     @NamedQuery(name = "Worker.findBySalary", query = "SELECT w FROM Worker w WHERE w.salary = :salary")})
-public abstract class Worker extends Person implements Serializable {
+public class Worker implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

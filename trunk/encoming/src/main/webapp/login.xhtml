@@ -23,15 +23,15 @@
                         <legend><h2>Entra</h2></legend>
                         <div class="control-group">
                             <div class="controls">
-                                <p:inputText id="userName" required="true" value="#{loginBean.userName}" 
+                                <p:inputText id="idUser" required="true" value="#{loginBean.document}" 
                                              requiredMessage="Por favor completa este campo" />
-                                <p:watermark for="userName" value="Correo o Usuario" />
-                                <p:message id="userNameMessage" for="userName" />
+                                <p:watermark for="idUser" value="Id de Usuario" />
+                                <p:message id="userNameMessage" for="idUser" />
                                 <p:password id="password" required="true" value="#{loginBean.password}"
                                             requiredMessage="Por favor completa este campo"/>
                                 <p:watermark for="password" value="Contraseña" />
                                 <p:message id="passwordMessage" for="password" />
-                                <h:commandButton action="#{loginBean.logIn()}" value="Entrar" class="btn btn-large btn-primary" />
+                                <h:commandButton action="#{loginBean.login()}" value="Entrar" class="btn btn-large btn-primary" />
                             </div>
                         </div>
                     </h:form>
