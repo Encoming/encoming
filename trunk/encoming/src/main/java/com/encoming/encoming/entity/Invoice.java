@@ -19,7 +19,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,7 +26,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "Invoice")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Invoice.findAll", query = "SELECT i FROM Invoice i"),
     @NamedQuery(name = "Invoice.findByIdInvoice", query = "SELECT i FROM Invoice i WHERE i.idInvoice = :idInvoice"),
@@ -51,6 +49,8 @@ public class Invoice implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "receiver")
     private String receiver;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "moment")
     @Temporal(TemporalType.DATE)
     private Date moment;
@@ -65,10 +65,11 @@ public class Invoice implements Serializable {
         this.idInvoice = idInvoice;
     }
 
-    public Invoice(Integer idInvoice, String sender, String receiver) {
+    public Invoice(Integer idInvoice, String sender, String receiver, Date moment) {
         this.idInvoice = idInvoice;
         this.sender = sender;
         this.receiver = receiver;
+        this.moment = moment;
     }
 
     public Integer getIdInvoice() {

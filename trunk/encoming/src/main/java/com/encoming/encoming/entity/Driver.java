@@ -19,8 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,12 +26,11 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Driver")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Driver.findAll", query = "SELECT d FROM Driver d"),
     @NamedQuery(name = "Driver.findByIdDriver", query = "SELECT d FROM Driver d WHERE d.idDriver = :idDriver"),
     @NamedQuery(name = "Driver.findByLicense", query = "SELECT d FROM Driver d WHERE d.license = :license")})
-public class Driver extends Worker implements Serializable {
+public class Driver implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -87,7 +84,6 @@ public class Driver extends Worker implements Serializable {
         this.worker = worker;
     }
 
-    @XmlTransient
     public List<Vehicle> getVehicleList() {
         return vehicleList;
     }

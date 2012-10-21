@@ -16,8 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,7 +23,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Route")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Route.findAll", query = "SELECT r FROM Route r"),
     @NamedQuery(name = "Route.findByIdRoute", query = "SELECT r FROM Route r WHERE r.idRoute = :idRoute"),
@@ -48,7 +45,7 @@ public class Route implements Serializable {
     private int numberTolls;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
     private List<Encoming> encomingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
+    @OneToMany(mappedBy = "route")
     private List<Point> pointList;
 
     public Route() {
@@ -88,7 +85,6 @@ public class Route implements Serializable {
         this.numberTolls = numberTolls;
     }
 
-    @XmlTransient
     public List<Encoming> getEncomingList() {
         return encomingList;
     }
@@ -97,7 +93,6 @@ public class Route implements Serializable {
         this.encomingList = encomingList;
     }
 
-    @XmlTransient
     public List<Point> getPointList() {
         return pointList;
     }

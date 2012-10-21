@@ -9,8 +9,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -19,8 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,20 +26,27 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Vehicle")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehicle.findAll", query = "SELECT v FROM Vehicle v"),
-    @NamedQuery(name = "Vehicle.findByPlateNumber", query = "SELECT v FROM Vehicle v WHERE v.vehiclePK.plateNumber = :plateNumber"),
-    @NamedQuery(name = "Vehicle.findByPlateLetters", query = "SELECT v FROM Vehicle v WHERE v.vehiclePK.plateLetters = :plateLetters"),
+    @NamedQuery(name = "Vehicle.findByPlateNumber", query = "SELECT v FROM Vehicle v WHERE v.plateNumber = :plateNumber"),
+    @NamedQuery(name = "Vehicle.findByPlateLetters", query = "SELECT v FROM Vehicle v WHERE v.plateLetters = :plateLetters"),
     @NamedQuery(name = "Vehicle.findByType", query = "SELECT v FROM Vehicle v WHERE v.type = :type"),
     @NamedQuery(name = "Vehicle.findByManufacturer", query = "SELECT v FROM Vehicle v WHERE v.manufacturer = :manufacturer"),
     @NamedQuery(name = "Vehicle.findByModel", query = "SELECT v FROM Vehicle v WHERE v.model = :model"),
     @NamedQuery(name = "Vehicle.findByCapacity", query = "SELECT v FROM Vehicle v WHERE v.capacity = :capacity"),
-    @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status")})
+    @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status"),
+    @NamedQuery(name = "Vehicle.findByIdVehicle", query = "SELECT v FROM Vehicle v WHERE v.idVehicle = :idVehicle")})
 public class Vehicle implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected VehiclePK vehiclePK;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "plateNumber")
+    private int plateNumber;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
+    @Column(name = "plateLetters")
+    private String plateLetters;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -66,7 +71,12 @@ public class Vehicle implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "status")
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle")
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "idVehicle")
+    private Integer idVehicle;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicleidVehicle")
     private List<Encoming> encomingList;
     @JoinColumn(name = "driver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
@@ -75,12 +85,14 @@ public class Vehicle implements Serializable {
     public Vehicle() {
     }
 
-    public Vehicle(VehiclePK vehiclePK) {
-        this.vehiclePK = vehiclePK;
+    public Vehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
     }
 
-    public Vehicle(VehiclePK vehiclePK, String type, String manufacturer, String model, int capacity, String status) {
-        this.vehiclePK = vehiclePK;
+    public Vehicle(Integer idVehicle, int plateNumber, String plateLetters, String type, String manufacturer, String model, int capacity, String status) {
+        this.idVehicle = idVehicle;
+        this.plateNumber = plateNumber;
+        this.plateLetters = plateLetters;
         this.type = type;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -88,16 +100,20 @@ public class Vehicle implements Serializable {
         this.status = status;
     }
 
-    public Vehicle(int plateNumber, String plateLetters) {
-        this.vehiclePK = new VehiclePK(plateNumber, plateLetters);
+    public int getPlateNumber() {
+        return plateNumber;
     }
 
-    public VehiclePK getVehiclePK() {
-        return vehiclePK;
+    public void setPlateNumber(int plateNumber) {
+        this.plateNumber = plateNumber;
     }
 
-    public void setVehiclePK(VehiclePK vehiclePK) {
-        this.vehiclePK = vehiclePK;
+    public String getPlateLetters() {
+        return plateLetters;
+    }
+
+    public void setPlateLetters(String plateLetters) {
+        this.plateLetters = plateLetters;
     }
 
     public String getType() {
@@ -140,7 +156,14 @@ public class Vehicle implements Serializable {
         this.status = status;
     }
 
-    @XmlTransient
+    public Integer getIdVehicle() {
+        return idVehicle;
+    }
+
+    public void setIdVehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
+    }
+
     public List<Encoming> getEncomingList() {
         return encomingList;
     }
@@ -160,7 +183,7 @@ public class Vehicle implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (vehiclePK != null ? vehiclePK.hashCode() : 0);
+        hash += (idVehicle != null ? idVehicle.hashCode() : 0);
         return hash;
     }
 
@@ -171,7 +194,7 @@ public class Vehicle implements Serializable {
             return false;
         }
         Vehicle other = (Vehicle) object;
-        if ((this.vehiclePK == null && other.vehiclePK != null) || (this.vehiclePK != null && !this.vehiclePK.equals(other.vehiclePK))) {
+        if ((this.idVehicle == null && other.idVehicle != null) || (this.idVehicle != null && !this.idVehicle.equals(other.idVehicle))) {
             return false;
         }
         return true;
@@ -179,7 +202,7 @@ public class Vehicle implements Serializable {
 
     @Override
     public String toString() {
-        return "com.encoming.encoming.entity.Vehicle[ vehiclePK=" + vehiclePK + " ]";
+        return "com.encoming.encoming.entity.Vehicle[ idVehicle=" + idVehicle + " ]";
     }
     
 }

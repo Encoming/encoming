@@ -4,10 +4,13 @@
  */
 package com.encoming.encoming.presentation.controller;
 
+import com.encoming.encoming.businesslogic.facade.FacadeFactory;
+import com.encoming.encoming.businesslogic.facade.PointFacade;
+import com.encoming.encoming.vo.PointVo;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.model.map.DefaultMapModel;
@@ -20,7 +23,7 @@ import org.primefaces.model.map.Marker;
  * @author juanmanuelmartinezromero
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class PointBean implements Serializable {
 
     private MapModel model;
@@ -65,11 +68,21 @@ public class PointBean implements Serializable {
     }
 
     public void addPoint(ActionEvent actionEvent) {
+        
+        PointVo pointVo = new PointVo();
+        PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
+        
+        pointVo.setName(getTitle());
+        pointVo.setLatitude(getLat());
+        pointVo.setLongitude(getLng());
+        
+        pointFacade.persist(pointVo);
+        
         Marker marker = new Marker(new LatLng(lat, lng), title);
         model.addOverlay(marker);
         addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha agregado un nuevo punto",
                 "Nombre:" + title
-                + "\nLatitud:" + lat 
+                + "\n\nLatitud:" + lat 
                 + ", Longitud:" + lng));
 
     }

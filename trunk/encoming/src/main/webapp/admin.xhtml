@@ -58,11 +58,11 @@
                     onPointClick="handlePointClick(event);"   
                     widgetVar="map" />  
 
-            <p:dialog widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
+            <p:dialog header="Agregar punto" widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
                 <h:form prependId="false">
                     <p:growl id="mensajes" showDetail="true"/>
                     <h:panelGrid columns="2">  
-                        <h:outputLabel for="title" value="Title:" />  
+                        <h:outputLabel for="title" value="Titulo:" />  
                         <p:inputText id="title" value="#{pointBean.title}" />  
 
                         <f:facet name="footer">  

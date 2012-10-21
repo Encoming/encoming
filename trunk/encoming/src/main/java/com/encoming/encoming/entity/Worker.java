@@ -5,49 +5,41 @@
 package com.encoming.encoming.entity;
 
 import java.io.Serializable;
-import java.lang.annotation.Inherited;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author juanmanuelmartinezromero
  */
-//@Entity
-//@Table(name = "Worker")
-@MappedSuperclass
-@XmlRootElement
+@Entity
+@Table(name = "Worker")
 @NamedQueries({
     @NamedQuery(name = "Worker.findAll", query = "SELECT w FROM Worker w"),
     @NamedQuery(name = "Worker.findByIdWorker", query = "SELECT w FROM Worker w WHERE w.idWorker = :idWorker"),
     @NamedQuery(name = "Worker.findBySalary", query = "SELECT w FROM Worker w WHERE w.salary = :salary")})
-public abstract class Worker extends Person implements Serializable {
+public class Worker implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "idWorker")
     private Integer idWorker;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "salary")
-    private BigDecimal salary;
+    private double salary;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "worker")
     private List<Driver> driverList;
     @JoinColumn(name = "person", referencedColumnName = "idPerson")
@@ -63,6 +55,11 @@ public abstract class Worker extends Person implements Serializable {
         this.idWorker = idWorker;
     }
 
+    public Worker(Integer idWorker, double salary) {
+        this.idWorker = idWorker;
+        this.salary = salary;
+    }
+
     public Integer getIdWorker() {
         return idWorker;
     }
@@ -71,15 +68,14 @@ public abstract class Worker extends Person implements Serializable {
         this.idWorker = idWorker;
     }
 
-    public BigDecimal getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(BigDecimal salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
-    @XmlTransient
     public List<Driver> getDriverList() {
         return driverList;
     }
@@ -96,7 +92,6 @@ public abstract class Worker extends Person implements Serializable {
         this.person = person;
     }
 
-    @XmlTransient
     public List<Administrator> getAdministratorList() {
         return administratorList;
     }

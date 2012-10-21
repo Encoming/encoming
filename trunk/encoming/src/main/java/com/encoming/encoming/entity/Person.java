@@ -5,28 +5,25 @@
 package com.encoming.encoming.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author juanmanuelmartinezromero
  */
-//@Entity
-//@Table(name = "person")
-@MappedSuperclass
-@XmlRootElement
+@Entity
+@Table(name = "Person")
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByIdPerson", query = "SELECT p FROM Person p WHERE p.idPerson = :idPerson"),
@@ -35,14 +32,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Person.findByMail", query = "SELECT p FROM Person p WHERE p.mail = :mail"),
     @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
     @NamedQuery(name = "Person.findByAdress", query = "SELECT p FROM Person p WHERE p.adress = :adress")})
-public abstract class Person implements Serializable {
+public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "idPerson")
     private Integer idPerson;
-    @Size(max = 25)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
@@ -58,6 +57,10 @@ public abstract class Person implements Serializable {
     @Size(max = 25)
     @Column(name = "adress")
     private String adress;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<Worker> workerList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<Client> clientList;
 
     public Person() {
     }
@@ -66,8 +69,9 @@ public abstract class Person implements Serializable {
         this.idPerson = idPerson;
     }
 
-    public Person(Integer idPerson, String lastanames) {
+    public Person(Integer idPerson, String name, String lastanames) {
         this.idPerson = idPerson;
+        this.name = name;
         this.lastanames = lastanames;
     }
 
@@ -117,6 +121,22 @@ public abstract class Person implements Serializable {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    public List<Worker> getWorkerList() {
+        return workerList;
+    }
+
+    public void setWorkerList(List<Worker> workerList) {
+        this.workerList = workerList;
+    }
+
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
     }
 
     @Override

@@ -4,7 +4,6 @@
  */
 package com.encoming.encoming.entity;
 
-import com.encoming.encoming.vo.EncomingVo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -13,7 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,16 +19,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author juanmanuelmartinezromero
  */
 @Entity
-@Table(name = "encoming")
-@XmlRootElement
+@Table(name = "Encoming")
 @NamedQueries({
     @NamedQuery(name = "Encoming.findAll", query = "SELECT e FROM Encoming e"),
     @NamedQuery(name = "Encoming.findByIdEncoming", query = "SELECT e FROM Encoming e WHERE e.idEncoming = :idEncoming"),
@@ -39,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Encoming.findByPriority", query = "SELECT e FROM Encoming e WHERE e.priority = :priority"),
     @NamedQuery(name = "Encoming.findByOrigin", query = "SELECT e FROM Encoming e WHERE e.origin = :origin"),
     @NamedQuery(name = "Encoming.findByDestiny", query = "SELECT e FROM Encoming e WHERE e.destiny = :destiny")})
-public class Encoming implements Serializable, IEntity<EncomingVo> {
+public class Encoming implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -51,7 +46,9 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
     @Size(min = 1, max = 30)
     @Column(name = "type")
     private String type;
-    @Size(max = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "volume")
     private String volume;
     @Basic(optional = false)
@@ -69,20 +66,15 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
     @Size(min = 1, max = 15)
     @Column(name = "destiny")
     private String destiny;
-    @JoinColumns({
-        @JoinColumn(name = "plateNumber", referencedColumnName = "plateNumber"),
-        @JoinColumn(name = "plateLetters", referencedColumnName = "plateLetters")})
+    @JoinColumn(name = "Vehicle_idVehicle", referencedColumnName = "idVehicle")
     @ManyToOne(optional = false)
-    private Vehicle vehicle;
-    @JoinColumn(name = "route", referencedColumnName = "idRoute")
-    @ManyToOne(optional = false)
-    private Route route;
+    private Vehicle vehicleidVehicle;
     @JoinColumn(name = "client", referencedColumnName = "idClient")
     @ManyToOne(optional = false)
     private Client client;
-    @JoinColumn(name = "administrator", referencedColumnName = "idAdministrator")
+    @JoinColumn(name = "route", referencedColumnName = "idRoute")
     @ManyToOne(optional = false)
-    private Administrator administrator;
+    private Route route;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
     private List<Invoice> invoiceList;
 
@@ -93,9 +85,10 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.idEncoming = idEncoming;
     }
 
-    public Encoming(Integer idEncoming, String type, String priority, String origin, String destiny) {
+    public Encoming(Integer idEncoming, String type, String volume, String priority, String origin, String destiny) {
         this.idEncoming = idEncoming;
         this.type = type;
+        this.volume = volume;
         this.priority = priority;
         this.origin = origin;
         this.destiny = destiny;
@@ -149,20 +142,12 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.destiny = destiny;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public Vehicle getVehicleidVehicle() {
+        return vehicleidVehicle;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setVehicleidVehicle(Vehicle vehicleidVehicle) {
+        this.vehicleidVehicle = vehicleidVehicle;
     }
 
     public Client getClient() {
@@ -173,15 +158,14 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.client = client;
     }
 
-    public Administrator getAdministrator() {
-        return administrator;
+    public Route getRoute() {
+        return route;
     }
 
-    public void setAdministrator(Administrator administrator) {
-        this.administrator = administrator;
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
-    @XmlTransient
     public List<Invoice> getInvoiceList() {
         return invoiceList;
     }
@@ -213,11 +197,6 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.Encoming[ idEncoming=" + idEncoming + " ]";
-    }
-
-    @Override
-    public EncomingVo toVo() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

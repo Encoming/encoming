@@ -12,7 +12,7 @@ import com.encoming.encoming.businesslogic.service.ServiceFactory;
  */
 public class FacadeFactory {
 
-    private String PU = "encoming";
+    private String PU = "encomingPU";
     private static FacadeFactory instance;
 
     public static synchronized FacadeFactory getInstance() {
@@ -24,5 +24,9 @@ public class FacadeFactory {
 
     public AdministratorFacade getAdministratorFacade() {
         return new AdministratorFacade(PU, ServiceFactory.getInstance().getAdministratorService());
+    }
+
+    public PointFacade getPointFacade() {
+        return new PointFacade(PU, ServiceFactory.getInstance().getPointService());
     }
 }
