@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Vehicle")
+@Table(name = "vehicle")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehicle.findAll", query = "SELECT v FROM Vehicle v"),
@@ -67,10 +67,10 @@ public class Vehicle implements Serializable {
     @Column(name = "status")
     private String status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle")
-    private List<Encoming> encomingList;
-    @JoinColumn(name = "driver", referencedColumnName = "idDriver")
+    private List<Shipping> shippingList;
+    @JoinColumn(name = "Driver_idDriver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
-    private Driver driver;
+    private Driver driveridDriver;
 
     public Vehicle() {
     }
@@ -141,20 +141,20 @@ public class Vehicle implements Serializable {
     }
 
     @XmlTransient
-    public List<Encoming> getEncomingList() {
-        return encomingList;
+    public List<Shipping> getShippingList() {
+        return shippingList;
     }
 
-    public void setEncomingList(List<Encoming> encomingList) {
-        this.encomingList = encomingList;
+    public void setShippingList(List<Shipping> shippingList) {
+        this.shippingList = shippingList;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public Driver getDriveridDriver() {
+        return driveridDriver;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriveridDriver(Driver driveridDriver) {
+        this.driveridDriver = driveridDriver;
     }
 
     @Override

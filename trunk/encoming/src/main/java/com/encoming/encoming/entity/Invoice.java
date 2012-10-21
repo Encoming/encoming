@@ -23,10 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Invoice")
+@Table(name = "invoice")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Invoice.findAll", query = "SELECT i FROM Invoice i"),
@@ -51,12 +51,17 @@ public class Invoice implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "receiver")
     private String receiver;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "moment")
     @Temporal(TemporalType.DATE)
     private Date moment;
-    @JoinColumn(name = "encoming", referencedColumnName = "idEncoming")
+    @JoinColumn(name = "Shipping_idShipping", referencedColumnName = "idShipping")
     @ManyToOne(optional = false)
-    private Encoming encoming;
+    private Shipping shippingidShipping;
+    @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
+    @ManyToOne(optional = false)
+    private Package packageidPackage;
 
     public Invoice() {
     }
@@ -65,10 +70,11 @@ public class Invoice implements Serializable {
         this.idInvoice = idInvoice;
     }
 
-    public Invoice(Integer idInvoice, String sender, String receiver) {
+    public Invoice(Integer idInvoice, String sender, String receiver, Date moment) {
         this.idInvoice = idInvoice;
         this.sender = sender;
         this.receiver = receiver;
+        this.moment = moment;
     }
 
     public Integer getIdInvoice() {
@@ -103,12 +109,20 @@ public class Invoice implements Serializable {
         this.moment = moment;
     }
 
-    public Encoming getEncoming() {
-        return encoming;
+    public Shipping getShippingidShipping() {
+        return shippingidShipping;
     }
 
-    public void setEncoming(Encoming encoming) {
-        this.encoming = encoming;
+    public void setShippingidShipping(Shipping shippingidShipping) {
+        this.shippingidShipping = shippingidShipping;
+    }
+
+    public Package getPackageidPackage() {
+        return packageidPackage;
+    }
+
+    public void setPackageidPackage(Package packageidPackage) {
+        this.packageidPackage = packageidPackage;
     }
 
     @Override

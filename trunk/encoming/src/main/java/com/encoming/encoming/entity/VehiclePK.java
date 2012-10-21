@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Embeddable
 public class VehiclePK implements Serializable {

@@ -24,16 +24,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Driver")
+@Table(name = "driver")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Driver.findAll", query = "SELECT d FROM Driver d"),
     @NamedQuery(name = "Driver.findByIdDriver", query = "SELECT d FROM Driver d WHERE d.idDriver = :idDriver"),
     @NamedQuery(name = "Driver.findByLicense", query = "SELECT d FROM Driver d WHERE d.license = :license")})
-public class Driver extends Worker implements Serializable {
+public class Driver implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -45,11 +45,11 @@ public class Driver extends Worker implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "license")
     private String license;
-    @JoinColumn(name = "worker", referencedColumnName = "idWorker")
-    @ManyToOne(optional = false)
-    private Worker worker;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driveridDriver")
     private List<Vehicle> vehicleList;
+    @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
+    @ManyToOne(optional = false)
+    private Person personidPerson;
 
     public Driver() {
     }
@@ -79,14 +79,6 @@ public class Driver extends Worker implements Serializable {
         this.license = license;
     }
 
-    public Worker getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
-
     @XmlTransient
     public List<Vehicle> getVehicleList() {
         return vehicleList;
@@ -94,6 +86,14 @@ public class Driver extends Worker implements Serializable {
 
     public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
+    }
+
+    public Person getPersonidPerson() {
+        return personidPerson;
+    }
+
+    public void setPersonidPerson(Person personidPerson) {
+        this.personidPerson = personidPerson;
     }
 
     @Override

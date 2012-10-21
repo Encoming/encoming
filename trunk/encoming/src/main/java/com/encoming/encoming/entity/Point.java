@@ -20,10 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Point")
+@Table(name = "point")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Point.findAll", query = "SELECT p FROM Point p"),
@@ -39,9 +39,9 @@ public class Point implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @JoinColumn(name = "route", referencedColumnName = "idRoute")
+    @JoinColumn(name = "Route_idRoute", referencedColumnName = "idRoute")
     @ManyToOne(optional = false)
-    private Route route;
+    private Route routeidRoute;
 
     public Point() {
     }
@@ -66,12 +66,12 @@ public class Point implements Serializable {
         this.name = name;
     }
 
-    public Route getRoute() {
-        return route;
+    public Route getRouteidRoute() {
+        return routeidRoute;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setRouteidRoute(Route routeidRoute) {
+        this.routeidRoute = routeidRoute;
     }
 
     @Override
