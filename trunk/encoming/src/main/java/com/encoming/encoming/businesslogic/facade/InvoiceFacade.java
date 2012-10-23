@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.businesslogic.facade;
 
+import com.encoming.encoming.businesslogic.service.InvoiceService;
 import com.encoming.encoming.vo.InvoiceVo;
 
 /**
