@@ -12,6 +12,7 @@ import com.encoming.encoming.vo.PersonVo;
  * @author juanmanuelmartinezromero
  */
 public class PersonFacade extends Facade<PersonVo> {
+    
     public PersonFacade(String PUName, PersonService service){
         super(PUName, service);
     }
