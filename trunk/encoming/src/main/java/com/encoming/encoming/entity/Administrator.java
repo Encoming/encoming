@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.AdministratorVo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Administrator.findByUsername", query = "SELECT a FROM Administrator a WHERE a.username = :username"),
     @NamedQuery(name = "Administrator.findByPassword", query = "SELECT a FROM Administrator a WHERE a.password = :password"),
     @NamedQuery(name = "Administrator.findByType", query = "SELECT a FROM Administrator a WHERE a.type = :type")})
-public class Administrator implements Serializable {
+public class Administrator implements Serializable, IEntity<AdministratorVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -136,4 +137,15 @@ public class Administrator implements Serializable {
         return "com.encoming.encoming.entity.Administrator[ idAdministrator=" + idAdministrator + " ]";
     }
     
+    @Override
+    public AdministratorVo toVo(){
+        AdministratorVo administratorVo = new AdministratorVo();
+        administratorVo.setIdAdministrator(getIdAdministrator());
+        administratorVo.setPassword(getPassword());
+        administratorVo.setType(getType());
+        administratorVo.setUsername(getUsername());
+        administratorVo.setPersonidPerson(getPersonidPerson().getIdPerson());
+        return administratorVo;
+    }
+       
 }

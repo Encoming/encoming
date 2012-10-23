@@ -4,7 +4,11 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.AdministratorVo;
+import com.encoming.encoming.vo.ClientVo;
+import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -33,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient"),
     @NamedQuery(name = "Client.findBySendedEncoming", query = "SELECT c FROM Client c WHERE c.sendedEncoming = :sendedEncoming"),
     @NamedQuery(name = "Client.findByReceivedEncoming", query = "SELECT c FROM Client c WHERE c.receivedEncoming = :receivedEncoming")})
-public class Client implements Serializable {
+public class Client implements Serializable,IEntity<ClientVo>  {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -131,6 +135,20 @@ public class Client implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.Client[ idClient=" + idClient + " ]";
+    }
+    
+    @Override
+    public ClientVo toVo(){
+        ClientVo clientVo = new ClientVo();
+        clientVo.setSendedEncoming(getSendedEncoming());
+        clientVo.setReceivedEncoming(getReceivedEncoming());
+        List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        for(Shipping entity : getShippingList()){
+            shippingVos.add(entity.toVo());
+        }
+        clientVo.setShippingList(shippingVos);
+        clientVo.setIdPerson(getPersonidPerson().getIdPerson());
+        return clientVo;
     }
     
 }

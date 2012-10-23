@@ -7,9 +7,6 @@ package com.encoming.encoming.dao;
 import com.encoming.encoming.entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
 
 /**
  *
@@ -50,7 +47,8 @@ public class PersonDAO implements IDAO<Person> {
     public List<Person> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+    
+/*
     public Person login(Person entity, EntityManager em) {
         Person person;
         Query q = em.createQuery("SELECT u FROM Person u "
@@ -67,4 +65,6 @@ public class PersonDAO implements IDAO<Person> {
         }
         return person;
     }
+ */
+    
 }

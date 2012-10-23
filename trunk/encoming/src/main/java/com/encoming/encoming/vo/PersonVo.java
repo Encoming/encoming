@@ -4,6 +4,8 @@
  */
 package com.encoming.encoming.vo;
 
+import java.util.List;
+
 /**
  *
  * @author germanpinerosm
@@ -16,7 +18,9 @@ public class PersonVo implements IValueObject {
     private String mail;
     private Integer phone;
     private String adress;
-    private String password;
+    private List<ClientVo> clientList;
+    private List<AdministratorVo> administratorList;
+    private List<DriverVo> driverList;
 
     /**
      * @return the idPerson
@@ -103,16 +107,46 @@ public class PersonVo implements IValueObject {
     }
 
     /**
-     * @return the password
+     * @return the clientList
      */
-    public String getPassword() {
-        return password;
+    public List<ClientVo> getClientList() {
+        return clientList;
     }
 
     /**
-     * @param password the password to set
+     * @param clientList the clientList to set
      */
-    public void setPassword(String password) {
-        this.password = password;
-    }    
+    public void setClientList(List<ClientVo> clientList) {
+        this.clientList = clientList;
+    }
+
+    /**
+     * @return the administratorList
+     */
+    public List<AdministratorVo> getAdministratorList() {
+        return administratorList;
+    }
+
+    /**
+     * @param administratorList the administratorList to set
+     */
+    public void setAdministratorList(List<AdministratorVo> administratorList) {
+        this.administratorList = administratorList;
+    }
+
+    /**
+     * @return the driverList
+     */
+    public List<DriverVo> getDriverList() {
+        return driverList;
+    }
+
+    /**
+     * @param driverList the driverList to set
+     */
+    public void setDriverList(List<DriverVo> driverList) {
+        this.driverList = driverList;
+    }
+
+   
 }

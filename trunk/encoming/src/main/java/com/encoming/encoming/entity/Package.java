@@ -4,7 +4,11 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.InvoiceVo;
+import com.encoming.encoming.vo.PackageVo;
+import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -34,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Package.findByVolume", query = "SELECT p FROM Package p WHERE p.volume = :volume"),
     @NamedQuery(name = "Package.findByPriority", query = "SELECT p FROM Package p WHERE p.priority = :priority"),
     @NamedQuery(name = "Package.findByWeight", query = "SELECT p FROM Package p WHERE p.weight = :weight")})
-public class Package implements Serializable {
+public class Package implements Serializable,IEntity<PackageVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -163,4 +167,25 @@ public class Package implements Serializable {
         return "com.encoming.encoming.entity.Package[ idPackage=" + idPackage + " ]";
     }
     
+        @Override
+    public PackageVo toVo(){
+        PackageVo packageVo = new PackageVo();
+        packageVo.setIdPackage(getIdPackage());
+        packageVo.setType(getType());
+        packageVo.setVolume(getVolume());
+        packageVo.setPriority(getPriority());
+        packageVo.setWeight(getWeight());
+        List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        for(Shipping entity : getShippingList()){
+            shippingVos.add(entity.toVo());
+        }
+        packageVo.setShippingList(shippingVos);
+        List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
+        for(Invoice entity : getInvoiceList()){
+            invoiceVos.add(entity.toVo());
+        }
+        packageVo.setShippingList(shippingVos);
+        
+        return packageVo;
+    }
 }

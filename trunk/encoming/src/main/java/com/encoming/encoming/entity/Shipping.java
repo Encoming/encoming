@@ -4,7 +4,10 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.InvoiceVo;
+import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -33,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Shipping.findAll", query = "SELECT s FROM Shipping s"),
     @NamedQuery(name = "Shipping.findByIdShipping", query = "SELECT s FROM Shipping s WHERE s.idShipping = :idShipping"),
     @NamedQuery(name = "Shipping.findByIdReceiver", query = "SELECT s FROM Shipping s WHERE s.idReceiver = :idReceiver")})
-public class Shipping implements Serializable {
+public class Shipping implements Serializable,IEntity<ShippingVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -154,5 +157,22 @@ public class Shipping implements Serializable {
     public String toString() {
         return "com.encoming.encoming.entity.Shipping[ idShipping=" + idShipping + " ]";
     }
+    
+    @Override
+    public ShippingVo toVo(){
+        ShippingVo shippingVo = new ShippingVo();
+        shippingVo.setIdShipping(getIdShipping());
+        shippingVo.setIdReceiver(getIdReceiver());
+        shippingVo.setRouteidRoute(getRouteidRoute());
+        shippingVo.setPackageidPackage(getPackageidPackage().getIdPackage());
+        shippingVo.setVehicle(getVehicle().getVehiclePK().getPlateNumber());
+        shippingVo.setClientidClient(getClientidClient().getIdClient());
+        List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
+        for(Invoice entity : getInvoiceList()){
+            invoiceVos.add(entity.toVo());
+        }
+        shippingVo.setInvoiceList(invoiceVos);
+        return shippingVo;
+    } 
     
 }

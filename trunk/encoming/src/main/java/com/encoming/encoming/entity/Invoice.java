@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.InvoiceVo;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -34,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Invoice.findBySender", query = "SELECT i FROM Invoice i WHERE i.sender = :sender"),
     @NamedQuery(name = "Invoice.findByReceiver", query = "SELECT i FROM Invoice i WHERE i.receiver = :receiver"),
     @NamedQuery(name = "Invoice.findByMoment", query = "SELECT i FROM Invoice i WHERE i.moment = :moment")})
-public class Invoice implements Serializable {
+public class Invoice implements Serializable,IEntity<InvoiceVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -148,6 +149,17 @@ public class Invoice implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.Invoice[ idInvoice=" + idInvoice + " ]";
+    }
+    
+    @Override
+    public InvoiceVo toVo(){
+        InvoiceVo invoiceVo = new InvoiceVo();
+        invoiceVo.setIdInvoice(getIdInvoice());
+        invoiceVo.setSender(getSender());
+        invoiceVo.setMoment(getMoment());
+        invoiceVo.setShippingidShipping(getShippingidShipping());
+        invoiceVo.setPackageidPackage(getPackageidPackage());
+        return invoiceVo;
     }
     
 }

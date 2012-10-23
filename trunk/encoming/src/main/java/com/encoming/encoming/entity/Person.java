@@ -4,6 +4,8 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.AdministratorVo;
+import com.encoming.encoming.vo.PersonVo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Person.findByMail", query = "SELECT p FROM Person p WHERE p.mail = :mail"),
     @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
     @NamedQuery(name = "Person.findByAdress", query = "SELECT p FROM Person p WHERE p.adress = :adress")})
-public class Person implements Serializable {
+public class Person implements Serializable ,IEntity<PersonVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -178,6 +180,19 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.Person[ idPerson=" + idPerson + " ]";
+    }
+    
+    @Override
+    public PersonVo toVo(){
+        PersonVo personVo = new PersonVo();
+        personVo.setIdPerson(getIdPerson());
+        personVo.setName(getName());
+        personVo.setLastName(getLastanames());
+        personVo.setAdress(getAdress());
+        personVo.setPhone(getPhone());
+        personVo.setMail(getMail());
+        personVo.setLastName(getLastanames());
+        return personVo;
     }
     
 }

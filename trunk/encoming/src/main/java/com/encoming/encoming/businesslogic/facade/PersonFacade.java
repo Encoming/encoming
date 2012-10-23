@@ -15,7 +15,8 @@ public class PersonFacade extends Facade<PersonVo> {
     public PersonFacade(String PUName, PersonService service){
         super(PUName, service);
     }
-
+    
+/*
     public PersonVo login(PersonVo personVo) {
         try {
             em = emf.createEntityManager();
@@ -27,4 +28,6 @@ public class PersonFacade extends Facade<PersonVo> {
             }
         }
     }
+    * */
+    
 }

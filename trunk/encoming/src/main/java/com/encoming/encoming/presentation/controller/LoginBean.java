@@ -4,9 +4,9 @@
  */
 package com.encoming.encoming.presentation.controller;
 
+import com.encoming.encoming.businesslogic.facade.AdministratorFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
-import com.encoming.encoming.businesslogic.facade.PersonFacade;
-import com.encoming.encoming.vo.PersonVo;
+import com.encoming.encoming.vo.AdministratorVo;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -21,10 +21,10 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class LoginBean {
 
-    private Integer document;
+    private String username;
     private String password;
     @ManagedProperty(value = "#{userBean}")
-    private PersonBean user;
+    private AdministratorBean user;
 
     /**
      * Creates a new instance of LoginBean
@@ -49,44 +49,44 @@ public class LoginBean {
     /**
      * @return the user
      */
-    public PersonBean getUser() {
+    public AdministratorBean getUser() {
         return user;
     }
 
     /**
      * @param user the user to set
      */
-    public void setUser(PersonBean user) {
+    public void setUser(AdministratorBean user) {
         this.user = user;
     }
 
     /**
-     * @return the document
+     * @return the username
      */
-    public Integer getDocument() {
-        return document;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param document the document to set
+     * @param username the username to set
      */
-    public void setDocument(Integer document) {
-        this.document = document;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String login() {
-        PersonVo personVo = new PersonVo();
-        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+        AdministratorVo administratorVo = new AdministratorVo();
+        AdministratorFacade administratorFacade = FacadeFactory.getInstance().getAdministratorFacade();
 
-        personVo.setIdPerson(getDocument());
-        personVo.setPassword(getPassword());
+        administratorVo.setUsername(getUsername());
+        administratorVo.setPassword(getPassword());
 
-        PersonVo login = personFacade.login(personVo);
+        AdministratorVo login = administratorFacade.login(administratorVo);
 
         if (login != null) {
-            user.setIdPerson(login.getIdPerson());
-            user.setName(login.getName());
-            user.setLastName(login.getLastName());
+            user.setUsername(login.getUsername());
+            user.setType(login.getType());
+            user.setPersonidPerson(login.getPersonidPerson());
             user.setLoggedIn(true);
             return "success";
         } else {

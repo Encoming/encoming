@@ -4,6 +4,8 @@
  */
 package com.encoming.encoming.vo;
 
+import com.encoming.encoming.entity.Person;
+
 /**
  *
  * @author juanmanuelmartinezromero
@@ -12,7 +14,8 @@ public class AdministratorVo implements IValueObject{
     private Integer idAdministrator;
     private String username;
     private String password;
-    private Integer idWorker;
+    private String type;
+    private Integer personidPerson;
 
     /**
      * @return the idAdministrator
@@ -57,18 +60,32 @@ public class AdministratorVo implements IValueObject{
     }
 
     /**
-     * @return the idWorker
+     * @return the type
      */
-    public Integer getIdWorker() {
-        return idWorker;
+    public String getType() {
+        return type;
     }
 
     /**
-     * @param idWorker the idWorker to set
+     * @param type the type to set
      */
-    public void setIdWorker(Integer idWorker) {
-        this.idWorker = idWorker;
+    public void setType(String type) {
+        this.type = type;
     }
-    
+
+    /**
+     * @return the personidPerson
+     */
+    public Integer getPersonidPerson() {
+        return personidPerson;
+    }
+
+    /**
+     * @param personidPerson the personidPerson to set
+     */
+    public void setPersonidPerson(Integer personidPerson) {
+        this.personidPerson = personidPerson;
+    }
+   
     
 }

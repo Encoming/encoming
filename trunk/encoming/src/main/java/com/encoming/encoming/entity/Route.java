@@ -4,7 +4,11 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.PointVo;
+import com.encoming.encoming.vo.RouteVo;
+import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -34,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Route.findByNumberTolls", query = "SELECT r FROM Route r WHERE r.numberTolls = :numberTolls"),
     @NamedQuery(name = "Route.findByDestinationCity", query = "SELECT r FROM Route r WHERE r.destinationCity = :destinationCity"),
     @NamedQuery(name = "Route.findByOriginCity", query = "SELECT r FROM Route r WHERE r.originCity = :originCity")})
-public class Route implements Serializable {
+public class Route implements Serializable,IEntity<RouteVo>{
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -161,5 +165,25 @@ public class Route implements Serializable {
     public String toString() {
         return "com.encoming.encoming.entity.Route[ idRoute=" + idRoute + " ]";
     }
+    
+    @Override
+    public RouteVo toVo(){
+        RouteVo routeVo = new RouteVo();
+        routeVo.setNumberKilometers(getNumberKilometers());
+        routeVo.setNumberTolls(getNumberTolls());
+        routeVo.setDestinationCity(getDestinationCity());
+        routeVo.setOriginCity(getOriginCity());
+        List<PointVo> pointVos = new ArrayList<PointVo>();
+        for(Point entity : getPointList()){
+            pointVos.add(entity.toVo());
+        }
+        routeVo.setPointList(pointVos);
+        List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        for(Shipping entity : getShippingList()){
+            shippingVos.add(entity.toVo());
+        }
+        routeVo.setShippingList(shippingVos);
+        return routeVo;
+    } 
     
 }
