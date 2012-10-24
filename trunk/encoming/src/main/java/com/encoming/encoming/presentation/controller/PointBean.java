@@ -34,9 +34,10 @@ public class PointBean implements Serializable {
     private double lat;
     private double lng;
     private List<SelectItem> points;
+    private List<PointVo> pointsVo;
 
     public PointBean() {
-        model = new DefaultMapModel();
+        model = addMarkers();
     }
 
     public MapModel getModel() {
@@ -72,24 +73,24 @@ public class PointBean implements Serializable {
     }
 
     public void addPoint(ActionEvent actionEvent) {
-        
+
         PointVo pointVo = new PointVo();
         PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
-        
+
         pointVo.setName(getTitle());
         pointVo.setLatitude(getLat());
         pointVo.setLongitude(getLng());
-        
+
         pointFacade.persist(pointVo);
-        
+
         Marker marker = new Marker(new LatLng(lat, lng), title);
         model.addOverlay(marker);
         addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha agregado un nuevo punto",
                 "Nombre:" + title
-                + "\n\nLatitud:" + lat 
+                + "\n\nLatitud:" + lat
                 + ", Longitud:" + lng));
     }
-    
+
     public List<SelectItem> getPoints() {
         if (points == null) {
             points = new ArrayList<SelectItem>();
@@ -101,5 +102,36 @@ public class PointBean implements Serializable {
             }
         }
         return points;
+    }
+
+    private List<PointVo> getPointsVo() {
+        if (pointsVo == null) {
+            pointsVo = new ArrayList<PointVo>();
+            List<PointVo> pointList = FacadeFactory.getInstance().getPointFacade().getList();
+            if (pointList != null) {
+                for (PointVo point : pointList) {
+                    pointsVo.add(point);
+                }
+            }
+        }
+        return pointsVo;
+    }
+
+    private List<Marker> pointVoToMarker() {
+        List<PointVo> voPoints = getPointsVo();
+        List<Marker> markers = new ArrayList<Marker>();
+        for (PointVo pointVo : voPoints) {
+            markers.add(new Marker(new LatLng(pointVo.getLatitude(), pointVo.getLongitude()), pointVo.getName()));
+        }
+        return markers;
+    }
+
+    private MapModel addMarkers() {
+        List<Marker> markers = pointVoToMarker();
+        MapModel map = new DefaultMapModel();
+        for (Marker marker : markers) {
+            map.addOverlay(marker);
+        }
+        return map;
     }
 }
