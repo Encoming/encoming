@@ -8,11 +8,14 @@ import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PointFacade;
 import com.encoming.encoming.vo.PointVo;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -30,6 +33,7 @@ public class PointBean implements Serializable {
     private String title;
     private double lat;
     private double lng;
+    private List<SelectItem> points;
 
     public PointBean() {
         model = new DefaultMapModel();
@@ -68,22 +72,34 @@ public class PointBean implements Serializable {
     }
 
     public void addPoint(ActionEvent actionEvent) {
-        
+
         PointVo pointVo = new PointVo();
         PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
-        
+
         pointVo.setName(getTitle());
         pointVo.setLatitude(getLat());
         pointVo.setLongitude(getLng());
-        
+
         pointFacade.persist(pointVo);
-        
+
         Marker marker = new Marker(new LatLng(lat, lng), title);
         model.addOverlay(marker);
         addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha agregado un nuevo punto",
                 "Nombre:" + title
-                + "\n\nLatitud:" + lat 
+                + "\n\nLatitud:" + lat
                 + ", Longitud:" + lng));
+    }
 
+    public List<SelectItem> getPoints() {
+        if (points == null) {
+            points = new ArrayList<SelectItem>();
+            List<PointVo> pointList = FacadeFactory.getInstance().getPointFacade().getList();
+            if (pointList != null) {
+                for (PointVo point : pointList) {
+                    points.add(new SelectItem(point.getName()));
+                }
+            }
+        }
+        return points;
     }
 }

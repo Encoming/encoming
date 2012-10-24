@@ -49,7 +49,15 @@
                 top: 10%;
             }
         </style>
-        <div class="hero-unit span7 offset1">
+        <div class="hero-unit span2 offset1">
+            <h:selectOneMenu id="point" required="true"
+                             requiredMessage="Por favor selecciona uno">
+                <f:selectItem itemLabel=""/>
+                <f:selectItems value="#{pointBean.points}" />
+                <f:validateLongRange minimum="1" />
+            </h:selectOneMenu>
+        </div>
+        <div class="hero-unit span7">
 
 
             <p:gmap id="gmap" center="36.890257,30.707417" zoom="13" type="HYBRID"   
