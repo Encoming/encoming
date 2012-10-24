@@ -53,8 +53,8 @@ public class AdministratorDAO implements IDAO<Administrator> {
     
     public Administrator login(Administrator entity, EntityManager em) {
         Administrator administrator;
-        Query q = em.createQuery("SELECT u FROM Person u "
-                + "WHERE u.idPerson LIKE :username "
+        Query q = em.createQuery("SELECT u FROM Administrator u "
+                + "WHERE u.username LIKE :username "
                 + "AND u.password LIKE :password")
                 .setParameter("username", entity.getUsername())
                 .setParameter("password", entity.getPassword());
