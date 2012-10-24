@@ -7,6 +7,9 @@ package com.encoming.encoming.businesslogic.service;
 import com.encoming.encoming.dao.DAOFactory;
 import com.encoming.encoming.entity.Point;
 import com.encoming.encoming.vo.PointVo;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -52,6 +55,18 @@ public class PointService implements IService<PointVo> {
 
     @Override
     public List<PointVo> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<PointVo> list = new ArrayList<PointVo>();
+        for (Point point : DAOFactory.getInstance().getPointDAO().getList(em)) {
+            list.add((point).toVo());
+        }
+        Collections.sort(list, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                PointVo p1 = (PointVo) o1;
+                PointVo p2 = (PointVo) o2;
+                return p1.getName().compareTo(p2.getName());
+            }
+        });
+        return list;
     }
 }

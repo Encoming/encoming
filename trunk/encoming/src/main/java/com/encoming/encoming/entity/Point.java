@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.PointVo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Point.findByName", query = "SELECT p FROM Point p WHERE p.name = :name"),
     @NamedQuery(name = "Point.findByLatitude", query = "SELECT p FROM Point p WHERE p.latitude = :latitude"),
     @NamedQuery(name = "Point.findByLongitude", query = "SELECT p FROM Point p WHERE p.longitude = :longitude")})
-public class Point implements Serializable {
+public class Point implements Serializable, IEntity<PointVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -132,6 +133,18 @@ public class Point implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.Point[ idPoint=" + idPoint + " ]";
+    }
+
+    @Override
+    public PointVo toVo() {
+        PointVo vo = new PointVo();
+        vo.setIdPoint(getIdPoint());
+        //vo.setIdRoute(getRoute().getIdRoute());
+        vo.setLatitude(getLatitude());
+        vo.setLongitude(getLongitude());
+        vo.setName(getName());
+        return vo;
+
     }
     
 }

@@ -7,6 +7,8 @@ package com.encoming.encoming.dao;
 import com.encoming.encoming.entity.Point;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -45,6 +47,10 @@ public class PointDAO implements IDAO<Point> {
 
     @Override
     public List<Point> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Point.class));
+        Query q = em.createQuery(cq);
+        return q.getResultList();
     }
+
 }
