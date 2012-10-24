@@ -50,15 +50,17 @@
             }
         </style>
         <div class="hero-unit span2 offset1">
-            <h:selectOneMenu id="point" required="true"
-                             requiredMessage="Por favor selecciona uno">
-                <f:selectItem itemLabel=""/>
-                <f:selectItems value="#{pointBean.points}" />
-                <f:validateLongRange minimum="1" />
-            </h:selectOneMenu>
+            <h:form id="pointsForm">
+                <h:selectOneMenu id="point" required="true"
+                                 requiredMessage="Por favor selecciona uno">
+                    <f:selectItem itemLabel=""/>
+                    <f:selectItems value="#{pointBean.points}" />
+                    <f:validateLongRange minimum="1" />
+                </h:selectOneMenu>
+            </h:form>
         </div>
         <div class="hero-unit span7">
-            <p:gmap id="gmap" center="36.890257,30.707417" zoom="13" type="HYBRID"   
+            <p:gmap id="gmap" center="#{pointBean.initialCoordinates}" zoom="16" type="HYBRID"   
                     style="width:600px;height:400px"  
                     model="#{pointBean.model}"   
                     onPointClick="handlePointClick(event);"   
@@ -76,7 +78,7 @@
                                              actionListener="#{pointBean.addPoint}"   
                                              update="mensajes"   
                                              oncomplete="markerAddComplete()"/>  
-                            <p:commandButton value="Cancel" onclick="return cancel()"/>  
+                            <p:commandButton value="Cancel" onclick="return cancel()" update=""/>  
                         </f:facet>  
                     </h:panelGrid>  
 

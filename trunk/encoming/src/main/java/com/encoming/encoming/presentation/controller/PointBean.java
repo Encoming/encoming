@@ -134,4 +134,16 @@ public class PointBean implements Serializable {
         }
         return map;
     }
+
+    public String getInitialCoordinates() {
+        String coordinates;
+        PointVo pointVo = null;
+        try {
+            pointVo = getPointsVo().get(0);
+            coordinates = pointVo.getLatitude() + "," + pointVo.getLongitude();
+        } catch (Exception e) {
+            coordinates="4.636253254870502,-74.06657649212656";
+        }
+        return coordinates;
+    }
 }
