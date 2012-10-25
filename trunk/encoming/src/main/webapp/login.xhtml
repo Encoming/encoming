@@ -23,10 +23,10 @@
                         <legend><h2>Entra</h2></legend>
                         <div class="control-group">
                             <div class="controls">
-                                <p:inputText id="idUser" required="true" value="#{loginBean.document}" 
+                                <p:inputText id="username" required="true" value="#{loginBean.username}" 
                                              requiredMessage="Por favor completa este campo" />
-                                <p:watermark for="idUser" value="Id de Usuario" />
-                                <p:message id="userNameMessage" for="idUser" />
+                                <p:watermark for="username" value="Nombre de Usuario" />
+                                <p:message id="usernameMessage" for="username" />
                                 <p:password id="password" required="true" value="#{loginBean.password}"
                                             requiredMessage="Por favor completa este campo"/>
                                 <p:watermark for="password" value="Contraseña" />
@@ -41,56 +41,7 @@
     </ui:define>
 
     <ui:define name="right">
-        <div class="span4 offset3">
-            <div class="hero-unit">
-                <f:view>
-                    <h:form id="signUpForm">
-                        <legend><h2>Registrate</h2></legend>
-                        <h:messages for="signUpForm" class="alert alert-error"/>
-                        
-                        <div class="control-group">
-                            <div class="controls">
-                                <p:inputText id="firstName" required="true" value="#{signUpBean.firstName}"
-                                             requiredMessage="Por favor completa este campo"/>
-                                <p:watermark for="firstName" value="Como te llamas?" />
-                                <p:message id="firstNameMessage" for="firstName" />
-                            </div>
-                            <div class="controls">
-                                <p:inputText id="lastName" required="true" value="#{signUpBean.lastName}"
-                                             requiredMessage="Por favor completa este campo"/>
-                                <p:watermark for="lastName" value="Y tu Apellido?" />
-                                <p:message id="lastNameMessage" for="lastName" />
-                            </div>
-                            <div class="controls">
-                                <div class="input-append">
-                                    <h:inputText  id="email" required="true" requiredMessage="Por favor completa este campo"
-                                                 value="#{signUpBean.userName}"/>
-                                    <p:watermark for="email" value="¿Cuál es tu correo?" />
-                                    <p:message id="emailMessage" for="email" />
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="control-group">
-                            <div class="controls">
-                                <p:password id="passwordSignUp" required="true" requiredMessage="Por favor completa este campo" 
-                                            value="#{signUpBean.password}"
-                                            feedback="true" promptLabel="Usa una contraseña segura" inline="true" 
-                                            weakLabel="Debil" goodLabel="Buena" strongLabel="Segura" 
-                                            match="passwordSignUpR" />
-                                <p:watermark for="passwordSignUp" value="Escribe una Contraseña" />
-                                <p:message id="passwordSignUpMessage" for="passwordSignUp" />
-                                <p:watermark for="passwordSignUpR" value="Escribela de nuevo" />
-                                <p:password id="passwordSignUpR" required="true" value="#{signUpBean.passwordR}"
-                                            requiredMessage="Por favor completa este campo"/>
-                                <p:message id="passwordSignUpRMessage" for="passwordSignUpR" />
-                                <h:commandButton action="#{signUpBean.signUp()}" value="Registrarse" class="btn btn-large btn-primary" />
-                            </div>
-                        </div>
-                    </h:form>
-                </f:view>
-            </div>
-        </div>
+       
     </ui:define>
 
     <ui:define name="content">
