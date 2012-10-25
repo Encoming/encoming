@@ -28,7 +28,16 @@ public class AdministratorDAO implements IDAO<Administrator> {
     
     @Override
     public void persist(Administrator entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.getTransaction().begin();
+        try {
+            em.persist(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -43,7 +52,7 @@ public class AdministratorDAO implements IDAO<Administrator> {
 
     @Override
     public void delete(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     @Override

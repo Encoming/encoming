@@ -7,10 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-/**
- *
- * @author Alexander
- */
 public class Facade<VO> {
 
     protected EntityManagerFactory emf;
