@@ -6,6 +6,7 @@ package com.encoming.encoming.entity;
 
 import com.encoming.encoming.vo.PointVo;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,6 +35,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Point.findByLatitude", query = "SELECT p FROM Point p WHERE p.latitude = :latitude"),
     @NamedQuery(name = "Point.findByLongitude", query = "SELECT p FROM Point p WHERE p.longitude = :longitude")})
 public class Point implements Serializable, IEntity<PointVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +58,8 @@ public class Point implements Serializable, IEntity<PointVo> {
     @JoinColumn(name = "route", referencedColumnName = "idRoute")
     @ManyToOne
     private Route route;
+    @OneToMany(mappedBy = "pointidPoint")
+    private List<Vehicle> vehicleList;
 
     public Point() {
     }
@@ -110,6 +115,14 @@ public class Point implements Serializable, IEntity<PointVo> {
         this.route = route;
     }
 
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
+
+    public void setVehicleList(List<Vehicle> vehicleList) {
+        this.vehicleList = vehicleList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -144,7 +157,5 @@ public class Point implements Serializable, IEntity<PointVo> {
         vo.setLongitude(getLongitude());
         vo.setName(getName());
         return vo;
-
     }
-    
 }

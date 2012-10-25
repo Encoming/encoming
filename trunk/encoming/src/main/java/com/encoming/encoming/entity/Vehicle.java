@@ -37,6 +37,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status"),
     @NamedQuery(name = "Vehicle.findByIdVehicle", query = "SELECT v FROM Vehicle v WHERE v.idVehicle = :idVehicle")})
 public class Vehicle implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -81,6 +82,9 @@ public class Vehicle implements Serializable {
     @JoinColumn(name = "driver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
     private Driver driver;
+    @JoinColumn(name = "Point_idPoint", referencedColumnName = "idPoint")
+    @ManyToOne
+    private Point pointidPoint;
 
     public Vehicle() {
     }
@@ -180,6 +184,14 @@ public class Vehicle implements Serializable {
         this.driver = driver;
     }
 
+    public Point getPointidPoint() {
+        return pointidPoint;
+    }
+
+    public void setPointidPoint(Point pointidPoint) {
+        this.pointidPoint = pointidPoint;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -204,5 +216,4 @@ public class Vehicle implements Serializable {
     public String toString() {
         return "com.encoming.encoming.entity.Vehicle[ idVehicle=" + idVehicle + " ]";
     }
-    
 }
