@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.PointVo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,16 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Point")
+@Table(name = "point")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Point.findAll", query = "SELECT p FROM Point p"),
     @NamedQuery(name = "Point.findByIdPoint", query = "SELECT p FROM Point p WHERE p.idPoint = :idPoint"),
     @NamedQuery(name = "Point.findByName", query = "SELECT p FROM Point p WHERE p.name = :name")})
-public class Point implements Serializable {
+public class Point implements Serializable,IEntity<PointVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -39,9 +40,9 @@ public class Point implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @JoinColumn(name = "route", referencedColumnName = "idRoute")
+    @JoinColumn(name = "Route_idRoute", referencedColumnName = "idRoute")
     @ManyToOne(optional = false)
-    private Route route;
+    private Route routeidRoute;
 
     public Point() {
     }
@@ -66,12 +67,12 @@ public class Point implements Serializable {
         this.name = name;
     }
 
-    public Route getRoute() {
-        return route;
+    public Route getRouteidRoute() {
+        return routeidRoute;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setRouteidRoute(Route routeidRoute) {
+        this.routeidRoute = routeidRoute;
     }
 
     @Override
@@ -99,4 +100,12 @@ public class Point implements Serializable {
         return "com.encoming.encoming.entity.Point[ idPoint=" + idPoint + " ]";
     }
     
+    @Override
+    public PointVo toVo(){
+        PointVo pointVo = new PointVo();
+        pointVo.setIdPoint(getIdPoint());
+        pointVo.setName(getName());
+        pointVo.setIdRoute(getRouteidRoute().getIdRoute());      
+        return pointVo;
+    } 
 }

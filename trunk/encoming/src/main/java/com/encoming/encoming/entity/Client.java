@@ -4,8 +4,9 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.ClientVo;
-import com.encoming.encoming.vo.EncomingVo;
+import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,39 +27,48 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Client")
+@Table(name = "client")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
     @NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient"),
     @NamedQuery(name = "Client.findBySendedEncoming", query = "SELECT c FROM Client c WHERE c.sendedEncoming = :sendedEncoming"),
     @NamedQuery(name = "Client.findByReceivedEncoming", query = "SELECT c FROM Client c WHERE c.receivedEncoming = :receivedEncoming")})
-public class Client extends Person implements Serializable, IEntity<ClientVo> {
-
+public class Client implements Serializable,IEntity<ClientVo>  {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "idClient")
     private Integer idClient;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "sendedEncoming")
-    private Integer sendedEncoming;
+    private int sendedEncoming;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "receivedEncoming")
-    private Integer receivedEncoming;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private List<Encoming> encomingList;
-    @JoinColumn(name = "person", referencedColumnName = "idPerson")
+    private int receivedEncoming;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientidClient")
+    private List<Shipping> shippingList;
+    @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)
-    private Person person;
+    private Person personidPerson;
 
     public Client() {
     }
 
     public Client(Integer idClient) {
         this.idClient = idClient;
+    }
+
+    public Client(Integer idClient, int sendedEncoming, int receivedEncoming) {
+        this.idClient = idClient;
+        this.sendedEncoming = sendedEncoming;
+        this.receivedEncoming = receivedEncoming;
     }
 
     public Integer getIdClient() {
@@ -69,37 +79,37 @@ public class Client extends Person implements Serializable, IEntity<ClientVo> {
         this.idClient = idClient;
     }
 
-    public Integer getSendedEncoming() {
+    public int getSendedEncoming() {
         return sendedEncoming;
     }
 
-    public void setSendedEncoming(Integer sendedEncoming) {
+    public void setSendedEncoming(int sendedEncoming) {
         this.sendedEncoming = sendedEncoming;
     }
 
-    public Integer getReceivedEncoming() {
+    public int getReceivedEncoming() {
         return receivedEncoming;
     }
 
-    public void setReceivedEncoming(Integer receivedEncoming) {
+    public void setReceivedEncoming(int receivedEncoming) {
         this.receivedEncoming = receivedEncoming;
     }
 
     @XmlTransient
-    public List<Encoming> getEncomingList() {
-        return encomingList;
+    public List<Shipping> getShippingList() {
+        return shippingList;
     }
 
-    public void setEncomingList(List<Encoming> encomingList) {
-        this.encomingList = encomingList;
+    public void setShippingList(List<Shipping> shippingList) {
+        this.shippingList = shippingList;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getPersonidPerson() {
+        return personidPerson;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPersonidPerson(Person personidPerson) {
+        this.personidPerson = personidPerson;
     }
 
     @Override
@@ -126,19 +136,19 @@ public class Client extends Person implements Serializable, IEntity<ClientVo> {
     public String toString() {
         return "com.encoming.encoming.entity.Client[ idClient=" + idClient + " ]";
     }
-
+    
     @Override
-    public ClientVo toVo() {
+    public ClientVo toVo(){
         ClientVo clientVo = new ClientVo();
-        List<EncomingVo> encomingVos = new ArrayList<EncomingVo>();
-        for (Encoming entity : getEncomingList()) {
-            encomingVos.add(entity.toVo());
-        }
-        clientVo.setEncomingList(encomingVos);
-        clientVo.setIdClient(getIdClient());
-        clientVo.setIdPerson(getPerson().getIdPerson());
-        clientVo.setReceivedEncoming(getReceivedEncoming());
         clientVo.setSendedEncoming(getSendedEncoming());
+        clientVo.setReceivedEncoming(getReceivedEncoming());
+        List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        for(Shipping entity : getShippingList()){
+            shippingVos.add(entity.toVo());
+        }
+        clientVo.setShippingList(shippingVos);
+        clientVo.setIdPerson(getPersonidPerson().getIdPerson());
         return clientVo;
     }
+    
 }

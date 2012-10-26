@@ -13,25 +13,40 @@ import java.util.List;
 public class VehicleVo implements IValueObject{
     
     private Integer idVehiclePK;
+    private String type;
     private String manufacturer;
     private String model;
     private int capacity;
     private String status;
-    private List<EncomingVo> encomingList;
+    private List<ShippingVo> shippingList;
     private Integer idDriver;
 
     /**
-     * @return the vehiclePK
+     * @return the idVehiclePK
      */
-    public Integer getVehiclePK() {
+    public Integer getIdVehiclePK() {
         return idVehiclePK;
     }
 
     /**
-     * @param vehiclePK the vehiclePK to set
+     * @param idVehiclePK the idVehiclePK to set
      */
-    public void setVehiclePK(Integer idVehiclePK) {
+    public void setIdVehiclePK(Integer idVehiclePK) {
         this.idVehiclePK = idVehiclePK;
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -91,17 +106,17 @@ public class VehicleVo implements IValueObject{
     }
 
     /**
-     * @return the encomingList
+     * @return the shippingList
      */
-    public List<EncomingVo> getEncomingList() {
-        return encomingList;
+    public List<ShippingVo> getShippingList() {
+        return shippingList;
     }
 
     /**
-     * @param encomingList the encomingList to set
+     * @param shippingList the shippingList to set
      */
-    public void setEncomingList(List<EncomingVo> encomingList) {
-        this.encomingList = encomingList;
+    public void setShippingList(List<ShippingVo> shippingList) {
+        this.shippingList = shippingList;
     }
 
     /**
@@ -117,5 +132,5 @@ public class VehicleVo implements IValueObject{
     public void setIdDriver(Integer idDriver) {
         this.idDriver = idDriver;
     }
-    
+
 }

@@ -4,6 +4,8 @@
  */
 package com.encoming.encoming.vo;
 
+import java.util.List;
+
 /**
  *
  * @author germanpinerosm
@@ -12,10 +14,13 @@ public class PersonVo implements IValueObject {
     
     private Integer idPerson;
     private String name;
-    private String lastanames;
+    private String lastName;
     private String mail;
     private Integer phone;
     private String adress;
+    private List<ClientVo> clientList;
+    private List<AdministratorVo> administratorList;
+    private List<DriverVo> driverList;
 
     /**
      * @return the idPerson
@@ -46,17 +51,17 @@ public class PersonVo implements IValueObject {
     }
 
     /**
-     * @return the lastanames
+     * @return the lastName
      */
-    public String getLastanames() {
-        return lastanames;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
-     * @param lastanames the lastanames to set
+     * @param lastName the lastName to set
      */
-    public void setLastanames(String lastanames) {
-        this.lastanames = lastanames;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
@@ -100,5 +105,48 @@ public class PersonVo implements IValueObject {
     public void setAdress(String adress) {
         this.adress = adress;
     }
-    
+
+    /**
+     * @return the clientList
+     */
+    public List<ClientVo> getClientList() {
+        return clientList;
+    }
+
+    /**
+     * @param clientList the clientList to set
+     */
+    public void setClientList(List<ClientVo> clientList) {
+        this.clientList = clientList;
+    }
+
+    /**
+     * @return the administratorList
+     */
+    public List<AdministratorVo> getAdministratorList() {
+        return administratorList;
+    }
+
+    /**
+     * @param administratorList the administratorList to set
+     */
+    public void setAdministratorList(List<AdministratorVo> administratorList) {
+        this.administratorList = administratorList;
+    }
+
+    /**
+     * @return the driverList
+     */
+    public List<DriverVo> getDriverList() {
+        return driverList;
+    }
+
+    /**
+     * @param driverList the driverList to set
+     */
+    public void setDriverList(List<DriverVo> driverList) {
+        this.driverList = driverList;
+    }
+
+   
 }

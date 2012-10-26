@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.VehiclePKVo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,10 +14,10 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Embeddable
-public class VehiclePK implements Serializable {
+public class VehiclePK implements Serializable,IEntity<VehiclePKVo> {
     @Basic(optional = false)
     @NotNull
     @Column(name = "plateNumber")
@@ -78,6 +79,13 @@ public class VehiclePK implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.VehiclePK[ plateNumber=" + plateNumber + ", plateLetters=" + plateLetters + " ]";
+    }
+    
+    public VehiclePKVo toVo(){
+        VehiclePKVo vehiclePKVo = new VehiclePKVo();
+        vehiclePKVo.setPlateNumber(getPlateNumber());
+        vehiclePKVo.setPlateLetters(getPlateLetters());
+        return vehiclePKVo;
     }
     
 }

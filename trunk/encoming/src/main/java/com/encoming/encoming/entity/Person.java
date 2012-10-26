@@ -4,28 +4,30 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.AdministratorVo;
+import com.encoming.encoming.vo.PersonVo;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
-//@Entity
-//@Table(name = "person")
-@MappedSuperclass
+@Entity
+@Table(name = "person")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
@@ -35,14 +37,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Person.findByMail", query = "SELECT p FROM Person p WHERE p.mail = :mail"),
     @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.phone = :phone"),
     @NamedQuery(name = "Person.findByAdress", query = "SELECT p FROM Person p WHERE p.adress = :adress")})
-public abstract class Person implements Serializable {
+public class Person implements Serializable ,IEntity<PersonVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "idPerson")
     private Integer idPerson;
-    @Size(max = 25)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
@@ -58,6 +62,12 @@ public abstract class Person implements Serializable {
     @Size(max = 25)
     @Column(name = "adress")
     private String adress;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
+    private List<Client> clientList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
+    private List<Administrator> administratorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
+    private List<Driver> driverList;
 
     public Person() {
     }
@@ -66,8 +76,9 @@ public abstract class Person implements Serializable {
         this.idPerson = idPerson;
     }
 
-    public Person(Integer idPerson, String lastanames) {
+    public Person(Integer idPerson, String name, String lastanames) {
         this.idPerson = idPerson;
+        this.name = name;
         this.lastanames = lastanames;
     }
 
@@ -119,6 +130,33 @@ public abstract class Person implements Serializable {
         this.adress = adress;
     }
 
+    @XmlTransient
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
+    }
+
+    @XmlTransient
+    public List<Administrator> getAdministratorList() {
+        return administratorList;
+    }
+
+    public void setAdministratorList(List<Administrator> administratorList) {
+        this.administratorList = administratorList;
+    }
+
+    @XmlTransient
+    public List<Driver> getDriverList() {
+        return driverList;
+    }
+
+    public void setDriverList(List<Driver> driverList) {
+        this.driverList = driverList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -142,6 +180,19 @@ public abstract class Person implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.Person[ idPerson=" + idPerson + " ]";
+    }
+    
+    @Override
+    public PersonVo toVo(){
+        PersonVo personVo = new PersonVo();
+        personVo.setIdPerson(getIdPerson());
+        personVo.setName(getName());
+        personVo.setLastName(getLastanames());
+        personVo.setAdress(getAdress());
+        personVo.setPhone(getPhone());
+        personVo.setMail(getMail());
+        personVo.setLastName(getLastanames());
+        return personVo;
     }
     
 }

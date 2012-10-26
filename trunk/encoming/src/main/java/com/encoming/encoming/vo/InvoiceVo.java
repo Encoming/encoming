@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.vo;
 
+import com.encoming.encoming.entity.Shipping;
 import java.util.Date;
 
 /**
@@ -15,7 +16,9 @@ public class InvoiceVo implements IValueObject{
     private String sender;
     private String receiver;
     private Date moment;
-    private Integer idEncoming;
+    private Shipping shippingidShipping;
+    private com.encoming.encoming.entity.Package packageidPackage;
+    
 
     /**
      * @return the idInvoice
@@ -74,17 +77,31 @@ public class InvoiceVo implements IValueObject{
     }
 
     /**
-     * @return the idEncoming
+     * @return the shippingidShipping
      */
-    public Integer getIdEncoming() {
-        return idEncoming;
+    public Shipping getShippingidShipping() {
+        return shippingidShipping;
     }
 
     /**
-     * @param idEncoming the idEncoming to set
+     * @param shippingidShipping the shippingidShipping to set
      */
-    public void setIdEncoming(Integer idEncoming) {
-        this.idEncoming = idEncoming;
+    public void setShippingidShipping(Shipping shippingidShipping) {
+        this.shippingidShipping = shippingidShipping;
+    }
+
+    /**
+     * @return the packageidPackage
+     */
+    public com.encoming.encoming.entity.Package getPackageidPackage() {
+        return packageidPackage;
+    }
+
+    /**
+     * @param packageidPackage the packageidPackage to set
+     */
+    public void setPackageidPackage(com.encoming.encoming.entity.Package packageidPackage) {
+        this.packageidPackage = packageidPackage;
     }
     
 }

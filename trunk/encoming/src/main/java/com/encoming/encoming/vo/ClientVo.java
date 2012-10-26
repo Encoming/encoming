@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.vo;
 
+import com.encoming.encoming.entity.Shipping;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class ClientVo implements IValueObject{
     private Integer idClient;
     private int sendedEncoming;
     private int receivedEncoming;
-    private List<EncomingVo> encomingList;
+    private List<ShippingVo> shippingList;
     private Integer idPerson;
 
     /**
@@ -60,20 +61,6 @@ public class ClientVo implements IValueObject{
     }
 
     /**
-     * @return the encomingList
-     */
-    public List<EncomingVo> getEncomingList() {
-        return encomingList;
-    }
-
-    /**
-     * @param encomingList the encomingList to set
-     */
-    public void setEncomingList(List<EncomingVo> encomingList) {
-        this.encomingList = encomingList;
-    }
-
-    /**
      * @return the idPerson
      */
     public Integer getIdPerson() {
@@ -85,6 +72,20 @@ public class ClientVo implements IValueObject{
      */
     public void setIdPerson(Integer idPerson) {
         this.idPerson = idPerson;
+    }
+
+    /**
+     * @return the shippingList
+     */
+    public List<ShippingVo> getShippingList() {
+        return shippingList;
+    }
+
+    /**
+     * @param shippingList the shippingList to set
+     */
+    public void setShippingList(List<ShippingVo> shippingList) {
+        this.shippingList = shippingList;
     }
 
    

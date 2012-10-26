@@ -4,7 +4,10 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.ShippingVo;
+import com.encoming.encoming.vo.VehicleVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -24,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Vehicle")
+@Table(name = "vehicle")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehicle.findAll", query = "SELECT v FROM Vehicle v"),
@@ -38,10 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Vehicle.findByModel", query = "SELECT v FROM Vehicle v WHERE v.model = :model"),
     @NamedQuery(name = "Vehicle.findByCapacity", query = "SELECT v FROM Vehicle v WHERE v.capacity = :capacity"),
     @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status")})
-public class Vehicle implements Serializable {
+public class Vehicle implements Serializable,IEntity<VehicleVo> {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected VehiclePK vehiclePK;
+    private VehiclePK vehiclePK;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -67,10 +70,10 @@ public class Vehicle implements Serializable {
     @Column(name = "status")
     private String status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle")
-    private List<Encoming> encomingList;
-    @JoinColumn(name = "driver", referencedColumnName = "idDriver")
+    private List<Shipping> shippingList;
+    @JoinColumn(name = "Driver_idDriver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
-    private Driver driver;
+    private Driver driveridDriver;
 
     public Vehicle() {
     }
@@ -141,20 +144,20 @@ public class Vehicle implements Serializable {
     }
 
     @XmlTransient
-    public List<Encoming> getEncomingList() {
-        return encomingList;
+    public List<Shipping> getShippingList() {
+        return shippingList;
     }
 
-    public void setEncomingList(List<Encoming> encomingList) {
-        this.encomingList = encomingList;
+    public void setShippingList(List<Shipping> shippingList) {
+        this.shippingList = shippingList;
     }
 
-    public Driver getDriver() {
-        return driver;
+    public Driver getDriveridDriver() {
+        return driveridDriver;
     }
 
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    public void setDriveridDriver(Driver driveridDriver) {
+        this.driveridDriver = driveridDriver;
     }
 
     @Override
@@ -181,5 +184,24 @@ public class Vehicle implements Serializable {
     public String toString() {
         return "com.encoming.encoming.entity.Vehicle[ vehiclePK=" + vehiclePK + " ]";
     }
+    
+    // --- Vehicle
+    @Override
+    public VehicleVo toVo(){
+        VehicleVo vehicleVo = new VehicleVo();
+        vehicleVo.setIdVehiclePK(getVehiclePK().getPlateNumber());
+        vehicleVo.setType(getType());
+        vehicleVo.setManufacturer(getManufacturer());
+        vehicleVo.setModel(getModel());
+        vehicleVo.setCapacity(getCapacity());
+        vehicleVo.setStatus(getStatus());
+                List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        for(Shipping entity : getShippingList()){
+            shippingVos.add(entity.toVo());
+        }
+        vehicleVo.setShippingList(shippingVos);
+        vehicleVo.setIdDriver(getDriveridDriver().getIdDriver());        
+        return vehicleVo;
+    } 
     
 }

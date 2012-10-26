@@ -16,4 +16,16 @@ public class AdministratorFacade extends Facade<AdministratorVo> {
     public AdministratorFacade(String PUName, AdministratorService service) {
         super(PUName, service);
     }
+    
+    public AdministratorVo login(AdministratorVo administratorVo) {
+        try {
+            em = emf.createEntityManager();
+            return ((AdministratorService)service).login(administratorVo, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
 }
