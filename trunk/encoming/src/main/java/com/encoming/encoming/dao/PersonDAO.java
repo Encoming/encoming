@@ -7,6 +7,7 @@ package com.encoming.encoming.dao;
 import com.encoming.encoming.entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,27 +26,32 @@ public class PersonDAO implements IDAO<Person> {
 
     @Override
     public void persist(Person entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }
 
     @Override
     public Person find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createNamedQuery("Person.findByIdPerson")
+                .setParameter("idPerson", id);
+        return (Person)query.getSingleResult();
     }
 
     @Override
     public void update(Person entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.merge(entity);
     }
 
     @Override
     public void delete(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Person person = find(id,em);
+        em.remove(person);
     }
 
     @Override
     public List<Person> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createNamedQuery("Person.findAll");
+        List<Person> lista = query.getResultList();
+        return lista;
     }
     
 /*
