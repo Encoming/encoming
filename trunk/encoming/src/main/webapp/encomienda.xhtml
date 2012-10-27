@@ -25,20 +25,20 @@
 
                             <h:outputLabel for="name" value="Nombres: *" styleClass="requiredLb1"/>
                             <h:inputText id="name" required="true" value="#{encomiendaBean.name}"
-                                         label="Name"/>
+                                         requiredMessage="¡Por favor ingrese los Nombres!"/>
                             <h:outputLabel for="lastNames" value="Apellidos: *" styleClass="requiredLb1"/>
                             <h:inputText id="lastNames" required="true" value="#{encomiendaBean.lastName}"
-                                         label="LastName"/>
+                                         requiredMessage="¡Por favor ingrese los Apellidos!"/>
                             <h:outputLabel for="idClient" value="Documento: *" />
                             <h:inputText id="idClient" required="true" value="#{encomiendaBean.idClient}"
-                                         requiredMessage="¡Por favor completa este campo!" />
+                                         requiredMessage="¡Por favor ingresa un Documento!" />
                             <h:outputLabel for="mail" value="Correo"/>
-                            <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}"/>
+                            <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}" />
                             <h:outputLabel for="phone"  value="Teléfono"/>
                             <h:inputText id="phone" required="false" value="#{encomiendaBean.phone}"/>
                             <h:outputLabel for="adress" value="Dirección: *"/>
                             <h:inputText id="adress" required="true" value="#{encomiendaBean.adress}"
-                                         requiredMessage="¡Por favor ingrese una direccionn!"/>
+                                         requiredMessage="¡Por favor ingrese una Dirección!"/>
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
@@ -49,16 +49,16 @@
                         <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
                             <h:outputLabel for="type" value="Tipo de paquete: *" />
                             <h:inputText id="type" required="true" value="#{encomiendaBean.type}"
-                                         requiredMessage="¡Por favor completa este campo!"/>
+                                         requiredMessage="¡Por favor ingrese un Tipo de Paquete!"/>
                             <h:outputLabel for="volume" value="Tamaño: *" />
                             <h:inputText id="volume" required="true" value="#{encomiendaBean.volume}"
-                                         requiredMessage="¡Por favor completa este campo!" />
+                                         requiredMessage="¡Por favor ingrese el Tamaño del paquete!" />
                             <h:outputLabel for="priority" value="Prioridad: *" />
                             <h:inputText id="priority" required="true" value="#{encomiendaBean.priority}"
-                                         requiredMessage="¡Por favor completa este campo!"/>
+                                         requiredMessage="¡Por favor ingrese la Prioridad del paquete!"/>
                             <h:outputLabel for="weigth" value="Peso: *" />
                             <h:inputText id="weight" required="true" value="#{encomiendaBean.weight}"
-                                         requiredMessage="¡Por favor completa este campo!" />
+                                         requiredMessage="¡Por favor ingrese la Prioridad del paquete!" />
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
@@ -69,20 +69,19 @@
                         <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
                             <h:outputLabel for="idReceiver" value="Documento: *" />
                             <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
-                                         requiredMessage="¡Por favor completa este campo!"/>
+                                         requiredMessage="¡Por favor ingresa un Documento!"/>
                             <h:outputLabel for="nameReceiver" value="Nombres: *" />
                             <h:inputText id="nameReceiver" required="true" value="#{encomiendaBean.nameReceiver}"
-                                         requiredMessage="¡Por favor completa este campo!"/>
+                                         requiredMessage="¡Por favor ingresa los Nombres!"/>
                             <h:outputLabel for="lastNamesReceiver" value="Apellidos: *"/>
                             <h:inputText id="lastNamesReceiver" required="true" value="#{encomiendaBean.lastNamesReceiver}"
-                                         requiredMessage="¡Por favor completa este campo!"/>
+                                         requiredMessage="¡Por favor ingresa los Apellidos!"/>
                             <h:outputLabel for="phoneReceiver" value="Telefono" />
                             <h:inputText id="phoneReceiver" required="false" value="#{encomiendaBean.phoneReceiver}" />
                             <h:outputLabel for="mailReceiver" value="E-mail" />
                             <h:inputText id="mailReceiver" required="false" value="#{encomiendaBean.mailReceiver}"/>
                             <h:outputLabel for="adressReceiver" value="Dirección" />
-                            <h:inputText id="adressReceiver" required="true" value="#{encomingBean.adressReceiver}"
-                                         requiredMessage="¡Por favor completa este campo!" />
+                            <h:inputText id="adressReceiver" required="true" value="#{encomingBean.adressReceiver}" />
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
