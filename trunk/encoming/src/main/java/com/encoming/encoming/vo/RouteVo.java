@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.vo;
 
+import com.encoming.encoming.entity.Shipping;
 import java.util.List;
 
 /**
@@ -15,8 +16,10 @@ public class RouteVo implements IValueObject{
     private Integer idRoute;
     private int numberKilometers;
     private int numberTolls;
-    private List<EncomingVo> encomingList;
+    private String destinationCity;
+    private String originCity;
     private List<PointVo> pointList;
+    private List<ShippingVo> shippingList;
 
     /**
      * @return the idRoute
@@ -61,17 +64,31 @@ public class RouteVo implements IValueObject{
     }
 
     /**
-     * @return the encomingList
+     * @return the destinationCity
      */
-    public List<EncomingVo> getEncomingList() {
-        return encomingList;
+    public String getDestinationCity() {
+        return destinationCity;
     }
 
     /**
-     * @param encomingList the encomingList to set
+     * @param destinationCity the destinationCity to set
      */
-    public void setEncomingList(List<EncomingVo> encomingList) {
-        this.encomingList = encomingList;
+    public void setDestinationCity(String destinationCity) {
+        this.destinationCity = destinationCity;
+    }
+
+    /**
+     * @return the originCity
+     */
+    public String getOriginCity() {
+        return originCity;
+    }
+
+    /**
+     * @param originCity the originCity to set
+     */
+    public void setOriginCity(String originCity) {
+        this.originCity = originCity;
     }
 
     /**
@@ -87,5 +104,20 @@ public class RouteVo implements IValueObject{
     public void setPointList(List<PointVo> pointList) {
         this.pointList = pointList;
     }
+
+    /**
+     * @return the shippingList
+     */
+    public List<ShippingVo> getShippingList() {
+        return shippingList;
+    }
+
+    /**
+     * @param shippingList the shippingList to set
+     */
+    public void setShippingList(List<ShippingVo> shippingList) {
+        this.shippingList = shippingList;
+    }
+
     
 }

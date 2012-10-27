@@ -4,7 +4,11 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.DriverVo;
+import com.encoming.encoming.vo.ShippingVo;
+import com.encoming.encoming.vo.VehicleVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,18 +23,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author andres
  */
 @Entity
-@Table(name = "Driver")
+@Table(name = "driver")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Driver.findAll", query = "SELECT d FROM Driver d"),
     @NamedQuery(name = "Driver.findByIdDriver", query = "SELECT d FROM Driver d WHERE d.idDriver = :idDriver"),
     @NamedQuery(name = "Driver.findByLicense", query = "SELECT d FROM Driver d WHERE d.license = :license")})
-public class Driver implements Serializable {
+public class Driver implements Serializable,IEntity<DriverVo>{
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -42,11 +49,11 @@ public class Driver implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "license")
     private String license;
-    @JoinColumn(name = "worker", referencedColumnName = "idWorker")
-    @ManyToOne(optional = false)
-    private Worker worker;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driveridDriver")
     private List<Vehicle> vehicleList;
+    @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
+    @ManyToOne(optional = false)
+    private Person personidPerson;
 
     public Driver() {
     }
@@ -76,20 +83,21 @@ public class Driver implements Serializable {
         this.license = license;
     }
 
-    public Worker getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
-
+    @XmlTransient
     public List<Vehicle> getVehicleList() {
         return vehicleList;
     }
 
     public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
+    }
+
+    public Person getPersonidPerson() {
+        return personidPerson;
+    }
+
+    public void setPersonidPerson(Person personidPerson) {
+        this.personidPerson = personidPerson;
     }
 
     @Override
@@ -115,6 +123,20 @@ public class Driver implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.encoming.entity.Driver[ idDriver=" + idDriver + " ]";
+    }
+    
+        @Override
+    public DriverVo toVo(){
+        DriverVo driverVo = new DriverVo();
+        driverVo.setIdDriver(getIdDriver());
+        driverVo.setLicense(getLicense());        
+        List<VehicleVo> vehicleVos = new ArrayList<VehicleVo>();
+        for(Vehicle entity : getVehicleList()){
+            vehicleVos.add(entity.toVo());
+        }
+        driverVo.setVehicleList(vehicleVos);
+        driverVo.setPersonidPerson(getPersonidPerson());
+        return driverVo;
     }
     
 }
