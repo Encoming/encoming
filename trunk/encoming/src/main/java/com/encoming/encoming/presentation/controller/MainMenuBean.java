@@ -18,18 +18,9 @@ import org.primefaces.model.MenuModel;
 @SessionScoped
 public class MainMenuBean {
 
-    private MenuModel model;  
-    private String page ="/index.xhtml";
+    private String page = "/inicio.xhtml";
     
     public MainMenuBean() {
-    }
-
-    public MenuModel getModel() {
-        return model;
-    }
-
-    public void setModel(MenuModel model) {
-        this.model = model;
     }
 
     public String getPage() {
@@ -40,20 +31,24 @@ public class MainMenuBean {
         this.page = page;
     }
     
-    public void Consultar() {  
-        page = "/Administrador/Personal.xhtml";
+    public void inicio() {  
+        page = "/inicio.xhtml";
     }  
       
-    public void update() {  
-        addMessage("Data updated");  
-    }  
-      
-    public void delete() {  
-        page ="/index.xhtml";
+    public void quienesSomos() {  
+        page = "/quienesSomos.xhtml"; 
+    }
+    
+    public void consultarSucursales() {  
+        page = "/consultarSucursales.xhtml"; 
     } 
     
-    public void addMessage(String summary) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);  
-        FacesContext.getCurrentInstance().addMessage(null, message);  
+    public void consultarPrecios() {  
+        page = "/consultarPrecios.xhtml"; 
     }
+    
+    public void detallesEncomienda() {  
+        page = "/detallesEncomienda.xhtml"; 
+    }     
+    
 }
