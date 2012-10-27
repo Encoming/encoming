@@ -14,7 +14,6 @@ public class AdministratorVo implements IValueObject{
     private Integer idAdministrator;
     private String username;
     private String password;
-    private String type;
     private Integer personidPerson;
 
     /**
@@ -57,20 +56,6 @@ public class AdministratorVo implements IValueObject{
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**

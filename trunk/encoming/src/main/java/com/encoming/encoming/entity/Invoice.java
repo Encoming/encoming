@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+
 import com.encoming.encoming.vo.InvoiceVo;
 import java.io.Serializable;
 import java.util.Date;
