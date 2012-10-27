@@ -4,7 +4,6 @@
  */
 package com.encoming.encoming.entity;
 
-
 import com.encoming.encoming.vo.InvoiceVo;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -35,7 +35,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Invoice.findBySender", query = "SELECT i FROM Invoice i WHERE i.sender = :sender"),
     @NamedQuery(name = "Invoice.findByReceiver", query = "SELECT i FROM Invoice i WHERE i.receiver = :receiver"),
     @NamedQuery(name = "Invoice.findByMoment", query = "SELECT i FROM Invoice i WHERE i.moment = :moment")})
-public class Invoice implements Serializable,IEntity<InvoiceVo> {
+public class Invoice implements Serializable, IEntity<InvoiceVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -63,6 +64,9 @@ public class Invoice implements Serializable,IEntity<InvoiceVo> {
     @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
     @ManyToOne(optional = false)
     private Package packageidPackage;
+    @JoinColumn(name = "encoming", referencedColumnName = "idEncoming")
+    @ManyToOne(optional = false)
+    private Encoming encoming;
 
     public Invoice() {
     }
@@ -126,6 +130,14 @@ public class Invoice implements Serializable,IEntity<InvoiceVo> {
         this.packageidPackage = packageidPackage;
     }
 
+    public Encoming getEncoming() {
+        return encoming;
+    }
+
+    public void setEncoming(Encoming encoming) {
+        this.encoming = encoming;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -150,9 +162,9 @@ public class Invoice implements Serializable,IEntity<InvoiceVo> {
     public String toString() {
         return "com.encoming.encoming.entity.Invoice[ idInvoice=" + idInvoice + " ]";
     }
-    
+
     @Override
-    public InvoiceVo toVo(){
+    public InvoiceVo toVo() {
         InvoiceVo invoiceVo = new InvoiceVo();
         invoiceVo.setIdInvoice(getIdInvoice());
         invoiceVo.setSender(getSender());
@@ -161,5 +173,4 @@ public class Invoice implements Serializable,IEntity<InvoiceVo> {
         invoiceVo.setPackageidPackage(getPackageidPackage());
         return invoiceVo;
     }
-    
 }

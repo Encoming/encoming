@@ -165,7 +165,7 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         shippingVo.setIdReceiver(getIdReceiver());
         shippingVo.setRouteidRoute(getRouteidRoute());
         shippingVo.setPackageidPackage(getPackageidPackage().getIdPackage());
-        shippingVo.setVehicle(getVehicle().getVehiclePK().getPlateNumber());
+        shippingVo.setVehicle(getVehicle().getIdVehicle());
         shippingVo.setClientidClient(getClientidClient().getIdClient());
         List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
         for(Invoice entity : getInvoiceList()){

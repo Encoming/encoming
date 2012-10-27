@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.VehicleVo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -36,7 +37,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Vehicle.findByCapacity", query = "SELECT v FROM Vehicle v WHERE v.capacity = :capacity"),
     @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status"),
     @NamedQuery(name = "Vehicle.findByIdVehicle", query = "SELECT v FROM Vehicle v WHERE v.idVehicle = :idVehicle")})
-public class Vehicle implements Serializable {
+public class Vehicle implements Serializable, IEntity<VehicleVo> {
+
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -204,5 +206,22 @@ public class Vehicle implements Serializable {
     public String toString() {
         return "com.encoming.encoming.entity.Vehicle[ idVehicle=" + idVehicle + " ]";
     }
-    
+
+    @Override
+    public VehicleVo toVo() {
+        VehicleVo vehicleVo = new VehicleVo();
+        vehicleVo.setIdVehicle(getIdVehicle());
+        vehicleVo.setType(getType());
+        vehicleVo.setManufacturer(getManufacturer());
+        vehicleVo.setModel(getModel());
+        vehicleVo.setCapacity(getCapacity());
+        vehicleVo.setStatus(getStatus());
+        /*List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        for(Shipping entity : getShippingList()){
+         shippingVos.add(entity.toVo());
+         }
+        vehicleVo.setShippingList(shippingVos);*/
+        vehicleVo.setIdDriver(getDriver().getIdDriver());
+        return vehicleVo;
+    }
 }

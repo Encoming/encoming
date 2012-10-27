@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class VehicleVo implements IValueObject{
     
-    private Integer idVehiclePK;
+    private Integer idVehicle;
     private String type;
     private String manufacturer;
     private String model;
@@ -24,15 +24,15 @@ public class VehicleVo implements IValueObject{
     /**
      * @return the idVehiclePK
      */
-    public Integer getIdVehiclePK() {
-        return idVehiclePK;
+    public Integer getIdVehicle() {
+        return idVehicle;
     }
 
     /**
      * @param idVehiclePK the idVehiclePK to set
      */
-    public void setIdVehiclePK(Integer idVehiclePK) {
-        this.idVehiclePK = idVehiclePK;
+    public void setIdVehicle(Integer idVehiclePK) {
+        this.idVehicle = idVehiclePK;
     }
 
     /**
