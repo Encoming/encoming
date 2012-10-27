@@ -23,7 +23,7 @@ public class ServiceFactory {
         return AdministratorService.getInstance();
     }
 
-    public PersonService getPersonService() {
-        return PersonService.getInstance();
+    public PointService getPointService() {
+        return PointService.getInstance();
     }
 }

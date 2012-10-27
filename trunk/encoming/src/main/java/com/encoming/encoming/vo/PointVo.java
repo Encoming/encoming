@@ -8,10 +8,12 @@ package com.encoming.encoming.vo;
  *
  * @author germanpineros
  */
-public class PointVo implements IValueObject{
-    
+public class PointVo implements IValueObject {
+
     private Integer idPoint;
     private String name;
+    private Double latitude;
+    private Double longitude;
     private Integer idRoute;
 
     /**
@@ -55,5 +57,32 @@ public class PointVo implements IValueObject{
     public void setIdRoute(Integer idRoute) {
         this.idRoute = idRoute;
     }
-    
+
+    /**
+     * @return the latitude
+     */
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * @param latitude the latitude to set
+     */
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * @return the longitude
+     */
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * @param longitude the longitude to set
+     */
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 }

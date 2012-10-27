@@ -49,7 +49,7 @@ public class Driver implements Serializable,IEntity<DriverVo>{
     @Size(min = 1, max = 20)
     @Column(name = "license")
     private String license;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driveridDriver")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
     private List<Vehicle> vehicleList;
     @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)

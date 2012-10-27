@@ -4,16 +4,14 @@
  */
 package com.encoming.encoming.entity;
 
-import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.VehicleVo;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -22,29 +20,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author andres
+ * @author juanmanuelmartinezromero
  */
 @Entity
-@Table(name = "vehicle")
-@XmlRootElement
+@Table(name = "Vehicle")
 @NamedQueries({
     @NamedQuery(name = "Vehicle.findAll", query = "SELECT v FROM Vehicle v"),
-    @NamedQuery(name = "Vehicle.findByPlateNumber", query = "SELECT v FROM Vehicle v WHERE v.vehiclePK.plateNumber = :plateNumber"),
-    @NamedQuery(name = "Vehicle.findByPlateLetters", query = "SELECT v FROM Vehicle v WHERE v.vehiclePK.plateLetters = :plateLetters"),
+    @NamedQuery(name = "Vehicle.findByPlateNumber", query = "SELECT v FROM Vehicle v WHERE v.plateNumber = :plateNumber"),
+    @NamedQuery(name = "Vehicle.findByPlateLetters", query = "SELECT v FROM Vehicle v WHERE v.plateLetters = :plateLetters"),
     @NamedQuery(name = "Vehicle.findByType", query = "SELECT v FROM Vehicle v WHERE v.type = :type"),
     @NamedQuery(name = "Vehicle.findByManufacturer", query = "SELECT v FROM Vehicle v WHERE v.manufacturer = :manufacturer"),
     @NamedQuery(name = "Vehicle.findByModel", query = "SELECT v FROM Vehicle v WHERE v.model = :model"),
     @NamedQuery(name = "Vehicle.findByCapacity", query = "SELECT v FROM Vehicle v WHERE v.capacity = :capacity"),
-    @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status")})
-public class Vehicle implements Serializable,IEntity<VehicleVo> {
+    @NamedQuery(name = "Vehicle.findByStatus", query = "SELECT v FROM Vehicle v WHERE v.status = :status"),
+    @NamedQuery(name = "Vehicle.findByIdVehicle", query = "SELECT v FROM Vehicle v WHERE v.idVehicle = :idVehicle")})
+public class Vehicle implements Serializable, IEntity<VehicleVo> {
+
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    private VehiclePK vehiclePK;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "plateNumber")
+    private int plateNumber;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
+    @Column(name = "plateLetters")
+    private String plateLetters;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -69,21 +73,28 @@ public class Vehicle implements Serializable,IEntity<VehicleVo> {
     @Size(min = 1, max = 10)
     @Column(name = "status")
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle")
-    private List<Shipping> shippingList;
-    @JoinColumn(name = "Driver_idDriver", referencedColumnName = "idDriver")
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "idVehicle")
+    private Integer idVehicle;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicleidVehicle")
+    private List<Encoming> encomingList;
+    @JoinColumn(name = "driver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
-    private Driver driveridDriver;
+    private Driver driver;
 
     public Vehicle() {
     }
 
-    public Vehicle(VehiclePK vehiclePK) {
-        this.vehiclePK = vehiclePK;
+    public Vehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
     }
 
-    public Vehicle(VehiclePK vehiclePK, String type, String manufacturer, String model, int capacity, String status) {
-        this.vehiclePK = vehiclePK;
+    public Vehicle(Integer idVehicle, int plateNumber, String plateLetters, String type, String manufacturer, String model, int capacity, String status) {
+        this.idVehicle = idVehicle;
+        this.plateNumber = plateNumber;
+        this.plateLetters = plateLetters;
         this.type = type;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -91,16 +102,20 @@ public class Vehicle implements Serializable,IEntity<VehicleVo> {
         this.status = status;
     }
 
-    public Vehicle(int plateNumber, String plateLetters) {
-        this.vehiclePK = new VehiclePK(plateNumber, plateLetters);
+    public int getPlateNumber() {
+        return plateNumber;
     }
 
-    public VehiclePK getVehiclePK() {
-        return vehiclePK;
+    public void setPlateNumber(int plateNumber) {
+        this.plateNumber = plateNumber;
     }
 
-    public void setVehiclePK(VehiclePK vehiclePK) {
-        this.vehiclePK = vehiclePK;
+    public String getPlateLetters() {
+        return plateLetters;
+    }
+
+    public void setPlateLetters(String plateLetters) {
+        this.plateLetters = plateLetters;
     }
 
     public String getType() {
@@ -143,27 +158,34 @@ public class Vehicle implements Serializable,IEntity<VehicleVo> {
         this.status = status;
     }
 
-    @XmlTransient
-    public List<Shipping> getShippingList() {
-        return shippingList;
+    public Integer getIdVehicle() {
+        return idVehicle;
     }
 
-    public void setShippingList(List<Shipping> shippingList) {
-        this.shippingList = shippingList;
+    public void setIdVehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
     }
 
-    public Driver getDriveridDriver() {
-        return driveridDriver;
+    public List<Encoming> getEncomingList() {
+        return encomingList;
     }
 
-    public void setDriveridDriver(Driver driveridDriver) {
-        this.driveridDriver = driveridDriver;
+    public void setEncomingList(List<Encoming> encomingList) {
+        this.encomingList = encomingList;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (vehiclePK != null ? vehiclePK.hashCode() : 0);
+        hash += (idVehicle != null ? idVehicle.hashCode() : 0);
         return hash;
     }
 
@@ -174,7 +196,7 @@ public class Vehicle implements Serializable,IEntity<VehicleVo> {
             return false;
         }
         Vehicle other = (Vehicle) object;
-        if ((this.vehiclePK == null && other.vehiclePK != null) || (this.vehiclePK != null && !this.vehiclePK.equals(other.vehiclePK))) {
+        if ((this.idVehicle == null && other.idVehicle != null) || (this.idVehicle != null && !this.idVehicle.equals(other.idVehicle))) {
             return false;
         }
         return true;
@@ -182,26 +204,24 @@ public class Vehicle implements Serializable,IEntity<VehicleVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.encoming.entity.Vehicle[ vehiclePK=" + vehiclePK + " ]";
+        return "com.encoming.encoming.entity.Vehicle[ idVehicle=" + idVehicle + " ]";
     }
-    
-    // --- Vehicle
+
     @Override
-    public VehicleVo toVo(){
+    public VehicleVo toVo() {
         VehicleVo vehicleVo = new VehicleVo();
-        vehicleVo.setIdVehiclePK(getVehiclePK().getPlateNumber());
+        vehicleVo.setIdVehicle(getIdVehicle());
         vehicleVo.setType(getType());
         vehicleVo.setManufacturer(getManufacturer());
         vehicleVo.setModel(getModel());
         vehicleVo.setCapacity(getCapacity());
         vehicleVo.setStatus(getStatus());
-                List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        /*List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
         for(Shipping entity : getShippingList()){
-            shippingVos.add(entity.toVo());
-        }
-        vehicleVo.setShippingList(shippingVos);
-        vehicleVo.setIdDriver(getDriveridDriver().getIdDriver());        
+         shippingVos.add(entity.toVo());
+         }
+        vehicleVo.setShippingList(shippingVos);*/
+        vehicleVo.setIdDriver(getDriver().getIdDriver());
         return vehicleVo;
-    } 
-    
+    }
 }
