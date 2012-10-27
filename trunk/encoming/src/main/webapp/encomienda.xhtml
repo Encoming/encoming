@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>ENCOMIENDAS</title>
+    </h:head>
+
+    <h:body>
+        <div class="row">
+            <div class="hero-unit offset1 span10"><h1>ENCOMING <small>Sistema para la Gestión de Transportes y Encomiendas</small></h1>
+            </div>
+            <p:separator id="customSeparator" style="width:970px;height:5px" />
+        </div>
+
+        <h:form>
+            <p:wizard id="wizard">
+                <p:tab id="tab1" title="Datos cliente">
+                    <p:panel header="Datos Personales del Cliente">
+                        <h:messages/>
+                        <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+
+                            <h:outputLabel for="name" value="Nombres: *" styleClass="requiredLb1"/>
+                            <h:inputText id="name" required="true" value="#{encomiendaBean.name}"
+                                         label="Name"/>
+                            <h:outputLabel for="lastNames" value="Apellidos: *" styleClass="requiredLb1"/>
+                            <h:inputText id="lastNames" required="true" value="#{encomiendaBean.lastName}"
+                                         label="LastName"/>
+                            <h:outputLabel for="idClient" value="Documento: *" />
+                            <h:inputText id="idClient" required="true" value="#{encomiendaBean.idClient}"
+                                         requiredMessage="¡Por favor completa este campo!" />
+                            <h:outputLabel for="mail" value="Correo"/>
+                            <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}"/>
+                            <h:outputLabel for="phone"  value="Teléfono"/>
+                            <h:inputText id="phone" required="false" value="#{encomiendaBean.phone}"/>
+                            <h:outputLabel for="adress" value="Dirección: *"/>
+                            <h:inputText id="adress" required="true" value="#{encomiendaBean.adress}"
+                                         requiredMessage="¡Por favor ingrese una direccionn!"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="tab2" title="Datos paquete">
+                    <p:panel header="Datos del paquete">
+                        <h:messages errorClass="error"/>
+                        <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                            <h:outputLabel for="type" value="Tipo de paquete: *" />
+                            <h:inputText id="type" required="true" value="#{encomiendaBean.type}"
+                                         requiredMessage="¡Por favor completa este campo!"/>
+                            <h:outputLabel for="volume" value="Tamaño: *" />
+                            <h:inputText id="volume" required="true" value="#{encomiendaBean.volume}"
+                                         requiredMessage="¡Por favor completa este campo!" />
+                            <h:outputLabel for="priority" value="Prioridad: *" />
+                            <h:inputText id="priority" required="true" value="#{encomiendaBean.priority}"
+                                         requiredMessage="¡Por favor completa este campo!"/>
+                            <h:outputLabel for="weigth" value="Peso: *" />
+                            <h:inputText id="weight" required="true" value="#{encomiendaBean.weight}"
+                                         requiredMessage="¡Por favor completa este campo!" />
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="tab3" title="Destinatario">
+                    <p:panel header="Datos Personales del destinatario">
+                        <h:messages errorClass="error"/>
+                        <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                            <h:outputLabel for="idReceiver" value="Documento: *" />
+                            <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
+                                         requiredMessage="¡Por favor completa este campo!"/>
+                            <h:outputLabel for="nameReceiver" value="Nombres: *" />
+                            <h:inputText id="nameReceiver" required="true" value="#{encomiendaBean.nameReceiver}"
+                                         requiredMessage="¡Por favor completa este campo!"/>
+                            <h:outputLabel for="lastNamesReceiver" value="Apellidos: *"/>
+                            <h:inputText id="lastNamesReceiver" required="true" value="#{encomiendaBean.lastNamesReceiver}"
+                                         requiredMessage="¡Por favor completa este campo!"/>
+                            <h:outputLabel for="phoneReceiver" value="Telefono" />
+                            <h:inputText id="phoneReceiver" required="false" value="#{encomiendaBean.phoneReceiver}" />
+                            <h:outputLabel for="mailReceiver" value="E-mail" />
+                            <h:inputText id="mailReceiver" required="false" value="#{encomiendaBean.mailReceiver}"/>
+                            <h:outputLabel for="adressReceiver" value="Dirección" />
+                            <h:inputText id="adressReceiver" required="true" value="#{encomingBean.adressReceiver}"
+                                         requiredMessage="¡Por favor completa este campo!" />
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+        </h:form>
+    </h:body>
+</html>

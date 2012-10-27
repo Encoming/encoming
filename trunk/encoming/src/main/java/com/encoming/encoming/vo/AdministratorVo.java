@@ -4,8 +4,6 @@
  */
 package com.encoming.encoming.vo;
 
-import com.encoming.encoming.entity.Person;
-
 /**
  *
  * @author juanmanuelmartinezromero
@@ -85,7 +83,5 @@ public class AdministratorVo implements IValueObject{
      */
     public void setPersonidPerson(Integer personidPerson) {
         this.personidPerson = personidPerson;
-    }
-   
-    
+    }   
 }

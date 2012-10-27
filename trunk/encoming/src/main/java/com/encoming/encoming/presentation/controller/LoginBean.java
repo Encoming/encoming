@@ -64,10 +64,10 @@ public class LoginBean implements Serializable{
         AdministratorVo login = administratorFacade.login(administratorVo);
 
         if (login != null) {
-            user.setUsername(login.getUsername());
-            user.setType(login.getType());
-            user.setPersonidPerson(login.getPersonidPerson());
-            user.setLoggedIn(true);
+            getUser().setUsername(login.getUsername());
+            getUser().setType(login.getType());
+            getUser().setPersonidPerson(login.getPersonidPerson());
+            getUser().setLoggedIn(true);
             return "success";
         } else {
             FacesContext.getCurrentInstance().addMessage(
