@@ -17,7 +17,8 @@
         </div>
 
         <h:form>
-            <p:wizard id="wizard">
+            <p:wizard id="wizard"
+                      flowListener="#{encomiendaBean.onFlowProcess}"> >
                 <p:tab id="tab1" title="Datos cliente">
                     <p:panel header="Datos Personales del Cliente">
                         <h:messages/>
@@ -27,10 +28,10 @@
                             <h:inputText id="name" required="true" value="#{encomiendaBean.name}"
                                          requiredMessage="¡Por favor ingrese los Nombres!"/>
                             <h:outputLabel for="lastNames" value="Apellidos: *" styleClass="requiredLb1"/>
-                            <h:inputText id="lastNames" required="true" value="#{encomiendaBean.lastName}"
+                            <h:inputText id="lastNames" required="true" value="#{encomiendaBean.lastNames}"
                                          requiredMessage="¡Por favor ingrese los Apellidos!"/>
                             <h:outputLabel for="idClient" value="Documento: *" />
-                            <h:inputText id="idClient" required="true" value="#{encomiendaBean.idClient}"
+                            <h:inputText id="idClient" required="true" value="#{encomiendaBean.idPerson}"
                                          requiredMessage="¡Por favor ingresa un Documento!" />
                             <h:outputLabel for="mail" value="Correo"/>
                             <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}" />
@@ -60,7 +61,7 @@
                             <h:inputText id="priority" required="true" value="#{encomiendaBean.priority}"
                                          requiredMessage="¡Por favor ingrese la Prioridad del paquete!"/>
                             <h:outputLabel for="weigth" value="Peso: *" />
-                            <h:inputText id="weight" required="true" value="#{encomiendaBean.weight}"
+                            <h:inputText id="weigth" required="true" value="#{encomiendaBean.weigth}"
                                          requiredMessage="¡Por favor ingrese la Prioridad del paquete!" />
                         </h:panelGrid>
                     </p:panel>
@@ -86,6 +87,10 @@
                             <h:outputLabel for="adressReceiver" value="Dirección" />
                             <h:inputText id="adressReceiver" required="true" value="#{encomingBean.adressReceiver}" />
                         </h:panelGrid>
+                    
+                    <p:commandButton value="Ajax Submit" update="panel,display" id="ajax"/> 
+                    
+
                     </p:panel>
                 </p:tab>
             </p:wizard>

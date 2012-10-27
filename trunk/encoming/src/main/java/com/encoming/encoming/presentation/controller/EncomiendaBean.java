@@ -1,263 +1,220 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.encoming.encoming.presentation.controller;
 
+import com.encoming.encoming.entity.Person;
+import com.encoming.encoming.entity.Package;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.event.FlowEvent;
 
 /**
  *
- * @author FAMILIA
+ * @author Andrezz
  */
 @ManagedBean
 @SessionScoped
 public class EncomiendaBean {
+        
+    private Person person = new Person();
+    private Package pack = new Package();
+    private Person client = new Person();
+    private boolean skip;
+    private static final Logger logger = Logger.getLogger(EncomiendaBean.class.getName()); 
     
     private String name;
-    private String lastName;
-    private Integer idClient;
+    private String lastNames;
+    private String idPerson;
     private String mail;
-    private Integer phone;
+    private String phone;
     private String adress;
+    
     private String type;
     private String volume;
     private String priority;
-    private float weight;
-    private Integer idReceiver;
+    private String weigth;
+    
+    private String idReceiver;
     private String nameReceiver;
     private String lastNamesReceiver;
-    private Integer phoneReceiver;
+    private String phoneReceiver;
     private String mailReceiver;
-    private String adressReceiver;
+    private String adressReceiver;    
     
+    public String onFlowProcess(FlowEvent event) {  
+        logger.info("Current wizard step:" + event.getOldStep());  
+        logger.info("Next step:" + event.getNewStep());  
+          
+        if(skip) {  
+            skip = false;   //reset in case user goes back  
+            return "confirm";  
+        }  
+        else {  
+            return event.getNewStep();  
+        }  
+    }
 
-//    public EncomiendaBean() {
-//    }
+    public EncomiendaBean() {
+    }
+    
+    public Person getPerson() {
+        return person;
+    }
 
-    /**
-     * @return the name
-     */
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Package getPack() {
+        return pack;
+    }
+
+    public void setPack(Package pack) {
+        this.pack = pack;
+    }
+
+    public Person getClient() {
+        return client;
+    }
+
+    public void setClient(Person client) {
+        this.client = client;
+    }
+
+    public boolean isSkip() {
+        return skip;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the idClient
-     */
-    public Integer getIdClient() {
-        return idClient;
+    public String getLastNames() {
+        return lastNames;
     }
 
-    /**
-     * @param idClient the idClient to set
-     */
-    public void setIdClient(Integer idClient) {
-        this.idClient = idClient;
+    public void setLastNames(String lastNames) {
+        this.lastNames = lastNames;
     }
 
-    /**
-     * @return the mail
-     */
+    public String getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(String idPerson) {
+        this.idPerson = idPerson;
+    }
+
     public String getMail() {
         return mail;
     }
 
-    /**
-     * @param mail the mail to set
-     */
     public void setMail(String mail) {
         this.mail = mail;
     }
 
-    /**
-     * @return the phone
-     */
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    /**
-     * @param phone the phone to set
-     */
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    /**
-     * @return the adress
-     */
     public String getAdress() {
         return adress;
     }
 
-    /**
-     * @param adress the adress to set
-     */
     public void setAdress(String adress) {
         this.adress = adress;
     }
 
-    /**
-     * @return the lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * @return the type
-     */
     public String getType() {
         return type;
     }
 
-    /**
-     * @param type the type to set
-     */
     public void setType(String type) {
         this.type = type;
     }
 
-    /**
-     * @return the volume
-     */
     public String getVolume() {
         return volume;
     }
 
-    /**
-     * @param volume the volume to set
-     */
     public void setVolume(String volume) {
         this.volume = volume;
     }
 
-    /**
-     * @return the priority
-     */
     public String getPriority() {
         return priority;
     }
 
-    /**
-     * @param priority the priority to set
-     */
     public void setPriority(String priority) {
         this.priority = priority;
     }
 
-    /**
-     * @return the weight
-     */
-    public float getWeight() {
-        return weight;
+    public String getWeigth() {
+        return weigth;
     }
 
-    /**
-     * @param weight the weight to set
-     */
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public void setWeigth(String weigth) {
+        this.weigth = weigth;
     }
 
-    /**
-     * @return the idReceiver
-     */
-    public Integer getIdReceiver() {
+    public String getIdReceiver() {
         return idReceiver;
     }
 
-    /**
-     * @param idReceiver the idReceiver to set
-     */
-    public void setIdReceiver(Integer idReceiver) {
+    public void setIdReceiver(String idReceiver) {
         this.idReceiver = idReceiver;
     }
 
-    /**
-     * @return the nameReceiver
-     */
     public String getNameReceiver() {
         return nameReceiver;
     }
 
-    /**
-     * @param nameReceiver the nameReceiver to set
-     */
     public void setNameReceiver(String nameReceiver) {
         this.nameReceiver = nameReceiver;
     }
 
-    /**
-     * @return the lastNamesReceiver
-     */
     public String getLastNamesReceiver() {
         return lastNamesReceiver;
     }
 
-    /**
-     * @param lastNamesReceiver the lastNamesReceiver to set
-     */
     public void setLastNamesReceiver(String lastNamesReceiver) {
         this.lastNamesReceiver = lastNamesReceiver;
     }
 
-    /**
-     * @return the phoneReceiver
-     */
-    public Integer getPhoneReceiver() {
+    public String getPhoneReceiver() {
         return phoneReceiver;
     }
 
-    /**
-     * @param phoneReceiver the phoneReceiver to set
-     */
-    public void setPhoneReceiver(Integer phoneReceiver) {
+    public void setPhoneReceiver(String phoneReceiver) {
         this.phoneReceiver = phoneReceiver;
     }
 
-    /**
-     * @return the mailReceiver
-     */
     public String getMailReceiver() {
         return mailReceiver;
     }
 
-    /**
-     * @param mailReceiver the mailReceiver to set
-     */
     public void setMailReceiver(String mailReceiver) {
         this.mailReceiver = mailReceiver;
     }
 
-    /**
-     * @return the adressReceiver
-     */
     public String getAdressReceiver() {
         return adressReceiver;
     }
 
-    /**
-     * @param adressReceiver the adressReceiver to set
-     */
     public void setAdressReceiver(String adressReceiver) {
         this.adressReceiver = adressReceiver;
     }
+    
+    
 }
