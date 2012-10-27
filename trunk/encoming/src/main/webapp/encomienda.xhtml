@@ -48,8 +48,11 @@
                         <h:messages errorClass="error"/>
                         <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
                             <h:outputLabel for="type" value="Tipo de paquete: *" />
-                            <h:inputText id="type" required="true" value="#{encomiendaBean.type}"
-                                         requiredMessage="¡Por favor ingrese un Tipo de Paquete!"/>
+                            <p:selectOneMenu id="type" value="#{encomiendaBean.type}">
+                                <f:selectItem itemLabel="Sobre" itemValue="1" />
+                                <f:selectItem itemLabel="Caja" itemValue="2" />
+                                <f:selectItem itemLabel="Otro" itemValue="3" />
+                            </p:selectOneMenu>
                             <h:outputLabel for="volume" value="Tamaño: *" />
                             <h:inputText id="volume" required="true" value="#{encomiendaBean.volume}"
                                          requiredMessage="¡Por favor ingrese el Tamaño del paquete!" />
