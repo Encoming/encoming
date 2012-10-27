@@ -63,7 +63,7 @@ public class Route implements Serializable,IEntity<RouteVo>{
     @Size(min = 1, max = 20)
     @Column(name = "originCity")
     private String originCity;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeidRoute")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
     private List<Point> pointList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeidRoute")
     private List<Shipping> shippingList;

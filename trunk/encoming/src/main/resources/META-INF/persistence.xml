@@ -5,9 +5,8 @@
     <jta-data-source>encoming</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="javax.persistence.jdbc.password" value="1234"></property>
-      <property name="javax.persistence.jdbc.user" value="root"></property>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
     </properties>
   </persistence-unit>
 </persistence>

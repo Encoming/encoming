@@ -7,16 +7,13 @@ package com.encoming.encoming.businesslogic.facade;
 import com.encoming.encoming.businesslogic.service.PointService;
 import com.encoming.encoming.vo.PointVo;
 
-
-
 /**
  *
- * @author Andrezz
+ * @author juanmanuelmartinezromero
  */
 public class PointFacade extends Facade<PointVo> {
-    
-    public PointFacade(String PUName, PointService service){
+
+    public PointFacade(String PUName, PointService service) {
         super(PUName, service);
-    }    
-    
+    }
 }

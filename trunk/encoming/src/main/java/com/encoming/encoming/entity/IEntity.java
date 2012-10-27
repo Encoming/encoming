@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.encoming.encoming.entity;
 
 /**
  *
- * @author juanmanuelmartinezromero
+ * @author Alexander
  */
-public interface IEntity<E> {
-
+public interface IEntity <E>{
+    
     E toVo();
+    
 }

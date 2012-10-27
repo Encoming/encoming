@@ -25,8 +25,8 @@ public class FacadeFactory {
     public AdministratorFacade getAdministratorFacade() {
         return new AdministratorFacade(PU, ServiceFactory.getInstance().getAdministratorService());
     }
-    
-    public PersonFacade getPersonFacade() {
-        return new PersonFacade(PU, ServiceFactory.getInstance().getPersonService());
+
+    public PointFacade getPointFacade() {
+        return new PointFacade(PU, ServiceFactory.getInstance().getPointService());
     }
 }
