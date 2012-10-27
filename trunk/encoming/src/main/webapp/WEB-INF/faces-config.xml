@@ -15,8 +15,8 @@
     
     <managed-bean>
         <description>Bean de manejo de usuario</description>
-        <managed-bean-name>userBean</managed-bean-name>
-        <managed-bean-class>com.encoming.encoming.presentation.controller.PersonBean</managed-bean-class>
+        <managed-bean-name>administratorBean</managed-bean-name>
+        <managed-bean-class>com.encoming.encoming.presentation.controller.AdministratorBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     
