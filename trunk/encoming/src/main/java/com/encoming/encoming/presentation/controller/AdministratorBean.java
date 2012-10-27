@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.encoming.encoming.presentation.controller;
 
 import java.io.Serializable;
@@ -9,9 +9,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**
- *
- * @author FAMILIA
- */
+*
+* @author FAMILIA
+*/
 
 @ManagedBean
 @SessionScoped
@@ -41,12 +41,12 @@ public class AdministratorBean implements Serializable {
 
 
     /*public String getPassword() {
-        return password;
-    }
+return password;
+}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }*/
+public void setPassword(String password) {
+this.password = password;
+}*/
 
     public String getType() {
         return type;
@@ -61,8 +61,8 @@ public class AdministratorBean implements Serializable {
     }
 
     /**
-     * @param personidPerson the personidPerson to set
-     */
+* @param personidPerson the personidPerson to set
+*/
     public void setPersonidPerson(Integer personidPerson) {
         this.personidPerson = personidPerson;
     }

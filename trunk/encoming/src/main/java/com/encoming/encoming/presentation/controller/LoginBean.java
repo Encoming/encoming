@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.AdministratorFacade;
@@ -15,9 +15,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
- *
- * @author juanmanuelmartinezromero
- */
+*
+* @author juanmanuelmartinezromero
+*/
 @ManagedBean
 @RequestScoped
 public class LoginBean implements Serializable{

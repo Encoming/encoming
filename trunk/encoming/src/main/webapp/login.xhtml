@@ -34,10 +34,10 @@
                             </div>
                             <div class="control-group">
                                     <div class="controls">
-                                        <p:inputText id="userName" required="true" value="#{loginBean.username}" 
+                                        <p:inputText id="username" required="true" value="#{loginBean.username}" 
                                                      requiredMessage="¡Por favor completa este campo!" />
-                                        <p:watermark for="userName" value="Usuario" />
-                                        <p:message id="userNameMessage" for="userName" />
+                                        <p:watermark for="username" value="Usuario" />
+                                        <p:message id="usernameMessage" for="username" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -72,7 +72,9 @@
             <div class="row">
                 <div class="span11 offset0">
                     <div class="hero-unit">
-                        
+                        <p:layoutUnit position="center" id="pag">  
+                            <ui:include src="#{menuBean.pagina}" />
+                        </p:layoutUnit> 
                     </div>
                 </div>
             </div>
