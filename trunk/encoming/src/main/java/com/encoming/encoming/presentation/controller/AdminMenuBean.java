@@ -15,7 +15,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class AdminMenuBean {
 
-    private String page = "/admin.xhtml";
+    private String page = "/adminPoints.xhtml";
             
     public AdminMenuBean() {
     }
@@ -28,16 +28,20 @@ public class AdminMenuBean {
         this.page = page;
     }
     
+    public void createEncoming(){
+        page = "/createEncoming.xhtml";
+    }
+    
     public void adminPersonal(){
-    
+        page = "/adminPersonal.xhtml";
     }
     
-    public void admin(){
-    
+    public void adminPoints(){
+        page = "/adminPoints.xhtml";
     }
     
-    public void adminVehiculos(){
-    
+    public void adminVehicles(){
+        page = "/adminVehicles.xhtml";
     }
     
 }
