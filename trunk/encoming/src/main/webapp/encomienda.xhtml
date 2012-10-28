@@ -26,20 +26,31 @@
 
                             <h:outputLabel for="name" value="Nombres: *" styleClass="requiredLb1"/>
                             <h:inputText id="name" required="true" value="#{encomiendaBean.name}"
-                                         requiredMessage="¡Por favor ingrese los Nombres!"/>
+                                         requiredMessage="¡Por favor ingrese los Nombres!">
+                                <f:validateLength minimum="4" />
+                            </h:inputText>
                             <h:outputLabel for="lastNames" value="Apellidos: *" styleClass="requiredLb1"/>
                             <h:inputText id="lastNames" required="true" value="#{encomiendaBean.lastNames}"
-                                         requiredMessage="¡Por favor ingrese los Apellidos!"/>
+                                         requiredMessage="¡Por favor ingrese los Apellidos!">
+                                <f:validateLength minimum="2" />
+                            </h:inputText>
                             <h:outputLabel for="idClient" value="Documento: *" />
                             <h:inputText id="idClient" required="true" value="#{encomiendaBean.idPerson}"
-                                         requiredMessage="¡Por favor ingresa un Documento!" />
+                                         requiredMessage="¡Por favor ingresa un Documento!" >
+                                <f:validateLength minimum="7" />
+                            </h:inputText>    
                             <h:outputLabel for="mail" value="Correo"/>
                             <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}" />
                             <h:outputLabel for="phone"  value="Teléfono"/>
-                            <h:inputText id="phone" required="false" value="#{encomiendaBean.phone}"/>
+                            <p:inputMask id="phone"
+                                         mask="9-99-99-99" 
+                                         value="#{encomiendaBean.phone}"
+                                         size="7" style="optionalLb1"/>
                             <h:outputLabel for="adress" value="Dirección: *"/>
                             <h:inputText id="adress" required="true" value="#{encomiendaBean.adress}"
-                                         requiredMessage="¡Por favor ingrese una Dirección!"/>
+                                         requiredMessage="¡Por favor ingrese una Dirección!">
+                                <f:validateLength minimum="8" />
+                            </h:inputText>    
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
@@ -68,29 +79,37 @@
                 </p:tab>
 
                 <p:tab id="tab3" title="Destinatario">
-                    <p:panel header="Datos Personales del destinatario">
+                    <p:panel header="Datos Personales del Destinatario">
                         <h:messages errorClass="error"/>
                         <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
                             <h:outputLabel for="idReceiver" value="Documento: *" />
                             <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
-                                         requiredMessage="¡Por favor ingresa un Documento!"/>
+                                         requiredMessage="¡Por favor ingresa un Documento!">
+                                <f:validateLength minimum="7" />
+                            </h:inputText>    
                             <h:outputLabel for="nameReceiver" value="Nombres: *" />
                             <h:inputText id="nameReceiver" required="true" value="#{encomiendaBean.nameReceiver}"
-                                         requiredMessage="¡Por favor ingresa los Nombres!"/>
+                                         requiredMessage="¡Por favor ingresa los Nombres!">
+                                <f:validateLength minimum="4" />
+                            </h:inputText>    
                             <h:outputLabel for="lastNamesReceiver" value="Apellidos: *"/>
                             <h:inputText id="lastNamesReceiver" required="true" value="#{encomiendaBean.lastNamesReceiver}"
-                                         requiredMessage="¡Por favor ingresa los Apellidos!"/>
+                                         requiredMessage="¡Por favor ingresa los Apellidos!">
+                                <f:validateLength minimum="4" />
+                            </h:inputText>    
                             <h:outputLabel for="phoneReceiver" value="Telefono" />
-                            <h:inputText id="phoneReceiver" required="false" value="#{encomiendaBean.phoneReceiver}" />
+                            <p:inputMask id="phoneReceiver"
+                                         mask="9-99-99-99" 
+                                         value="#{encomiendaBean.phoneReceiver}"
+                                         size="7" style="optionalLb1"/>
                             <h:outputLabel for="mailReceiver" value="E-mail" />
                             <h:inputText id="mailReceiver" required="false" value="#{encomiendaBean.mailReceiver}"/>
-                            <h:outputLabel for="adressReceiver" value="Dirección" />
-                            <h:inputText id="adressReceiver" required="true" value="#{encomingBean.adressReceiver}" />
+                            <h:outputLabel for="adressReceiver" value="Dirección: *" />
+                            <h:inputText id="adressReceiver" required="true" value="#{encomingBean.adressReceiver}" >
+                                <f:validateLength minimum="8" />
+                            </h:inputText>    
                         </h:panelGrid>
-                    
-                    <p:commandButton value="Ajax Submit" update="panel,display" id="ajax"/> 
-                    
-
+                        <p:commandButton value="Guardar" update="panel,display" id="ajax"/> 
                     </p:panel>
                 </p:tab>
             </p:wizard>
