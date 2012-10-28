@@ -241,7 +241,7 @@ public class EncomiendaBean {
     public void comparation(FacesContext arg0, UIComponent arg1, Object arg2, Object arg3)
          throws ValidatorException {
       if (((String)arg2)==((String)arg3)) {
-         throw new ValidatorException(new FacesMessage("La cuidad orgen y destino coinciden"));
+         throw new ValidatorException(new FacesMessage("La cuidad origen y destino coinciden"));
       }
    }
     
