@@ -25,4 +25,11 @@ public class DAOFactory {
     public PointDAO getPointDAO() {
         return PointDAO.getInstance();
     }
+    public PersonDAO getPersonDAO() {
+        return PersonDAO.getInstance();
+    }
+    
+    public DriverDAO getDriverDAO() {
+        return DriverDAO.getInstance();
+    }
 }

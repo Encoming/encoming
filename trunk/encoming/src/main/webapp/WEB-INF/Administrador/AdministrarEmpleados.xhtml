@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+
+<p:accordionPanel multiple="true">  
+    <p:tab title="Nuevo empleado">  
+          <div class="hero-unit span5 offset5">
+            <h2><big>Agregar Empleado</big></h2>
+            <p:separator/>
+            <h:form>
+                <h:panelGroup>
+                    <div class="control-group">
+                        <div class="controls">
+                            <h:outputLabel id="id" value="Documento : "/>
+                            <p:inputText id="id" label="documento" required="true"></p:inputText>
+                            <p:watermark for="id" value="documento" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <p:separator/>
+                <h:panelGrid columns="2" cellspacing="10">
+                    <h:panelGroup><div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="name" value="Nombre" />
+                                <p:inputText id="name" label="Nombre" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="lastName" value="Apellidos" />
+                                <p:inputText id="lastName" label="Apellidos" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+
+                                <p:watermark for="mail" value="Mail" /> 
+                                <p:inputText id="mail" label="Mail" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    
+                    
+
+                   
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="telefono" value="Telefono" />
+                                <p:inputText id="telefono" label="Telefono" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                    </h:panelGrid>
+                <p:separator/>
+                    <h:panelGrid columns="2" cellspacing="10">
+                 <h:panelGroup>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <p:watermark for="idAdministrator" value="id" />
+                        <p:inputText id="idAdministrator" label="id" required="true"></p:inputText>
+                    </div>
+                </div>
+                 </h:panelGroup>    
+                        
+                 <h:panelGroup>
+                <div class="control-group">
+                    <div class="controls">
+                        <p:watermark for="userName" value="nombre de usuario" />
+                        <p:inputText id="userName" label="nombre de usuario" required="true"></p:inputText>
+                    </div>
+                </div>
+                 </h:panelGroup>
+                 <h:panelGroup>
+                <div class="control-group">
+                    <div class="controls">
+                         <p:watermark for="pwd1" value="Constraseña" /> 
+            <p:password id="pwd1" value="#{passwordBean.password5}" match="pwd2" label="Password 1" required="true"/>  
+            <p:watermark for="pwd2" value="Constraseña" /> 
+            <p:password id="pwd2" value="#{passwordBean.password5}" label="Password 2" required="true"/> 
+            
+                    </div>
+                </div>
+                 </h:panelGroup>
+                
+                       
+                  </h:panelGrid>
+
+
+            </h:form>
+
+
+
+<!--
+        </div>
+            <form value ="newEmployee">
+                <table width="20%" border="0" cellspacing="10">
+                <tr>
+                    <td>
+                        <h:outputText value="Nombres :"/><br></br>
+                        Apellidos:<br></br>                    
+                        documento:<br></br>                    
+                        email:<br></br>
+                        Telefono: 
+                         
+            
+            </td>
+                    
+    <td>&nbsp;
+     <p:inputText label="nombres" type="text" value="#{addEmployeeBean.name}"/> <br></br>
+     <p:inputText label="Apellidos" type="text" value="#{addEmployeeBean.lastName}"/> <br></br>                        
+     <p:inputText label="documento " type="text" value="#{addEmployeeBean.idPerson}"/> <br></br>
+     <p:inputText label="e-mail: " type="text" value="#{addEmployeeBean.mail}"/> <br></br>
+     <p:inputText type="text" value="#{addEmployeeBean.phone}"/> <br></br>
+     <h:commandButton value ="Aceptar" action="#{addEmployeeBean.addEmployee}"/> <br></br>
+     
+    
+    </td>
+                    
+                          <td>
+                        <h:outputText value="id"/><br></br>
+                        <h:outputText value="usuario"/><br></br>
+                                     
+                        Contraseña:<br></br>                    
+                        Repita su contraseña:<br></br>
+                        
+                         
+            
+            </td>
+                    
+    <td>&nbsp;
+     <p:inputText label="id" type="text" value="#{addEmployeeBean.idAdministrator}"/> <br></br>
+     <p:inputText label="ususario" type="text" value="#{addEmployeeBean.username}"/> <br></br>
+     <p:inputText label="contraseña" type="text" value="#{addEmployeeBean.password}"/> <br></br>                        
+     <p:inputText label="contraseñarep" type="text" value="#{addEmployeeBean.idPerson}"/> <br></br>
+     
+     
+     
+    
+    </td>
+  </tr>
+</table>
+                </form>
+                 
+           
+    </p:tab>  
+    <p:tab title="Buscar">  
+        <h:panelGrid columns="2" cellpadding="10">  
+            <h:outputText value="Documento" />  
+            <p:inputText label="documento" type="text" value="#{findEmployeeBean.documento}"/> <br></br> 
+        </h:panelGrid>      </p:tab>  -->
+          </div>
+    </p:tab>
+</p:accordionPanel>  
+</body>
+</html>

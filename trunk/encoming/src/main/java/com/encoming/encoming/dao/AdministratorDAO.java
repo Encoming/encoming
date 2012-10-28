@@ -5,6 +5,7 @@
 package com.encoming.encoming.dao;
 
 import com.encoming.encoming.entity.Administrator;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -28,42 +29,39 @@ public class AdministratorDAO implements IDAO<Administrator> {
     
     @Override
     public void persist(Administrator entity, EntityManager em) {
-        em.getTransaction().begin();
-        try {
-            em.persist(entity);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
+        em.persist(entity);
     }
 
     @Override
     public Administrator find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createQuery("SELECT adm FROM Administrator adm "
+                + "WHERE adm.personidPerson.idPerson =:idPerson")
+                .setParameter("idPerson", id);
+        return (Administrator)query.getSingleResult();
     }
 
     @Override
     public void update(Administrator entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+       em.merge(em);
     }
 
     @Override
     public void delete(Object id, EntityManager em) {
-        
+        Administrator admin = find(id, em);
+        em.remove(admin);
     }
 
     @Override
     public List<Administrator> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createNamedQuery("Administrator.findAll");
+        List<Administrator> lista = query.getResultList();
+        return lista;
     }
     
     public Administrator login(Administrator entity, EntityManager em) {
         Administrator administrator;
-        Query q = em.createQuery("SELECT u FROM Administrator u "
-                + "WHERE u.username LIKE :username "
+        Query q = em.createQuery("SELECT u FROM Person u "
+                + "WHERE u.idPerson LIKE :username "
                 + "AND u.password LIKE :password")
                 .setParameter("username", entity.getUsername())
                 .setParameter("password", entity.getPassword());

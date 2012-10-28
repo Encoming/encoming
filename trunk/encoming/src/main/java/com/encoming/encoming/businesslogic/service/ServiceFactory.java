@@ -26,4 +26,7 @@ public class ServiceFactory {
     public PointService getPointService() {
         return PointService.getInstance();
     }
+    public PersonService getPersonService() {
+        return PersonService.getInstance();
+    }
 }

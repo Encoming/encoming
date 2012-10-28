@@ -29,4 +29,7 @@ public class FacadeFactory {
     public PointFacade getPointFacade() {
         return new PointFacade(PU, ServiceFactory.getInstance().getPointService());
     }
+    public PersonFacade getPersonFacade() {
+        return new PersonFacade(PU, ServiceFactory.getInstance().getPersonService());
+    }
 }
