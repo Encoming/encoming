@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        Agregar Vehiculo
+    </ui:define>
+
+    <ui:define name="top">
+
+    </ui:define>
+
+    <ui:define name="left">
+
+        <h:form class="span1">  
+            <p:menu>  
+                <p:submenu label="Personal">
+
+                </p:submenu>  
+                <p:submenu label="Finanzas">  
+
+                </p:submenu>  
+                <p:separator />  
+                <p:submenu label="Sucursales" icon="ui-icon-heart">  
+                    <p:menuitem value="Agregar sucursal" icon="ui-icon-home" />  
+                    <p:menuitem value="Administrar " icon="ui-icon-document" />  
+                    <p:menuitem value="Rutas" icon="ui-icon-arrowthick-1-s" />   
+                    <p:menuitem value="Vehiculos" icon="ui-icon-update" url="addVehicle.xhtml" />
+
+                </p:submenu>  
+            </p:menu>  
+
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="right">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <style type="text/css">
+            .ui-growl {
+                top: 10%
+            }
+        </style>
+        <div class="hero-unit span5 offset1">
+            <h2><big>Agregar vehiculo</big></h2>
+            <p:separator/>
+            <h:form>
+                <h:panelGroup>
+                    <div class="control-group">
+                        <div class="controls">
+                            <h:outputLabel id="plateId" value="Matricula"/>
+                            <p:inputText id="plateIt" label="Matricula" required="true"></p:inputText>
+                            <p:inputText id="numberIt" label="Matricula" required="true"></p:inputText>
+                            <p:watermark for="numberIt" value="Números" />
+                            <p:watermark for="plateIt" value="Letras" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <p:separator/>
+                <h:panelGrid columns="2">
+                    <h:panelGroup><div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="typeIT" value="Tipo" />
+                                <p:inputText id="typeIT" label="Tipo" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="manufacturerIT" value="Manufacturado por" />
+                                <p:inputText id="manufacturerIT" label="Manufacturado por" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+
+                                <p:watermark for="modelIT" value="Modelo" /> 
+                                <p:inputText id="modelIT" label="Modelo" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="capacityIT" value="Capacidad" />
+                                <p:inputText id="capacityIT" label="Capacidad" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="stateIT" value="Estado" />
+                                <p:inputText id="stateIT" label="Estado" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <p:watermark for="driverIT" value="Conductor" />
+                                <p:inputText id="driverIT" label="Conductor" required="true"></p:inputText>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGrid>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <p:watermark for="actualPointIT" value="Punto Actual" />
+                        <p:inputText id="actualPointIT" label="Punto Actual" required="true"></p:inputText>
+                    </div>
+                </div>
+                <h:panelGrid columns="3">
+
+                </h:panelGrid>
+
+
+            </h:form>
+
+
+
+
+        </div>
+    </ui:define>
+
+    <ui:define name="bottom">
+
+    </ui:define>
+
+</ui:composition>

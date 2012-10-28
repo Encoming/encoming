@@ -83,6 +83,9 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
     @JoinColumn(name = "driver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
     private Driver driver;
+    @JoinColumn(name = "Point_idPoint", referencedColumnName = "idPoint")
+    @ManyToOne
+    private Point pointidPoint;
 
     public Vehicle() {
     }
@@ -180,6 +183,14 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
 
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+
+    public Point getPointidPoint() {
+        return pointidPoint;
+    }
+
+    public void setPointidPoint(Point pointidPoint) {
+        this.pointidPoint = pointidPoint;
     }
 
     @Override
