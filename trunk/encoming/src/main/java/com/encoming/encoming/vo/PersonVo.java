@@ -22,6 +22,19 @@ public class PersonVo implements IValueObject {
     private List<AdministratorVo> administratorList;
     private List<DriverVo> driverList;
 
+    public PersonVo() {
+    }
+    
+    
+    public PersonVo(Integer idPerson, String name, String lastName, String mail, Integer phone, String adress) {
+        this.idPerson = idPerson;
+        this.name = name;
+        this.lastName = lastName;
+        this.mail = mail;
+        this.phone = phone;
+        this.adress = adress;
+    }
+
     /**
      * @return the idPerson
      */

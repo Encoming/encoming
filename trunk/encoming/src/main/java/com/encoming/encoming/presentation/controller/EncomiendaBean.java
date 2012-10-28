@@ -2,6 +2,8 @@ package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.entity.Person;
 import com.encoming.encoming.entity.Package;
+import com.encoming.encoming.vo.ClientVo;
+import com.encoming.encoming.vo.PersonVo;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -19,9 +21,9 @@ import org.primefaces.event.FlowEvent;
 @SessionScoped
 public class EncomiendaBean {
         
-    private Person person = new Person();
+    private Person personReceiver = new Person();
     private Package pack = new Package();
-    private Person client = new Person();
+    private Person personSender = new Person();
     private boolean skip;
     private static final Logger logger = Logger.getLogger(EncomiendaBean.class.getName()); 
     
@@ -44,7 +46,12 @@ public class EncomiendaBean {
     private String lastNamesReceiver;
     private String phoneReceiver;
     private String mailReceiver;
-    private String adressReceiver;    
+    private String adressReceiver;
+    
+    private PersonVo personReceiverVo = new PersonVo();
+    private ClientVo clientReceiverVo = new ClientVo();
+    private ClientVo clientSenderVo = new ClientVo();
+    private PersonVo personSenderVo = new PersonVo();
     
     public String onFlowProcess(FlowEvent event) {  
         logger.info("Current wizard step:" + event.getOldStep());  
@@ -62,28 +69,12 @@ public class EncomiendaBean {
     public EncomiendaBean() {
     }
     
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     public Package getPack() {
         return pack;
     }
 
     public void setPack(Package pack) {
         this.pack = pack;
-    }
-
-    public Person getClient() {
-        return client;
-    }
-
-    public void setClient(Person client) {
-        this.client = client;
     }
 
     public boolean isSkip() {
@@ -237,13 +228,55 @@ public class EncomiendaBean {
     public void setDestinationCity(String destinationCity) {
         this.destinationCity = destinationCity;
     }
+
+    public Person getPersonReceiver() {
+        return personReceiver;
+    }
+
+    public void setPersonReceiver(Person personReceiver) {
+        this.personReceiver = personReceiver;
+    }
+
+    public Person getPersonSender() {
+        return personSender;
+    }
+
+    public void setPersonSender(Person personSender) {
+        this.personSender = personSender;
+    }
+
+    public PersonVo getPersonReceiverVo() {
+        return personReceiverVo;
+    }
+
+    public void setPersonReceiverVo(PersonVo personReceiverVo) {
+        this.personReceiverVo = personReceiverVo;
+    }
+
+    public ClientVo getClientReceiverVo() {
+        return clientReceiverVo;
+    }
+
+    public void setClientReceiverVo(ClientVo clientReceiverVo) {
+        this.clientReceiverVo = clientReceiverVo;
+    }
+
+    public ClientVo getClientSenderVo() {
+        return clientSenderVo;
+    }
+
+    public void setClientSenderVo(ClientVo clientSenderVo) {
+        this.clientSenderVo = clientSenderVo;
+    }
+
+    public PersonVo getPersonSenderVo() {
+        return personSenderVo;
+    }
+
+    public void setPersonSenderVo(PersonVo personSenderVo) {
+        this.personSenderVo = personSenderVo;
+    }
     
-    public void comparation(FacesContext arg0, UIComponent arg1, Object arg2, Object arg3)
-         throws ValidatorException {
-      if (((String)arg2)==((String)arg3)) {
-         throw new ValidatorException(new FacesMessage("La cuidad orgen y destino coinciden"));
-      }
-   }
     
     
 }
