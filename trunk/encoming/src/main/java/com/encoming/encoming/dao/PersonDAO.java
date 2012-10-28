@@ -25,7 +25,7 @@ public class PersonDAO implements IDAO<Person> {
 
     @Override
     public void persist(Person entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+         em.persist(entity);
     }
 
     @Override

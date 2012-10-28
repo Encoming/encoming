@@ -3,11 +3,20 @@
   <persistence-unit name="encomingPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>encoming</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>com.encoming.encoming.entity.Administrator</class>
+    <class>com.encoming.encoming.entity.Client</class>
+    <class>com.encoming.encoming.entity.Driver</class>
+    <class>com.encoming.encoming.entity.Invoice</class>
+    <class>com.encoming.encoming.entity.Package</class>
+    <class>com.encoming.encoming.entity.Person</class>
+    <class>com.encoming.encoming.entity.Point</class>
+    <class>com.encoming.encoming.entity.Route</class>
+    <class>com.encoming.encoming.entity.Shipping</class>
+    <class>com.encoming.encoming.entity.Vehicle</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="javax.persistence.jdbc.password" value="german2012"></property>
-      <property name="javax.persistence.jdbc.user" value="root"></property>
+      <property name="javax.persistence.jdbc.password" value="german2012"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
     </properties>
   </persistence-unit>
 </persistence>

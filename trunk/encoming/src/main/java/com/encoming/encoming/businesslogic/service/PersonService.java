@@ -4,7 +4,10 @@
  */
 package com.encoming.encoming.businesslogic.service;
 
+import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.entity.Person;
 import com.encoming.encoming.vo.PersonVo;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -24,7 +27,15 @@ public class PersonService implements IService<PersonVo> {
 
     @Override
     public void persist(PersonVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Person entity = new Person();
+        entity.setName(vo.getName());
+        entity.setLastanames(vo.getLastName());
+        entity.setAdress(vo.getAdress());
+        entity.setMail(vo.getMail());
+        entity.setPhone(vo.getPhone());
+        entity.setIdPerson(vo.getIdPerson());
+
+        DAOFactory.getInstance().getPersonDAO().persist(entity, em);
     }
 
     @Override
@@ -44,19 +55,11 @@ public class PersonService implements IService<PersonVo> {
 
     @Override
     public List<PersonVo> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<PersonVo> list = new ArrayList<PersonVo>();
+        for (Person person : DAOFactory.getInstance().getPersonDAO().getList(em)) {
+            list.add((person).toVo());
+        };
+        return list;
     }
-    
-/*
-    public PersonVo login(PersonVo personVo, EntityManager em) {
-        Person entity = new Person();
-        
-        entity.setIdPerson(personVo.getIdPerson());
-        entity.setPassword(personVo.getPassword());
-        
-        Person person= new PersonDAO().login(entity, em);
-        return person != null? person.toVo():null;
-    }
-    * */
        
 }
