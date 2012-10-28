@@ -45,4 +45,12 @@ public class AdminMenuBean {
         page = "/adminVehicles.xhtml";
     }
     
+    public void adminEmployee(){
+        page = "/adminEmployee.xhtml";
+    }
+    
+    public void seeEmployees(){
+        page = "/seeEmployees.xhtml";
+    }
+    
 }

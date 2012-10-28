@@ -29,4 +29,12 @@ public class FacadeFactory {
     public PointFacade getPointFacade() {
         return new PointFacade(PU, ServiceFactory.getInstance().getPointService());
     }
+    
+    public PersonFacade getPersonFacade() {
+        return new PersonFacade(PU, ServiceFactory.getInstance().getPersonService());
+    }
+    
+    public DriverFacade getDriverFacade() {
+        return new DriverFacade(PU, ServiceFactory.getInstance().getDriverService());
+    }
 }

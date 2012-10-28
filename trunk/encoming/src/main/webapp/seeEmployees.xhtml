@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form>  
+  
+    <p:dataTable id="dataTable" var="car" value="#{tableBeanEmpleados.employees}">  
+        <f:facet name="header">  
+            Empleados 
+        </f:facet>  
+  
+        <p:column id="modelHeader" sortBy="#{administratorVo.idAdministrator}">  
+            <f:facet name="header">  
+                <h:outputText value="Model" />  
+            </f:facet>  
+            <h:outputText value="#{administratorVo.idAdministrator}" />  
+        </p:column>  
+  
+        <p:column sortBy="#{administratorVo.username}">  
+            <f:facet name="header">  
+                <h:outputText value="Year" />  
+            </f:facet>  
+            <h:outputText value="#{administratorVo.username}" />  
+        </p:column>  
+  <!--
+        <p:column sortBy="#{car.manufacturer}">  
+            <f:facet name="header">  
+                <h:outputText value="Manufacturer" />  
+            </f:facet>  
+            <h:outputText value="#{car.manufacturer}" />  
+        </p:column>  
+  
+        <p:column sortBy="#{car.color}">  
+            <f:facet name="header">  
+                <h:outputText value="Color" />  
+            </f:facet>  
+            <h:outputText value="#{car.color}" />  
+        </p:column>  -->
+    </p:dataTable>  
+  
+</h:form>  
+</html>
+
