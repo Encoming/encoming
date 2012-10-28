@@ -3,8 +3,12 @@ package com.encoming.encoming.presentation.controller;
 import com.encoming.encoming.entity.Person;
 import com.encoming.encoming.entity.Package;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -32,6 +36,8 @@ public class EncomiendaBean {
     private String volume;
     private String priority;
     private String weigth;
+    private String originCity;
+    private String destinationCity;
     
     private String idReceiver;
     private String nameReceiver;
@@ -215,6 +221,29 @@ public class EncomiendaBean {
     public void setAdressReceiver(String adressReceiver) {
         this.adressReceiver = adressReceiver;
     }
+
+    public String getOriginCity() {
+        return originCity;
+    }
+
+    public void setOriginCity(String originCity) {
+        this.originCity = originCity;
+    }
+
+    public String getDestinationCity() {
+        return destinationCity;
+    }
+
+    public void setDestinationCity(String destinationCity) {
+        this.destinationCity = destinationCity;
+    }
+    
+    public void comparation(FacesContext arg0, UIComponent arg1, Object arg2, Object arg3)
+         throws ValidatorException {
+      if (((String)arg2)==((String)arg3)) {
+         throw new ValidatorException(new FacesMessage("La cuidad orgen y destino coinciden"));
+      }
+   }
     
     
 }
