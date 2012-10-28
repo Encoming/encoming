@@ -6,7 +6,7 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="javax.persistence.jdbc.password" value="1234"></property>
+      <property name="javax.persistence.jdbc.password" value="german2012"></property>
       <property name="javax.persistence.jdbc.user" value="root"></property>
     </properties>
   </persistence-unit>

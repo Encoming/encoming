@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.AdministratorFacade;
@@ -15,9 +15,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
- *
- * @author juanmanuelmartinezromero
- */
+*
+* @author juanmanuelmartinezromero
+*/
 @ManagedBean
 @RequestScoped
 public class LoginBean implements Serializable{
@@ -64,10 +64,9 @@ public class LoginBean implements Serializable{
         AdministratorVo login = administratorFacade.login(administratorVo);
 
         if (login != null) {
-            getUser().setUsername(login.getUsername());
-            getUser().setType(login.getType());
-            getUser().setPersonidPerson(login.getPersonidPerson());
-            getUser().setLoggedIn(true);
+            user.setUsername(login.getUsername());
+            user.setPersonidPerson(login.getPersonidPerson());
+            user.setLoggedIn(true);
             return "success";
         } else {
             FacesContext.getCurrentInstance().addMessage(

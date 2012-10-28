@@ -9,74 +9,68 @@
 
     <ui:define name="top">
         <div class="row">
-            
-           <div class="hero-unit offset1 span10"><h1>ENCOMING <small>Sistema para la Gestión de Transportes y Encomiendas</small></h1>
-               <p:separator id="customSeparator" style="width:970px;height:5px" />
-               <div class="span8">
-                    <h:commandButton action="pn1" value="Inicio" class="btn btn-success" />
-                    <h:commandButton action="pn2" value="¿Quiénes Somos?" class="btn btn-success" />
-                    <h:commandButton action="pn2" value="Detalles de una encomienda" class="btn btn-success" />
-                    <h:commandButton action="pn2" value="Nuestras sucursales" class="btn btn-success" />
-                    <h:commandButton action="pn2" value="Nuestros precios" class="btn btn-success" />               
+
+            <div class="hero-unit offset1 span10"><h1>ENCOMING <small>Sistema para la Gestión de Transportes y Encomiendas</small></h1>
+                <p:separator id="customSeparator" style="width:970px;height:5px" />
+                <div class="span8">
+                    <h:commandButton action="#{mainMenuBean.inicio()}" update="pag" value="Inicio" class="btn btn-success"/>
+                    <h:commandButton action="#{mainMenuBean.quienesSomos}" update="pag" value="¿Quiénes Somos?" class="btn btn-success"/>
+                    <h:commandButton action="#{mainMenuBean.consultarSucursales}" update="pag" value="Consultar Sucursales" class="btn btn-success" />
+                    <h:commandButton action="#{mainMenuBean.consultarPrecios}" update="pag" value="Consultar Precios" class="btn btn-success" />
+                    <h:commandButton action="#{mainMenuBean.detallesEncomienda}" update="pag" value="Encomiendas" class="btn btn-navbar" />
                 </div>
                 <div>
                     <h3><a data-toggle="modal" href="#shareModal" class="btn btn-info">Iniciar Sesión</a></h3>
                 </div>
-           </div>
+            </div>
         </div>
         <div class="row">
-                <div class="span0">
-                    <h:form id="shareForm" class="form-horizontal form-no-margin">
-                        <div id="shareModal" class="modal hide fade">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">×</button>
-                                <h2>Iniciar Sesión:</h2>
+            <div class="span0">
+                <h:form id="shareForm" class="form-horizontal form-no-margin">
+                    <div id="shareModal" class="modal hide fade">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h2>Iniciar Sesión:</h2>
+                        </div>
+                        <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="username" required="true" value="#{loginBean.username}" 
+                                                 requiredMessage="¡Por favor completa este campo!" />
+                                    <p:watermark for="username" value="Usuario" />
+                                    <p:message id="usernameMessage" for="username" />
+                                </div>
                             </div>
                             <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="username" required="true" value="#{loginBean.username}" 
-                                                     requiredMessage="¡Por favor completa este campo!" />
-                                        <p:watermark for="username" value="Usuario" />
-                                        <p:message id="userNameMessage" for="username" />
-                                    </div>
+                                <div class="controls">
+                                    <p:password id="password" required="true" value="#{loginBean.password}"
+                                                requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="password" value="Contraseña" />
+                                    <p:message id="passwordMessage" for="password" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:password id="password" required="true" value="#{loginBean.password}"
-                                                    requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="password" value="Contraseña" />
-                                        <p:message id="passwordMessage" for="password" />
-                                    </div>
-                                    
-                                </div>
+
+                            </div>
                             <div class="form-actions">
                                 <h:commandButton action="#{loginBean.login()}" value="Entrar" class="btn btn-success" />
                             </div>
-                        </div>
-                    </h:form>
-                </div>        
-            </div>
+                    </div>
+                </h:form>
+            </div>        
+        </div>
     </ui:define>
     <!--Fin Encabezado-->
 
     <ui:define name="left">
-        
+
     </ui:define>
 
     <ui:define name="right">
-       
+
     </ui:define>
 
     <ui:define name="content">
-        <div class="container">
-            <div class="row">
-                <div class="span11 offset0">
-                    <div class="hero-unit">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+        <p:layoutUnit position="center" id="pag">  
+            <ui:include src="#{menuBean.page}" />
+        </p:layoutUnit> 
     </ui:define>
 
     <ui:define name="bottom">

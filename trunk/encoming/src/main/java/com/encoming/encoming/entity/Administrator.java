@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Administrator.findAll", query = "SELECT a FROM Administrator a"),
     @NamedQuery(name = "Administrator.findByIdAdministrator", query = "SELECT a FROM Administrator a WHERE a.idAdministrator = :idAdministrator"),
     @NamedQuery(name = "Administrator.findByUsername", query = "SELECT a FROM Administrator a WHERE a.username = :username"),
-    @NamedQuery(name = "Administrator.findByPassword", query = "SELECT a FROM Administrator a WHERE a.password = :password"),
-    @NamedQuery(name = "Administrator.findByType", query = "SELECT a FROM Administrator a WHERE a.type = :type")})
+    @NamedQuery(name = "Administrator.findByPassword", query = "SELECT a FROM Administrator a WHERE a.password = :password")})
 public class Administrator implements Serializable, IEntity<AdministratorVo> {
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,11 +48,6 @@ public class Administrator implements Serializable, IEntity<AdministratorVo> {
     @Size(min = 1, max = 30)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "type")
-    private String type;
     @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)
     private Person personidPerson;
@@ -65,11 +59,10 @@ public class Administrator implements Serializable, IEntity<AdministratorVo> {
         this.idAdministrator = idAdministrator;
     }
 
-    public Administrator(Integer idAdministrator, String username, String password, String type) {
+    public Administrator(Integer idAdministrator, String username, String password) {
         this.idAdministrator = idAdministrator;
         this.username = username;
         this.password = password;
-        this.type = type;
     }
 
     public Integer getIdAdministrator() {
@@ -94,14 +87,6 @@ public class Administrator implements Serializable, IEntity<AdministratorVo> {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Person getPersonidPerson() {
@@ -142,7 +127,6 @@ public class Administrator implements Serializable, IEntity<AdministratorVo> {
         AdministratorVo administratorVo = new AdministratorVo();
         administratorVo.setIdAdministrator(getIdAdministrator());
         administratorVo.setPassword(getPassword());
-        administratorVo.setType(getType());
         administratorVo.setUsername(getUsername());
         administratorVo.setPersonidPerson(getPersonidPerson().getIdPerson());
         return administratorVo;

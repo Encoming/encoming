@@ -8,7 +8,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Encoming <ui:insert name="title"></ui:insert></title>
+        <title>:: ENCOMING ::<ui:insert name="title"></ui:insert></title>
 
         <link href="#{request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="#{request.contextPath}/resources/css/default.css" rel="stylesheet" type="text/css"/>
@@ -35,20 +35,19 @@
                             <span class="icon-bar"></span>
                         </a>
 
-                        <a class="brand" href="#">Encoming</a>
+                        <a class="brand" href="#">ENCOMING</a>
 
                         <div class="nav-collapse">
-                            <ui:fragment rendered="#{userBean.loggedIn}">
+                            <ui:fragment rendered="#{administratorBean.loggedIn}">
                                 <ul class="nav pull-left">
-                                    <li><a href="#">¿Quienes Somos?</a></li>
-                                    <li><a href="#">Encomiendas</a></li>
-                                    <li><a href="#">Consultar Precios</a></li>
-                                    <li><a href="#">Sucursales</a></li>
+                                    <li><a href="#">Administrar Personal</a></li>
+                                    <li><a href="#">Administrar Sucursales</a></li>
+                                    <li><a href="#">Administrar Vehículos</a></li>
                                 </ul> 
                                 <ul class="nav pull-right">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <h:outputText value="#{userBean.idPerson}" />
+                                            <h:outputText value="#{administratorBean.username}" />
                                             <b class="caret"></b>
                                         </a>
                                         <ul class="dropdown-menu">
@@ -56,7 +55,7 @@
                                             <li class="divider"></li>
                                             <li>
                                                 <h:form class="navbar-form">
-                                                    <h:commandLink action="#{userBean.logOut()}" value="Cerrar sesión" />
+                                                    <h:commandLink action="#{administratorBean.logOut()}" value="Cerrar sesión" />
                                                 </h:form>
                                             </li>
                                         </ul>
@@ -93,4 +92,5 @@
         </div>
 
     </h:body>
+
 </html>
