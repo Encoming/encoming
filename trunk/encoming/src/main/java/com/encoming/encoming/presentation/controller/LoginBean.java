@@ -70,7 +70,7 @@ public class LoginBean implements Serializable{
             return "success";
         } else {
             FacesContext.getCurrentInstance().addMessage(
-                    "loginForm:idUser", new FacesMessage(
+                    "loginForm:username", new FacesMessage(
                     "Id de usuario o contraseña inválidos"));
             return "failure";
         }
