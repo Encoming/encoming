@@ -16,30 +16,7 @@
     </ui:define>
 
     <ui:define name="left">
-
-        <h:form>   
-                 <p:menu> 
-                       <p:submenu label="Nueva Encomienda" >  
-                           <p:menuitem value="Crear" actionListener="#{adminMenuBean.createEncoming}" update="pag" ajax ="false"/>  
-                        </p:submenu>
-                     
-                       <p:submenu label="Administrar Personal" >  
-                           <p:menuitem value="Nuevo empleado" actionListener="#{adminMenuBean.adminPersonal}" update="pag" ajax ="false"/>   
-                       </p:submenu>  
-                     
-                       <p:submenu label="Administrar Sucursales">  
-                           <p:menuitem value="Agregar sucursal" icon="ui-icon-home" actionListener="#{adminMenuBean.adminPoints}" update="pag" ajax ="false"/>  
-                           <p:menuitem value="Administrar " icon="ui-icon-document" />  
-                           <p:menuitem value="Rutas" icon="ui-icon-arrowthick-1-s" />
-                       </p:submenu>  
-
-                       <p:submenu label="Administrar Vehículos">  
-                           <p:menuitem value="Nuevo Vehículo" actionListener="#{adminMenuBean.adminVehicles}" update="pag" ajax ="false"/>   
-                       </p:submenu>
-                     
-                </p:menu>  
-             </h:form>
-
+        
     </ui:define>
 
     <ui:define name="right">
@@ -47,12 +24,42 @@
     </ui:define>
 
     <ui:define name="content">
-        
-        <p:layoutUnit position="center" id="pag">  
-            <ui:include src="#{adminMenuBean.page}" />
-        </p:layoutUnit>  
-        
-        
+        <div class="container">
+            <div class="row">
+                <div class="span3 offset0">
+                        <f:view>
+                            <h:form>   
+                                <p:menu> 
+                                      <p:submenu label="Nueva Encomienda" >  
+                                          <p:menuitem value="Crear" actionListener="#{adminMenuBean.createEncoming}" update="pag" ajax ="false"/>  
+                                       </p:submenu>
+
+                                      <p:submenu label="Administrar Personal" >  
+                                          <p:menuitem value="Nuevo empleado" actionListener="#{adminMenuBean.adminPersonal}" update="pag" ajax ="false"/>   
+                                      </p:submenu>  
+
+                                      <p:submenu label="Administrar Sucursales">  
+                                          <p:menuitem value="Agregar sucursal" icon="ui-icon-home" actionListener="#{adminMenuBean.adminPoints}" update="pag" ajax ="false"/>  
+                                          <p:menuitem value="Administrar " icon="ui-icon-document" />  
+                                          <p:menuitem value="Rutas" icon="ui-icon-arrowthick-1-s" />
+                                      </p:submenu>  
+
+                                      <p:submenu label="Administrar Vehículos">  
+                                          <p:menuitem value="Nuevo Vehículo" actionListener="#{adminMenuBean.adminVehicles}" update="pag" ajax ="false"/>   
+                                      </p:submenu>
+                               </p:menu>  
+                            </h:form>
+                        </f:view>
+                </div>
+                <div class="span9 offset0">
+                     <h:form>
+                         <p:layoutUnit position="left" id="pag">  
+                             <ui:include src="#{adminMenuBean.page}" />
+                         </p:layoutUnit> 
+                     </h:form>
+                </div>
+             </div>
+        </div>
     </ui:define>
 
     <ui:define name="bottom">
