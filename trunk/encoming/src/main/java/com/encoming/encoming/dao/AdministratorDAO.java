@@ -73,6 +73,5 @@ public class AdministratorDAO implements IDAO<Administrator> {
             administrator = null;
         }
         return administrator;
-    }
-    
+    }   
 }

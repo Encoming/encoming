@@ -5,6 +5,7 @@
 package com.encoming.encoming.presentation.controller;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -42,6 +43,14 @@ public class AdminMenuBean {
     
     public void adminVehicles(){
         page = "/adminVehicles.xhtml";
+    }
+    
+    public void adminEmployee(){
+        page = "/adminEmployee.xhtml";
+    }
+    
+    public void seeEmployees(){
+        page = "/seeEmployees.xhtml";
     }
     
 }

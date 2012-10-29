@@ -26,7 +26,12 @@ public class ServiceFactory {
     public PointService getPointService() {
         return PointService.getInstance();
     }
+    
     public PersonService getPersonService() {
         return PersonService.getInstance();
+    }
+    
+    public DriverService getDriverService() {
+        return DriverService.getInstance();
     }
 }

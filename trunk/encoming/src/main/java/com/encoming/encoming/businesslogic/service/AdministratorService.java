@@ -87,7 +87,7 @@ public class AdministratorService implements IService<AdministratorVo> {
         entity.setUsername(administratorVo.getUsername());
         entity.setPassword(administratorVo.getPassword());
         
-        Administrator administrator= new AdministratorDAO().login(entity, em);
+        Administrator administrator = DAOFactory.getInstance().getAdministratorDAO().login(entity, em);
         return administrator != null? administrator.toVo():null;
     }
 }

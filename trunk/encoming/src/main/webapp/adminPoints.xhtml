@@ -9,8 +9,7 @@
     <h:head>
         <title>Administración de Sucursales</title>
     </h:head>
-    <h:body>
-        <h:form>         
+    <h:body>        
                 <div class="hero-unit span6 offset0">
                     <h2 style="color: #005580">Sucursales</h2>
                     <style type="text/css">
@@ -29,7 +28,7 @@
                 </div>
                 <div class="hero-unit span6 offset0">
                     <p:gmap id="gmap" center="#{pointBean.initialCoordinates}" zoom="16" type="HYBRID"   
-                            style="w    idth:600px;height:400px"  
+                            style="width:600px;height:400px"  
                             model="#{pointBean.model}"   
                             onPointClick="handlePointClick(event);"   
                             widgetVar="map" />  
@@ -91,7 +90,5 @@
                         }  
                     </script>
                 </div>
-         
-        </h:form>  
     </h:body>
 </html>
