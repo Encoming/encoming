@@ -10,7 +10,7 @@
         <title>Administración de Sucursales</title>
     </h:head>
     <h:body>
-            <p:wizard id="wizard"
+        <p:wizard id="wizard"
                       flowListener="#{encomiendaBean.onFlowProcess}"> >
                 <p:tab id="tab1" title="Datos cliente">
                     <p:panel header="Datos Personales del Cliente">
@@ -34,11 +34,11 @@
                             </p:inputText>    
                             <h:outputLabel for="mail" value="E-mail :*"/>
                             <p:inputText id="mail" required="false" value="#{encomiendaBean.mail}" >
-                               
+                                <f:validator validatorId="emailValidatorBean" />
                             </p:inputText> 
                             <h:outputLabel for="phone"  value="Teléfono"/>
                             <p:inputMask id="phone"
-                                         mask="9-99-99-99" 
+                                         mask="9999999" 
                                          value="#{encomiendaBean.phone}"
                                          size="7" style="optionalLb1"/>
                             <h:outputLabel for="adress" value="Dirección: *"/>
@@ -46,8 +46,7 @@
                                          requiredMessage="¡Por favor ingrese una Dirección!">
                                 <f:validateLength minimum="8" />
                             </p:inputText>    
-                        </h:panelGrid>
-                        <h:commandButton value="Guardar" class="btn btn-success"/>
+                        </h:panelGrid>  
                     </p:panel>
                 </p:tab>
 
@@ -116,22 +115,41 @@
                             </p:inputText>    
                             <h:outputLabel for="phoneReceiver" value="Telefono" />
                             <p:inputMask id="phoneReceiver"
-                                         mask="9-99-99-99" 
+                                         mask="9999999" 
                                          value="#{encomiendaBean.phoneReceiver}"
                                          size="7" style="optionalLb1"/>
                             <h:outputLabel for="mailReceiver" value="E-mail:*" />
                             <p:inputText id="mailReceiver" required="false" value="#{encomiendaBean.mailReceiver}" >
-                                
+                                <f:validator validatorId="emailValidatorBean" />
                             </p:inputText> 
                             <h:outputLabel for="adressReceiver" value="Dirección: *" />
-                            <p:inputText id="adressReceiver" required="true" value="#{encomingBean.adressReceiver}" >
+                            <p:inputText id="adressReceiver" required="true" value="#{encomiendaBean.adressReceiver}" >
                                 <f:validateLength minimum="8" />
                             </p:inputText>
-                                   
+
                         </h:panelGrid>
-                        <p:commandButton value="Guardar" update="panel,display" id="ajax"/> 
                     </p:panel>
                 </p:tab>
-            </p:wizard> 
+
+                <p:tab id="verification" title=" Verificación">  
+                    <p:panel header="Verification">  
+
+                        <h:panelGrid id="verificar" columns="6">  
+                            <h:outputText value="Nombre: " />  
+                            <h:outputText styleClass="outputLabel"  
+                                          value="#{encomiendaBean.name}" />  
+
+                            <h:outputText value="Apellidos: " />  
+                            <h:outputText  styleClass="outputLabel"  
+                                           value="#{encomiendaBean.lastNames}"/>   
+
+                            <h:outputText />  
+                            <h:outputText />  
+                        </h:panelGrid>  
+
+                        <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}"/>  
+                    </p:panel>  
+                </p:tab> 
+            </p:wizard>     
     </h:body>
 </html>
