@@ -4,19 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <h:head>
         <title>Administración de Sucursales</title>
     </h:head>
-    <h:body> 
-                <style type="text/css">
+    <h:body>     
+        <p:panel header="Administración de Sucursales:">
+            <style type="text/css">
                         .ui-growl {
                             top: 10%;
                         }
                  </style>
                 <div class="hero-unit span6 offset0">
-                    <h2 style="color: #005580">Sucursales</h2>
+                    <h3 style="color: #005580">Sucursales:</h3>
                     
                     <h:form id="pointsForm">
                         <h:selectOneMenu id="point" required="true"
@@ -91,6 +93,8 @@
                             return false;  
                         }  
                     </script>
+        </p:panel> 
+                
                 
     </h:body>
 </html>

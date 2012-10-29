@@ -7,9 +7,10 @@
       xmlns:f="http://java.sun.com/jsf/core">
     
     <h:head>
-        <title>Administración de Sucursales</title>
+        <title>Crear Nueva Encomienda</title>
     </h:head>
     <h:body>
+        <p:panel header="Crear una nueva encomienda:">
         <p:wizard id="wizard"
                       flowListener="#{encomiendaBean.onFlowProcess}"> >
                 <p:tab id="tab1" title="Datos cliente">
@@ -150,6 +151,7 @@
                         <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}"/>  
                     </p:panel>  
                 </p:tab> 
-            </p:wizard>     
-    </h:body>
+            </p:wizard> 
+        </p:panel>
+    </h:body> 
 </html>
