@@ -30,7 +30,8 @@ public class PersonDAO implements IDAO<Person> {
     }
 
     @Override
-    public Person find(Object id, EntityManager em) {
+    public Person find(Object idA, EntityManager em) {
+        Integer id = (Integer) idA;
         Query query = em.createNamedQuery("Person.findByIdPerson")
                 .setParameter("idPerson", id);
         return (Person)query.getSingleResult();

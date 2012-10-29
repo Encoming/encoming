@@ -30,7 +30,7 @@ public class AddEmployeeBean {
     private Integer idAdministrator;
     private String username;
     private String password;
-    private Integer personidPerson = idPerson;
+    private Integer personidPerson;
 
     public Integer getPersonidPerson() {
         return personidPerson;
@@ -116,6 +116,7 @@ public class AddEmployeeBean {
     public AddEmployeeBean() {
     }
     public void addEmployee(){
+        this.personidPerson = idPerson;
         PersonVo personVo = new PersonVo();
         personVo.setAdress(adress);
         personVo.setIdPerson(idPerson);
@@ -130,7 +131,7 @@ public class AddEmployeeBean {
         adminVo.setUsername(username);     
         adminVo.setPersonidPerson(personidPerson);
         
-        PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade();
+        PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade(); 
         AdministratorFacade adminFac = FacadeFactory.getInstance().getAdministratorFacade();   
         
         personFac.persist(personVo);

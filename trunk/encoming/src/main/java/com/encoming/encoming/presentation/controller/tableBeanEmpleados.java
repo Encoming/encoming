@@ -24,21 +24,33 @@ public class tableBeanEmpleados {
     ArrayList<PersonVo> employees;
 
     public tableBeanEmpleados() {
-
-    }
-    public ArrayList<PersonVo> getEmployees(){
-        PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade();
+        employeesAdm = new ArrayList();
+        employees = new ArrayList();
         AdministratorFacade adminFac = FacadeFactory.getInstance().getAdministratorFacade();  
         employeesAdm = adminFac.getList();
         for(AdministratorVo admVo : employeesAdm){
+            PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade();
             employees.add(personFac.find(admVo.getPersonidPerson()));
         }
+    }
+
+    public List<AdministratorVo> getEmployeesAdm() {
+        return employeesAdm;
+    }
+
+    public void setEmployeesAdm(List<AdministratorVo> employeesAdm) {
+        this.employeesAdm = employeesAdm;
+    }
+
+    public ArrayList<PersonVo> getEmployees() {
         return employees;
     }
 
     public void setEmployees(ArrayList<PersonVo> employees) {
         this.employees = employees;
     }
+
+    
     
     
 }

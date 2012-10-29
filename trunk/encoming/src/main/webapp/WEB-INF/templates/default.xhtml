@@ -30,7 +30,7 @@
             }
         </script>
 
-        <title>Encoming: <ui:insert name="title"></ui:insert></title>
+        <title>:: Encoming :: <ui:insert name="title"></ui:insert></title>
 
         <link href="#{request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="#{request.contextPath}/resources/css/default.css" rel="stylesheet" type="text/css"/>
@@ -44,8 +44,7 @@
 
     <h:body>
 
-        <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+        <ui:insert name="top">Top</ui:insert>
             <!--navbar-->
             <div class="navbar navbar-fixed-top">
                 <div class="navbar-inner " id="navbar-top">
@@ -62,10 +61,10 @@
                         <div class="nav-collapse">
                             <ui:fragment rendered="#{administratorBean.loggedIn}">
                                 <ul class="nav pull-left">
-                                    <li><a href="#">Crear Encomienda</a></li>
-                                    <li><a href="#">Administrar Personal</a></li>
-                                    <li><a href="#">Administrar Sucursales</a></li>
-                                    <li><a href="#">Administrar Vehículos</a></li>
+                                    <li><a href="#{request.contextPath}/createEncoming.xhtml">Crear Encomienda</a></li>
+                                    <li><a href="#{request.contextPath}/adminEmployee.xhtml">Administrar Personal</a></li>
+                                    <li><a href="#{request.contextPath}/adminPoints">Administrar Sucursales</a></li>
+                                    <li><a href="#{request.contextPath}/adminVehicles">Administrar Vehículos</a></li>
                                 </ul> 
                                 <ul class="nav pull-right">
                                     <li class="dropdown">
@@ -94,7 +93,9 @@
                     </div>
                 </div>
             </div>
-            <!--end navbar-->
+        
+        <div id="top">
+            
         </div>
 
         <div>

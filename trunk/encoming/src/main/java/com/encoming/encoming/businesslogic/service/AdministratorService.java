@@ -31,8 +31,7 @@ public class AdministratorService implements IService<AdministratorVo> {
 
     @Override
     public void persist(AdministratorVo vo, EntityManager em) {
-        PersonDAO persondao= new PersonDAO(); 
-        
+        PersonDAO persondao = DAOFactory.getInstance().getPersonDAO(); 
         Administrator admin =  new Administrator();
         admin.setIdAdministrator(vo.getIdAdministrator());
         Person person = persondao.find(vo.getPersonidPerson(), em);

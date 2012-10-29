@@ -9,14 +9,15 @@
     <h:head>
         <title>Administración de Sucursales</title>
     </h:head>
-    <h:body>        
-                <div class="hero-unit span6 offset0">
-                    <h2 style="color: #005580">Sucursales</h2>
-                    <style type="text/css">
+    <h:body> 
+                <style type="text/css">
                         .ui-growl {
                             top: 10%;
                         }
-                    </style>
+                 </style>
+                <div class="hero-unit span6 offset0">
+                    <h2 style="color: #005580">Sucursales</h2>
+                    
                     <h:form id="pointsForm">
                         <h:selectOneMenu id="point" required="true"
                                          requiredMessage="Por favor selecciona uno">
@@ -26,7 +27,8 @@
                         </h:selectOneMenu>
                     </h:form>
                 </div>
-                <div class="hero-unit span6 offset0">
+                
+                    <p:growl id="messages" showDetail="true" />
                     <p:gmap id="gmap" center="#{pointBean.initialCoordinates}" zoom="16" type="HYBRID"   
                             style="width:600px;height:400px"  
                             model="#{pointBean.model}"   
@@ -89,6 +91,6 @@
                             return false;  
                         }  
                     </script>
-                </div>
+                
     </h:body>
 </html>
