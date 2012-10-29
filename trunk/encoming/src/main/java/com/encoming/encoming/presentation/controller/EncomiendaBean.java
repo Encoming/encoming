@@ -1,15 +1,22 @@
 package com.encoming.encoming.presentation.controller;
 
+import com.encoming.encoming.businesslogic.facade.FacadeFactory;
+import com.encoming.encoming.businesslogic.facade.PersonFacade;
+import com.encoming.encoming.businesslogic.facade.PointFacade;
 import com.encoming.encoming.entity.Person;
 import com.encoming.encoming.entity.Package;
+import com.encoming.encoming.vo.ClientVo;
+import com.encoming.encoming.vo.PersonVo;
+import com.encoming.encoming.vo.PointVo;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
+import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.Marker;
 
 /**
  *
@@ -19,9 +26,6 @@ import org.primefaces.event.FlowEvent;
 @SessionScoped
 public class EncomiendaBean {
         
-    private Person person = new Person();
-    private Package pack = new Package();
-    private Person client = new Person();
     private boolean skip;
     private static final Logger logger = Logger.getLogger(EncomiendaBean.class.getName()); 
     
@@ -44,8 +48,33 @@ public class EncomiendaBean {
     private String lastNamesReceiver;
     private String phoneReceiver;
     private String mailReceiver;
-    private String adressReceiver;    
+    private String adressReceiver;
     
+    
+    public void addPerson(ActionEvent actionEvent) {
+
+        PersonVo personVo = new PersonVo();
+        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+
+        personVo.setName(getName());
+        personVo.setLastName(getLastNames());
+        personVo.setIdPerson(Integer.parseInt(getIdPerson()));
+        personVo.setMail(getMail());
+        personVo.setPhone(Integer.parseInt(getPhone()));
+        personVo.setAdress(getAdress());
+
+        personFacade.persist(personVo);
+        
+        addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha agregado una nueva Persona",
+                "Nombre:" + name
+                + "\n\nApellido:" + lastNames
+                + ", :" + idPerson));
+    }
+    
+    public void addMessage(FacesMessage message) {
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+       
     public String onFlowProcess(FlowEvent event) {  
         logger.info("Current wizard step:" + event.getOldStep());  
         logger.info("Next step:" + event.getNewStep());  
@@ -60,30 +89,6 @@ public class EncomiendaBean {
     }
 
     public EncomiendaBean() {
-    }
-    
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public Package getPack() {
-        return pack;
-    }
-
-    public void setPack(Package pack) {
-        this.pack = pack;
-    }
-
-    public Person getClient() {
-        return client;
-    }
-
-    public void setClient(Person client) {
-        this.client = client;
     }
 
     public boolean isSkip() {
@@ -237,13 +242,5 @@ public class EncomiendaBean {
     public void setDestinationCity(String destinationCity) {
         this.destinationCity = destinationCity;
     }
-    
-    public void comparation(FacesContext arg0, UIComponent arg1, Object arg2, Object arg3)
-         throws ValidatorException {
-      if (((String)arg2)==((String)arg3)) {
-         throw new ValidatorException(new FacesMessage("La cuidad origen y destino coinciden"));
-      }
-   }
-    
-    
+      
 }

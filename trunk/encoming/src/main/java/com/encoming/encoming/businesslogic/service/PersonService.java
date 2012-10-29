@@ -28,15 +28,15 @@ public class PersonService implements IService<PersonVo> {
 
     @Override
     public void persist(PersonVo vo, EntityManager em) {
-        Person person = new Person();
-        person.setName(vo.getName());
-        person.setAdress(vo.getAdress());
-        person.setIdPerson(vo.getIdPerson());
-        person.setLastanames(vo.getLastName());
-        person.setMail(vo.getLastName());
-        person.setPhone(vo.getPhone());
-        DAOFactory.getInstance().getPersonDAO().persist(person, em);
-               
+        Person entity = new Person();
+        entity.setName(vo.getName());
+        entity.setLastanames(vo.getLastName());
+        entity.setAdress(vo.getAdress());
+        entity.setMail(vo.getMail());
+        entity.setPhone(vo.getPhone());
+        entity.setIdPerson(vo.getIdPerson());
+
+        DAOFactory.getInstance().getPersonDAO().persist(entity, em);
     }
 
     @Override
@@ -67,12 +67,11 @@ public class PersonService implements IService<PersonVo> {
 
     @Override
     public List<PersonVo> getList(EntityManager em) {
-        PersonDAO dao =  DAOFactory.getInstance().getPersonDAO();
-        List<Person> lista = dao.getList(em);
-        ArrayList<PersonVo> personas = new ArrayList();
-        for(Person p : lista){
-            personas.add(p.toVo());
-        }
-        return personas;
-    }   
+        List<PersonVo> list = new ArrayList<PersonVo>();
+        for (Person person : DAOFactory.getInstance().getPersonDAO().getList(em)) {
+            list.add((person).toVo());
+        };
+        return list;
+    }
+       
 }
