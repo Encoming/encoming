@@ -55,6 +55,12 @@ public class EncomiendaBean {
 
         PersonVo personVo = new PersonVo();
         PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+        System.out.println(getPhone());
+        System.out.println(getPhone());
+        System.out.println(getPhone());
+        System.out.println(getPhone());
+        System.out.println(getPhone());
+        System.out.println(getPhone());
 
         personVo.setName(getName());
         personVo.setLastName(getLastNames());
@@ -74,7 +80,7 @@ public class EncomiendaBean {
     public void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-       
+           
     public String onFlowProcess(FlowEvent event) {  
         logger.info("Current wizard step:" + event.getOldStep());  
         logger.info("Next step:" + event.getNewStep());  
