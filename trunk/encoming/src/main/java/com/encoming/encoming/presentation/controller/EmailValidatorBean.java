@@ -21,24 +21,25 @@ import javax.faces.validator.ValidatorException;
 //@RequestScoped
 @FacesValidator(value = "emailValidatorBean")
 public class EmailValidatorBean implements Validator {
- 
+
     @Override
     public void validate(FacesContext context, UIComponent component,
             Object value) throws ValidatorException {
         String email = String.valueOf(value);
         boolean valid = true;
-        if (value == null) {
+        if (email.length() == 0) {
             valid = false;
-        } else if (!email.contains("@")) {
+        } else if (!email.endsWith("@gmail.com")
+                && !email.endsWith("@hotmail.com")
+                && !email.endsWith("@yahoo.es")
+                && !email.endsWith("@unal.edu.co")) {
             valid = false;
-        } else if (!email.contains(".")) {
-            valid = false;
-        } else if (email.contains(" ")) {
+        } else if (email.indexOf('@') < 5 || email.indexOf('@') > 15) {
             valid = false;
         }
         if (!valid) {
             FacesMessage message = new FacesMessage(
-                    FacesMessage.SEVERITY_ERROR, "¡Dirección Email Inválida!",
+                    FacesMessage.SEVERITY_ERROR, "¡Dirección Email Inválida, Ingrese un Dominio Valido!",
                     "¡La dirección de correo electrónico que ha introducido no es válido!");
             throw new ValidatorException(message);
         }

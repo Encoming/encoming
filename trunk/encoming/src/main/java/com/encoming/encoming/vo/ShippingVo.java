@@ -6,7 +6,9 @@ package com.encoming.encoming.vo;
 
 import com.encoming.encoming.entity.Route;
 import com.encoming.encoming.entity.Vehicle;
+import java.util.Date;
 import java.util.List;
+import javax.enterprise.inject.New;
 
 /**
  *
@@ -20,6 +22,8 @@ public class ShippingVo {
     private Integer packageidPackage;
     private Integer vehicle;
     private Integer clientidClient;
+    private Date sendedDate;
+    private Date arrivedDate;
     private List<InvoiceVo> invoiceList;
 
     /**
@@ -120,5 +124,19 @@ public class ShippingVo {
         this.invoiceList = invoiceList;
     }
 
-       
+    public Date getSendedDate() {
+        return sendedDate;
+    }
+
+    public void setSendedDate(Date sendedDate) {
+        this.sendedDate = sendedDate;
+    }
+
+    public Date getArrivedDate() {
+        return arrivedDate;
+    }
+
+    public void setArrivedDate(Date arrivedDate) {
+        this.arrivedDate = arrivedDate;
+    }       
 }

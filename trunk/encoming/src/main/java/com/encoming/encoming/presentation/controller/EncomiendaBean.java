@@ -2,12 +2,7 @@ package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
-import com.encoming.encoming.businesslogic.facade.PointFacade;
-import com.encoming.encoming.entity.Person;
-import com.encoming.encoming.entity.Package;
-import com.encoming.encoming.vo.ClientVo;
 import com.encoming.encoming.vo.PersonVo;
-import com.encoming.encoming.vo.PointVo;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,8 +10,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
-import org.primefaces.model.map.LatLng;
-import org.primefaces.model.map.Marker;
 
 /**
  *
@@ -54,22 +47,27 @@ public class EncomiendaBean {
     public void addPerson(ActionEvent actionEvent) {
 
         PersonVo personVo = new PersonVo();
+        PersonVo personRVo = new PersonVo();
         PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
-        System.out.println(getPhone());
-        System.out.println(getPhone());
-        System.out.println(getPhone());
-        System.out.println(getPhone());
-        System.out.println(getPhone());
-        System.out.println(getPhone());
-
+        
+//        Persona que envia el paquete
         personVo.setName(getName());
         personVo.setLastName(getLastNames());
         personVo.setIdPerson(Integer.parseInt(getIdPerson()));
         personVo.setMail(getMail());
-        personVo.setPhone(Integer.parseInt(getPhone()));
+        personVo.setPhone(Integer.parseInt(emptyphone(getPhone())));
         personVo.setAdress(getAdress());
+        
+//        Persona que recibe el paquete
+        personRVo.setName(getNameReceiver());
+        personRVo.setLastName(getLastNamesReceiver());
+        personRVo.setIdPerson(Integer.parseInt(getIdReceiver()));
+        personRVo.setMail(getMailReceiver());
+        personRVo.setPhone(Integer.parseInt(emptyphone(getPhoneReceiver())));
+        personRVo.setAdress(getAdressReceiver());
 
         personFacade.persist(personVo);
+        //personFacade.persist(personRVo);
         
         addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha agregado una nueva Persona",
                 "Nombre:" + name
@@ -92,6 +90,16 @@ public class EncomiendaBean {
         else {  
             return event.getNewStep();  
         }  
+    }
+    
+    public String emptyphone(String phone){
+        String hphone="";
+        if(phone.length()<6){
+            hphone="0000000";
+        } else{
+            hphone = phone;
+        }
+        return hphone;
     }
 
     public EncomiendaBean() {

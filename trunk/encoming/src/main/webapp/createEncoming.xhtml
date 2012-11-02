@@ -18,7 +18,7 @@
                 <p:tab id="tab1" title="Datos cliente">
                     <p:panel header="Datos Personales del Cliente">
                         <p:messages errorClass="error"/>
-                        <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                        <h:panelGrid columns="2" columnClasses="label , value" styleClass="grid">
 
                             <h:outputLabel for="name" value="Nombres: *" styleClass="requiredLb1"/>
                             <h:inputText id="name" required="true" value="#{encomiendaBean.name}"
@@ -135,16 +135,20 @@
                 </p:tab>
 
                 <p:tab id="verification" title=" Verificación">  
-                    <p:panel header="Verification">  
+                    <p:panel header="Verificación">  
 
-                        <h:panelGrid id="verificar" columns="6">  
+                        <h:panelGrid id="verificar" columns="2">  
                             <h:outputText value="Nombre: " />  
                             <h:outputText styleClass="outputLabel"  
                                           value="#{encomiendaBean.name}" />  
 
                             <h:outputText value="Apellidos: " />  
                             <h:outputText  styleClass="outputLabel"  
-                                           value="#{encomiendaBean.lastNames}"/>   
+                                           value="#{encomiendaBean.lastNames}"/> 
+                            
+                            <h:outputText value="Teléfono: " />  
+                            <h:outputText  styleClass="outputLabel"  
+                                           value="#{encomiendaBean.emptyphone(phone)}"/>
 
                             <h:outputText />  
                             <h:outputText />  

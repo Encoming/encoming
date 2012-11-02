@@ -8,6 +8,7 @@ import com.encoming.encoming.vo.InvoiceVo;
 import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -47,6 +49,14 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
     @NotNull
     @Column(name = "idReceiver")
     private int idReceiver;
+    @Basic (optional = false)
+    @Column (name = "sendedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date sendedDate;
+    @Basic (optional = false)
+    @Column (name = "arrivedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date arrivedDate;
     @JoinColumn(name = "Route_idRoute", referencedColumnName = "idRoute")
     @ManyToOne(optional = false)
     private Route routeidRoute;
@@ -124,6 +134,22 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         this.clientidClient = clientidClient;
     }
 
+    public Date getSendedDate() {
+        return sendedDate;
+    }
+
+    public void setSendedDate(Date sendedDate) {
+        this.sendedDate = sendedDate;
+    }
+
+    public Date getArrivedDate() {
+        return arrivedDate;
+    }
+
+    public void setArrivedDate(Date arrivedDate) {
+        this.arrivedDate = arrivedDate;
+    }
+
     @XmlTransient
     public List<Invoice> getInvoiceList() {
         return invoiceList;
@@ -163,6 +189,8 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         ShippingVo shippingVo = new ShippingVo();
         shippingVo.setIdShipping(getIdShipping());
         shippingVo.setIdReceiver(getIdReceiver());
+        shippingVo.setSendedDate(getSendedDate());
+        shippingVo.setArrivedDate(getArrivedDate());
         shippingVo.setRouteidRoute(getRouteidRoute());
         shippingVo.setPackageidPackage(getPackageidPackage().getIdPackage());
         shippingVo.setVehicle(getVehicle().getIdVehicle());

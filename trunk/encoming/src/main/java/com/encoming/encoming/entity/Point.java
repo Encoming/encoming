@@ -6,6 +6,7 @@ package com.encoming.encoming.entity;
 
 import com.encoming.encoming.vo.PointVo;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
