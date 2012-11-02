@@ -32,4 +32,10 @@ public class DAOFactory {
     public DriverDAO getDriverDAO() {
         return DriverDAO.getInstance();
     }
+
+    public VehicleDAO getVehicleDAO() {
+        return VehicleDAO.getInstance();
+    }
+
+
 }

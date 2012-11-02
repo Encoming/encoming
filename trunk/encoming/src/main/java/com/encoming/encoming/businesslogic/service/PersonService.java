@@ -70,7 +70,7 @@ public class PersonService implements IService<PersonVo> {
         List<PersonVo> list = new ArrayList<PersonVo>();
         for (Person person : DAOFactory.getInstance().getPersonDAO().getList(em)) {
             list.add((person).toVo());
-        };
+        }
         return list;
     }
        

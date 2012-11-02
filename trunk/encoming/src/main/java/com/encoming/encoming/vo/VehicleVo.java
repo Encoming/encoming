@@ -11,7 +11,8 @@ import java.util.List;
  * @author germanpinerosm
  */
 public class VehicleVo implements IValueObject{
-    
+    private Integer plateNumber;
+    private String plateLetters;
     private Integer idVehicle;
     private String type;
     private String manufacturer;
@@ -83,6 +84,24 @@ public class VehicleVo implements IValueObject{
     public int getCapacity() {
         return capacity;
     }
+
+    public Integer getPlateNumber() {
+        return plateNumber;
+    }
+
+    public void setPlateNumber(Integer plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+
+    public String getPlateLetters() {
+        return plateLetters;
+    }
+
+    public void setPlateLetters(String plateLetters) {
+        this.plateLetters = plateLetters;
+    }
+    
+    
 
     /**
      * @param capacity the capacity to set

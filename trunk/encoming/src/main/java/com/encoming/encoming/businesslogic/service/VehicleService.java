@@ -4,7 +4,13 @@
  */
 package com.encoming.encoming.businesslogic.service;
 
+import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.dao.DriverDAO;
+import com.encoming.encoming.dao.VehicleDAO;
+import com.encoming.encoming.entity.Driver;
+import com.encoming.encoming.entity.Vehicle;
 import com.encoming.encoming.vo.VehicleVo;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -25,27 +31,59 @@ public class VehicleService implements IService<VehicleVo> {
 
     @Override
     public void persist(VehicleVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DriverDAO driverDao= DAOFactory.getInstance().getDriverDAO();
+        
+        Driver driver = new Driver();
+        driver = driverDao.find(vo.getIdDriver(), em);
+        Vehicle entity = new Vehicle();
+        
+        
+        entity.setIdVehicle(vo.getIdVehicle());
+        entity.setDriver(driver);
+        entity.setCapacity(vo.getCapacity());
+        entity.setPlateLetters(vo.getPlateLetters());
+        entity.setPlateNumber(vo.getPlateNumber());
+        entity.setModel(vo.getModel());
+        
+        DAOFactory.getInstance().getVehicleDAO().persist(entity, em);
     }
 
     @Override
     public VehicleVo find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        VehicleDAO dao = DAOFactory.getInstance().getVehicleDAO();
+        VehicleVo  vo = dao.find(id, em).toVo();
+        return vo;
+        
     }
 
     @Override
     public void update(VehicleVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Vehicle entity =  new Vehicle();
+        entity.setIdVehicle(vo.getIdVehicle());
+        Driver driver  = DAOFactory.getInstance().getDriverDAO().find(vo.getIdDriver(), em);
+        entity.setDriver(driver);
+        entity.setCapacity(vo.getCapacity());
+        entity.setPlateLetters(vo.getPlateLetters());
+        entity.setPlateNumber(vo.getPlateNumber());
+        entity.setModel(vo.getModel());
+        DAOFactory.getInstance().getVehicleDAO().update(entity, em);
     }
 
     @Override
     public void delete(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        VehicleDAO dao =  DAOFactory.getInstance().getVehicleDAO();
+        dao.delete(id, em);
     }
 
     @Override
     public List<VehicleVo> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        VehicleDAO dao =  DAOFactory.getInstance().getVehicleDAO();
+        List<Vehicle> lista = dao.getList(em);
+        ArrayList<VehicleVo> vehicles = new ArrayList();
+        for(Vehicle p : lista){
+            vehicles.add(p.toVo());
+        }
+        return vehicles;
     }
     
 }

@@ -7,6 +7,7 @@ package com.encoming.encoming.dao;
 import com.encoming.encoming.entity.Driver;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,26 +26,32 @@ public class DriverDAO implements IDAO<Driver> {
     
     @Override
     public void persist(Driver entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }    
     
     @Override
     public Driver find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createQuery("SELECT dri FROM Driver dri "
+                + "WHERE dri.personidPerson.idPerson =:idPerson")
+                .setParameter("idPerson", id);
+        return (Driver)query.getSingleResult();
     }
     
     @Override
     public void update(Driver entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.merge(em);
     }
     
     @Override
     public void delete(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+         Driver dri = find(id, em);
+        em.remove(dri);
     }
     
     @Override
     public List<Driver> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createNamedQuery("Driver.findAll");
+        List<Driver> lista = query.getResultList();
+        return lista;
     }   
 }

@@ -7,6 +7,7 @@ package com.encoming.encoming.dao;
 import com.encoming.encoming.entity.Vehicle;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,27 +26,33 @@ public class VehicleDAO implements IDAO<Vehicle>{
     
     @Override
     public void persist(Vehicle entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }    
     
     @Override
     public Vehicle find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+        Query query = em.createNamedQuery("Vehicle.findByIdVehicle")
+                .setParameter("idVehicle", id);
+        return(Vehicle) query.getSingleResult();
+        
+            }
     
     @Override
     public void update(Vehicle entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.merge(entity);
     }
     
     @Override
     public void delete(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Vehicle vehicle = find(id,em);
+        em.remove(vehicle);
     }
     
     @Override
     public List<Vehicle> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createNamedQuery("Vehicle.findAll");
+        List<Vehicle> list = query.getResultList();
+        return list;
     }
     
 }
