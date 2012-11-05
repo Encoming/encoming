@@ -37,4 +37,8 @@ public class FacadeFactory {
     public DriverFacade getDriverFacade() {
         return new DriverFacade(PU, ServiceFactory.getInstance().getDriverService());
     }
+    
+    public PackageFacade getPackageFacade() {
+        return new PackageFacade (PU, ServiceFactory.getInstance().getPackageService());
+    }
 }

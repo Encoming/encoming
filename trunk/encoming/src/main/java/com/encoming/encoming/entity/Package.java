@@ -42,7 +42,7 @@ public class Package implements Serializable,IEntity<PackageVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "idPackage")
     private Integer idPackage;
     @Basic(optional = false)

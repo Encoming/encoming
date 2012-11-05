@@ -4,6 +4,8 @@
  */
 package com.encoming.encoming.businesslogic.service;
 
+import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.entity.Package;
 import com.encoming.encoming.vo.PackageVo;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,7 +27,13 @@ public class PackageService implements IService<PackageVo>{
 
     @Override
     public void persist(PackageVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Package entity = new Package();
+        entity.setType(vo.getType());
+        entity.setVolume(vo.getVolume());
+        entity.setPriority(vo.getPriority());
+        entity.setWeight(vo.getWeight());
+
+        DAOFactory.getInstance().getPackageDAO().persist(entity, em);
     }
 
     @Override
