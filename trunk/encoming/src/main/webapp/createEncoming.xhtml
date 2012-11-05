@@ -40,7 +40,7 @@
                                 <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}" >
                                     <f:validator validatorId="emailValidatorBean" />
                                 </h:inputText> 
-                                <h:outputLabel for="phone"  value="Teléfono"/>
+                                <h:outputLabel for="phone"  value="Teléfono :"/>
                                 <p:inputMask id="phone"
                                              mask="9999999" 
                                              value="#{encomiendaBean.phone}"
@@ -60,39 +60,42 @@
                             <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
                                 <h:outputLabel for="type" value="Tipo de paquete: *" />
                                 <p:selectOneMenu id="type" value="#{encomiendaBean.type}">
-                                    <f:selectItem itemLabel="Sobre" itemValue="1" />
-                                    <f:selectItem itemLabel="Caja" itemValue="2" />
-                                    <f:selectItem itemLabel="Otro" itemValue="3" />
+                                    <f:selectItem itemLabel="Sobre" itemValue="Sobre" />
+                                    <f:selectItem itemLabel="Caja" itemValue="Caja" />
+                                    <f:selectItem itemLabel="Otro" itemValue="Otro" />
                                 </p:selectOneMenu>
-                                <h:outputLabel for="volume" value="Tamaño: *" />
+                                <h:outputLabel for="volume" value="Tamaño (m): *" />
                                 <h:inputText id="volume" required="true" value="#{encomiendaBean.volume}"
-                                             requiredMessage="¡Por favor ingrese el Tamaño del paquete!" />
+                                             requiredMessage="¡Por favor ingrese el Tamaño del paquete!" >
+                                     <f:validateDoubleRange minimum="0.00" maximum="100.0" />
+                                </h:inputText>     
                                 <h:outputLabel for="priority" value="Prioridad: *" />
+                                
                                 <p:selectOneMenu id="priority" value="#{encomiendaBean.priority}">
-                                    <f:selectItem itemLabel="Alta" itemValue="1" />
-                                    <f:selectItem itemLabel="Moderada" itemValue="2" />
-                                    <f:selectItem itemLabel="Baja" itemValue="3" />
+                                    <f:selectItem itemLabel="Alta" itemValue="Alta" />
+                                    <f:selectItem itemLabel="Moderada" itemValue="Moderada" />
+                                    <f:selectItem itemLabel="Baja" itemValue="Baja" />
                                 </p:selectOneMenu>
-                                <h:outputLabel for="weigth" value="Peso: *" />
+                                <h:outputLabel for="weigth" value="Peso (Kg): *" />
                                 <h:inputText id="weigth" required="true" value="#{encomiendaBean.weigth}"
-                                             requiredMessage="¡Por favor ingrese la Prioridad del paquete!" >
-                                    <f:validateDoubleRange minimum="20.00" maximum="1000.00" />
+                                             requiredMessage="¡Por favor ingrese el peso del paquete!" >
+                                    <f:validateDoubleRange minimum="0.00" maximum="100.00" />
                                 </h:inputText>
                                 <h:outputLabel for="originCity" value="Ciudad de Origen: *" />
                                 <p:selectOneMenu id="originCity" value="#{encomiendaBean.originCity}">
-                                    <f:selectItem itemLabel="Bogotá" itemValue="1" />
-                                    <f:selectItem itemLabel="Cali" itemValue="2" />
-                                    <f:selectItem itemLabel="Medellín" itemValue="3" />
-                                    <f:selectItem itemLabel="Cartagena" itemValue="4" />
-                                    <f:selectItem itemLabel="Barranquilla" itemValue="5"/>
+                                    <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
+                                    <f:selectItem itemLabel="Cali" itemValue="Cali" />
+                                    <f:selectItem itemLabel="Medellín" itemValue="Medellín" />
+                                    <f:selectItem itemLabel="Cartagena" itemValue="Cartagena" />
+                                    <f:selectItem itemLabel="Barranquilla" itemValue="Barranquilla"/>
                                 </p:selectOneMenu>
                                 <h:outputLabel for="destinationCity" value="Ciudad de Destino: *" validator=""/>
                                 <p:selectOneMenu id="destinationCity" value="#{encomiendaBean.destinationCity}">
-                                    <f:selectItem itemLabel="Bogotá" itemValue="1" />
-                                    <f:selectItem itemLabel="Cali" itemValue="2" />
-                                    <f:selectItem itemLabel="Medellín" itemValue="3" />
-                                    <f:selectItem itemLabel="Cartagena" itemValue="4" />
-                                    <f:selectItem itemLabel="Barranquilla" itemValue="5" />
+                                    <f:selectItem itemLabel="Bogotá" itemValue="Bogotá" />
+                                    <f:selectItem itemLabel="Cali" itemValue="Cali" />
+                                    <f:selectItem itemLabel="Medellín" itemValue="Medellín" />
+                                    <f:selectItem itemLabel="Cartagena" itemValue="Cartagena" />
+                                    <f:selectItem itemLabel="Barranquilla" itemValue="Barranquilla" />
                                 </p:selectOneMenu>
                             </h:panelGrid>
                         </p:panel>
@@ -138,7 +141,7 @@
                     <p:tab id="verification" title=" Verificación">  
                         <p:panel header="Verificación">  
 
-                            <h:panelGrid id="verificar" columns="2">  
+                            <h:panelGrid id="verificar" columns="6">  
                                 <h:outputText value="Nombre: " />  
                                 <h:outputText styleClass="outputLabel"  
                                               value="#{encomiendaBean.name}" />  
@@ -149,13 +152,64 @@
 
                                 <h:outputText value="Teléfono: " />  
                                 <h:outputText  styleClass="outputLabel"  
-                                               value="#{encomiendaBean.emptyphone(phone)}"/>
+                                               value="#{encomiendaBean.phone}"/>
 
-                                <h:outputText />  
-                                <h:outputText />  
+                                <h:outputText value="Documento: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.idPerson}"/>
+
+                                <h:outputText value="Mail: " />  
+                                <h:outputText  styleClass="outputLabel" 
+                                               value="#{encomiendaBean.mail}"/>
+
+                                <h:outputText value="Dirección: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.adress}"/>
+
+                                <h:outputText value="Tipo: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.type}"/>
+
+                                <h:outputText value="Tamaño: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.volume}"/>
+
+                                <h:outputText value="Prioridad: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.priority}"/>
+
+                                <h:outputText value="Peso: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.weigth}"/>
+
+                                <h:outputText value="Ciudad de Origen: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.originCity}"/>
+
+                                <h:outputText value="Ciudad de Destino: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.destinationCity}"/>
+
+                                <h:outputText value="Documento Destinatario: "/>  
+                                <h:outputText value="#{encomiendaBean.idReceiver}"/>  
+                                
+                                <h:outputText value="Nombre Destinatario: " />
+                                <h:outputText value="#{encomiendaBean.nameReceiver}"/>
+                                
+                                <h:outputText value="Apellidos Destinatario: " />
+                                <h:outputText value="#{encomiendaBean.lastNamesReceiver}"/>
+                                
+                                <h:outputText value="Teléfono Destinatario: " />
+                                <h:outputText value="#{encomiendaBean.phoneReceiver}"/>
+                                
+                                <h:outputText value="Email Destinatario: " />
+                                <h:outputText value="#{encomiendaBean.mailReceiver}"/>
+                                
+                                <h:outputText value="Dirección Destinatario: " />
+                                <h:outputText value="#{encomiendaBean.adressReceiver}"/>
                             </h:panelGrid>  
 
-                            <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}"/>  
+                            <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}"/>
                         </p:panel>  
                     </p:tab> 
                 </p:wizard>
