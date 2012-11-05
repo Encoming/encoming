@@ -1,14 +1,49 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./WEB-INF/templates/default.xhtml">
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
-        title
+        Administración #{administratorBean.username}
     </ui:define>
 
     <ui:define name="content">
-        content
+        <div class="container">
+            <div class="row">
+                <div class="span3 offset0">
+                    <f:view>
+                        <h:form>   
+                            <p:menu> 
+                                <p:submenu label="Nueva Encomienda" >  
+                                    <p:menuitem value="Crear" icon="ui-icon-document" action="#{adminMenuBean.createEncoming}" ajax ="false"/>  
+                                </p:submenu>
+
+                                <p:submenu label="Administrar Personal" >  
+                                    <p:menuitem value="Nuevo empleado" icon="ui-icon-document" action="#{adminMenuBean.adminEmployee}" ajax ="false"/>
+                                    <p:menuitem value="Ver empleados" icon="ui-icon-arrowthick-1-s" action="#{adminMenuBean.seeEmployees}" ajax ="false"/>
+                                </p:submenu>  
+
+                                <p:submenu label="Administrar Sucursales">  
+                                    <p:menuitem value="Agregar sucursal" icon="ui-icon-home" action="#{adminMenuBean.adminPoints}" ajax ="false"/>  
+                                    <p:menuitem value="Administrar" icon="ui-icon-document" />  
+                                    <p:menuitem value="Rutas" icon="ui-icon-arrowthick-1-s" />
+                                </p:submenu>  
+
+                                <p:submenu label="Administrar Vehículos">  
+                                    <p:menuitem value="Nuevo Vehículo" icon="ui-icon-document" action="#{adminMenuBean.adminVehicles}" ajax ="false"/>   
+                                </p:submenu>
+                            </p:menu>  
+                        </h:form>
+                    </f:view>
+                </div>
+                <div class="span9 offset0">
+                    <ui:include src="#{adminMenuBean.page}"/>
+                </div>
+            </div>
+        </div>
     </ui:define>
 
 </ui:composition>

@@ -1,100 +1,99 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    
-    <h:head>
-        <title>Administración de Sucursales</title>
-    </h:head>
-    <h:body>     
-        <p:panel header="Administración de Sucursales:">
+    <ui:define name="title">
+        - Sucursales
+    </ui:define>
+
+    <ui:define name="content">
+        <p:panel header="Administración de Sucursales">
             <style type="text/css">
-                        .ui-growl {
-                            top: 10%;
-                        }
-                 </style>
-                <div class="hero-unit span6 offset0">
-                    <h3 style="color: #005580">Sucursales:</h3>
-                    
-                    <h:form id="pointsForm">
-                        <h:selectOneMenu id="point" required="true"
-                                         requiredMessage="Por favor selecciona uno">
-                            <f:selectItem itemLabel=""/>
-                            <f:selectItems value="#{pointBean.points}" />
-                            <f:validateLongRange minimum="1" />
-                        </h:selectOneMenu>
-                    </h:form>
-                </div>
-                
-                    <p:growl id="messages" showDetail="true" />
-                    <p:gmap id="gmap" center="#{pointBean.initialCoordinates}" zoom="16" type="HYBRID"   
-                            style="width:600px;height:400px"  
-                            model="#{pointBean.model}"   
-                            onPointClick="handlePointClick(event);"   
-                            widgetVar="map" />  
+                .ui-growl {
+                    top: 10%;
+                }
+            </style>
+            <div class="hero-unit span6 offset0">
+                <h3 style="color: #005580">Sucursales:</h3>
 
-                    <p:dialog header="Agregar punto" widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
-                        <h:form prependId="false">
-                            <p:growl id="mensajes" showDetail="true"/>
-                            <h:panelGrid columns="2">  
-                                <h:outputLabel for="title" value="Titulo:" />  
-                                <p:inputText id="title" value="#{pointBean.title}" />  
+                <h:form id="pointsForm">
+                    <h:selectOneMenu id="point" required="true"
+                                     requiredMessage="Por favor selecciona uno">
+                        <f:selectItem itemLabel=""/>
+                        <f:selectItems value="#{pointBean.points}" />
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
+                </h:form>
+            </div>
 
-                                <f:facet name="footer">  
-                                    <p:commandButton value="Add"   
-                                                     actionListener="#{pointBean.addPoint}"   
-                                                     update="mensajes"   
-                                                     oncomplete="markerAddComplete()"/>  
-                                    <p:commandButton value="Cancel" onclick="return cancel()" update=""/>  
-                                </f:facet>  
-                            </h:panelGrid>  
+            <p:growl id="messages" showDetail="true" />
+            <p:gmap id="gmap" center="#{pointBean.initialCoordinates}" zoom="16" type="HYBRID"   
+                    style="width:600px;height:400px"  
+                    model="#{pointBean.model}"   
+                    onPointClick="handlePointClick(event);"   
+                    widgetVar="map" />  
 
-                            <h:inputHidden id="lat" value="#{pointBean.lat}" />  
-                            <h:inputHidden id="lng" value="#{pointBean.lng}" />  
-                        </h:form>  
-                    </p:dialog>  
+            <p:dialog header="Agregar punto" widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
+                <h:form prependId="false">
+                    <p:growl id="mensajes" showDetail="true"/>
+                    <h:panelGrid columns="2">  
+                        <h:outputLabel for="title" value="Titulo:" />  
+                        <p:inputText id="title" value="#{pointBean.title}" />  
 
-                    <script type="text/javascript">  
-                        var currentMarker = null;  
+                        <f:facet name="footer">  
+                            <p:commandButton value="Add"   
+                                             actionListener="#{pointBean.addPoint}"   
+                                             update="mensajes"   
+                                             oncomplete="markerAddComplete()"/>  
+                            <p:commandButton value="Cancel" onclick="return cancel()" update=""/>  
+                        </f:facet>  
+                    </h:panelGrid>  
 
-                        function handlePointClick(event) {  
-                            if(currentMarker == null) {  
-                                document.getElementById('lat').value = event.latLng.lat();  
-                                document.getElementById('lng').value = event.latLng.lng();  
+                    <h:inputHidden id="lat" value="#{pointBean.lat}" />  
+                    <h:inputHidden id="lng" value="#{pointBean.lng}" />  
+                </h:form>  
+            </p:dialog>  
 
-                                currentMarker = new google.maps.Marker({  
-                                    position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())  
-                                });  
+            <script type="text/javascript">  
+                var currentMarker = null;  
 
-                                map.addOverlay(currentMarker);  
+                function handlePointClick(event) {  
+                    if(currentMarker == null) {  
+                        document.getElementById('lat').value = event.latLng.lat();  
+                        document.getElementById('lng').value = event.latLng.lng();  
 
-                                dlg.show();  
-                            }     
-                        }  
+                        currentMarker = new google.maps.Marker({  
+                            position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())  
+                        });  
 
-                        function markerAddComplete() {  
-                            var title = document.getElementById('title');  
-                            currentMarker.setTitle(title.value);  
-                            title.value = "";  
+                        map.addOverlay(currentMarker);  
 
-                            currentMarker = null;  
-                            dlg.hide();  
-                        }  
+                        dlg.show();  
+                    }     
+                }  
 
-                        function cancel() {  
-                            dlg.hide();  
-                            currentMarker.setMap(null);  
-                            currentMarker = null;  
+                function markerAddComplete() {  
+                    var title = document.getElementById('title');  
+                    currentMarker.setTitle(title.value);  
+                    title.value = "";  
 
-                            return false;  
-                        }  
-                    </script>
-        </p:panel> 
-                
-                
-    </h:body>
-</html>
+                    currentMarker = null;  
+                    dlg.hide();  
+                }  
+
+                function cancel() {  
+                    dlg.hide();  
+                    currentMarker.setMap(null);  
+                    currentMarker = null;  
+
+                    return false;  
+                }  
+            </script>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
