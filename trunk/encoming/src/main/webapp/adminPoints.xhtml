@@ -22,7 +22,7 @@
 
                 <h:form id="pointsForm">
                     <h:selectOneMenu id="point" required="true"
-                                     requiredMessage="Por favor selecciona uno">
+                                     requiredMessage="Selecciona un Punto:">
                         <f:selectItem itemLabel=""/>
                         <f:selectItems value="#{pointBean.points}" />
                         <f:validateLongRange minimum="1" />
@@ -37,19 +37,19 @@
                     onPointClick="handlePointClick(event);"   
                     widgetVar="map" />  
 
-            <p:dialog header="Agregar punto" widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
+            <p:dialog header="Agregar Punto:" widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
                 <h:form prependId="false">
                     <p:growl id="mensajes" showDetail="true"/>
                     <h:panelGrid columns="2">  
-                        <h:outputLabel for="title" value="Titulo:" />  
+                        <h:outputLabel for="title" value="Nombre:" />  
                         <p:inputText id="title" value="#{pointBean.title}" />  
 
                         <f:facet name="footer">  
-                            <p:commandButton value="Add"   
+                            <p:commandButton value="Agregar"   
                                              actionListener="#{pointBean.addPoint}"   
                                              update="mensajes"   
                                              oncomplete="markerAddComplete()"/>  
-                            <p:commandButton value="Cancel" onclick="return cancel()" update=""/>  
+                            <p:commandButton value="Cancelar" onclick="return cancel()" update=""/>  
                         </f:facet>  
                     </h:panelGrid>  
 
