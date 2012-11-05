@@ -196,12 +196,12 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `encoming`.`Point` (
   `idPoint` INT UNSIGNED NOT NULL ,
   `name` VARCHAR(45) NULL ,
-  `route` INT NOT NULL ,
+  `route` INT ,
   `latitude` DOUBLE NULL ,
-  `logitude` DOUBLE NULL ,
+  `longitude` DOUBLE NULL ,
   PRIMARY KEY (`idPoint`) ,
   UNIQUE INDEX `idPoint_UNIQUE` (`idPoint` ASC) ,
-  INDEX `fk_Point_Route1` (`route` ASC) ,
+  INDEX `fk_Point_Route1` (`rounte` ASC) ,
   CONSTRAINT `fk_Point_Route1`
     FOREIGN KEY (`route` )
     REFERENCES `encoming`.`Route` (`idRoute` )
