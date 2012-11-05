@@ -1,104 +1,108 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
-    
-    <h:head>
-        <title>Administración de Empleados</title>
-    </h:head>
-    <h:body>
-                <div class="span6 offset1">
-                    <div class="hero-unit">
-                        <f:view>
-                            <h:form id="addEmployeeForm">
-                                <h2><big>Nuevo Empleado:</big></h2>
-                                <p:separator/>
-                                <h:messages for="addEmployeeForm" class="alert alert-error"/>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="idPerson" required="true" value="#{addEmployeeBean.idPerson}"
-                                                     requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="idPerson" value="Id" />
-                                        <p:message id="idPersonMessage" for="idPerson" />
-                                    </div>
+    <ui:define name="title">
+        - Personal
+    </ui:define>
+
+    <ui:define name="content">
+        <p:panel header="Administración de Personale">
+            <div class="span6 offset1">
+                <div class="hero-unit">
+                    <f:view>
+                        <h:form id="addEmployeeForm">
+                            <h2><big>Nuevo Empleado:</big></h2>
+                            <p:separator/>
+                            <h:messages for="addEmployeeForm" class="alert alert-error"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="idPerson" required="true" value="#{addEmployeeBean.idPerson}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="idPerson" value="Id" />
+                                    <p:message id="idPersonMessage" for="idPerson" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="name" required="true" value="#{addEmployeeBean.name}"
-                                                     requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="name" value="Nombre" />
-                                        <p:message id="nameMessage" for="name" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="name" required="true" value="#{addEmployeeBean.name}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="name" value="Nombre" />
+                                    <p:message id="nameMessage" for="name" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="lastName" required="true" value="#{addEmployeeBean.lastName}"
-                                                     requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="lastName" value="Apellido" />
-                                        <p:message id="lastNameMessage" for="lastName" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="lastName" required="true" value="#{addEmployeeBean.lastName}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="lastName" value="Apellido" />
+                                    <p:message id="lastNameMessage" for="lastName" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="mail" required="true" value="#{addEmployeeBean.mail}"
-                                                     requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="mail" value="Email" />
-                                        <p:message id="mailMessage" for="mail" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="mail" required="true" value="#{addEmployeeBean.mail}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="mail" value="Email" />
+                                    <p:message id="mailMessage" for="mail" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="phone" required="true" value="#{addEmployeeBean.phone}"
-                                                     requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="phone" value="Teléfono" />
-                                        <p:message id="phoneMessage" for="phone" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="phone" required="true" value="#{addEmployeeBean.phone}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="phone" value="Teléfono" />
+                                    <p:message id="phoneMessage" for="phone" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="idAdministrator" required="true" value="#{addEmployeeBean.idAdministrator}"
-                                                     requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="idAdministrator" value="Id de Administrador" />
-                                        <p:message id="idAdministratorMessage" for="idAdministrator" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="idAdministrator" required="true" value="#{addEmployeeBean.idAdministrator}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="idAdministrator" value="Id de Administrador" />
+                                    <p:message id="idAdministratorMessage" for="idAdministrator" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:inputText id="username" required="true" value="#{addEmployeeBean.username}"
-                                                    requiredMessage="Por favor completa este campo"/>
-                                        <p:watermark for="username" value="Nombre de Usuario" />
-                                        <p:message id="usernameMessage" for="username" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="username" required="true" value="#{addEmployeeBean.username}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="username" value="Nombre de Usuario" />
+                                    <p:message id="usernameMessage" for="username" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:password id="password" required="true" requiredMessage="Por favor completa este campo" 
-                                                    value="#{addEmployeeBean.password}"
-                                                    feedback="true" promptLabel="Usa una contraseña segura" inline="true" 
-                                                    weakLabel="Debil" goodLabel="Buena" strongLabel="Segura" 
-                                                    match="password" />
-                                        <p:watermark for="password" value="Contraseña" />
-                                        <p:message id="passwordMessage" for="password" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:password id="password" required="true" requiredMessage="Por favor completa este campo" 
+                                                value="#{addEmployeeBean.password}"
+                                                feedback="true" promptLabel="Usa una contraseña segura" inline="true" 
+                                                weakLabel="Debil" goodLabel="Buena" strongLabel="Segura" 
+                                                match="password" />
+                                    <p:watermark for="password" value="Contraseña" />
+                                    <p:message id="passwordMessage" for="password" />
                                 </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <p:watermark for="password" value="Nuevamente la contraseña" />
-                                        <p:password id="passwordR" required="true" value="#{addEmployeeBean.password}"
-                                                    requiredMessage="Por favor completa este campo"/>
-                                        <p:message id="passwordRMessage" for="passwordR" />
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:watermark for="password" value="Nuevamente la contraseña" />
+                                    <p:password id="passwordR" required="true" value="#{addEmployeeBean.password}"
+                                                requiredMessage="Por favor completa este campo"/>
+                                    <p:message id="passwordRMessage" for="passwordR" />
                                 </div>
-                                
-                                <div class="form-actions">
-                                    <h:commandButton action="#{addEmployeeBean.addEmployee()}" value="Guardar" class="btn btn-large btn-primary" />
-                                </div>
-                            </h:form>
-                        </f:view>
-                    </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <h:commandButton action="#{addEmployeeBean.addEmployee()}" value="Guardar" class="btn btn-large btn-primary" />
+                            </div>
+                        </h:form>
+                    </f:view>
                 </div>
-    </h:body>
-</html>
+            </div>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
