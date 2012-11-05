@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>Crear Nueva Encomienda</title>
+    </h:head>
+    
+    <h:body>
+        <h:form>
+            <p:panel header="Crear una nueva encomienda:">
+                <p:growl id="growl" sticky="true" showDetail="true"/>  
+                <p:wizard id="wizard"
+                          flowListener="#{encomiendaBean.onFlowProcess}"> >
+                    <p:tab id="tab1" title="Datos cliente">
+                        <p:panel header="Datos Personales del Cliente">
+                            <p:messages errorClass="error"/>
+                            <h:panelGrid columns="2" columnClasses="label , value" styleClass="grid">
+
+                                <h:outputLabel for="name" value="Nombres: *" styleClass="requiredLb1"/>
+                                <h:inputText id="name" required="true" value="#{encomiendaBean.name}"
+                                             requiredMessage="¡Por favor ingrese los Nombres!" validatorMessage="El Nombre es incorrecto">
+                                    <f:validateLength minimum="4" />
+                                </h:inputText>
+                                <h:outputLabel for="lastNames" value="Apellidos: *" styleClass="requiredLb1"/>
+                                <h:inputText id="lastNames" required="true" value="#{encomiendaBean.lastNames}"
+                                             requiredMessage="¡Por favor ingrese los Apellidos!">
+                                    <f:validateLength minimum="2" />
+                                </h:inputText>
+                                <h:outputLabel for="idClient" value="Documento: *" />
+                                <h:inputText id="idClient" required="true" value="#{encomiendaBean.idPerson}"
+                                             requiredMessage="¡Por favor ingresa un Documento!" validatorMessage="El documento es incorrecto, por favor verifiquelo">
+                                    <f:validateLongRange minimum="700000" maximum="100000000000"/>                                
+                                </h:inputText>    
+                                <h:outputLabel for="mail" value="E-mail :*"/>
+                                <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}" >
+                                    <f:validator validatorId="emailValidatorBean" />
+                                </h:inputText> 
+                                <h:outputLabel for="phone"  value="Teléfono"/>
+                                <p:inputMask id="phone"
+                                             mask="9999999" 
+                                             value="#{encomiendaBean.phone}"
+                                             size="7" style="optionalLb1"/>
+                                <h:outputLabel for="adress" value="Dirección: *"/>
+                                <h:inputText id="adress" required="true" value="#{encomiendaBean.adress}"
+                                             requiredMessage="¡Por favor ingrese una Dirección!">
+                                    <f:validateLength minimum="8" />
+                                </h:inputText>    
+                            </h:panelGrid>  
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="tab2" title="Datos paquete">
+                        <p:panel header="Datos del paquete">
+                            <p:messages errorClass="error"/>
+                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                                <h:outputLabel for="type" value="Tipo de paquete: *" />
+                                <p:selectOneMenu id="type" value="#{encomiendaBean.type}">
+                                    <f:selectItem itemLabel="Sobre" itemValue="1" />
+                                    <f:selectItem itemLabel="Caja" itemValue="2" />
+                                    <f:selectItem itemLabel="Otro" itemValue="3" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="volume" value="Tamaño: *" />
+                                <h:inputText id="volume" required="true" value="#{encomiendaBean.volume}"
+                                             requiredMessage="¡Por favor ingrese el Tamaño del paquete!" />
+                                <h:outputLabel for="priority" value="Prioridad: *" />
+                                <p:selectOneMenu id="priority" value="#{encomiendaBean.priority}">
+                                    <f:selectItem itemLabel="Alta" itemValue="1" />
+                                    <f:selectItem itemLabel="Moderada" itemValue="2" />
+                                    <f:selectItem itemLabel="Baja" itemValue="3" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="weigth" value="Peso: *" />
+                                <h:inputText id="weigth" required="true" value="#{encomiendaBean.weigth}"
+                                             requiredMessage="¡Por favor ingrese la Prioridad del paquete!" >
+                                    <f:validateDoubleRange minimum="20.00" maximum="1000.00" />
+                                </h:inputText>
+                                <h:outputLabel for="originCity" value="Ciudad de Origen: *" />
+                                <p:selectOneMenu id="originCity" value="#{encomiendaBean.originCity}">
+                                    <f:selectItem itemLabel="Bogotá" itemValue="1" />
+                                    <f:selectItem itemLabel="Cali" itemValue="2" />
+                                    <f:selectItem itemLabel="Medellín" itemValue="3" />
+                                    <f:selectItem itemLabel="Cartagena" itemValue="4" />
+                                    <f:selectItem itemLabel="Barranquilla" itemValue="5"/>
+                                </p:selectOneMenu>
+                                <h:outputLabel for="destinationCity" value="Ciudad de Destino: *" validator=""/>
+                                <p:selectOneMenu id="destinationCity" value="#{encomiendaBean.destinationCity}">
+                                    <f:selectItem itemLabel="Bogotá" itemValue="1" />
+                                    <f:selectItem itemLabel="Cali" itemValue="2" />
+                                    <f:selectItem itemLabel="Medellín" itemValue="3" />
+                                    <f:selectItem itemLabel="Cartagena" itemValue="4" />
+                                    <f:selectItem itemLabel="Barranquilla" itemValue="5" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="tab3" title="Destinatario">
+                        <p:panel header="Datos Personales del Destinatario">
+                            <p:messages errorClass="error"/>
+                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                                <h:outputLabel for="idReceiver" value="Documento: *" />
+                                <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
+                                             requiredMessage="¡Por favor ingresa un Documento!">
+                                    <f:validateLongRange minimum="700000" maximum="100000000000"/> 
+                                </h:inputText>    
+                                <h:outputLabel for="nameReceiver" value="Nombres: *" />
+                                <h:inputText id="nameReceiver" required="true" value="#{encomiendaBean.nameReceiver}"
+                                             requiredMessage="¡Por favor ingresa los Nombres!" validatorMessage="El Nombre es incorrecto">
+                                    <f:validateLength minimum="4" />
+                                </h:inputText>    
+                                <h:outputLabel for="lastNamesReceiver" value="Apellidos: *"/>
+                                <h:inputText id="lastNamesReceiver" required="true" value="#{encomiendaBean.lastNamesReceiver}"
+                                             requiredMessage="¡Por favor ingresa los Apellidos!">
+                                    <f:validateLength minimum="4" />
+                                </h:inputText>    
+                                <h:outputLabel for="phoneReceiver" value="Telefono" />
+                                <p:inputMask id="phoneReceiver"
+                                             mask="9999999" 
+                                             value="#{encomiendaBean.phoneReceiver}"
+                                             size="7" style="optionalLb1"/>
+                                <h:outputLabel for="mailReceiver" value="E-mail:*" />
+                                <h:inputText id="mailReceiver" required="false" value="#{encomiendaBean.mailReceiver}" >
+                                    <f:validator validatorId="emailValidatorBean" />
+                                </h:inputText> 
+                                <h:outputLabel for="adressReceiver" value="Dirección: *" />
+                                <h:inputText id="adressReceiver" required="true" value="#{encomiendaBean.adressReceiver}" >
+                                    <f:validateLength minimum="8" />
+                                </h:inputText>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="verification" title=" Verificación">  
+                        <p:panel header="Verificación">  
+
+                            <h:panelGrid id="verificar" columns="2">  
+                                <h:outputText value="Nombre: " />  
+                                <h:outputText styleClass="outputLabel"  
+                                              value="#{encomiendaBean.name}" />  
+
+                                <h:outputText value="Apellidos: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.lastNames}"/> 
+
+                                <h:outputText value="Teléfono: " />  
+                                <h:outputText  styleClass="outputLabel"  
+                                               value="#{encomiendaBean.emptyphone(phone)}"/>
+
+                                <h:outputText />  
+                                <h:outputText />  
+                            </h:panelGrid>  
+
+                            <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}"/>  
+                        </p:panel>  
+                    </p:tab> 
+                </p:wizard> 
+            </p:panel>
+        </h:form>
+    </h:body> 
+</html>
