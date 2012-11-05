@@ -31,33 +31,29 @@
                             <h:form>   
                                 <p:menu> 
                                       <p:submenu label="Nueva Encomienda" >  
-                                          <p:menuitem value="Crear" icon="ui-icon-document" actionListener="#{adminMenuBean.createEncoming}" ajax ="false"/>  
+                                          <p:menuitem value="Crear" icon="ui-icon-document" action="#{adminMenuBean.createEncoming}" ajax ="false"/>  
                                        </p:submenu>
 
                                       <p:submenu label="Administrar Personal" >  
-                                          <p:menuitem value="Nuevo empleado" icon="ui-icon-document" actionListener="#{adminMenuBean.adminEmployee}" ajax ="false"/>
-                                          <p:menuitem value="Ver empleados" icon="ui-icon-arrowthick-1-s" actionListener="#{adminMenuBean.seeEmployees}" ajax ="false"/>
+                                          <p:menuitem value="Nuevo empleado" icon="ui-icon-document" action="#{adminMenuBean.adminEmployee}" ajax ="false"/>
+                                          <p:menuitem value="Ver empleados" icon="ui-icon-arrowthick-1-s" action="#{adminMenuBean.seeEmployees}" ajax ="false"/>
                                       </p:submenu>  
 
                                       <p:submenu label="Administrar Sucursales">  
-                                          <p:menuitem value="Agregar sucursal" icon="ui-icon-home" actionListener="#{adminMenuBean.adminPoints}" ajax ="false"/>  
+                                          <p:menuitem value="Agregar sucursal" icon="ui-icon-home" action="#{adminMenuBean.adminPoints}" ajax ="false"/>  
                                           <p:menuitem value="Administrar" icon="ui-icon-document" />  
                                           <p:menuitem value="Rutas" icon="ui-icon-arrowthick-1-s" />
                                       </p:submenu>  
 
                                       <p:submenu label="Administrar Vehículos">  
-                                          <p:menuitem value="Nuevo Vehículo" icon="ui-icon-document" actionListener="#{adminMenuBean.adminVehicles}" ajax ="false"/>   
+                                          <p:menuitem value="Nuevo Vehículo" icon="ui-icon-document" action="#{adminMenuBean.adminVehicles}" ajax ="false"/>   
                                       </p:submenu>
                                </p:menu>  
                             </h:form>
                         </f:view>
                 </div>
                 <div class="span9 offset0">
-                     <h:form>
-                         <p:layoutUnit position="left">  
-                             <ui:include src="#{adminMenuBean.page}" />
-                         </p:layoutUnit> 
-                     </h:form>
+                        <ui:include src="#{adminMenuBean.page}"/>
                 </div>
              </div>
         </div>
