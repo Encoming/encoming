@@ -2,11 +2,14 @@ package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
+import com.encoming.encoming.businesslogic.facade.PackageFacade;
+import com.encoming.encoming.vo.ClientVo;
 import com.encoming.encoming.vo.PersonVo;
+import com.encoming.encoming.vo.PackageVo;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
@@ -16,17 +19,16 @@ import org.primefaces.event.FlowEvent;
  * @author Andrezz
  */
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class EncomiendaBean {
-        
-    private boolean skip;
-    private static final Logger logger = Logger.getLogger(EncomiendaBean.class.getName()); 
     
+    private boolean skip;
+    private static Logger logger = Logger.getLogger(EncomiendaBean.class.getName());
     private String name;
     private String lastNames;
-    private String idPerson;
+    private Integer idPerson;
     private String mail;
-    private String phone;
+    private Integer phone;
     private String adress;
     
     private String type;
@@ -36,83 +38,66 @@ public class EncomiendaBean {
     private String originCity;
     private String destinationCity;
     
-    private String idReceiver;
+    private Integer idReceiver;
     private String nameReceiver;
     private String lastNamesReceiver;
-    private String phoneReceiver;
+    private Integer phoneReceiver;
     private String mailReceiver;
     private String adressReceiver;
     
-    
-    public void addPerson(ActionEvent actionEvent) {
+     public void addPerson(ActionEvent actionEvent) {
 
+        //        Persona que envia el paquete
         PersonVo personVo = new PersonVo();
-        PersonVo personRVo = new PersonVo();
-        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
-        
-//        Persona que envia el paquete
         personVo.setName(getName());
         personVo.setLastName(getLastNames());
-        personVo.setIdPerson(Integer.parseInt(getIdPerson()));
+        personVo.setIdPerson(getIdPerson());
         personVo.setMail(getMail());
-        personVo.setPhone(Integer.parseInt(emptyphone(getPhone())));
+        personVo.setPhone(getPhone());
         personVo.setAdress(getAdress());
+        createperson(personVo);
         
+        ClientVo clientVo = new ClientVo();
+
 //        Persona que recibe el paquete
+        PersonVo personRVo = new PersonVo();
         personRVo.setName(getNameReceiver());
         personRVo.setLastName(getLastNamesReceiver());
-        personRVo.setIdPerson(Integer.parseInt(getIdReceiver()));
+        personRVo.setIdPerson(getIdReceiver());
         personRVo.setMail(getMailReceiver());
-        personRVo.setPhone(Integer.parseInt(emptyphone(getPhoneReceiver())));
+        personRVo.setPhone(getPhoneReceiver());
         personRVo.setAdress(getAdressReceiver());
-
-        personFacade.persist(personVo);
-        //personFacade.persist(personRVo);
+        createperson(personRVo);
         
-        addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha agregado una nueva Persona",
-                "Nombre:" + name
-                + "\n\nApellido:" + lastNames
-                + ", :" + idPerson));
+        //   Persistencia del paquete q se va a enviar        
+        PackageVo packageVo = new PackageVo();
+        //packageVo.setIdPackage(0);
+        packageVo.setPriority(getPriority());
+        packageVo.setType(getType());
+        packageVo.setVolume(getVolume());
+        packageVo.setWeight(Float.parseFloat(getWeigth()));
+        PackageFacade packageFacade = FacadeFactory.getInstance().getPackageFacade();
+        packageFacade.persist(packageVo);
     }
+
+    public void createperson(PersonVo person) {
+        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+        personFacade.persist(person);
+    }
+
+    public void createpersonx(PersonVo person) {
+        PersonFacade personFacadex = FacadeFactory.getInstance().getPersonFacade();
+        personFacadex.persist(person);
+    }  
     
-    public void addMessage(FacesMessage message) {
-        FacesContext.getCurrentInstance().addMessage(null, message);
+    public static Logger getLogger() {
+        return logger;
     }
-           
-    public String onFlowProcess(FlowEvent event) {  
-        logger.info("Current wizard step:" + event.getOldStep());  
-        logger.info("Next step:" + event.getNewStep());  
-          
-        if(skip) {  
-            skip = false;   //reset in case user goes back  
-            return "confirm";  
-        }  
-        else {  
-            return event.getNewStep();  
-        }  
-    }
+
+    public static void setLogger(Logger aLogger) {
+        logger = aLogger;
+    }    
     
-    public String emptyphone(String phone){
-        String hphone="";
-        if(phone.length()<6){
-            hphone="0000000";
-        } else{
-            hphone = phone;
-        }
-        return hphone;
-    }
-
-    public EncomiendaBean() {
-    }
-
-    public boolean isSkip() {
-        return skip;
-    }
-
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
-
     public String getName() {
         return name;
     }
@@ -129,11 +114,11 @@ public class EncomiendaBean {
         this.lastNames = lastNames;
     }
 
-    public String getIdPerson() {
+    public Integer getIdPerson() {
         return idPerson;
     }
 
-    public void setIdPerson(String idPerson) {
+    public void setIdPerson(Integer idPerson) {
         this.idPerson = idPerson;
     }
 
@@ -145,11 +130,11 @@ public class EncomiendaBean {
         this.mail = mail;
     }
 
-    public String getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 
@@ -193,11 +178,27 @@ public class EncomiendaBean {
         this.weigth = weigth;
     }
 
-    public String getIdReceiver() {
+    public String getOriginCity() {
+        return originCity;
+    }
+
+    public void setOriginCity(String originCity) {
+        this.originCity = originCity;
+    }
+
+    public String getDestinationCity() {
+        return destinationCity;
+    }
+
+    public void setDestinationCity(String destinationCity) {
+        this.destinationCity = destinationCity;
+    }
+
+    public Integer getIdReceiver() {
         return idReceiver;
     }
 
-    public void setIdReceiver(String idReceiver) {
+    public void setIdReceiver(Integer idReceiver) {
         this.idReceiver = idReceiver;
     }
 
@@ -217,11 +218,11 @@ public class EncomiendaBean {
         this.lastNamesReceiver = lastNamesReceiver;
     }
 
-    public String getPhoneReceiver() {
+    public Integer getPhoneReceiver() {
         return phoneReceiver;
     }
 
-    public void setPhoneReceiver(String phoneReceiver) {
+    public void setPhoneReceiver(Integer phoneReceiver) {
         this.phoneReceiver = phoneReceiver;
     }
 
@@ -241,20 +242,32 @@ public class EncomiendaBean {
         this.adressReceiver = adressReceiver;
     }
 
-    public String getOriginCity() {
-        return originCity;
+   
+    public void addMessage(FacesMessage message) {
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void setOriginCity(String originCity) {
-        this.originCity = originCity;
+    public String onFlowProcess(FlowEvent event) {
+        getLogger().info("Current wizard step:" + event.getOldStep());
+        getLogger().info("Next step:" + event.getNewStep());
+
+        if (isSkip()) {
+            setSkip(false);   //reset in case user goes back  
+            return "confirm";
+        } else {
+            return event.getNewStep();
+        }
     }
 
-    public String getDestinationCity() {
-        return destinationCity;
+    public EncomiendaBean() {
     }
 
-    public void setDestinationCity(String destinationCity) {
-        this.destinationCity = destinationCity;
+    public boolean isSkip() {
+        return skip;
     }
-      
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+
 }

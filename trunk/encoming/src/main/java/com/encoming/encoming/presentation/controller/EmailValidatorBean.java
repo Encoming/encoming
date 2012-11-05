@@ -39,7 +39,7 @@ public class EmailValidatorBean implements Validator {
         }
         if (!valid) {
             FacesMessage message = new FacesMessage(
-                    FacesMessage.SEVERITY_ERROR, "¡Dirección Email Inválida, Ingrese un Dominio Valido!",
+                    FacesMessage.SEVERITY_ERROR, "¡Dirección Email Inválida, Ingrese un Dominio Válido!",
                     "¡La dirección de correo electrónico que ha introducido no es válido!");
             throw new ValidatorException(message);
         }

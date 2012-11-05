@@ -36,6 +36,9 @@ public class DAOFactory {
     public VehicleDAO getVehicleDAO() {
         return VehicleDAO.getInstance();
     }
-
+    
+    public PackageDAO getPackageDAO(){
+        return PackageDAO.getInstance();
+    }
 
 }

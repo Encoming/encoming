@@ -21,6 +21,9 @@ public class PackageVo {
     private float weight;
     private List<ShippingVo> shippingList;
     private List<InvoiceVo> invoiceList;
+    
+     public PackageVo() {
+     }
 
     /**
      * @return the idPackage

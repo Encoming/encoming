@@ -34,4 +34,8 @@ public class ServiceFactory {
     public DriverService getDriverService() {
         return DriverService.getInstance();
     }
+    
+    public PackageService getPackageService(){
+        return PackageService.getInstance();
+    }
 }

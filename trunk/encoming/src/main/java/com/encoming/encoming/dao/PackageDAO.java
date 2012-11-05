@@ -4,7 +4,9 @@
  */
 package com.encoming.encoming.dao;
 
+import com.encoming.encoming.entity.Package;
 import java.util.List;
+import javax.management.Query;
 import javax.persistence.EntityManager;
 
 /**
@@ -24,22 +26,26 @@ public class PackageDAO implements IDAO<Package>{
     
     @Override
     public void persist(Package entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }    
     
     @Override
-    public Package find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Package find(Object idA, EntityManager em) {
+        Integer id = (Integer) idA;
+        javax.persistence.Query query = em.createNamedQuery("Package.findByIdPackage")
+                .setParameter("idPackage", id);
+        return (Package)query.getSingleResult();
     }
     
     @Override
     public void update(Package entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.merge(entity);
     }
     
     @Override
     public void delete(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Package packageA = find(id,em);
+        em.remove(packageA);
     }
     
     @Override
