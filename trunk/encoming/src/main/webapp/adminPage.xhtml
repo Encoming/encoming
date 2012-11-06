@@ -2,6 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./WEB-INF/templates/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
@@ -29,7 +30,7 @@
                                 <p:submenu label="Administrar Sucursales">  
                                     <p:menuitem value="Agregar sucursal" icon="ui-icon-home" action="#{adminMenuBean.adminPoints}" ajax ="false"/>  
                                     <p:menuitem value="Administrar" icon="ui-icon-document" />  
-                                    <p:menuitem value="Rutas" icon="ui-icon-arrowthick-1-s" />
+                                    <p:menuitem value="Rutas" icon="ui-icon-arrowthick-1-s" action="#{adminMenuBean.adminRoutes}" ajax ="false"/>
                                 </p:submenu>  
 
                                 <p:submenu label="Administrar Vehículos">  

@@ -41,6 +41,10 @@ public class AdminMenuBean {
         page = "/adminPoints.xhtml";
     }
     
+    public void adminRoutes(){
+        page = "/adminRoutes.html";
+    }
+    
     public void adminVehicles(){
         page = "/adminVehicles.xhtml";
     }
