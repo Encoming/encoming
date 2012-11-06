@@ -73,8 +73,7 @@ public class EncomiendaBean {
 
         //   Persistencia del paquete que se va a enviar        
         PackageVo packageVo = new PackageVo();
-        idPackage=123;
-        //packageVo.setIdPackage(idPackage);
+        //packageVo.setIdPackage(0);
         packageVo.setPriority(getPriority());
         packageVo.setType(getType());
         packageVo.setVolume(getVolume());

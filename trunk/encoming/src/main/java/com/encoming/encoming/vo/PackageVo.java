@@ -4,8 +4,6 @@
  */
 package com.encoming.encoming.vo;
 
-import com.encoming.encoming.entity.Invoice;
-import com.encoming.encoming.entity.Shipping;
 import java.util.List;
 
 /**
