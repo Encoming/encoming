@@ -21,9 +21,10 @@ import org.primefaces.event.FlowEvent;
 @ManagedBean
 @ApplicationScoped
 public class EncomiendaBean {
-    
+
     private boolean skip;
     private static Logger logger = Logger.getLogger(EncomiendaBean.class.getName());
+    
     private String name;
     private String lastNames;
     private Integer idPerson;
@@ -31,10 +32,11 @@ public class EncomiendaBean {
     private Integer phone;
     private String adress;
     
+    private Integer idPackage;
     private String type;
     private String volume;
     private String priority;
-    private String weigth;
+    private float weigth;
     private String originCity;
     private String destinationCity;
     
@@ -44,8 +46,8 @@ public class EncomiendaBean {
     private Integer phoneReceiver;
     private String mailReceiver;
     private String adressReceiver;
-    
-     public void addPerson(ActionEvent actionEvent) {
+
+    public void addPerson(ActionEvent actionEvent) {
 
         //        Persona que envia el paquete
         PersonVo personVo = new PersonVo();
@@ -56,7 +58,7 @@ public class EncomiendaBean {
         personVo.setPhone(getPhone());
         personVo.setAdress(getAdress());
         createperson(personVo);
-        
+
         ClientVo clientVo = new ClientVo();
 
 //        Persona que recibe el paquete
@@ -68,16 +70,17 @@ public class EncomiendaBean {
         personRVo.setPhone(getPhoneReceiver());
         personRVo.setAdress(getAdressReceiver());
         createperson(personRVo);
-        
-        //   Persistencia del paquete q se va a enviar        
+
+        //   Persistencia del paquete que se va a enviar        
         PackageVo packageVo = new PackageVo();
-        //packageVo.setIdPackage(0);
+        idPackage=123;
+        //packageVo.setIdPackage(idPackage);
         packageVo.setPriority(getPriority());
         packageVo.setType(getType());
         packageVo.setVolume(getVolume());
-        packageVo.setWeight(Float.parseFloat(getWeigth()));
-        PackageFacade packageFacade = FacadeFactory.getInstance().getPackageFacade();
-        packageFacade.persist(packageVo);
+        packageVo.setWeight(getWeigth());
+        createpackage(packageVo);
+
     }
 
     public void createperson(PersonVo person) {
@@ -85,19 +88,20 @@ public class EncomiendaBean {
         personFacade.persist(person);
     }
 
-    public void createpersonx(PersonVo person) {
-        PersonFacade personFacadex = FacadeFactory.getInstance().getPersonFacade();
-        personFacadex.persist(person);
-    }  
-    
+    public void createpackage(PackageVo paquete) {
+        PackageFacade packageFacade = FacadeFactory.getInstance().getPackageFacade();
+        packageFacade.persist(paquete);
+
+    }
+
     public static Logger getLogger() {
         return logger;
     }
 
     public static void setLogger(Logger aLogger) {
         logger = aLogger;
-    }    
-    
+    }
+
     public String getName() {
         return name;
     }
@@ -170,11 +174,11 @@ public class EncomiendaBean {
         this.priority = priority;
     }
 
-    public String getWeigth() {
+    public float getWeigth() {
         return weigth;
     }
 
-    public void setWeigth(String weigth) {
+    public void setWeigth(float weigth) {
         this.weigth = weigth;
     }
 
@@ -242,7 +246,6 @@ public class EncomiendaBean {
         this.adressReceiver = adressReceiver;
     }
 
-   
     public void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
@@ -269,5 +272,4 @@ public class EncomiendaBean {
     public void setSkip(boolean skip) {
         this.skip = skip;
     }
-
 }
