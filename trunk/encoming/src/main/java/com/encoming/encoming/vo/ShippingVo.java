@@ -21,9 +21,17 @@ public class ShippingVo {
     private Route routeidRoute;
     private Integer packageidPackage;
     private Integer vehicle;
-    private Integer clientidClient;
     private Date sendedDate;
     private Date arrivedDate;
+    private Integer personidPerson;
+
+    public Integer getPersonidPerson() {
+        return personidPerson;
+    }
+
+    public void setPersonidPerson(Integer personidPerson) {
+        this.personidPerson = personidPerson;
+    }
     private List<InvoiceVo> invoiceList;
 
     /**
@@ -94,20 +102,6 @@ public class ShippingVo {
      */
     public void setVehicle(Integer vehicle) {
         this.vehicle = vehicle;
-    }
-
-    /**
-     * @return the clientidClient
-     */
-    public Integer getClientidClient() {
-        return clientidClient;
-    }
-
-    /**
-     * @param clientidClient the clientidClient to set
-     */
-    public void setClientidClient(Integer clientidClient) {
-        this.clientidClient = clientidClient;
     }
 
     /**

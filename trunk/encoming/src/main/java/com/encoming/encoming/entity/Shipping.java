@@ -68,9 +68,9 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         @JoinColumn(name = "Vehicle_plateLetters", referencedColumnName = "plateLetters")})
     @ManyToOne(optional = false)
     private Vehicle vehicle;
-    @JoinColumn(name = "Client_idClient", referencedColumnName = "idClient")
+    @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)
-    private Client clientidClient;
+    private Person personidPerson;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shippingidShipping")
     private List<Invoice> invoiceList;
 
@@ -126,12 +126,12 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         this.vehicle = vehicle;
     }
 
-    public Client getClientidClient() {
-        return clientidClient;
+    public Person getPersonidPerson() {
+        return personidPerson;
     }
 
-    public void setClientidClient(Client clientidClient) {
-        this.clientidClient = clientidClient;
+    public void setPersonidPerson(Person personidPerson) {
+        this.personidPerson = personidPerson;
     }
 
     public Date getSendedDate() {
@@ -194,7 +194,7 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         shippingVo.setRouteidRoute(getRouteidRoute());
         shippingVo.setPackageidPackage(getPackageidPackage().getIdPackage());
         shippingVo.setVehicle(getVehicle().getIdVehicle());
-        shippingVo.setClientidClient(getClientidClient().getIdClient());
+        shippingVo.setPersonidPerson(getPersonidPerson().getIdPerson());
         List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
         for(Invoice entity : getInvoiceList()){
             invoiceVos.add(entity.toVo());

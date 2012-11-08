@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.vo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class PackageVo {
     private String volume;
     private String priority;
     private float weight;
+    private Date received_packet;
     private List<ShippingVo> shippingList;
     private List<InvoiceVo> invoiceList;
     
@@ -119,6 +121,14 @@ public class PackageVo {
      */
     public void setInvoiceList(List<InvoiceVo> invoiceList) {
         this.invoiceList = invoiceList;
+    }
+    
+    public Date getReceived_packet() {
+        return received_packet;
+    }
+
+    public void setReceived_packet(Date received_packet) {
+        this.received_packet = received_packet;
     }
     
 }

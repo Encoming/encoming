@@ -78,8 +78,6 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
     @NotNull
     @Column(name = "idVehicle")
     private Integer idVehicle;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicleidVehicle")
-    private List<Encoming> encomingList;
     @JoinColumn(name = "driver", referencedColumnName = "idDriver")
     @ManyToOne(optional = false)
     private Driver driver;
@@ -167,14 +165,6 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
 
     public void setIdVehicle(Integer idVehicle) {
         this.idVehicle = idVehicle;
-    }
-
-    public List<Encoming> getEncomingList() {
-        return encomingList;
-    }
-
-    public void setEncomingList(List<Encoming> encomingList) {
-        this.encomingList = encomingList;
     }
 
     public Driver getDriver() {

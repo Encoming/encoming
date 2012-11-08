@@ -64,9 +64,7 @@ public class Invoice implements Serializable, IEntity<InvoiceVo> {
     @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
     @ManyToOne(optional = false)
     private Package packageidPackage;
-    @JoinColumn(name = "encoming", referencedColumnName = "idEncoming")
-    @ManyToOne(optional = false)
-    private Encoming encoming;
+
 
     public Invoice() {
     }
@@ -128,14 +126,6 @@ public class Invoice implements Serializable, IEntity<InvoiceVo> {
 
     public void setPackageidPackage(Package packageidPackage) {
         this.packageidPackage = packageidPackage;
-    }
-
-    public Encoming getEncoming() {
-        return encoming;
-    }
-
-    public void setEncoming(Encoming encoming) {
-        this.encoming = encoming;
     }
     
     @Override

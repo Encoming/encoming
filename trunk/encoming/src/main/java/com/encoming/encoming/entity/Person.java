@@ -63,8 +63,6 @@ public class Person implements Serializable ,IEntity<PersonVo> {
     @Column(name = "adress")
     private String adress;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
-    private List<Client> clientList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
     private List<Administrator> administratorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
     private List<Driver> driverList;
@@ -128,15 +126,6 @@ public class Person implements Serializable ,IEntity<PersonVo> {
 
     public void setAdress(String adress) {
         this.adress = adress;
-    }
-
-    @XmlTransient
-    public List<Client> getClientList() {
-        return clientList;
-    }
-
-    public void setClientList(List<Client> clientList) {
-        this.clientList = clientList;
     }
 
     @XmlTransient

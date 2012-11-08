@@ -1,11 +1,12 @@
 package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
-import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.businesslogic.facade.PackageFacade;
-import com.encoming.encoming.vo.ClientVo;
-import com.encoming.encoming.vo.PersonVo;
+import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.vo.PackageVo;
+import com.encoming.encoming.vo.PersonVo;
+import com.encoming.encoming.vo.ShippingVo;
+import java.util.Date;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
@@ -24,7 +25,6 @@ public class EncomiendaBean {
 
     private boolean skip;
     private static Logger logger = Logger.getLogger(EncomiendaBean.class.getName());
-    
     private String name;
     private String lastNames;
     private Integer idPerson;
@@ -32,7 +32,6 @@ public class EncomiendaBean {
     private Integer phone;
     private String adress;
     
-    private Integer idPackage;
     private String type;
     private String volume;
     private String priority;
@@ -46,10 +45,15 @@ public class EncomiendaBean {
     private Integer phoneReceiver;
     private String mailReceiver;
     private String adressReceiver;
+    
+    private Date fecha= new Date();
+
+    public EncomiendaBean() {
+    }
 
     public void addPerson(ActionEvent actionEvent) {
 
-        //        Persona que envia el paquete
+        //Persona que envia el paquete
         PersonVo personVo = new PersonVo();
         personVo.setName(getName());
         personVo.setLastName(getLastNames());
@@ -59,9 +63,7 @@ public class EncomiendaBean {
         personVo.setAdress(getAdress());
         createperson(personVo);
 
-        ClientVo clientVo = new ClientVo();
-
-//        Persona que recibe el paquete
+        //Persona que recibe el paquete
         PersonVo personRVo = new PersonVo();
         personRVo.setName(getNameReceiver());
         personRVo.setLastName(getLastNamesReceiver());
@@ -73,13 +75,27 @@ public class EncomiendaBean {
 
         //   Persistencia del paquete que se va a enviar        
         PackageVo packageVo = new PackageVo();
-        //packageVo.setIdPackage(0);
         packageVo.setPriority(getPriority());
         packageVo.setType(getType());
         packageVo.setVolume(getVolume());
         packageVo.setWeight(getWeigth());
+        packageVo.setReceived_packet(fecha);
         createpackage(packageVo);
+        
+//        // Creaciacion de shipping
+//        ShippingVo shippingVo = new ShippingVo();
+//        shippingVo.setIdShipping(123);
+//        shippingVo.setIdReceiver(idReceiver);
+//        shippingVo.setRouteidRoute(null);
+//        shippingVo.setVehicle(phone);
+//        shippingVo.setSendedDate(null);
+//        shippingVo.setArrivedDate(null);
+//        shippingVo.setPersonidPerson(idPerson);
+//        shippingVo.setPackageidPackage(1);
+                
 
+        FacesMessage msg = new FacesMessage("Successful", "Welcome :");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void createperson(PersonVo person) {
@@ -91,14 +107,6 @@ public class EncomiendaBean {
         PackageFacade packageFacade = FacadeFactory.getInstance().getPackageFacade();
         packageFacade.persist(paquete);
 
-    }
-
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    public static void setLogger(Logger aLogger) {
-        logger = aLogger;
     }
 
     public String getName() {
@@ -245,9 +253,9 @@ public class EncomiendaBean {
         this.adressReceiver = adressReceiver;
     }
 
-    public void addMessage(FacesMessage message) {
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+//    public void addMessage(FacesMessage message) {
+//        FacesContext.getCurrentInstance().addMessage(null, message);
+//    }
 
     public String onFlowProcess(FlowEvent event) {
         getLogger().info("Current wizard step:" + event.getOldStep());
@@ -261,14 +269,19 @@ public class EncomiendaBean {
         }
     }
 
-    public EncomiendaBean() {
-    }
-
     public boolean isSkip() {
         return skip;
     }
 
     public void setSkip(boolean skip) {
         this.skip = skip;
+    }
+
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public static void setLogger(Logger aLogger) {
+        logger = aLogger;
     }
 }

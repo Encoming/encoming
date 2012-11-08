@@ -32,6 +32,7 @@ public class PackageService implements IService<PackageVo>{
         entity.setVolume(vo.getVolume());
         entity.setPriority(vo.getPriority());
         entity.setWeight(vo.getWeight());
+        entity.setReceived_packet(vo.getReceived_packet());
 
         DAOFactory.getInstance().getPackageDAO().persist(entity, em);
     }

@@ -9,6 +9,7 @@ import com.encoming.encoming.vo.PackageVo;
 import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -66,6 +68,11 @@ public class Package implements Serializable,IEntity<PackageVo> {
     @NotNull
     @Column(name = "weight")
     private float weight;
+    @Basic(optional = false)
+    @NotNull
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "received_packet")
+    private Date received_packet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "packageidPackage")
     private List<Shipping> shippingList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "packageidPackage")
@@ -78,12 +85,13 @@ public class Package implements Serializable,IEntity<PackageVo> {
         this.idPackage = idPackage;
     }
 
-    public Package(Integer idPackage, String type, String volume, String priority, float weight) {
+    public Package(Integer idPackage, String type, String volume, String priority, float weight,Date received_packet) {
         this.idPackage = idPackage;
         this.type = type;
         this.volume = volume;
         this.priority = priority;
         this.weight = weight;
+        this.received_packet = received_packet;
     }
 
     public Integer getIdPackage() {
@@ -124,6 +132,14 @@ public class Package implements Serializable,IEntity<PackageVo> {
 
     public void setWeight(float weight) {
         this.weight = weight;
+    }
+    
+    public Date getReceived_packet() {
+        return received_packet;
+    }
+
+    public void setReceived_packet(Date received_packet) {
+        this.received_packet = received_packet;
     }
 
     @XmlTransient
@@ -177,6 +193,7 @@ public class Package implements Serializable,IEntity<PackageVo> {
         packageVo.setVolume(getVolume());
         packageVo.setPriority(getPriority());
         packageVo.setWeight(getWeight());
+        packageVo.setReceived_packet(getReceived_packet());
         List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
         for(Shipping entity : getShippingList()){
             shippingVos.add(entity.toVo());
