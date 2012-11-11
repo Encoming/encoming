@@ -71,7 +71,8 @@
                             position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())  
                         });  
 
-                        map.addOverlay(currentMarker);  
+                        map.addOverlay(currentMarker);
+                        map.setMapType(G_MAP_TYPE);
 
                         dlg.show();  
                     }     

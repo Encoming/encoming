@@ -42,7 +42,7 @@ public class AdminMenuBean {
     }
     
     public void adminRoutes(){
-        page = "/adminRoutes.html";
+        page = "/adminRoutes.xhtml";
     }
     
     public void adminVehicles(){

@@ -24,12 +24,16 @@
                     center: new google.maps.LatLng(-34.397, 150.644),
                     zoom: 20,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
+                    
                 };
                 var map = new google.maps.Map(document.getElementById("map_canvas"),
                 mapOptions);
             }
+            
         </script>
-
+            
+        
+        
         <title>:: Encoming :: <ui:insert name="title"></ui:insert></title>
 
         <link href="#{request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -82,7 +86,7 @@
 
                             <form class="navbar-search pull-right">
                                 <input type="text" class="search-query" placeholder="Buscar"/>
-                                <button type="submit" class="btn"><i class="icon-search icon-white" /></button>
+                                <button type="submit" class="btn"><i class="icon-search" /></button>
                             </form>
                         </ui:fragment>          
                     </div>
