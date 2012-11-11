@@ -66,40 +66,35 @@
             <div class="container">
                 <div class="row">
                     <div class="span5 offset0">
+                        <form action="#" name="form_ruta" onsubmit="obtenerRuta(this.desde.value, this.hasta.value); return false">
+                            <h2>Calcular Rutas</h2>
+                            <label class="control-label " for="program">Ciudad de Partida:</label>
+                            <div class="controls">
+                                <h:selectOneMenu required="true" id="desde"
+                                                 requiredMessage = "¡Por favor selecciona una ciudad!">
+                                    <f:selectItem itemLabel=""/>
+                                    <f:selectItems value="#{pointBean.points}" />
+                                    <f:validateLongRange minimum="1" />
+                                </h:selectOneMenu>
+                            </div>
+                            <label class="control-label " for="program">Ciudad de Destino:</label>
+                            <div class="controls">
+                                <h:selectOneMenu required="true" id="hasta"
+                                                 requiredMessage = "¡Por favor selecciona una ciudad!">
+                                    <f:selectItem itemLabel=""/>
+                                    <f:selectItems value="#{pointBean.points}" />
+                                    <f:validateLongRange minimum="1" />
+                                </h:selectOneMenu>
+                            </div>
+                            <h:commandButton name="ruta" type="submit" value="Calcular ruta" class="btn btn-large btn-primary" />
 
-                        <h2>Calcular Rutas</h2>
-                        <label class="control-label " for="program">Ciudad de Partida:</label>
-                        <div class="controls">
-                            <h:selectOneMenu required="true" 
-                                             requiredMessage = "¡Por favor selecciona una ciudad!">
-                                <f:selectItem itemLabel=""/>
-                                <f:selectItems value="#{pointBean.points}" />
-                                <f:validateLongRange minimum="1" />
-                            </h:selectOneMenu>
-                        </div>
-                        <label class="control-label " for="program">Ciudad de Destino:</label>
-                        <div class="controls">
-                            <h:selectOneMenu required="true" 
-                                             requiredMessage = "¡Por favor selecciona una ciudad!">
-                                <f:selectItem itemLabel=""/>
-                                <f:selectItems value="#{pointBean.points}" />
-                                <f:validateLongRange minimum="1" />
-                            </h:selectOneMenu>
-                        </div>
-                        <h:commandButton value="Calcular ruta" class="btn btn-large btn-primary" />
+                            <tr>
+                                <td valign="top">
+                                    <div id="map" style="width: 500px; height: 400px"></div>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                <strong>Mapa</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td valign="top">
-                                <div id="map" style="width: 500px; height: 400px"></div>
-                            </td>
-                        </tr>
-
-
+                        </form>
 
                     </div>
                     <div class="span5 offset0">
