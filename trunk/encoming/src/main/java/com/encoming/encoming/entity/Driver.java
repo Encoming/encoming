@@ -40,7 +40,7 @@ public class Driver implements Serializable,IEntity<DriverVo>{
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "idDriver")
     private Integer idDriver;
     @Basic(optional = false)

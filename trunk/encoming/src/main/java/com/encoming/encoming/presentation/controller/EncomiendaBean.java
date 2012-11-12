@@ -5,7 +5,10 @@ import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.vo.EncomingVo;
 import com.encoming.encoming.vo.PersonVo;
+import com.encoming.encoming.vo.ShippingVo;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -47,7 +50,9 @@ public class EncomiendaBean {
     private String mailReceiver;
     private String adressReceiver;
     private Date fecha= new Date();
-    
+    SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault()); 
+    String fecha2 = formato2.format(fecha);
+        
      public void addPerson(ActionEvent actionEvent) {
 
 //        Persona que envia el paquete
@@ -76,8 +81,13 @@ public class EncomiendaBean {
         encomingVo.setType(getType());
         encomingVo.setVolume(getVolume());
         encomingVo.setWeight(getWeigth());
-        encomingVo.setReceived_packet(fecha);
+        encomingVo.setReceived_packet(fecha2);
         createencoming(encomingVo);
+        
+//        Creacion de una shipping
+        ShippingVo shippingVo = new ShippingVo();
+        shippingVo.setArrivedDate(null);
+                
         
     }
 

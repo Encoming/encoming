@@ -15,8 +15,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -71,8 +69,8 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
     @Basic(optional = false)
     @NotNull
     @Column(name = "received_packet")
-    @Temporal(TemporalType.DATE)
-    private Date receivedPacket;
+    //@Temporal(TemporalType.DATE)
+    private String receivedPacket;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
     private List<Invoice> invoiceList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
@@ -85,7 +83,7 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.idEncoming = idPackage;
     }
 
-    public Encoming(Integer idPackage, String type, String volume, String priority, float weight, Date receivedPacket) {
+    public Encoming(Integer idPackage, String type, String volume, String priority, float weight, String receivedPacket) {
         this.idEncoming = idPackage;
         this.type = type;
         this.volume = volume;
@@ -134,11 +132,11 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.weight = weight;
     }
 
-    public Date getReceivedPacket() {
+    public String getReceivedPacket() {
         return receivedPacket;
     }
 
-    public void setReceivedPacket(Date receivedPacket) {
+    public void setReceivedPacket(String receivedPacket) {
         this.receivedPacket = receivedPacket;
     }
 

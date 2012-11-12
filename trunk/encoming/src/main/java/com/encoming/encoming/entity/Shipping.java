@@ -50,15 +50,15 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @Column(name = "idReceiver")
     private int idReceiver;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "sendedDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sendedDate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private String sendedDate;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "arrivedDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date arrivedDate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private String arrivedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
     private List<Invoice> invoiceList;
     @JoinColumn(name = "Vehicle_idVehicle", referencedColumnName = "idVehicle")
@@ -81,7 +81,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.idShipping = idShipping;
     }
 
-    public Shipping(Integer idShipping, int idReceiver, Date sendedDate, Date arrivedDate) {
+    public Shipping(Integer idShipping, int idReceiver, String sendedDate, String arrivedDate) {
         this.idShipping = idShipping;
         this.idReceiver = idReceiver;
         this.sendedDate = sendedDate;
@@ -104,19 +104,19 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.idReceiver = idReceiver;
     }
 
-    public Date getSendedDate() {
+    public String getSendedDate() {
         return sendedDate;
     }
 
-    public void setSendedDate(Date sendedDate) {
+    public void setSendedDate(String sendedDate) {
         this.sendedDate = sendedDate;
     }
 
-    public Date getArrivedDate() {
+    public String getArrivedDate() {
         return arrivedDate;
     }
 
-    public void setArrivedDate(Date arrivedDate) {
+    public void setArrivedDate(String arrivedDate) {
         this.arrivedDate = arrivedDate;
     }
 

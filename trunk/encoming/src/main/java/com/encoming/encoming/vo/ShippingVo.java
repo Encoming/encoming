@@ -15,8 +15,8 @@ public class ShippingVo {
 
     private Integer idShipping;
     private int idReceiver;
-    private Date sendedDate;
-    private Date arrivedDate;
+    private String sendedDate;
+    private String arrivedDate;
     private List<InvoiceVo> invoiceList;
     private Integer idVehicle;
     private Integer idPerson;
@@ -54,28 +54,28 @@ public class ShippingVo {
     /**
      * @return the sendedDate
      */
-    public Date getSendedDate() {
+    public String getSendedDate() {
         return sendedDate;
     }
 
     /**
      * @param sendedDate the sendedDate to set
      */
-    public void setSendedDate(Date sendedDate) {
+    public void setSendedDate(String sendedDate) {
         this.sendedDate = sendedDate;
     }
 
     /**
      * @return the arrivedDate
      */
-    public Date getArrivedDate() {
+    public String getArrivedDate() {
         return arrivedDate;
     }
 
     /**
      * @param arrivedDate the arrivedDate to set
      */
-    public void setArrivedDate(Date arrivedDate) {
+    public void setArrivedDate(String arrivedDate) {
         this.arrivedDate = arrivedDate;
     }
 

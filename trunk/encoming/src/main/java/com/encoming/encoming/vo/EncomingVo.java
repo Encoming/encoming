@@ -22,7 +22,7 @@ public class EncomingVo implements IValueObject {
     private Integer idRoute;
     private List<InvoiceVo> invoiceList;
     private float weight;
-    private Date received_packet;
+    private String received_packet;
     private List<ShippingVo> shippingList;
 
     /**
@@ -151,11 +151,11 @@ public class EncomingVo implements IValueObject {
         this.shippingList = shippingList;
     }
 
-    public Date getReceived_packet() {
+    public String getReceived_packet() {
         return received_packet;
     }
 
-    public void setReceived_packet(Date received_packet) {
+    public void setReceived_packet(String received_packet) {
         this.received_packet = received_packet;
     }
 }
