@@ -4,39 +4,39 @@
  */
 package com.encoming.encoming.vo;
 
+import com.encoming.encoming.entity.Shipping;
 import java.util.Date;
 import java.util.List;
 
 /**
  *
- * @author FAMILIA
+ * @author germanpinerosm
  */
-public class PackageVo {
-    
-    private Integer idPackage;
+public class EncomingVo implements IValueObject {
+
+    private Integer idEncoming;
     private String type;
     private String volume;
     private String priority;
+    private Integer idVehicle;
+    private Integer idRoute;
+    private List<InvoiceVo> invoiceList;
     private float weight;
     private Date received_packet;
     private List<ShippingVo> shippingList;
-    private List<InvoiceVo> invoiceList;
-    
-     public PackageVo() {
-     }
 
     /**
-     * @return the idPackage
+     * @return the idEncoming
      */
-    public Integer getIdPackage() {
-        return idPackage;
+    public Integer getIdEncoming() {
+        return idEncoming;
     }
 
     /**
-     * @param idPackage the idPackage to set
+     * @param idEncoming the idEncoming to set
      */
-    public void setIdPackage(Integer idPackage) {
-        this.idPackage = idPackage;
+    public void setIdEncoming(Integer idEncoming) {
+        this.idEncoming = idEncoming;
     }
 
     /**
@@ -82,6 +82,48 @@ public class PackageVo {
     }
 
     /**
+     * @return the idVehicle
+     */
+    public Integer getIdVehicle() {
+        return idVehicle;
+    }
+
+    /**
+     * @param idVehicle the idVehicle to set
+     */
+    public void setIdVehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
+    }
+
+    /**
+     * @return the idRoute
+     */
+    public Integer getIdRoute() {
+        return idRoute;
+    }
+
+    /**
+     * @param idRoute the idRoute to set
+     */
+    public void setIdRoute(Integer idRoute) {
+        this.idRoute = idRoute;
+    }
+
+    /**
+     * @return the invoiceList
+     */
+    public List<InvoiceVo> getInvoiceList() {
+        return invoiceList;
+    }
+
+    /**
+     * @param invoiceList the invoiceList to set
+     */
+    public void setInvoiceList(List<InvoiceVo> invoiceList) {
+        this.setInvoiceList(invoiceList);
+    }
+
+    /**
      * @return the weight
      */
     public float getWeight() {
@@ -109,20 +151,6 @@ public class PackageVo {
         this.shippingList = shippingList;
     }
 
-    /**
-     * @return the invoiceList
-     */
-    public List<InvoiceVo> getInvoiceList() {
-        return invoiceList;
-    }
-
-    /**
-     * @param invoiceList the invoiceList to set
-     */
-    public void setInvoiceList(List<InvoiceVo> invoiceList) {
-        this.invoiceList = invoiceList;
-    }
-    
     public Date getReceived_packet() {
         return received_packet;
     }
@@ -130,5 +158,4 @@ public class PackageVo {
     public void setReceived_packet(Date received_packet) {
         this.received_packet = received_packet;
     }
-    
 }

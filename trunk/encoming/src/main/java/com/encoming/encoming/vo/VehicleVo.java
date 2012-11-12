@@ -11,29 +11,58 @@ import java.util.List;
  * @author germanpinerosm
  */
 public class VehicleVo implements IValueObject{
-    private Integer plateNumber;
-    private String plateLetters;
     private Integer idVehicle;
+    private int plateNumber;
+    private String plateLetters;
     private String type;
     private String manufacturer;
     private String model;
-    private int capacity;
+    private String capacity;
     private String status;
     private List<ShippingVo> shippingList;
+    private Integer idPoint;
     private Integer idDriver;
 
     /**
-     * @return the idVehiclePK
+     * @return the idVehicle
      */
     public Integer getIdVehicle() {
         return idVehicle;
     }
 
     /**
-     * @param idVehiclePK the idVehiclePK to set
+     * @param idVehicle the idVehicle to set
      */
-    public void setIdVehicle(Integer idVehiclePK) {
-        this.idVehicle = idVehiclePK;
+    public void setIdVehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
+    }
+
+    /**
+     * @return the plateNumber
+     */
+    public int getPlateNumber() {
+        return plateNumber;
+    }
+
+    /**
+     * @param plateNumber the plateNumber to set
+     */
+    public void setPlateNumber(int plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+
+    /**
+     * @return the plateLetters
+     */
+    public String getPlateLetters() {
+        return plateLetters;
+    }
+
+    /**
+     * @param plateLetters the plateLetters to set
+     */
+    public void setPlateLetters(String plateLetters) {
+        this.plateLetters = plateLetters;
     }
 
     /**
@@ -81,32 +110,14 @@ public class VehicleVo implements IValueObject{
     /**
      * @return the capacity
      */
-    public int getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
-
-    public Integer getPlateNumber() {
-        return plateNumber;
-    }
-
-    public void setPlateNumber(Integer plateNumber) {
-        this.plateNumber = plateNumber;
-    }
-
-    public String getPlateLetters() {
-        return plateLetters;
-    }
-
-    public void setPlateLetters(String plateLetters) {
-        this.plateLetters = plateLetters;
-    }
-    
-    
 
     /**
      * @param capacity the capacity to set
      */
-    public void setCapacity(int capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 
@@ -139,6 +150,20 @@ public class VehicleVo implements IValueObject{
     }
 
     /**
+     * @return the idPoint
+     */
+    public Integer getIdPoint() {
+        return idPoint;
+    }
+
+    /**
+     * @param idPoint the idPoint to set
+     */
+    public void setIdPoint(Integer idPoint) {
+        this.idPoint = idPoint;
+    }
+
+    /**
      * @return the idDriver
      */
     public Integer getIdDriver() {
@@ -151,5 +176,4 @@ public class VehicleVo implements IValueObject{
     public void setIdDriver(Integer idDriver) {
         this.idDriver = idDriver;
     }
-
 }

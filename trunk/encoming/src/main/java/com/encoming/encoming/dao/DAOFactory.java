@@ -10,9 +10,6 @@ package com.encoming.encoming.dao;
  */
 public class DAOFactory {
 
-    public AdministratorDAO getAdministratorDAO() {
-        return AdministratorDAO.getInstance();
-    }
     private static DAOFactory instance;
 
     public static synchronized DAOFactory getInstance() {
@@ -22,13 +19,18 @@ public class DAOFactory {
         return instance;
     }
 
+    public AdministratorDAO getAdministratorDAO() {
+        return AdministratorDAO.getInstance();
+    }
+
     public PointDAO getPointDAO() {
         return PointDAO.getInstance();
     }
+
     public PersonDAO getPersonDAO() {
         return PersonDAO.getInstance();
     }
-    
+
     public DriverDAO getDriverDAO() {
         return DriverDAO.getInstance();
     }
@@ -36,9 +38,8 @@ public class DAOFactory {
     public VehicleDAO getVehicleDAO() {
         return VehicleDAO.getInstance();
     }
-    
-    public PackageDAO getPackageDAO(){
-        return PackageDAO.getInstance();
-    }
 
+    public EncomingDAO getEncomingDAO() {
+        return EncomingDAO.getInstance();
+    }
 }

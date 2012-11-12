@@ -5,7 +5,6 @@
 package com.encoming.encoming.entity;
 
 import com.encoming.encoming.vo.DriverVo;
-import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.VehicleVo;
 import java.io.Serializable;
 import java.util.ArrayList;

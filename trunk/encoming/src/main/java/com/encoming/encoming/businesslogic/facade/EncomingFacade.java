@@ -4,16 +4,16 @@
  */
 package com.encoming.encoming.businesslogic.facade;
 
-import com.encoming.encoming.businesslogic.service.VehiclePKService;
-import com.encoming.encoming.vo.VehiclePKVo;
+import com.encoming.encoming.businesslogic.service.EncomingService;
+import com.encoming.encoming.vo.EncomingVo;
 
 /**
  *
  * @author Andrezz
  */
-public class VehiclePKFacade extends Facade<VehiclePKVo> {
+public class EncomingFacade extends Facade<EncomingVo> {
     
-    public VehiclePKFacade(String PUName, VehiclePKService service){
+    public EncomingFacade(String PUName, EncomingService service){
         super(PUName, service);
     }    
     

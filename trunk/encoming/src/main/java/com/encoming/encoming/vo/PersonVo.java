@@ -18,6 +18,7 @@ public class PersonVo implements IValueObject {
     private String mail;
     private Integer phone;
     private String adress;
+    private List<ClientVo> clientList;
     private List<AdministratorVo> administratorList;
     private List<DriverVo> driverList;
 
@@ -116,6 +117,20 @@ public class PersonVo implements IValueObject {
      */
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    /**
+     * @return the clientList
+     */
+    public List<ClientVo> getClientList() {
+        return clientList;
+    }
+
+    /**
+     * @param clientList the clientList to set
+     */
+    public void setClientList(List<ClientVo> clientList) {
+        this.clientList = clientList;
     }
 
     /**

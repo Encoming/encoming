@@ -4,16 +4,16 @@
  */
 package com.encoming.encoming.businesslogic.facade;
 
-import com.encoming.encoming.businesslogic.service.PackageService;
-import com.encoming.encoming.vo.PackageVo;
+import com.encoming.encoming.businesslogic.service.ClientService;
+import com.encoming.encoming.vo.ClientVo;
 
 /**
  *
  * @author Andrezz
  */
-public class PackageFacade extends Facade<PackageVo> {
+public class ClientFacade extends Facade<ClientVo> {
     
-    public PackageFacade(String PUName, PackageService service){
+    public ClientFacade(String PUName, ClientService service){
         super(PUName, service);
     }    
     

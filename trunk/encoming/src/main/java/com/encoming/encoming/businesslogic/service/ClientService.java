@@ -4,7 +4,7 @@
  */
 package com.encoming.encoming.businesslogic.service;
 
-import com.encoming.encoming.vo.VehiclePKVo;
+import com.encoming.encoming.vo.ClientVo;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -12,29 +12,29 @@ import javax.persistence.EntityManager;
  *
  * @author FAMILIA
  */
-public class VehiclePKService implements IService<VehiclePKVo>{
+public class ClientService implements IService<ClientVo> {
     
-    private static VehiclePKService instance;
+        private static ClientService instance;
 
-    public static synchronized VehiclePKService getInstance() {
+    public static synchronized ClientService getInstance() {
         if (instance == null) {
-            instance = new VehiclePKService();
+            instance = new ClientService();
         }
         return instance;
     }
 
     @Override
-    public void persist(VehiclePKVo vo, EntityManager em) {
+    public void persist(ClientVo vo, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public VehiclePKVo find(Object id, EntityManager em) {
+    public ClientVo find(Object id, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void update(VehiclePKVo vo, EntityManager em) {
+    public void update(ClientVo vo, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -44,8 +44,9 @@ public class VehiclePKService implements IService<VehiclePKVo>{
     }
 
     @Override
-    public List<VehiclePKVo> getList(EntityManager em) {
+    public List<ClientVo> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+
 }

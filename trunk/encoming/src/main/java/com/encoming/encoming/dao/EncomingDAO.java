@@ -4,53 +4,58 @@
  */
 package com.encoming.encoming.dao;
 
-import com.encoming.encoming.entity.Package;
+import com.encoming.encoming.entity.Encoming;
 import java.util.List;
-import javax.management.Query;
 import javax.persistence.EntityManager;
 
 /**
  *
  * @author Tutas
  */
-public class PackageDAO implements IDAO<Package>{
+public class EncomingDAO implements IDAO<Encoming>{
     
-    private static PackageDAO instance;
+    private static EncomingDAO instance;
     
-    public static synchronized PackageDAO getInstance() {
+    public static synchronized EncomingDAO getInstance() {
         if (instance == null) {
-            instance = new PackageDAO();
+            instance = new EncomingDAO();
         }
         return instance;
     }
-    
+
     @Override
-    public void persist(Package entity, EntityManager em) {
-        em.persist(entity);
-    }    
-    
+    public void persist(Encoming entity, EntityManager em) {
+        try {
+            em.persist(entity);
+        } catch (Exception e) {
+            
+        }
+    }
+
     @Override
-    public Package find(Object idA, EntityManager em) {
+    public Encoming find(Object idA, EntityManager em) {
         Integer id = (Integer) idA;
         javax.persistence.Query query = em.createNamedQuery("Package.findByIdPackage")
                 .setParameter("idPackage", id);
-        return (Package)query.getSingleResult();
+        return (Encoming)query.getSingleResult();
     }
-    
+
     @Override
-    public void update(Package entity, EntityManager em) {
+    public void update(Encoming entity, EntityManager em) {
         em.merge(entity);
     }
-    
+
     @Override
     public void delete(Object id, EntityManager em) {
-        Package packageA = find(id,em);
-        em.remove(packageA);
+        Encoming encoming = find(id,em);
+        em.remove(encoming);
     }
-    
+
     @Override
-    public List<Package> getList(EntityManager em) {
+    public List<Encoming> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+
     
 }

@@ -4,7 +4,6 @@
  */
 package com.encoming.encoming.entity;
 
-import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.PersonVo;
 import java.io.Serializable;
 import java.util.List;
