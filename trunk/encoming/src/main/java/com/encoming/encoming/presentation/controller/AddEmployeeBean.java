@@ -10,7 +10,9 @@ import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.PersonVo;
 import javax.faces.bean.ManagedBean;
+
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -31,6 +33,8 @@ public class AddEmployeeBean {
     private String username;
     private String password;
     private Integer personidPerson;
+    
+    
 
     public Integer getPersonidPerson() {
         return personidPerson;
@@ -112,6 +116,7 @@ public class AddEmployeeBean {
     public void setAdress(String adress) {
         this.adress = adress;
     }
+
     
     public AddEmployeeBean() {
     }
@@ -137,4 +142,5 @@ public class AddEmployeeBean {
         personFac.persist(personVo);
         adminFac.persist(adminVo);
     }
+
 }

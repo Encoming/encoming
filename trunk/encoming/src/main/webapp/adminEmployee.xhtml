@@ -12,8 +12,10 @@
     </ui:define>
 
     <ui:define name="content">
-        <p:panel header="Administración de Personal">
-            <div class="span6 offset1">
+        <p:tabView orientation="top" >  
+        <p:tab title="Nuevo Empleado">  
+        
+            <div class="span5 offset0">
                 <div class="hero-unit">
                     <f:view>
                         <h:form id="addEmployeeForm">
@@ -82,16 +84,17 @@
                                                 value="#{addEmployeeBean.password}"
                                                 feedback="true" promptLabel="Usa una contraseña segura" inline="true" 
                                                 weakLabel="Debil" goodLabel="Buena" strongLabel="Segura" 
-                                                match="password" />
+                                                match="passwordR" />
                                     <p:watermark for="password" value="Contraseña" />
                                     <p:message id="passwordMessage" for="password" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <p:watermark for="password" value="Nuevamente la contraseña" />
+                                    
                                     <p:password id="passwordR" required="true" value="#{addEmployeeBean.password}"
                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="passwordR" value="Nuevamente la contraseña" />
                                     <p:message id="passwordRMessage" for="passwordR" />
                                 </div>
                             </div>
@@ -103,7 +106,42 @@
                     </f:view>
                 </div>
             </div>
-        </p:panel>
-    </ui:define>
-
+    
+        </p:tab>
+            <p:tab title="Borrar Empleado">   
+                <div class="span5 offset0">
+                <div class="hero-unit">
+                    <f:view>
+                        <h:form id="deleteEmployeeForm">
+                            <h2><big>Borrar Empleado:</big></h2>
+                            <p:separator/>
+                            <h:messages for="addEmployeeForm" class="alert alert-error"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="idPersonToDelete" required="true" value="#{removeEmployeeBean.id}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="idPersonToDelete" value="Id" />
+                                    <p:message id="idPersonMessage" for="idPersonToDelete" />
+                                    <div class="form-actions">
+                                    <h:commandButton action="#{removeEmployeeBean.find()}" value="Buscar" class="btn btn-large btn-primary" />
+                                    </div>
+                                    <p:separator/>
+                                    <br/>
+                                    <h:outputText id="name" value="Nombre : #{removeEmployeeBean.auxPerson.getName()}"/><br/>
+                                    <h:outputText id="phone" value="Telefono : #{removeEmployeeBean.auxPerson.getPhone()}"/><br/>
+                                    <h:outputText id="mail" value="Email : #{removeEmployeeBean.auxPerson.getMail()}"/><br/>
+                                    <div class="form-actions">
+                                    <h:commandButton action="#{removeEmployeeBean.delete()}" value="Borrar" class="btn btn-large btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                            </h:form>      
+                    </f:view>
+                </div>
+                </div>
+        <!--<h:outputText value="BAJO MANTENIMIENTO"/>-->
+    </p:tab>
+</p:tabView>
+        </ui:define>
 </ui:composition>
+

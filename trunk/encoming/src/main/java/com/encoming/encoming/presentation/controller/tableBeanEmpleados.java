@@ -22,6 +22,7 @@ public class tableBeanEmpleados {
 
     List <AdministratorVo> employeesAdm;
     ArrayList<PersonVo> employees;
+    private List<PersonVo> filteredEmployees;  
 
     public tableBeanEmpleados() {
         employeesAdm = new ArrayList();
@@ -30,8 +31,18 @@ public class tableBeanEmpleados {
         employeesAdm = adminFac.getList();
         for(AdministratorVo admVo : employeesAdm){
             PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade();
-            employees.add(personFac.find(admVo.getPersonidPerson()));
+            employees.add(personFac.find(admVo.getPersonidPerson()));       
         }
+        filteredEmployees = employees; 
+    }
+
+    public List<PersonVo> getFilteredEmployees() {
+                      
+        return filteredEmployees;
+    }
+
+    public void setFilteredEmployees(List<PersonVo> filteredEmployees) {
+        this.filteredEmployees = filteredEmployees;
     }
 
     public List<AdministratorVo> getEmployeesAdm() {
