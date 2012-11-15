@@ -4,48 +4,57 @@
  */
 package com.encoming.encoming.dao;
 
+import com.encoming.encoming.entity.Administrator;
+import com.encoming.encoming.entity.Encoming;
 import com.encoming.encoming.entity.Route;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
  * @author Andrezz
  */
-public class RouteDAO implements IDAO<Route>{
-    
+public class RouteDAO implements IDAO<Route> {
+
     private static RouteDAO instance;
-    
+
     public static synchronized RouteDAO getInstance() {
         if (instance == null) {
             instance = new RouteDAO();
         }
         return instance;
     }
-    
+
     @Override
     public void persist(Route entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }    
-    
+//        try {
+            em.persist(entity);
+//        } catch (Exception e) {
+//        }
+    }
+
     @Override
     public Route find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createQuery("SELECT rou FROM Router rou "
+                + "WHERE rou.idRoute =:idRoute")
+                .setParameter("idRoute", id);
+        return (Route) query.getSingleResult();
+
     }
-    
+
     @Override
     public void update(Route entity, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     @Override
     public void delete(Object id, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     @Override
     public List<Route> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

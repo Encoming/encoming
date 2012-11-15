@@ -19,7 +19,6 @@ public class AdministratorBean implements Serializable {
     private Integer idAdministrator;
     private String username;
     //private String password;
-    private String type;
     private Integer personidPerson;
     private boolean loggedIn;
     
@@ -48,14 +47,6 @@ public void setPassword(String password) {
 this.password = password;
 }*/
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Integer getPersonidPerson() {
         return personidPerson;
     }
@@ -77,7 +68,6 @@ this.password = password;
     
     public String logOut() {
         idAdministrator = null;
-        type = null;
         username = null;
         personidPerson = null;
         loggedIn = false;

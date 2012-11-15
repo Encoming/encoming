@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/default.xhtml">
+
+            <ui:define name="title">
+                -Prueba
+            </ui:define>
+
+            <ui:define name="content">
+
+
+                <h:form id="pointsForm">
+                    <h:outputLabel for="originCity" value="Ciudad de Origen: *" />
+                    <h:selectOneMenu id="point" required="true"
+                                     requiredMessage="Selecciona un Punto:">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{prBean.points}" />
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel for="destinationCity" value="Ciudad de Destino: *" validator=""/>
+                    <h:selectOneMenu id="point1" required="true"
+                                     requiredMessage="Selecciona un Punto:">
+                        <f:selectItem itemLabel=""/>
+                        <f:selectItems value="#{prBean.points}" />
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

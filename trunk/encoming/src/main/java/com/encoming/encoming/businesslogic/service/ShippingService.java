@@ -4,6 +4,17 @@
  */
 package com.encoming.encoming.businesslogic.service;
 
+import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.dao.EncomingDAO;
+import com.encoming.encoming.dao.PersonDAO;
+import com.encoming.encoming.dao.RouteDAO;
+import com.encoming.encoming.dao.ShippingDAO;
+import com.encoming.encoming.dao.VehicleDAO;
+import com.encoming.encoming.entity.Encoming;
+import com.encoming.encoming.entity.Person;
+import com.encoming.encoming.entity.Route;
+import com.encoming.encoming.entity.Shipping;
+import com.encoming.encoming.entity.Vehicle;
 import com.encoming.encoming.vo.ShippingVo;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,12 +36,34 @@ public class ShippingService implements IService<ShippingVo>{
 
     @Override
     public void persist(ShippingVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Shipping entity = new Shipping();
+        
+        entity.setIdReceiver(vo.getIdReceiver());
+        entity.setArrivedDate(vo.getArrivedDate());
+        entity.setSendedDate(vo.getSendedDate());
+        entity.setCost(vo.getCost());
+        PersonDAO persondao = DAOFactory.getInstance().getPersonDAO();
+        Person person = persondao.find(vo.getIdPerson(), em);
+        entity.setPerson(person);
+        VehicleDAO vehicledao = DAOFactory.getInstance().getVehicleDAO();
+        Vehicle vehicle = vehicledao.find(vo.getIdVehicle(), em);
+        entity.setVehicle(vehicle);
+        RouteDAO routedao = DAOFactory.getInstance().getRouteDAO();
+        Route route = routedao.find(vo.getIdRoute(), em);
+        entity.setRoute(route);
+        EncomingDAO encomingdao = DAOFactory.getInstance().getEncomingDAO();
+        Encoming encoming = encomingdao.find(vo.getIdEncoming(), em);
+        entity.setEncoming(encoming);
+        
+        DAOFactory.getInstance().getShippingDAO().persist(entity, em);
+        
     }
 
     @Override
     public ShippingVo find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        ShippingDAO dao = DAOFactory.getInstance().getShippingDAO();
+        ShippingVo shippingvo = dao.find(id, em).toVo();
+        return shippingvo;
     }
 
     @Override

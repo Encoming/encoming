@@ -4,25 +4,35 @@
  */
 package com.encoming.encoming.vo;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author FAMILIA
  */
-public class ShippingVo {
+public class ShippingVo implements IValueObject {
 
     private Integer idShipping;
-    private int idReceiver;
+    private Integer idReceiver;
     private String sendedDate;
     private String arrivedDate;
+    private double cost;
     private List<InvoiceVo> invoiceList;
     private Integer idVehicle;
     private Integer idPerson;
     private Integer idRoute;
     private Integer idEncoming;
-    
+
+    public ShippingVo() {
+    }
+
+    public ShippingVo(Integer idReceiver, String sendedDate, String arrivedDate, double cost) {
+        this.idReceiver = idReceiver;
+        this.sendedDate = sendedDate;
+        this.arrivedDate = arrivedDate;
+        this.cost = cost;
+    }
+
     /**
      * @return the idShipping
      */
@@ -40,14 +50,14 @@ public class ShippingVo {
     /**
      * @return the idReceiver
      */
-    public int getIdReceiver() {
+    public Integer getIdReceiver() {
         return idReceiver;
     }
 
     /**
      * @param idReceiver the idReceiver to set
      */
-    public void setIdReceiver(int idReceiver) {
+    public void setIdReceiver(Integer idReceiver) {
         this.idReceiver = idReceiver;
     }
 
@@ -147,5 +157,13 @@ public class ShippingVo {
      */
     public void setIdEncoming(Integer idEncoming) {
         this.idEncoming = idEncoming;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }

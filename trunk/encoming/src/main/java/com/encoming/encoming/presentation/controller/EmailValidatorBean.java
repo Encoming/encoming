@@ -20,7 +20,7 @@ import javax.faces.validator.ValidatorException;
 //@ManagedBean
 //@RequestScoped
 @FacesValidator(value = "emailValidatorBean")
-public class EmailValidatorBean implements Validator {
+public class EmailValidatorBean  implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component,

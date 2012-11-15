@@ -35,6 +35,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Shipping.findAll", query = "SELECT s FROM Shipping s"),
     @NamedQuery(name = "Shipping.findByIdShipping", query = "SELECT s FROM Shipping s WHERE s.idShipping = :idShipping"),
     @NamedQuery(name = "Shipping.findByIdReceiver", query = "SELECT s FROM Shipping s WHERE s.idReceiver = :idReceiver"),
+    @NamedQuery(name = "Shipping.findByCost", query = "SELECT s FROM Shipping s WHERE s.cost = :cost"),
     @NamedQuery(name = "Shipping.findBySendedDate", query = "SELECT s FROM Shipping s WHERE s.sendedDate = :sendedDate"),
     @NamedQuery(name = "Shipping.findByArrivedDate", query = "SELECT s FROM Shipping s WHERE s.arrivedDate = :arrivedDate")})
 public class Shipping implements Serializable, IEntity<ShippingVo> {
@@ -48,7 +49,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @Basic(optional = false)
     @NotNull
     @Column(name = "idReceiver")
-    private int idReceiver;
+    private Integer idReceiver;
     @Basic(optional = false)
     //@NotNull
     @Column(name = "sendedDate")
@@ -59,6 +60,10 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @Column(name = "arrivedDate")
     //@Temporal(TemporalType.TIMESTAMP)
     private String arrivedDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cost")
+    private double cost;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
     private List<Invoice> invoiceList;
     @JoinColumn(name = "Vehicle_idVehicle", referencedColumnName = "idVehicle")
@@ -81,11 +86,12 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.idShipping = idShipping;
     }
 
-    public Shipping(Integer idShipping, int idReceiver, String sendedDate, String arrivedDate) {
+    public Shipping(Integer idShipping, Integer idReceiver, String sendedDate, String arrivedDate,Double cost) {
         this.idShipping = idShipping;
         this.idReceiver = idReceiver;
         this.sendedDate = sendedDate;
         this.arrivedDate = arrivedDate;
+        this.cost = cost;
     }
 
     public Integer getIdShipping() {
@@ -96,11 +102,11 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.idShipping = idShipping;
     }
 
-    public int getIdReceiver() {
+    public Integer getIdReceiver() {
         return idReceiver;
     }
 
-    public void setIdReceiver(int idReceiver) {
+    public void setIdReceiver(Integer idReceiver) {
         this.idReceiver = idReceiver;
     }
 
@@ -159,6 +165,15 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     public void setEncoming(Encoming encoming) {
         this.encoming = encoming;
     }
+    
+    
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 
     @Override
     public int hashCode() {
@@ -182,7 +197,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.pruebaelementos.Shipping[ idShipping=" + idShipping + " ]";
+        return "com.encoming.encoming.entity.Shipping[ idShipping=" + idShipping + " ]";
     }
 
     @Override
@@ -192,6 +207,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         shippingVo.setIdEncoming(getEncoming().getIdEncoming());
         shippingVo.setIdPerson(getPerson().getIdPerson());
         shippingVo.setIdReceiver(getIdReceiver());
+        shippingVo.setCost(getCost());
         shippingVo.setIdRoute(getRoute().getIdRoute());
         shippingVo.setIdShipping(getIdShipping());
         shippingVo.setIdVehicle(getVehicle().getIdVehicle());
@@ -203,4 +219,6 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         shippingVo.setSendedDate(getSendedDate());
         return shippingVo;
     }
+
+
 }

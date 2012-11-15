@@ -4,7 +4,11 @@
  */
 package com.encoming.encoming.businesslogic.service;
 
+import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.dao.RouteDAO;
+import com.encoming.encoming.dao.ShippingDAO;
 import com.encoming.encoming.vo.RouteVo;
+import com.encoming.encoming.vo.ShippingVo;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -30,7 +34,9 @@ public class RouteService implements IService<RouteVo>{
 
     @Override
     public RouteVo find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        RouteDAO dao = DAOFactory.getInstance().getRouteDAO();
+        RouteVo routevo = dao.find(id, em).toVo();
+        return routevo;
     }
 
     @Override
