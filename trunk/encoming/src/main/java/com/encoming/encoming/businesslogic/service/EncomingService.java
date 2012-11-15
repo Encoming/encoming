@@ -5,8 +5,8 @@
 package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
-import com.encoming.encoming.entity.Package;
-import com.encoming.encoming.vo.PackageVo;
+import com.encoming.encoming.entity.Encoming;
+import com.encoming.encoming.vo.EncomingVo;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -14,35 +14,35 @@ import javax.persistence.EntityManager;
  *
  * @author FAMILIA
  */
-public class PackageService implements IService<PackageVo>{
+public class EncomingService implements IService<EncomingVo>{
     
-    private static PackageService instance;
+    private static EncomingService instance;
 
-    public static synchronized PackageService getInstance() {
+    public static synchronized EncomingService getInstance() {
         if (instance == null) {
-            instance = new PackageService();
+            instance = new EncomingService();
         }
         return instance;
     }
 
     @Override
-    public void persist(PackageVo vo, EntityManager em) {
-        Package entity = new Package();
+    public void persist(EncomingVo vo, EntityManager em) {
+        Encoming entity = new Encoming();
         entity.setType(vo.getType());
         entity.setVolume(vo.getVolume());
         entity.setPriority(vo.getPriority());
         entity.setWeight(vo.getWeight());
 
-        DAOFactory.getInstance().getPackageDAO().persist(entity, em);
+        DAOFactory.getInstance().getEncomingDAO().persist(entity, em);
     }
 
     @Override
-    public PackageVo find(Object id, EntityManager em) {
+    public EncomingVo find(Object id, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void update(PackageVo vo, EntityManager em) {
+    public void update(EncomingVo vo, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -52,7 +52,7 @@ public class PackageService implements IService<PackageVo>{
     }
 
     @Override
-    public List<PackageVo> getList(EntityManager em) {
+    public List<EncomingVo> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

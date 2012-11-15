@@ -32,7 +32,8 @@ public class PointDAO implements IDAO<Point> {
 
     @Override
     public Point find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createQuery("SELECT p FROM Point p WHERE p.idPoint=:idPoint").setParameter("idPoint", id);
+        return (Point)query.getSingleResult();
     }
 
     @Override

@@ -4,8 +4,8 @@
  */
 package com.encoming.encoming.presentation.controller;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -14,7 +14,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class AdminMenuBean {
+public class AdminMenuBean implements Serializable{
 
     private String page = "/createEncoming.xhtml";
             

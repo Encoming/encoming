@@ -20,15 +20,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author andres
  */
 @Entity
-@Table(name = "invoice")
-@XmlRootElement
+@Table(name = "Invoice")
 @NamedQueries({
     @NamedQuery(name = "Invoice.findAll", query = "SELECT i FROM Invoice i"),
     @NamedQuery(name = "Invoice.findByIdInvoice", query = "SELECT i FROM Invoice i WHERE i.idInvoice = :idInvoice"),
@@ -60,11 +58,8 @@ public class Invoice implements Serializable, IEntity<InvoiceVo> {
     private Date moment;
     @JoinColumn(name = "Shipping_idShipping", referencedColumnName = "idShipping")
     @ManyToOne(optional = false)
-    private Shipping shippingidShipping;
+    private Shipping shipping;
     @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
-    @ManyToOne(optional = false)
-    private Package packageidPackage;
-    @JoinColumn(name = "encoming", referencedColumnName = "idEncoming")
     @ManyToOne(optional = false)
     private Encoming encoming;
 
@@ -114,20 +109,12 @@ public class Invoice implements Serializable, IEntity<InvoiceVo> {
         this.moment = moment;
     }
 
-    public Shipping getShippingidShipping() {
-        return shippingidShipping;
+    public Shipping getShipping() {
+        return shipping;
     }
 
-    public void setShippingidShipping(Shipping shippingidShipping) {
-        this.shippingidShipping = shippingidShipping;
-    }
-
-    public Package getPackageidPackage() {
-        return packageidPackage;
-    }
-
-    public void setPackageidPackage(Package packageidPackage) {
-        this.packageidPackage = packageidPackage;
+    public void setShipping(Shipping shippingidShipping) {
+        this.shipping = shippingidShipping;
     }
 
     public Encoming getEncoming() {
@@ -137,7 +124,7 @@ public class Invoice implements Serializable, IEntity<InvoiceVo> {
     public void setEncoming(Encoming encoming) {
         this.encoming = encoming;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -160,17 +147,18 @@ public class Invoice implements Serializable, IEntity<InvoiceVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.encoming.entity.Invoice[ idInvoice=" + idInvoice + " ]";
+        return "com.encoming.pruebaelementos.Invoice[ idInvoice=" + idInvoice + " ]";
     }
 
     @Override
     public InvoiceVo toVo() {
         InvoiceVo invoiceVo = new InvoiceVo();
+        invoiceVo.setIdEncoming(getEncoming().getIdEncoming());
         invoiceVo.setIdInvoice(getIdInvoice());
-        invoiceVo.setSender(getSender());
+        invoiceVo.setIdShipping(getShipping().getIdShipping());
         invoiceVo.setMoment(getMoment());
-        invoiceVo.setShippingidShipping(getShippingidShipping());
-        invoiceVo.setPackageidPackage(getPackageidPackage());
+        invoiceVo.setReceiver(getReceiver());
+        invoiceVo.setSender(getSender());
         return invoiceVo;
     }
 }

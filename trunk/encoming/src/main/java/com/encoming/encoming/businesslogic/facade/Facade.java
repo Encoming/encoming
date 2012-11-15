@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.validation.ConstraintViolationException;
 
 public class Facade<VO> {
 
@@ -26,7 +27,7 @@ public class Facade<VO> {
             tx.begin();
             service.persist(vo, em);
             tx.commit();
-        } catch (Exception e) {
+        } catch (ConstraintViolationException e) {
             e.printStackTrace();
             if (em != null && tx != null) {
                 tx.rollback();

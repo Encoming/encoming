@@ -29,16 +29,20 @@ public class FacadeFactory {
     public PointFacade getPointFacade() {
         return new PointFacade(PU, ServiceFactory.getInstance().getPointService());
     }
-    
+
     public PersonFacade getPersonFacade() {
         return new PersonFacade(PU, ServiceFactory.getInstance().getPersonService());
     }
-    
+
     public DriverFacade getDriverFacade() {
         return new DriverFacade(PU, ServiceFactory.getInstance().getDriverService());
     }
-    
-    public PackageFacade getPackageFacade() {
-        return new PackageFacade (PU, ServiceFactory.getInstance().getPackageService());
+
+    public VehicleFacade getVehicleFacade() {
+        return new VehicleFacade(PU, ServiceFactory.getInstance().getVehicleService());
+    }
+
+    public EncomingFacade getEncomingFacade() {
+        return new EncomingFacade(PU, ServiceFactory.getInstance().getEncomingService());
     }
 }

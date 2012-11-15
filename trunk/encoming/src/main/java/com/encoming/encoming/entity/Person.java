@@ -4,7 +4,6 @@
  */
 package com.encoming.encoming.entity;
 
-import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.PersonVo;
 import java.io.Serializable;
 import java.util.List;
@@ -62,8 +61,6 @@ public class Person implements Serializable ,IEntity<PersonVo> {
     @Size(max = 25)
     @Column(name = "adress")
     private String adress;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
-    private List<Client> clientList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
     private List<Administrator> administratorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personidPerson")
@@ -128,15 +125,6 @@ public class Person implements Serializable ,IEntity<PersonVo> {
 
     public void setAdress(String adress) {
         this.adress = adress;
-    }
-
-    @XmlTransient
-    public List<Client> getClientList() {
-        return clientList;
-    }
-
-    public void setClientList(List<Client> clientList) {
-        this.clientList = clientList;
     }
 
     @XmlTransient

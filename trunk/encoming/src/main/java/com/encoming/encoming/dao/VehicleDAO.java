@@ -8,6 +8,7 @@ import com.encoming.encoming.entity.Vehicle;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 
 /**
  *

@@ -1,15 +1,15 @@
 package com.encoming.encoming.presentation.controller;
 
+import com.encoming.encoming.businesslogic.facade.EncomingFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
-import com.encoming.encoming.businesslogic.facade.PackageFacade;
-import com.encoming.encoming.vo.ClientVo;
+import com.encoming.encoming.vo.EncomingVo;
 import com.encoming.encoming.vo.PersonVo;
-import com.encoming.encoming.vo.PackageVo;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
@@ -19,7 +19,7 @@ import org.primefaces.event.FlowEvent;
  * @author Andrezz
  */
 @ManagedBean
-@ApplicationScoped
+@RequestScoped
 public class EncomiendaBean {
     
     private boolean skip;
@@ -34,7 +34,7 @@ public class EncomiendaBean {
     private String type;
     private String volume;
     private String priority;
-    private String weigth;
+    private float weigth;
     private String originCity;
     private String destinationCity;
     
@@ -47,7 +47,7 @@ public class EncomiendaBean {
     
      public void addPerson(ActionEvent actionEvent) {
 
-        //        Persona que envia el paquete
+//                Persona que envia el paquete
         PersonVo personVo = new PersonVo();
         personVo.setName(getName());
         personVo.setLastName(getLastNames());
@@ -56,10 +56,8 @@ public class EncomiendaBean {
         personVo.setPhone(getPhone());
         personVo.setAdress(getAdress());
         createperson(personVo);
-        
-        ClientVo clientVo = new ClientVo();
 
-//        Persona que recibe el paquete
+//      Persona que recibe el paquete
         PersonVo personRVo = new PersonVo();
         personRVo.setName(getNameReceiver());
         personRVo.setLastName(getLastNamesReceiver());
@@ -69,15 +67,15 @@ public class EncomiendaBean {
         personRVo.setAdress(getAdressReceiver());
         createperson(personRVo);
         
-        //   Persistencia del paquete q se va a enviar        
-        PackageVo packageVo = new PackageVo();
+        //   Persistencia del paquete q se va a enviar  
+        EncomingVo encomingVo = new EncomingVo();
         //packageVo.setIdPackage(0);
-        packageVo.setPriority(getPriority());
-        packageVo.setType(getType());
-        packageVo.setVolume(getVolume());
-        packageVo.setWeight(Float.parseFloat(getWeigth()));
-        PackageFacade packageFacade = FacadeFactory.getInstance().getPackageFacade();
-        packageFacade.persist(packageVo);
+        encomingVo.setPriority(getPriority());
+        encomingVo.setType(getType());
+        encomingVo.setVolume(getVolume());
+        encomingVo.setWeight(75);
+        EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
+        encomingFacade.persist(encomingVo);
     }
 
     public void createperson(PersonVo person) {
@@ -93,10 +91,6 @@ public class EncomiendaBean {
     public static Logger getLogger() {
         return logger;
     }
-
-    public static void setLogger(Logger aLogger) {
-        logger = aLogger;
-    }    
     
     public String getName() {
         return name;
@@ -170,11 +164,11 @@ public class EncomiendaBean {
         this.priority = priority;
     }
 
-    public String getWeigth() {
+    public float getWeigth() {
         return weigth;
     }
 
-    public void setWeigth(String weigth) {
+    public void setWeigth(float weigth) {
         this.weigth = weigth;
     }
 
@@ -248,8 +242,8 @@ public class EncomiendaBean {
     }
 
     public String onFlowProcess(FlowEvent event) {
-        getLogger().info("Current wizard step:" + event.getOldStep());
-        getLogger().info("Next step:" + event.getNewStep());
+        getLogger().log(Level.INFO, "Current wizard step:{0}", event.getOldStep());
+        getLogger().log(Level.INFO, "Next step:{0}", event.getNewStep());
 
         if (isSkip()) {
             setSkip(false);   //reset in case user goes back  

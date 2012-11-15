@@ -97,7 +97,7 @@ public class PointBean implements Serializable {
             List<PointVo> pointList = FacadeFactory.getInstance().getPointFacade().getList();
             if (pointList != null) {
                 for (PointVo point : pointList) {
-                    points.add(new SelectItem(point.getName()));
+                    points.add(new SelectItem(point.getIdPoint(),point.getName()));
                 }
             }
         }
@@ -137,12 +137,11 @@ public class PointBean implements Serializable {
 
     public String getInitialCoordinates() {
         String coordinates;
-        PointVo pointVo = null;
         try {
-            pointVo = getPointsVo().get(0);
+            PointVo pointVo = getPointsVo().get(0);
             coordinates = pointVo.getLatitude() + "," + pointVo.getLongitude();
         } catch (Exception e) {
-            coordinates="4.636253254870502,-74.06657649212656";
+            coordinates = "4.636253254870502,-74.06657649212656";
         }
         return coordinates;
     }

@@ -21,5 +21,21 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
+    <managed-bean>
+        <description>Bean para administracion de Vehiculos</description>
+        <managed-bean-name>vehicleBean</managed-bean-name>
+        <managed-bean-class>com.encoming.encoming.presentation.controller.VehicleBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>addVehicleBean</managed-bean-name>
+        <managed-bean-class>com.encoming.encoming.presentation.controller.AddVehicleBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <description>Control de Conductores</description>
+        <managed-bean-name>driverBean</managed-bean-name>
+        <managed-bean-class>com.encoming.encoming.presentation.controller.DriverBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

@@ -5,7 +5,6 @@
 package com.encoming.encoming.entity;
 
 import com.encoming.encoming.vo.DriverVo;
-import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.VehicleVo;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -131,9 +130,9 @@ public class Driver implements Serializable,IEntity<DriverVo>{
         driverVo.setIdDriver(getIdDriver());
         driverVo.setLicense(getLicense());        
         List<VehicleVo> vehicleVos = new ArrayList<VehicleVo>();
-        for(Vehicle entity : getVehicleList()){
-            vehicleVos.add(entity.toVo());
-        }
+//        for(Vehicle entity : getVehicleList()){
+//            vehicleVos.add(entity.toVo());
+//        }
         driverVo.setVehicleList(vehicleVos);
         driverVo.setPersonidPerson(getPersonidPerson());
         return driverVo;

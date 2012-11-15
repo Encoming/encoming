@@ -16,29 +16,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author andres
  */
 @Entity
-@Table(name = "shipping")
-@XmlRootElement
+@Table(name = "Shipping")
 @NamedQueries({
     @NamedQuery(name = "Shipping.findAll", query = "SELECT s FROM Shipping s"),
     @NamedQuery(name = "Shipping.findByIdShipping", query = "SELECT s FROM Shipping s WHERE s.idShipping = :idShipping"),
-    @NamedQuery(name = "Shipping.findByIdReceiver", query = "SELECT s FROM Shipping s WHERE s.idReceiver = :idReceiver")})
-public class Shipping implements Serializable,IEntity<ShippingVo> {
+    @NamedQuery(name = "Shipping.findByIdReceiver", query = "SELECT s FROM Shipping s WHERE s.idReceiver = :idReceiver"),
+    @NamedQuery(name = "Shipping.findBySendedDate", query = "SELECT s FROM Shipping s WHERE s.sendedDate = :sendedDate"),
+    @NamedQuery(name = "Shipping.findByArrivedDate", query = "SELECT s FROM Shipping s WHERE s.arrivedDate = :arrivedDate")})
+public class Shipping implements Serializable, IEntity<ShippingVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,30 +49,30 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
     @NotNull
     @Column(name = "idReceiver")
     private int idReceiver;
-    @Basic (optional = false)
-    @Column (name = "sendedDate")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "sendedDate")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date sendedDate;
-    @Basic (optional = false)
-    @Column (name = "arrivedDate")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "arrivedDate")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date arrivedDate;
-    @JoinColumn(name = "Route_idRoute", referencedColumnName = "idRoute")
-    @ManyToOne(optional = false)
-    private Route routeidRoute;
-    @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
-    @ManyToOne(optional = false)
-    private Package packageidPackage;
-    @JoinColumns({
-        @JoinColumn(name = "Vehicle_plateNumber", referencedColumnName = "plateNumber"),
-        @JoinColumn(name = "Vehicle_plateLetters", referencedColumnName = "plateLetters")})
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
+    private List<Invoice> invoiceList;
+    @JoinColumn(name = "Vehicle_idVehicle", referencedColumnName = "idVehicle")
     @ManyToOne(optional = false)
     private Vehicle vehicle;
-    @JoinColumn(name = "Client_idClient", referencedColumnName = "idClient")
+    @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)
-    private Client clientidClient;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shippingidShipping")
-    private List<Invoice> invoiceList;
+    private Person person;
+    @JoinColumn(name = "Route_idRoute", referencedColumnName = "idRoute")
+    @ManyToOne(optional = false)
+    private Route route;
+    @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
+    @ManyToOne(optional = false)
+    private Encoming encoming;
 
     public Shipping() {
     }
@@ -81,9 +81,11 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         this.idShipping = idShipping;
     }
 
-    public Shipping(Integer idShipping, int idReceiver) {
+    public Shipping(Integer idShipping, int idReceiver, Date sendedDate, Date arrivedDate) {
         this.idShipping = idShipping;
         this.idReceiver = idReceiver;
+        this.sendedDate = sendedDate;
+        this.arrivedDate = arrivedDate;
     }
 
     public Integer getIdShipping() {
@@ -102,38 +104,6 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         this.idReceiver = idReceiver;
     }
 
-    public Route getRouteidRoute() {
-        return routeidRoute;
-    }
-
-    public void setRouteidRoute(Route routeidRoute) {
-        this.routeidRoute = routeidRoute;
-    }
-
-    public Package getPackageidPackage() {
-        return packageidPackage;
-    }
-
-    public void setPackageidPackage(Package packageidPackage) {
-        this.packageidPackage = packageidPackage;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public Client getClientidClient() {
-        return clientidClient;
-    }
-
-    public void setClientidClient(Client clientidClient) {
-        this.clientidClient = clientidClient;
-    }
-
     public Date getSendedDate() {
         return sendedDate;
     }
@@ -150,13 +120,44 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
         this.arrivedDate = arrivedDate;
     }
 
-    @XmlTransient
     public List<Invoice> getInvoiceList() {
         return invoiceList;
     }
 
     public void setInvoiceList(List<Invoice> invoiceList) {
         this.invoiceList = invoiceList;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public Encoming getEncoming() {
+        return encoming;
+    }
+
+    public void setEncoming(Encoming encoming) {
+        this.encoming = encoming;
     }
 
     @Override
@@ -181,26 +182,25 @@ public class Shipping implements Serializable,IEntity<ShippingVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.encoming.entity.Shipping[ idShipping=" + idShipping + " ]";
+        return "com.encoming.pruebaelementos.Shipping[ idShipping=" + idShipping + " ]";
     }
-    
+
     @Override
-    public ShippingVo toVo(){
+    public ShippingVo toVo() {
         ShippingVo shippingVo = new ShippingVo();
-        shippingVo.setIdShipping(getIdShipping());
-        shippingVo.setIdReceiver(getIdReceiver());
-        shippingVo.setSendedDate(getSendedDate());
         shippingVo.setArrivedDate(getArrivedDate());
-        shippingVo.setRouteidRoute(getRouteidRoute());
-        shippingVo.setPackageidPackage(getPackageidPackage().getIdPackage());
-        shippingVo.setVehicle(getVehicle().getIdVehicle());
-        shippingVo.setClientidClient(getClientidClient().getIdClient());
+        shippingVo.setIdEncoming(getEncoming().getIdEncoming());
+        shippingVo.setIdPerson(getPerson().getIdPerson());
+        shippingVo.setIdReceiver(getIdReceiver());
+        shippingVo.setIdRoute(getRoute().getIdRoute());
+        shippingVo.setIdShipping(getIdShipping());
+        shippingVo.setIdVehicle(getVehicle().getIdVehicle());
         List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
-        for(Invoice entity : getInvoiceList()){
+        for (Invoice entity : getInvoiceList()) {
             invoiceVos.add(entity.toVo());
         }
         shippingVo.setInvoiceList(invoiceVos);
+        shippingVo.setSendedDate(getSendedDate());
         return shippingVo;
-    } 
-    
+    }
 }

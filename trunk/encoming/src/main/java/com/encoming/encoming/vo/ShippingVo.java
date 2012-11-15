@@ -4,28 +4,25 @@
  */
 package com.encoming.encoming.vo;
 
-import com.encoming.encoming.entity.Route;
-import com.encoming.encoming.entity.Vehicle;
 import java.util.Date;
 import java.util.List;
-import javax.enterprise.inject.New;
 
 /**
  *
  * @author FAMILIA
  */
 public class ShippingVo {
-    
+
     private Integer idShipping;
     private int idReceiver;
-    private Route routeidRoute;
-    private Integer packageidPackage;
-    private Integer vehicle;
-    private Integer clientidClient;
     private Date sendedDate;
     private Date arrivedDate;
     private List<InvoiceVo> invoiceList;
-
+    private Integer idVehicle;
+    private Integer idPerson;
+    private Integer idRoute;
+    private Integer idEncoming;
+    
     /**
      * @return the idShipping
      */
@@ -55,59 +52,31 @@ public class ShippingVo {
     }
 
     /**
-     * @return the routeidRoute
+     * @return the sendedDate
      */
-    public Route getRouteidRoute() {
-        return routeidRoute;
+    public Date getSendedDate() {
+        return sendedDate;
     }
 
     /**
-     * @param routeidRoute the routeidRoute to set
+     * @param sendedDate the sendedDate to set
      */
-    public void setRouteidRoute(Route routeidRoute) {
-        this.routeidRoute = routeidRoute;
+    public void setSendedDate(Date sendedDate) {
+        this.sendedDate = sendedDate;
     }
 
     /**
-     * @return the packageidPackage
+     * @return the arrivedDate
      */
-    public Integer getPackageidPackage() {
-        return packageidPackage;
+    public Date getArrivedDate() {
+        return arrivedDate;
     }
 
     /**
-     * @param packageidPackage the packageidPackage to set
+     * @param arrivedDate the arrivedDate to set
      */
-    public void setPackageidPackage(Integer packageidPackage) {
-        this.packageidPackage = packageidPackage;
-    }
-
-    /**
-     * @return the vehicle
-     */
-    public Integer getVehicle() {
-        return vehicle;
-    }
-
-    /**
-     * @param vehicle the vehicle to set
-     */
-    public void setVehicle(Integer vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    /**
-     * @return the clientidClient
-     */
-    public Integer getClientidClient() {
-        return clientidClient;
-    }
-
-    /**
-     * @param clientidClient the clientidClient to set
-     */
-    public void setClientidClient(Integer clientidClient) {
-        this.clientidClient = clientidClient;
+    public void setArrivedDate(Date arrivedDate) {
+        this.arrivedDate = arrivedDate;
     }
 
     /**
@@ -124,19 +93,59 @@ public class ShippingVo {
         this.invoiceList = invoiceList;
     }
 
-    public Date getSendedDate() {
-        return sendedDate;
+    /**
+     * @return the idVehicle
+     */
+    public Integer getIdVehicle() {
+        return idVehicle;
     }
 
-    public void setSendedDate(Date sendedDate) {
-        this.sendedDate = sendedDate;
+    /**
+     * @param idVehicle the idVehicle to set
+     */
+    public void setIdVehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
     }
 
-    public Date getArrivedDate() {
-        return arrivedDate;
+    /**
+     * @return the idPerson
+     */
+    public Integer getIdPerson() {
+        return idPerson;
     }
 
-    public void setArrivedDate(Date arrivedDate) {
-        this.arrivedDate = arrivedDate;
-    }       
+    /**
+     * @param idPerson the idPerson to set
+     */
+    public void setIdPerson(Integer idPerson) {
+        this.idPerson = idPerson;
+    }
+
+    /**
+     * @return the idRoute
+     */
+    public Integer getIdRoute() {
+        return idRoute;
+    }
+
+    /**
+     * @param idRoute the idRoute to set
+     */
+    public void setIdRoute(Integer idRoute) {
+        this.idRoute = idRoute;
+    }
+
+    /**
+     * @return the idPackage
+     */
+    public Integer getIdEncoming() {
+        return idEncoming;
+    }
+
+    /**
+     * @param idEncoming the idPackage to set
+     */
+    public void setIdEncoming(Integer idEncoming) {
+        this.idEncoming = idEncoming;
+    }
 }

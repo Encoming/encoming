@@ -4,19 +4,23 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.EncomingVo;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,22 +32,23 @@ import javax.validation.constraints.Size;
 @Table(name = "Encoming")
 @NamedQueries({
     @NamedQuery(name = "Encoming.findAll", query = "SELECT e FROM Encoming e"),
-    @NamedQuery(name = "Encoming.findByIdEncoming", query = "SELECT e FROM Encoming e WHERE e.idEncoming = :idEncoming"),
+    @NamedQuery(name = "Encoming.findByIdPackage", query = "SELECT e FROM Encoming e WHERE e.idEncoming = :idPackage"),
     @NamedQuery(name = "Encoming.findByType", query = "SELECT e FROM Encoming e WHERE e.type = :type"),
     @NamedQuery(name = "Encoming.findByVolume", query = "SELECT e FROM Encoming e WHERE e.volume = :volume"),
     @NamedQuery(name = "Encoming.findByPriority", query = "SELECT e FROM Encoming e WHERE e.priority = :priority"),
-    @NamedQuery(name = "Encoming.findByOrigin", query = "SELECT e FROM Encoming e WHERE e.origin = :origin"),
-    @NamedQuery(name = "Encoming.findByDestiny", query = "SELECT e FROM Encoming e WHERE e.destiny = :destiny")})
-public class Encoming implements Serializable {
+    @NamedQuery(name = "Encoming.findByWeight", query = "SELECT e FROM Encoming e WHERE e.weight = :weight"),
+    @NamedQuery(name = "Encoming.findByReceivedPacket", query = "SELECT e FROM Encoming e WHERE e.receivedPacket = :receivedPacket")})
+public class Encoming implements Serializable, IEntity<EncomingVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idEncoming")
+    @Column(name = "idPackage")
     private Integer idEncoming;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 20)
     @Column(name = "type")
     private String type;
     @Basic(optional = false)
@@ -58,40 +63,32 @@ public class Encoming implements Serializable {
     private String priority;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "origin")
-    private String origin;
+    @Column(name = "weight")
+    private float weight;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "destiny")
-    private String destiny;
-    @JoinColumn(name = "Vehicle_idVehicle", referencedColumnName = "idVehicle")
-    @ManyToOne(optional = false)
-    private Vehicle vehicleidVehicle;
-    @JoinColumn(name = "client", referencedColumnName = "idClient")
-    @ManyToOne(optional = false)
-    private Client client;
-    @JoinColumn(name = "route", referencedColumnName = "idRoute")
-    @ManyToOne(optional = false)
-    private Route route;
+    @Column(name = "received_packet")
+    @Temporal(TemporalType.DATE)
+    private Date receivedPacket;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
     private List<Invoice> invoiceList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
+    private List<Shipping> shippingList;
 
     public Encoming() {
     }
 
-    public Encoming(Integer idEncoming) {
-        this.idEncoming = idEncoming;
+    public Encoming(Integer idPackage) {
+        this.idEncoming = idPackage;
     }
 
-    public Encoming(Integer idEncoming, String type, String volume, String priority, String origin, String destiny) {
-        this.idEncoming = idEncoming;
+    public Encoming(Integer idPackage, String type, String volume, String priority, float weight, Date receivedPacket) {
+        this.idEncoming = idPackage;
         this.type = type;
         this.volume = volume;
         this.priority = priority;
-        this.origin = origin;
-        this.destiny = destiny;
+        this.weight = weight;
+        this.receivedPacket = receivedPacket;
     }
 
     public Integer getIdEncoming() {
@@ -126,44 +123,20 @@ public class Encoming implements Serializable {
         this.priority = priority;
     }
 
-    public String getOrigin() {
-        return origin;
+    public float getWeight() {
+        return weight;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 
-    public String getDestiny() {
-        return destiny;
+    public Date getReceivedPacket() {
+        return receivedPacket;
     }
 
-    public void setDestiny(String destiny) {
-        this.destiny = destiny;
-    }
-
-    public Vehicle getVehicleidVehicle() {
-        return vehicleidVehicle;
-    }
-
-    public void setVehicleidVehicle(Vehicle vehicleidVehicle) {
-        this.vehicleidVehicle = vehicleidVehicle;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setReceivedPacket(Date receivedPacket) {
+        this.receivedPacket = receivedPacket;
     }
 
     public List<Invoice> getInvoiceList() {
@@ -172,6 +145,14 @@ public class Encoming implements Serializable {
 
     public void setInvoiceList(List<Invoice> invoiceList) {
         this.invoiceList = invoiceList;
+    }
+
+    public List<Shipping> getShippingList() {
+        return shippingList;
+    }
+
+    public void setShippingList(List<Shipping> shippingList) {
+        this.shippingList = shippingList;
     }
 
     @Override
@@ -196,7 +177,11 @@ public class Encoming implements Serializable {
 
     @Override
     public String toString() {
-        return "com.encoming.encoming.entity.Encoming[ idEncoming=" + idEncoming + " ]";
+        return "com.encoming.pruebaelementos.Encoming[ idPackage=" + idEncoming + " ]";
     }
-    
+
+    @Override
+    public EncomingVo toVo() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

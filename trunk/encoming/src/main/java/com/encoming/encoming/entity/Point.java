@@ -59,7 +59,7 @@ public class Point implements Serializable, IEntity<PointVo> {
     @JoinColumn(name = "route", referencedColumnName = "idRoute")
     @ManyToOne
     private Route route;
-    @OneToMany(mappedBy = "pointidPoint")
+    @OneToMany(mappedBy = "point")
     private List<Vehicle> vehicleList;
 
     public Point() {
