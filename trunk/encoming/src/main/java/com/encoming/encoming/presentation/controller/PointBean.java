@@ -34,6 +34,7 @@ public class PointBean implements Serializable {
     private double lat;
     private double lng;
     private List<SelectItem> points;
+    private List<SelectItem> latLngPoints;
     private List<PointVo> pointsVo;
 
     public PointBean() {
@@ -97,11 +98,24 @@ public class PointBean implements Serializable {
             List<PointVo> pointList = FacadeFactory.getInstance().getPointFacade().getList();
             if (pointList != null) {
                 for (PointVo point : pointList) {
-                    points.add(new SelectItem(point.getIdPoint(),point.getName()));
+                    points.add(new SelectItem(point.getIdPoint(), point.getName()));
                 }
             }
         }
         return points;
+    }
+
+    public List<SelectItem> getLatLngPoints() {
+        if (latLngPoints == null) {
+            latLngPoints = new ArrayList<SelectItem>();
+            List<PointVo> pointList = FacadeFactory.getInstance().getPointFacade().getList();
+            if (pointList != null) {
+                for (PointVo point : pointList) {
+                    latLngPoints.add(new SelectItem(point.getLatitude()+", "+point.getLongitude(), point.getName()));
+                }
+            }
+        }
+        return latLngPoints;
     }
 
     private List<PointVo> getPointsVo() {
@@ -144,5 +158,12 @@ public class PointBean implements Serializable {
             coordinates = "4.636253254870502,-74.06657649212656";
         }
         return coordinates;
+    }
+
+    /**
+     * @param latLngPoints the latLngPoints to set
+     */
+    public void setLatLngPoints(List<SelectItem> latLngPoints) {
+        this.latLngPoints = latLngPoints;
     }
 }

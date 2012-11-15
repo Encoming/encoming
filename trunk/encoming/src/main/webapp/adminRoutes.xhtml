@@ -43,8 +43,8 @@
                 }
 		
                 function getRoute(from, to) {
-                    gdir.load("from: " + from + " to: " + to,
-                    { "locale": "es", "travelMode" : G_TRAVEL_MODE_DRIVING }); 
+                    gdir.load("from: "+from+" to: "+to,
+                    { "locale": "es", "travelMode" : G_TRAVEL_MODE_DRIVING });
                 }
 	
                 function onGDirectionsLoad(){ 
@@ -78,8 +78,7 @@
                             <div class="controls">
                                 <h:selectOneMenu required="true" id="from"
                                                  requiredMessage = "¡Por favor selecciona una ciudad!">
-                                    <f:selectItem itemLabel=""/>
-                                    <f:selectItems value="#{pointBean.points}" />
+                                    <f:selectItems value="#{pointBean.latLngPoints}" />
                                     <f:validateLongRange minimum="1" />
                                 </h:selectOneMenu>
                             </div>
@@ -87,11 +86,11 @@
                             <div class="controls">
                                 <h:selectOneMenu required="true" id="to"
                                                  requiredMessage = "¡Por favor selecciona una ciudad!">
-                                    <f:selectItem itemLabel=""/>
-                                    <f:selectItems value="#{pointBean.points}" />
+                                    <f:selectItems value="#{pointBean.latLngPoints}" />
                                     <f:validateLongRange minimum="1" />
                                 </h:selectOneMenu>
                             </div>
+
                             <h:commandButton name="ruta" type="submit" value="Calcular ruta" class="btn btn-large btn-primary" />
 
                             <div id="map" style="width: 500px; height: 500px"></div>
