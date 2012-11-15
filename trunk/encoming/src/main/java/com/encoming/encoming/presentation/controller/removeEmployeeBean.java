@@ -5,8 +5,10 @@
 package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.AdministratorFacade;
+import com.encoming.encoming.businesslogic.facade.DriverFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
+import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.PersonVo;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -50,16 +52,19 @@ public class removeEmployeeBean {
     }
     
     public void delete(){
+        Object auxi;
         System.out.println("entro");
         System.out.println("id a buscar : " + auxPerson.getIdPerson());
         System.out.println("entro2");
         PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade(); 
+        DriverFacade drivFac = FacadeFactory.getInstance().getDriverFacade();
         AdministratorFacade adminFac = FacadeFactory.getInstance().getAdministratorFacade();   
         System.out.println("*******************crea las instanias");
-        adminFac.delete(auxPerson.getIdPerson());
-         System.out.println("*******************borra el admin");
-        personFac.delete(auxPerson.getIdPerson());
-         System.out.println("*******************borro la persona");
+        // try to delete a adminstrator and if it isn't then try to delete as a driver
+
+         //adminFac.delete(auxPerson.getIdPerson());
+         personFac.delete(auxPerson.getIdPerson());
+
         auxPerson = null;
         id = null;
     }

@@ -13,13 +13,14 @@
 
     <ui:define name="content">
         <p:tabView orientation="top" >  
-        <p:tab title="Nuevo Empleado">  
-        
+            
+        <p:tab title="Nuevo Administrador">  
+            
             <div class="span5 offset0">
                 <div class="hero-unit">
                     <f:view>
                         <h:form id="addEmployeeForm">
-                            <h2><big>Nuevo Empleado:</big></h2>
+                            <h2><big>Nuevo Administrador:</big></h2>
                             <p:separator/>
                             <h:messages for="addEmployeeForm" class="alert alert-error"/>
                             <div class="control-group">
@@ -62,6 +63,16 @@
                                     <p:message id="phoneMessage" for="phone" />
                                 </div>
                             </div>
+                            
+                           <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="adress" required="true" value="#{addEmployeeBean.adress}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="adress" value="Direcci&oacute;n" />
+                                    <p:message id="adressMessage" for="adress" />
+                                </div>
+                            </div>
+                            
                             <div class="control-group">
                                 <div class="controls">
                                     <p:inputText id="idAdministrator" required="true" value="#{addEmployeeBean.idAdministrator}"
@@ -106,8 +117,95 @@
                     </f:view>
                 </div>
             </div>
+        </p:tab>
+           
+                      
+            
+            <p:tab title="Nuevo Conductor">  
+        
+            <div class="span5 offset0">
+                <div class="hero-unit">
+                    <f:view>
+                        <h:form id="addDriverEmployeeForm">
+                            <h2><big>Nuevo Conductor:</big></h2>
+                            <p:separator/>
+                            <h:messages for="addDriverEmployeeForm" class="alert alert-error"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="idPerson" required="true" value="#{addDriverEmployeeBean.idPerson}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="idPerson" value="Id" />
+                                    <p:message id="idPersonMessage" for="idPerson" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="name" required="true" value="#{addDriverEmployeeBean.name}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="name" value="Nombre" />
+                                    <p:message id="nameMessage" for="name" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="lastName" required="true" value="#{addDriverEmployeeBean.lastName}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="lastName" value="Apellido" />
+                                    <p:message id="lastNameMessage" for="lastName" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="mail" required="true" value="#{addDriverEmployeeBean.mail}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="mail" value="Email" />
+                                    <p:message id="mailMessage" for="mail" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="phone" required="true" value="#{addDriverEmployeeBean.phone}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="phone" value="Teléfono" />
+                                    <p:message id="phoneMessage" for="phone" />
+                                </div>
+                            </div>
+                            
+                           <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="adress" required="true" value="#{addDriverEmployeeBean.adress}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="adress" value="Direcci&oacute;n" />
+                                    <p:message id="adressMessage" for="adress" />
+                                </div>
+                           </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="idDriver" required="true" value="#{addDriverEmployeeBean.idDriver}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="idDriver" value="Codigo de Conductor" />
+                                    <p:message id="idDriverMessage" for="idDriver" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <p:inputText id="license" required="true" value="#{addDriverEmployeeBean.license}"
+                                                 requiredMessage="Por favor completa este campo"/>
+                                    <p:watermark for="license" value="Licencia" />
+                                    <p:message id="licenseMessage" for="license" />
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                    <h:commandButton action="#{addDriverEmployeeBean.addDriver()}" value="Agregar" class="btn btn-large btn-primary" />
+                                    </div>
+                             </h:form>
+                    </f:view>
+                </div>
+            </div>
     
         </p:tab>
+                            
             <p:tab title="Borrar Empleado">   
                 <div class="span5 offset0">
                 <div class="hero-unit">
@@ -139,8 +237,9 @@
                     </f:view>
                 </div>
                 </div>
-        <!--<h:outputText value="BAJO MANTENIMIENTO"/>-->
+       
     </p:tab>
+                            
 </p:tabView>
         </ui:define>
 </ui:composition>

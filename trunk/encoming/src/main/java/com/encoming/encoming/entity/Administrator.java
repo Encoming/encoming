@@ -124,7 +124,9 @@ public class Administrator implements Serializable, IEntity<AdministratorVo> {
     
     @Override
     public AdministratorVo toVo(){
+        
         AdministratorVo administratorVo = new AdministratorVo();
+        administratorVo.setPersonidPerson(getPersonidPerson().getIdPerson());
         administratorVo.setIdAdministrator(getIdAdministrator());
         administratorVo.setPassword(getPassword());
         administratorVo.setUsername(getUsername());

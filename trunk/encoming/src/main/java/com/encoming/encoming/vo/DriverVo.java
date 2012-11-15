@@ -15,8 +15,9 @@ public class DriverVo implements IValueObject{
     
     private Integer idDriver;
     private String license;
-    private List<VehicleVo> vehicleList;
-    private Person personidPerson;
+    private List<VehicleVo> vehicleList = null;
+    private Integer personidPerson;
+    private final String type = "Conductor";
 
     /**
      * @return the idDriver
@@ -63,15 +64,19 @@ public class DriverVo implements IValueObject{
     /**
      * @return the personidPerson
      */
-    public Person getPersonidPerson() {
+    public Integer getPersonidPerson() {
         return personidPerson;
     }
 
     /**
      * @param personidPerson the personidPerson to set
      */
-    public void setPersonidPerson(Person personidPerson) {
+    public void setPersonidPerson(Integer personidPerson) {
         this.personidPerson = personidPerson;
+    }
+
+    public String getType() {
+        return type;
     }
 
   

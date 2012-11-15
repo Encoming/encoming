@@ -5,7 +5,16 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core">
-
+    <script type="text/javascript">
+        var type = 0;
+        function add(){
+            type = type+1;
+        } 
+        
+    </script>
+    
+     
+            
     <ui:define name="title">
         - Personal
     </ui:define>
@@ -13,8 +22,10 @@
     <ui:define name="content">
         <p:panel header="Todos los Empleados"> 
                 <h:form>  
-  
-    <p:dataTable id="dataTable" var="personVo" value="#{tableBeanEmpleados.employees}" widgetVar="personTable"   
+                    <p:accordionPanel dynamic="true" cache="true" multiple="true">  
+        <p:tab title="Administradores">  
+             
+            <p:dataTable id="dataTable" var="personVo" value="#{tableBeanEmpleados.employees}" widgetVar="personTable"   
             emptyMessage="No se encontraron empleados con el criterio de busqueda" filteredValue="#{tableBeanEmpleados.filteredEmployees}">  
   
          <f:facet name="header">  
@@ -45,12 +56,64 @@
                 headerText="Telefono" >  
             <h:outputText value="#{personVo.phone}" />  
         </p:column>  
-    </p:dataTable>  
+      <p:column id="adressDriverColumn"  
+                headerText="Direccion" >  
+                   <h:outputText value="#{personVo.adress}" />  
+        </p:column> 
+    </p:dataTable>   
+        </p:tab>  
+                        
+                        
+                        
+                        
+                        
+                        
+        <p:tab title="conductores">  
+           <p:dataTable id="dataDriverTable" var="personDriverVo" value="#{tableBeanEmpleados.employeesDrivers}" widgetVar="personDriverTable"   
+            emptyMessage="No se encontraron empleados con el criterio de busqueda" filteredValue="#{tableBeanEmpleados.filteredDriverEmployees}">  
+  
+         <f:facet name="header">  
+            <p:outputPanel>  
+                <h:outputText value="Buscar en todos los campos:    " />  
+                <p:inputText id="globalFilter" onkeyup="personDriverTable.filter()" style="width:150px" />  
+            </p:outputPanel>  
+        </f:facet>  
+  
+        <p:column id="idColumn" 
+                headerText="Documento" sortBy="#{personDriverVo.idPerson}" 
+                filterBy="#{personDriverVo.idPerson}" filterMatchMode="startsWith">  
+            <h:outputText value="#{personDriverVo.idPerson}" />  
+        </p:column>  
+  
+        <p:column id="nameColumn"  sortBy="#{personDriverVo.name}"
+                headerText="Nombre" filterBy="#{personDriverVo.name}" filterMatchMode="startsWith">  
+            <h:outputText value="#{personDriverVo.name}"  />  
+        </p:column>  
+  
+        <p:column id="lastNameColumn"    
+                  headerText="Apellidos" sortBy="#{personDriverVo.lastName}"  
+                >  
+            <h:outputText value="#{personDriverVo.phone}" />  
+        </p:column>  
+      
+               <p:column id="phoneDriverColumn"  
+                headerText="Telefono" >  
+            <h:outputText value="#{personDriverVo.phone}" />  
+        </p:column>  
+               <p:column id="adressDriverColumn"  
+                headerText="Direccion" >  
+                   <h:outputText value="#{personDriverVo.adress}" />  
+        </p:column> 
+    </p:dataTable>   
+        </p:tab>  
+    </p:accordionPanel>  
+  
+    
       
 </h:form>  
         </p:panel>
     </ui:define>
-
+     
 </ui:composition>
 
 
