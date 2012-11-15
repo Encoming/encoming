@@ -42,7 +42,7 @@ public class AdminMenuBean implements Serializable{
     }
     
     public void adminRoutes(){
-        page = "/adminRoutes.html";
+        page = "/adminRoutes.xhtml";
     }
     
     public void adminVehicles(){

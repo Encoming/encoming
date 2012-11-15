@@ -8,10 +8,11 @@
                 xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="title">
-        - Sucursales
+        Sucursales
     </ui:define>
 
     <ui:define name="content">
+                       
         <p:panel header="Administración de Sucursales">
             <style type="text/css">
                 .ui-growl {
@@ -30,9 +31,11 @@
                     </h:selectOneMenu>
                 </h:form>
             </div>
-
+            
+            <!-- mapTypeId: ROADMAP, SATELLITE, HYBRID, TERRAIN -->
+            
             <p:growl id="messages" showDetail="true" />
-            <p:gmap id="gmap" center="#{pointBean.initialCoordinates}" zoom="16" type="HYBRID"   
+            <p:gmap id="gmap" center="#{pointBean.initialCoordinates}" zoom="16" type="ROADMAP"   
                     style="width:600px;height:400px"  
                     model="#{pointBean.model}"   
                     onPointClick="handlePointClick(event);"   
@@ -71,7 +74,7 @@
                             position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())  
                         });  
 
-                        map.addOverlay(currentMarker);  
+                        map.addOverlay(currentMarker);
 
                         dlg.show();  
                     }     

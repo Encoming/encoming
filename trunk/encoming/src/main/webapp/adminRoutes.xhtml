@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:v="urn:schemas-microsoft-com:vml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        Rutas
+    </ui:define>
+
+    <ui:define name="content">
+        <h:head>
+            <META HTTP-EQUIV="Content-Type"/>
+
+            <style type="text/css">
+                .ui-growl {
+                    top: 10%;
+                }
+
+            </style>
+
+            <script type="text/javascript"
+                    src=" http://maps.google.com/?file=api&amp;v=2.x&amp;key=ABQIAAAAUnJY3ChJhF0YgyTSDJuVfBTqu-zEVMNfNVaqfAe9FKyfKhfBExSs9LrIQ7GOuBeSnaddg05sRmEBxQ">          
+            </script>        
+
+            <script type="text/javascript">
+                var map;
+                var gdir;
+                var geocoder = null;
+                
+                function load() {
+                    if (GBrowserIsCompatible()) {
+                        map = new GMap2(document.getElementById("map"));	
+                        gdir = new GDirections(map, document.getElementById("details"));
+                        GEvent.addListener(gdir, "load", onGDirectionsLoad);
+                        GEvent.addListener(gdir, "error", mostrarError);	
+                        getRoute("Bogota, Colombia", "Medellín, Colombia");	
+                    }
+                }
+		
+                function getRoute(from, to) {
+                    gdir.load("from: " + from + " to: " + to,
+                    { "locale": "es", "travelMode" : G_TRAVEL_MODE_DRIVING }); 
+                }
+	
+                function onGDirectionsLoad(){ 
+                    //Tiempo y Distancia
+                    document.getElementById("getDistance").innerHTML = gdir.getSummaryHtml(); 
+                } 
+	
+                function mostrarError(){
+                    if (gdir.getStatus().code == G_GEO_UNKNOWN_ADDRESS)
+                        alert("¡No se ha encontrado una ubicación geográfica que corresponda con la dirección especificada!");
+                    else if (gdir.getStatus().code == G_GEO_SERVER_ERROR)
+                        alert("¡No se ha podido procesar correctamente la solicitud de ruta o de códigos geográficos, sin saberse el motivo exacto del fallo!");
+                    else if (gdir.getStatus().code == G_GEO_MISSING_QUERY)
+                        alert("¡Falta el parámetro HTTP o no tiene valor alguno. En las solicitudes de códigos geográficos, esto significa que se ha especificado una dirección vacía!");
+                    else if (gdir.getStatus().code == G_GEO_BAD_KEY)
+                        alert("¡La clave proporcionada no es válida o no coincide con el dominio para el cual se ha indicado!");
+                    else if (gdir.getStatus().code == G_GEO_BAD_REQUEST)
+                        alert("¡No se ha podido analizar correctamente la solicitud de ruta!");
+                    else alert("Error desconocido.");
+	   
+                }
+            </script>
+        </h:head>
+        <h:body>
+            <div class="container">
+                <div class="row">
+                    <div class="span5 offset0">
+                        <form action="#" name="form_ruta" onsubmit="getRoute(this.from.value, this.to.value); return false">
+                            <h2>Calcular Rutas</h2>
+                            <label class="control-label " for="program">Ciudad de Partida:</label>
+                            <div class="controls">
+                                <h:selectOneMenu required="true" id="from"
+                                                 requiredMessage = "¡Por favor selecciona una ciudad!">
+                                    <f:selectItem itemLabel=""/>
+                                    <f:selectItems value="#{pointBean.points}" />
+                                    <f:validateLongRange minimum="1" />
+                                </h:selectOneMenu>
+                            </div>
+                            <label class="control-label " for="program">Ciudad de Destino:</label>
+                            <div class="controls">
+                                <h:selectOneMenu required="true" id="to"
+                                                 requiredMessage = "¡Por favor selecciona una ciudad!">
+                                    <f:selectItem itemLabel=""/>
+                                    <f:selectItems value="#{pointBean.points}" />
+                                    <f:validateLongRange minimum="1" />
+                                </h:selectOneMenu>
+                            </div>
+                            <h:commandButton name="ruta" type="submit" value="Calcular ruta" class="btn btn-large btn-primary" />
+
+                            <div id="map" style="width: 500px; height: 500px"></div>
+
+                        </form>
+                    </div>
+                    <div class="span5 offset0">
+                        <tr>
+                            <td>
+                                <strong>Detalles de la ruta:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <div id="getDistance"></div>
+                                <div id="details" style="width: 330px"></div>
+                            </td>
+                        </tr>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <script>
+                window.onload = load;
+                window.onunload = GUnload;
+            </script>
+        </h:body>
+    </ui:define>
+
+</ui:composition>
