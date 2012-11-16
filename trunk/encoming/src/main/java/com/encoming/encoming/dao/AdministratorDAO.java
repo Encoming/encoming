@@ -5,6 +5,7 @@
 package com.encoming.encoming.dao;
 
 import com.encoming.encoming.entity.Administrator;
+import java.util.ArrayList;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -47,7 +48,10 @@ public class AdministratorDAO implements IDAO<Administrator> {
 
     @Override
     public void delete(Object id, EntityManager em) {
+        System.out.println("entra ......en la dao");
         Administrator admin = find(id, em);
+        System.out.println("************ENCONTRO EL ADMIN" + admin.getUsername());
+        
         em.remove(admin);
     }
 
@@ -74,4 +78,16 @@ public class AdministratorDAO implements IDAO<Administrator> {
         }
         return administrator;
     }   
+    
+    public List<Administrator> Filter(Object param, EntityManager em){
+        List<Administrator> list;
+        Query q = em.createQuery("SELECT u FROM Administrador u WHERE "
+                + "u.person.idPerson LIKE % :param %"
+                + "OR u.person.name LIKE % :param % "
+                + "OR u.person.lastanames LIKE %:param%")
+                .setParameter("param", param);
+        list = q.getResultList();
+        return list;
+        
+    }
 }

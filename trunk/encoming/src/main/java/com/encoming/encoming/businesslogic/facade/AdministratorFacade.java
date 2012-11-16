@@ -6,6 +6,8 @@ package com.encoming.encoming.businesslogic.facade;
 
 import com.encoming.encoming.businesslogic.service.AdministratorService;
 import com.encoming.encoming.vo.AdministratorVo;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,6 +23,17 @@ public class AdministratorFacade extends Facade<AdministratorVo> {
         try {
             em = emf.createEntityManager();
             return ((AdministratorService)service).login(administratorVo, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
+    public ArrayList<AdministratorVo> filter(Object parameter){
+         try {
+            em = emf.createEntityManager();
+            return ((AdministratorService)service).filter(parameter, em);
         } finally {
             if (em != null) {
                 em.clear();

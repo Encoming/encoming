@@ -48,8 +48,8 @@ public class Driver implements Serializable,IEntity<DriverVo>{
     @Size(min = 1, max = 20)
     @Column(name = "license")
     private String license;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
-    private List<Vehicle> vehicleList;
+  /*  @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
+    private List<Vehicle> vehicleList = null;*/
     @JoinColumn(name = "Person_idPerson", referencedColumnName = "idPerson")
     @ManyToOne(optional = false)
     private Person personidPerson;
@@ -82,14 +82,14 @@ public class Driver implements Serializable,IEntity<DriverVo>{
         this.license = license;
     }
 
-    @XmlTransient
+  /*  @XmlTransient
     public List<Vehicle> getVehicleList() {
         return vehicleList;
     }
 
     public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
-    }
+    }*/
 
     public Person getPersonidPerson() {
         return personidPerson;
@@ -129,12 +129,17 @@ public class Driver implements Serializable,IEntity<DriverVo>{
         DriverVo driverVo = new DriverVo();
         driverVo.setIdDriver(getIdDriver());
         driverVo.setLicense(getLicense());        
+       /*     System.out.println("llega antes de pasar el list de vehiculos");
         List<VehicleVo> vehicleVos = new ArrayList<VehicleVo>();
-//        for(Vehicle entity : getVehicleList()){
-//            vehicleVos.add(entity.toVo());
-//        }
+        if(getVehicleList()!= null){
+            System.out.println("ENTRA EN EL FOR");
+        for(Vehicle entity : getVehicleList()){
+            vehicleVos.add(entity.toVo());
+        }
+        System.out.println("pasa el for");
         driverVo.setVehicleList(vehicleVos);
-        driverVo.setPersonidPerson(getPersonidPerson());
+        }   */
+        driverVo.setPersonidPerson(getPersonidPerson().getIdPerson());
         return driverVo;
     }
     

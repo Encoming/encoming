@@ -5,49 +5,115 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core">
-
+    <script type="text/javascript">
+        var type = 0;
+        function add(){
+            type = type+1;
+        } 
+        
+    </script>
+    
+     
+            
     <ui:define name="title">
         - Personal
     </ui:define>
 
     <ui:define name="content">
-        <p:panel header="Todos los Empleados">
-            <h:form>  
-                <p:dataTable id="dataTable" var="personVo" value="#{tableBeanEmpleados.employees}">  
-                    <f:facet name="header">  
-                        Empleados 
-                    </f:facet>  
-
-                    <p:column id="modelHeader" sortBy="#{personVo.idPerson}">  
-                        <f:facet name="header">  
-                            <h:outputText value="Documento" />  
-                        </f:facet>  
-                        <h:outputText value="#{personVo.idPerson}" />  
-                    </p:column>  
-
-                    <p:column sortBy="#{personVo.name}">  
-                        <f:facet name="header">  
-                            <h:outputText value="Nombre" />  
-                        </f:facet>  
-                        <h:outputText value="#{personVo.name}" />  
-                    </p:column>  
-
-                    <p:column sortBy="#{personVo.lastName}">  
-                        <f:facet name="header">  
-                            <h:outputText value="Apellidos" />  
-                        </f:facet>  
-                        <h:outputText value="#{personVo.lastName}" />  
-                    </p:column>  
-
-                    <p:column sortBy="#{personVo.phone}">  
-                        <f:facet name="header">  
-                            <h:outputText value="Teléfono" />  
-                        </f:facet>  
-                        <h:outputText value="#{personVo.phone}" />  
-                    </p:column>  
-                </p:dataTable>  
-            </h:form> 
+        <p:panel header="Todos los Empleados"> 
+                <h:form>  
+                    <p:accordionPanel dynamic="true" cache="true" multiple="true">  
+        <p:tab title="Administradores">  
+             
+            <p:dataTable id="dataTable" var="personVo" value="#{tableBeanEmpleados.employees}" widgetVar="personTable"   
+            emptyMessage="No se encontraron empleados con el criterio de busqueda" filteredValue="#{tableBeanEmpleados.filteredEmployees}">  
+  
+         <f:facet name="header">  
+            <p:outputPanel>  
+                <h:outputText value="Buscar en todos los campos:    " />  
+                <p:inputText id="globalFilter" onkeyup="personTable.filter()" style="width:150px" />  
+            </p:outputPanel>  
+        </f:facet>  
+  
+        <p:column id="idColumn" 
+                headerText="Documento" sortBy="#{personVo.idPerson}" 
+                filterBy="#{personVo.idPerson}" filterMatchMode="startsWith">  
+            <h:outputText value="#{personVo.idPerson}" />  
+        </p:column>  
+  
+        <p:column id="nameColumn"  sortBy="#{personVo.name}"
+                headerText="Nombre" filterBy="#{personVo.name}" filterMatchMode="startsWith">  
+            <h:outputText value="#{personVo.name}"  />  
+        </p:column>  
+  
+        <p:column id="lastNameColumn"    
+                  headerText="Apellidos" sortBy="#{personVo.lastName}"  
+                >  
+            <h:outputText value="#{personVo.lastName}" />  
+        </p:column>  
+  
+        <p:column id="phoneColumn"  
+                headerText="Telefono" >  
+            <h:outputText value="#{personVo.phone}" />  
+        </p:column>  
+      <p:column id="adressDriverColumn"  
+                headerText="Direccion" >  
+                   <h:outputText value="#{personVo.adress}" />  
+        </p:column> 
+    </p:dataTable>   
+        </p:tab>  
+                        
+                        
+                        
+                        
+                        
+                        
+        <p:tab title="conductores">  
+           <p:dataTable id="dataDriverTable" var="personDriverVo" value="#{tableBeanEmpleados.employeesDrivers}" widgetVar="personDriverTable"   
+            emptyMessage="No se encontraron empleados con el criterio de busqueda" filteredValue="#{tableBeanEmpleados.filteredDriverEmployees}">  
+  
+         <f:facet name="header">  
+            <p:outputPanel>  
+                <h:outputText value="Buscar en todos los campos:    " />  
+                <p:inputText id="globalFilter" onkeyup="personDriverTable.filter()" style="width:150px" />  
+            </p:outputPanel>  
+        </f:facet>  
+  
+        <p:column id="idColumn" 
+                headerText="Documento" sortBy="#{personDriverVo.idPerson}" 
+                filterBy="#{personDriverVo.idPerson}" filterMatchMode="startsWith">  
+            <h:outputText value="#{personDriverVo.idPerson}" />  
+        </p:column>  
+  
+        <p:column id="nameColumn"  sortBy="#{personDriverVo.name}"
+                headerText="Nombre" filterBy="#{personDriverVo.name}" filterMatchMode="startsWith">  
+            <h:outputText value="#{personDriverVo.name}"  />  
+        </p:column>  
+  
+        <p:column id="lastNameColumn"    
+                  headerText="Apellidos" sortBy="#{personDriverVo.lastName}"  
+                >  
+            <h:outputText value="#{personDriverVo.phone}" />  
+        </p:column>  
+      
+               <p:column id="phoneDriverColumn"  
+                headerText="Telefono" >  
+            <h:outputText value="#{personDriverVo.phone}" />  
+        </p:column>  
+               <p:column id="adressDriverColumn"  
+                headerText="Direccion" >  
+                   <h:outputText value="#{personDriverVo.adress}" />  
+        </p:column> 
+    </p:dataTable>   
+        </p:tab>  
+    </p:accordionPanel>  
+  
+    
+      
+</h:form>  
         </p:panel>
     </ui:define>
-
+     
 </ui:composition>
+
+

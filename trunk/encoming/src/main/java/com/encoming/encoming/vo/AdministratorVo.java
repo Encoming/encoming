@@ -15,7 +15,7 @@ public class AdministratorVo implements IValueObject{
     private String username;
     private String password;
     private Integer personidPerson;
-
+    private final String type = "Administrador";
     /**
      * @return the idAdministrator
      */

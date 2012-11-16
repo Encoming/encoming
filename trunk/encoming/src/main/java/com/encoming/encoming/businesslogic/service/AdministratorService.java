@@ -89,4 +89,13 @@ public class AdministratorService implements IService<AdministratorVo> {
         Administrator administrator = DAOFactory.getInstance().getAdministratorDAO().login(entity, em);
         return administrator != null? administrator.toVo():null;
     }
+    
+    public ArrayList<AdministratorVo> filter(Object parameter, EntityManager em){
+        List<Administrator> list = DAOFactory.getInstance().getAdministratorDAO().Filter(parameter, em);
+        ArrayList<AdministratorVo> adminsFilters = new ArrayList();
+         for(Administrator p : list){
+            adminsFilters.add(p.toVo());
+        }
+        return adminsFilters;
+    }
 }

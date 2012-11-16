@@ -4,15 +4,13 @@
  */
 package com.encoming.encoming.presentation.controller;
 
-import com.encoming.encoming.businesslogic.facade.AdministratorFacade;
+import com.encoming.encoming.businesslogic.facade.DriverFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
-import com.encoming.encoming.vo.AdministratorVo;
+import com.encoming.encoming.vo.DriverVo;
 import com.encoming.encoming.vo.PersonVo;
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -20,7 +18,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @RequestScoped
-public class AddEmployeeBean {
+public class AddDriverEmployeeBean {
 
     private Integer idPerson;
     private String name;
@@ -29,45 +27,11 @@ public class AddEmployeeBean {
     private Integer phone;
     private String adress;
     
-    private Integer idAdministrator;
-    private String username;
-    private String password;
-    private Integer personidPerson;
-    
-    
+    private String license;
+    private Integer idDriver;
 
-    public Integer getPersonidPerson() {
-        return personidPerson;
+    public AddDriverEmployeeBean() {
     }
-
-    public void setPersonidPerson(Integer personidPerson) {
-        this.personidPerson = personidPerson;
-    }
-
-    public Integer getIdAdministrator() {
-        return idAdministrator;
-    }
-
-    public void setIdAdministrator(Integer idAdministrator) {
-        this.idAdministrator = idAdministrator;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
- 
 
     public Integer getIdPerson() {
         return idPerson;
@@ -117,12 +81,26 @@ public class AddEmployeeBean {
         this.adress = adress;
     }
 
-    
-    public AddEmployeeBean() {
+    public String getLicense() {
+        return license;
     }
-    public void addEmployee(){
-        this.personidPerson = idPerson;
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public Integer getIdDriver() {
+        return idDriver;
+    }
+
+    public void setIdDriver(Integer idDriver) {
+        this.idDriver = idDriver;
+    }
+    
+    
+    public void addDriver(){
         PersonVo personVo = new PersonVo();
+        
         personVo.setAdress(adress);
         personVo.setIdPerson(idPerson);
         personVo.setLastName(lastName);
@@ -130,17 +108,15 @@ public class AddEmployeeBean {
         personVo.setName(name);
         personVo.setPhone(phone);
         
-        AdministratorVo adminVo = new AdministratorVo();
-        adminVo.setIdAdministrator(idAdministrator);
-        adminVo.setPassword(password);
-        adminVo.setUsername(username);     
-        adminVo.setPersonidPerson(personidPerson);
+        
+        DriverVo driverVo = new DriverVo();
+        driverVo.setIdDriver(idDriver);
+        driverVo.setLicense(license);
+        driverVo.setPersonidPerson(idPerson);
         
         PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade(); 
-        AdministratorFacade adminFac = FacadeFactory.getInstance().getAdministratorFacade();   
-        
+        DriverFacade driverFac = FacadeFactory.getInstance().getDriverFacade();
         personFac.persist(personVo);
-        adminFac.persist(adminVo);
+        driverFac.persist(driverVo);
     }
-
 }
