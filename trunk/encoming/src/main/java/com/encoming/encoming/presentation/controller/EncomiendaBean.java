@@ -52,9 +52,15 @@ public class EncomiendaBean {
     private Integer phoneReceiver;
     private String mailReceiver;
     private String adressReceiver;
-    private Date fecha = new Date();
-    SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault());
-    String fecha2 = formato2.format(fecha);
+    private boolean validator = true;
+
+    public String dateTime() {
+        Date fecha = new Date();
+        SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault());
+        String fecha2 = formato2.format(fecha);
+        return fecha2;
+
+    }
 
     public void addPerson(ActionEvent actionEvent) {
 
@@ -69,7 +75,8 @@ public class EncomiendaBean {
         personVo.setAdress(getAdress());
         try {
             createperson(personVo);
-        } catch (Exception copo) {
+        } catch (Exception e) {
+            validator = false;
             addMessage("Error al ingresar la persona");
         }
 
@@ -84,25 +91,28 @@ public class EncomiendaBean {
         personRVo.setAdress(getAdressReceiver());
         try {
             createperson(personRVo);
-        } catch (Exception copo) {
+        } catch (Exception e) {
+            validator = false;
             addMessage("Error al ingresar la persona");
         }
 
+
+        if (validator) {
 //        Persistencia del paquete q se va a enviar  
-        EncomingVo encomingVo = new EncomingVo();
-        encomingVo.setPriority(getPriority());
-        encomingVo.setType(getType());
-        encomingVo.setVolume(getVolume());
-        encomingVo.setWeight(getWeigth());
-        encomingVo.setReceived_packet(fecha2);
-        try {
-            createencoming(encomingVo);
-        } catch (Exception copo) {
-            addMessage("error al asignar el paquete");
-        }
+            EncomingVo encomingVo = new EncomingVo();
+            encomingVo.setPriority(getPriority());
+            encomingVo.setType(getType());
+            encomingVo.setVolume(getVolume());
+            encomingVo.setWeight(getWeigth());
+            encomingVo.setReceived_packet(dateTime());
+            try {
+                createencoming(encomingVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("error al asignar el paquete");
+            }
 
 //        Creacion de una shipping
-
             ShippingVo shippingVo = new ShippingVo();
             shippingVo.setIdReceiver(getIdReceiver());
             shippingVo.setIdPerson(getIdPerson());
@@ -111,14 +121,18 @@ public class EncomiendaBean {
             shippingVo.setIdRoute(1);
             shippingVo.setSendedDate(null);
             shippingVo.setArrivedDate(null);
-        try {
-            createshipping(shippingVo);
+            try {
+                createshipping(shippingVo);
 
-        } catch (Exception e) {
-            addMessage("Si aparece esot sirve!!!");
+            } catch (Exception e) {
+                validator = false;
+                addMessage("Si aparece esot sirve!!!");
+            }
         }
 
-        addMessage("Los datos han sido guardados");
+        if (validator) {
+            addMessage("Los datos han sido guardados");
+        }
     }
 
     public void createshipping(ShippingVo shipping) {
@@ -128,17 +142,6 @@ public class EncomiendaBean {
 
     public void createperson(PersonVo person) {
         PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
-//        if (personFacade != null) {
-//            user.setUsername(personFacade.getUsername());
-//            user.setPersonidPerson(personFacade.getPersonidPerson());
-//            user.setLoggedIn(true);
-//            return "success";
-//        } else {
-//            FacesContext.getCurrentInstance().addMessage(
-//                    "loginForm:idUser", new FacesMessage(
-//                    "¡Id de usuario o contraseña inválidos!"));
-//            return "failure";
-//        }
         personFacade.persist(person);
     }
 
@@ -146,14 +149,6 @@ public class EncomiendaBean {
         EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
         encomingFacade.persist(paquete);
 
-    }
-
-    public void validar() {
-        String origen = getOriginCity();
-        String destiny = getDestinationCity();
-        if (origen == destiny) {
-            addMessage("LAs ciudades son iguales");
-        }
     }
 
     public void addMessage(String summary) {
