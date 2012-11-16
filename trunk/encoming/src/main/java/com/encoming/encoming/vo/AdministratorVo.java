@@ -70,7 +70,5 @@ public class AdministratorVo implements IValueObject{
      */
     public void setPersonidPerson(Integer personidPerson) {
         this.personidPerson = personidPerson;
-    }
-   
-    
+    } 
 }

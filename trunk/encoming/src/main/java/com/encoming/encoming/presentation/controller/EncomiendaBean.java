@@ -5,6 +5,7 @@ import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.businesslogic.facade.ShippingFacade;
 import com.encoming.encoming.vo.EncomingVo;
+import com.encoming.encoming.vo.InvoiceVo;
 import com.encoming.encoming.vo.PersonVo;
 import com.encoming.encoming.vo.PointVo;
 import com.encoming.encoming.vo.ShippingVo;
@@ -18,6 +19,8 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -28,7 +31,7 @@ import org.primefaces.event.FlowEvent;
  * @author Andrezz
  */
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class EncomiendaBean {
 
     private List<SelectItem> points;
@@ -63,8 +66,6 @@ public class EncomiendaBean {
     }
 
     public void addPerson(ActionEvent actionEvent) {
-
-
 //        Persona que envia el paquete
         PersonVo personVo = new PersonVo();
         personVo.setName(getName());
@@ -96,7 +97,6 @@ public class EncomiendaBean {
             addMessage("Error al ingresar la persona");
         }
 
-
         if (validator) {
 //        Persistencia del paquete q se va a enviar  
             EncomingVo encomingVo = new EncomingVo();
@@ -111,25 +111,24 @@ public class EncomiendaBean {
                 validator = false;
                 addMessage("error al asignar el paquete");
             }
-
 //        Creacion de una shipping
             ShippingVo shippingVo = new ShippingVo();
             shippingVo.setIdReceiver(getIdReceiver());
             shippingVo.setIdPerson(getIdPerson());
+            shippingVo.setCost(2333.02);
             shippingVo.setIdEncoming(encomingVo.getIdEncoming());
-            shippingVo.setIdVehicle(1);
-            shippingVo.setIdRoute(1);
+            shippingVo.setIdVehicle(23);
+            shippingVo.setIdRoute(22);
             shippingVo.setSendedDate(null);
             shippingVo.setArrivedDate(null);
+            shippingVo.setIdInvoice(idReceiver);
             try {
                 createshipping(shippingVo);
-
             } catch (Exception e) {
                 validator = false;
-                addMessage("Si aparece esot sirve!!!");
+                addMessage("Si aparece esto sirve!!!");
             }
         }
-
         if (validator) {
             addMessage("Los datos han sido guardados");
         }

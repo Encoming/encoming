@@ -80,7 +80,7 @@
                                 <h:outputLabel for="weigth" value="Peso (Kg): *" />
                                 <h:inputText id="weigth" required="true" value="#{encomiendaBean.weigth}"
                                              requiredMessage="¡Por favor ingrese el peso del paquete!" >
-                                    <f:validateDoubleRange minimum="0.00" maximum="100.00" />
+                                    <f:validateDoubleRange minimum="1.00" maximum="100.00" />
                                 </h:inputText>
                                 <h:outputLabel for="originCity" value="Ciudad de Origen: *" />
                                 <h:selectOneMenu id="point" required="true" value="#{encomiendaBean.originCity}"

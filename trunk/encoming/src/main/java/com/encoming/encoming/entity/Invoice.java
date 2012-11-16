@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -56,8 +57,10 @@ public class Invoice implements Serializable, IEntity<InvoiceVo> {
     @Column(name = "moment")
     @Temporal(TemporalType.DATE)
     private Date moment;
-    @JoinColumn(name = "Shipping_idShipping", referencedColumnName = "idShipping")
-    @ManyToOne(optional = false)
+//    @JoinColumn(name = "Shipping_idShipping", referencedColumnName = "idShipping")
+//    @ManyToOne(optional = false)
+    
+    @OneToOne
     private Shipping shipping;
     @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
     @ManyToOne(optional = false)

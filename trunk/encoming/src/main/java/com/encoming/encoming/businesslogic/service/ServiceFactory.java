@@ -46,4 +46,8 @@ public class ServiceFactory {
     public ShippingService getShippingService() {
         return ShippingService.getInstance();
     }
+
+    public InvoiceService getInvoiceService() {
+        return InvoiceService.getInstance();
+    }
 }

@@ -50,4 +50,8 @@ public class DAOFactory {
     public RouteDAO getRouteDAO() {
         return RouteDAO.getInstance();
     }
+    
+    public InvoiceDAO getInvoiceDAO() {
+        return InvoiceDAO.getInstance();
+    }
 }

@@ -4,14 +4,9 @@
  */
 package com.encoming.encoming.entity;
 
-import com.encoming.encoming.vo.InvoiceVo;
 import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,10 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -40,7 +33,15 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Shipping.findByArrivedDate", query = "SELECT s FROM Shipping s WHERE s.arrivedDate = :arrivedDate")})
 public class Shipping implements Serializable, IEntity<ShippingVo> {
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
     @Id
     @Basic(optional = false)
     //@NotNull
@@ -64,8 +65,8 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @NotNull
     @Column(name = "cost")
     private double cost;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
-    private List<Invoice> invoiceList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
+//    private List<Invoice> invoiceList;
     @JoinColumn(name = "Vehicle_idVehicle", referencedColumnName = "idVehicle")
     @ManyToOne(optional = false)
     private Vehicle vehicle;
@@ -78,6 +79,8 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
     @ManyToOne(optional = false)
     private Encoming encoming;
+    @OneToOne(mappedBy = "shipping")
+    private Invoice invoice;
 
     public Shipping() {
     }
@@ -86,12 +89,13 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.idShipping = idShipping;
     }
 
-    public Shipping(Integer idShipping, Integer idReceiver, String sendedDate, String arrivedDate,Double cost) {
+    public Shipping(Integer idShipping, Integer idReceiver, String sendedDate, String arrivedDate, Double cost) {
         this.idShipping = idShipping;
         this.idReceiver = idReceiver;
         this.sendedDate = sendedDate;
         this.arrivedDate = arrivedDate;
         this.cost = cost;
+
     }
 
     public Integer getIdShipping() {
@@ -126,14 +130,6 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.arrivedDate = arrivedDate;
     }
 
-    public List<Invoice> getInvoiceList() {
-        return invoiceList;
-    }
-
-    public void setInvoiceList(List<Invoice> invoiceList) {
-        this.invoiceList = invoiceList;
-    }
-
     public Vehicle getVehicle() {
         return vehicle;
     }
@@ -165,8 +161,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     public void setEncoming(Encoming encoming) {
         this.encoming = encoming;
     }
-    
-    
+
     public double getCost() {
         return cost;
     }
@@ -178,7 +173,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idShipping != null ? idShipping.hashCode() : 0);
+        hash += (getIdShipping() != null ? getIdShipping().hashCode() : 0);
         return hash;
     }
 
@@ -189,7 +184,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
             return false;
         }
         Shipping other = (Shipping) object;
-        if ((this.idShipping == null && other.idShipping != null) || (this.idShipping != null && !this.idShipping.equals(other.idShipping))) {
+        if ((this.getIdShipping() == null && other.getIdShipping() != null) || (this.getIdShipping() != null && !this.idShipping.equals(other.idShipping))) {
             return false;
         }
         return true;
@@ -197,7 +192,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.encoming.entity.Shipping[ idShipping=" + idShipping + " ]";
+        return "com.encoming.encoming.entity.Shipping[ idShipping=" + getIdShipping() + " ]";
     }
 
     @Override
@@ -210,15 +205,17 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         shippingVo.setCost(getCost());
         shippingVo.setIdRoute(getRoute().getIdRoute());
         shippingVo.setIdShipping(getIdShipping());
-        shippingVo.setIdVehicle(getVehicle().getIdVehicle());
-        List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
-        for (Invoice entity : getInvoiceList()) {
-            invoiceVos.add(entity.toVo());
-        }
-        shippingVo.setInvoiceList(invoiceVos);
         shippingVo.setSendedDate(getSendedDate());
+        shippingVo.setIdVehicle(getVehicle().getIdVehicle());
+        shippingVo.setIdInvoice(getInvoice().getIdInvoice());
         return shippingVo;
     }
 
+    public void setInvoice(Invoice invoice) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 
+    public Invoice getInvoice() {
+        return invoice;
+    }
 }

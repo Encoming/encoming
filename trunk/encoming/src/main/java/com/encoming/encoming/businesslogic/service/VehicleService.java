@@ -40,6 +40,7 @@ public class VehicleService implements IService<VehicleVo> {
         entity.setIdVehicle(vo.getIdVehicle());
         entity.setDriver(driver);
         entity.setCapacity(vo.getCapacity());
+        entity.setDestinationCity(vo.getDestinationCity());
         entity.setPlateLetters(vo.getPlateLetters());
         entity.setPlateNumber(vo.getPlateNumber());
         entity.setModel(vo.getModel());
@@ -63,6 +64,7 @@ public class VehicleService implements IService<VehicleVo> {
         entity.setDriver(driver);
         entity.setCapacity(vo.getCapacity());
         entity.setPlateLetters(vo.getPlateLetters());
+        entity.setDestinationCity(vo.getDestinationCity());
         entity.setPlateNumber(vo.getPlateNumber());
         entity.setModel(vo.getModel());
         DAOFactory.getInstance().getVehicleDAO().update(entity, em);
