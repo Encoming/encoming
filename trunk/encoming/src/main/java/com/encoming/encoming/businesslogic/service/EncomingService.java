@@ -6,10 +6,8 @@ package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
 import com.encoming.encoming.dao.EncomingDAO;
-import com.encoming.encoming.dao.PersonDAO;
 import com.encoming.encoming.entity.Encoming;
 import com.encoming.encoming.vo.EncomingVo;
-import com.encoming.encoming.vo.PersonVo;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -45,6 +43,13 @@ public class EncomingService implements IService<EncomingVo>{
         EncomingDAO dao = DAOFactory.getInstance().getEncomingDAO();
         EncomingVo encomingvo = dao.find(id, em).toVo();
         return encomingvo;
+    }
+    
+    //@Override
+    public Integer findMaxIdEncoming(EntityManager em) {
+        EncomingDAO dao = DAOFactory.getInstance().getEncomingDAO();
+        Integer a= dao.finMaxIdEncoming(em);
+        return a;
     }
 
     @Override

@@ -6,6 +6,7 @@ package com.encoming.encoming.dao;
 
 import com.encoming.encoming.entity.Encoming;
 import java.util.List;
+import javax.management.Query;
 import javax.persistence.EntityManager;
 
 /**
@@ -40,6 +41,12 @@ public class EncomingDAO implements IDAO<Encoming>{
         return (Encoming)query.getSingleResult();
     }
 
+    public Integer finMaxIdEncoming (EntityManager em) {
+        int id = 0;
+        javax.persistence.Query query = em.createQuery("SELECT Max(e.idEncoming) FROM Encoming e");
+        return (Integer)query.getSingleResult();
+    }
+    
     @Override
     public void update(Encoming entity, EntityManager em) {
         em.merge(entity);

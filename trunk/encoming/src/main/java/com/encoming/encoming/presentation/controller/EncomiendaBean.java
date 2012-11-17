@@ -116,7 +116,8 @@ public class EncomiendaBean {
             shippingVo.setIdReceiver(getIdReceiver());
             shippingVo.setIdPerson(getIdPerson());
             shippingVo.setCost(2333);
-            shippingVo.setIdEncoming(1);
+            shippingVo.setIdEncoming(findMaxIdEncoming());
+            //shippingVo.setIdEncoming(1);
             shippingVo.setIdVehicle(1);
             shippingVo.setIdRoute(1);
             shippingVo.setSendedDate(null);
@@ -138,6 +139,11 @@ public class EncomiendaBean {
         ShippingFacade shippingFacade = FacadeFactory.getInstance().getShippingFacade();
         shippingFacade.persist(shipping);
     }
+    
+    public Integer findMaxIdEncoming() {
+        EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
+        return encomingFacade.findMaxIdEncoming();
+    }    
 
     public void createperson(PersonVo person) {
         PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
