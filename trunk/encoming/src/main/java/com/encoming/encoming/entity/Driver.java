@@ -91,7 +91,7 @@ public class Driver implements Serializable,IEntity<DriverVo>{
         this.vehicleList = vehicleList;
     }
 
-    public Person getPersonidPerson() {
+    public Person getPerson() {
         return personidPerson;
     }
 
@@ -134,7 +134,7 @@ public class Driver implements Serializable,IEntity<DriverVo>{
 //            vehicleVos.add(entity.toVo());
 //        }
         driverVo.setVehicleList(vehicleVos);
-        driverVo.setPersonidPerson(getPersonidPerson());
+        driverVo.setPersonId(getPerson().getIdPerson());
         return driverVo;
     }
     

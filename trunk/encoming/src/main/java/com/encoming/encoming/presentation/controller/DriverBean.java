@@ -6,6 +6,7 @@ package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.vo.DriverVo;
+import com.encoming.encoming.vo.PersonVo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.SelectItem;
@@ -30,9 +31,9 @@ public class DriverBean {
             List<DriverVo> driverList = FacadeFactory.getInstance().getDriverFacade().getList();
             if (driverList != null) {
                 for (DriverVo driver : driverList) {
+                    PersonVo person = FacadeFactory.getInstance().getPersonFacade().find(driver.getPersonId());
                     drivers.add(new SelectItem(driver.getIdDriver(),
-                            driver.getPersonidPerson().getName() + " "
-                            + driver.getPersonidPerson().getLastanames()));
+                            person.getName() + " " + person.getLastName()));
                 }
             }
         }

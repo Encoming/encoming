@@ -37,7 +37,7 @@ public class DriverService implements IService<DriverVo> {
         DriverDAO dao = DAOFactory.getInstance().getDriverDAO();
         Driver driver =  new Driver();
         driver.setIdDriver(vo.getIdDriver());
-        Person person = persondao.find(vo.getPersonidPerson(), em);
+        Person person = persondao.find(vo.getPersonId(), em);
         driver.setPersonidPerson(person);
         driver.setLicense(vo.getLicense());
         dao.persist(driver, em);
@@ -56,7 +56,7 @@ public class DriverService implements IService<DriverVo> {
         DriverDAO dao = DAOFactory.getInstance().getDriverDAO();
         Driver driver =  new Driver();
         driver.setIdDriver(vo.getIdDriver());
-        Person person = persondao.find(vo.getPersonidPerson(), em);
+        Person person = persondao.find(vo.getPersonId(), em);
         driver.setPersonidPerson(person);
         driver.setLicense(vo.getLicense());
         dao.update(driver, em);

@@ -18,9 +18,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,11 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Route.findAll", query = "SELECT r FROM Route r"),
     @NamedQuery(name = "Route.findByIdRoute", query = "SELECT r FROM Route r WHERE r.idRoute = :idRoute"),
-    @NamedQuery(name = "Route.findByNumberKilometers", query = "SELECT r FROM Route r WHERE r.numberKilometers = :numberKilometers"),
-    @NamedQuery(name = "Route.findByNumberTolls", query = "SELECT r FROM Route r WHERE r.numberTolls = :numberTolls"),
-    @NamedQuery(name = "Route.findByDestinationCity", query = "SELECT r FROM Route r WHERE r.destinationCity = :destinationCity"),
-    @NamedQuery(name = "Route.findByOriginCity", query = "SELECT r FROM Route r WHERE r.originCity = :originCity")})
-public class Route implements Serializable,IEntity<RouteVo>{
+    @NamedQuery(name = "Route.findByNumberKilometers", query = "SELECT r FROM Route r WHERE r.numberKilometers = :numberKilometers")})
+public class Route implements Serializable, IEntity<RouteVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,20 +47,10 @@ public class Route implements Serializable,IEntity<RouteVo>{
     @NotNull
     @Column(name = "numberKilometers")
     private int numberKilometers;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "numberTolls")
-    private int numberTolls;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "destinationCity")
-    private String destinationCity;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "originCity")
-    private String originCity;
+    @OneToOne
+    private Point originPoint;
+    @OneToOne
+    private Point destinationPoint;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
     private List<Point> pointList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
@@ -78,9 +66,6 @@ public class Route implements Serializable,IEntity<RouteVo>{
     public Route(Integer idRoute, int numberKilometers, int numberTolls, String destinationCity, String originCity) {
         this.idRoute = idRoute;
         this.numberKilometers = numberKilometers;
-        this.numberTolls = numberTolls;
-        this.destinationCity = destinationCity;
-        this.originCity = originCity;
     }
 
     public Integer getIdRoute() {
@@ -99,30 +84,6 @@ public class Route implements Serializable,IEntity<RouteVo>{
         this.numberKilometers = numberKilometers;
     }
 
-    public int getNumberTolls() {
-        return numberTolls;
-    }
-
-    public void setNumberTolls(int numberTolls) {
-        this.numberTolls = numberTolls;
-    }
-
-    public String getDestinationCity() {
-        return destinationCity;
-    }
-
-    public void setDestinationCity(String destinationCity) {
-        this.destinationCity = destinationCity;
-    }
-
-    public String getOriginCity() {
-        return originCity;
-    }
-
-    public void setOriginCity(String originCity) {
-        this.originCity = originCity;
-    }
-
     @XmlTransient
     public List<Point> getPointList() {
         return pointList;
@@ -139,6 +100,22 @@ public class Route implements Serializable,IEntity<RouteVo>{
 
     public void setShippingList(List<Shipping> shippingList) {
         this.shippingList = shippingList;
+    }
+
+    public Point getOriginPoint() {
+        return originPoint;
+    }
+
+    public void setOriginPoint(Point originPoint) {
+        this.originPoint = originPoint;
+    }
+
+    public Point getDestinationPoint() {
+        return destinationPoint;
+    }
+
+    public void setDestinationPoint(Point destinationPoint) {
+        this.destinationPoint = destinationPoint;
     }
 
     @Override
@@ -165,25 +142,23 @@ public class Route implements Serializable,IEntity<RouteVo>{
     public String toString() {
         return "com.encoming.encoming.entity.Route[ idRoute=" + idRoute + " ]";
     }
-    
+
     @Override
-    public RouteVo toVo(){
+    public RouteVo toVo() {
         RouteVo routeVo = new RouteVo();
         routeVo.setNumberKilometers(getNumberKilometers());
-        routeVo.setNumberTolls(getNumberTolls());
-        routeVo.setDestinationCity(getDestinationCity());
-        routeVo.setOriginCity(getOriginCity());
+        routeVo.setOriginPoint(getOriginPoint().getIdPoint());
+        routeVo.setDestinationPoint(getDestinationPoint().getIdPoint());
         List<PointVo> pointVos = new ArrayList<PointVo>();
-        for(Point entity : getPointList()){
+        for (Point entity : getPointList()) {
             pointVos.add(entity.toVo());
         }
         routeVo.setPointList(pointVos);
         List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
-        for(Shipping entity : getShippingList()){
+        for (Shipping entity : getShippingList()) {
             shippingVos.add(entity.toVo());
         }
         routeVo.setShippingList(shippingVos);
         return routeVo;
-    } 
-    
+    }
 }

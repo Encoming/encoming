@@ -4,19 +4,18 @@
  */
 package com.encoming.encoming.vo;
 
-import com.encoming.encoming.entity.Person;
 import java.util.List;
 
 /**
  *
  * @author germanpineros
  */
-public class DriverVo implements IValueObject{
-    
+public class DriverVo implements IValueObject {
+
     private Integer idDriver;
     private String license;
     private List<VehicleVo> vehicleList;
-    private Person personidPerson;
+    private Integer personId;
 
     /**
      * @return the idDriver
@@ -61,18 +60,16 @@ public class DriverVo implements IValueObject{
     }
 
     /**
-     * @return the personidPerson
+     * @return the person
      */
-    public Person getPersonidPerson() {
-        return personidPerson;
+    public Integer getPersonId() {
+        return personId;
     }
 
     /**
-     * @param personidPerson the personidPerson to set
+     * @param person the person to set
      */
-    public void setPersonidPerson(Person personidPerson) {
-        this.personidPerson = personidPerson;
+    public void setPersonId(Integer person) {
+        this.personId = person;
     }
-
-  
 }
