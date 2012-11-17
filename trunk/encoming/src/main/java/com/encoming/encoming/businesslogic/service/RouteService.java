@@ -38,6 +38,12 @@ public class RouteService implements IService<RouteVo>{
         RouteVo routevo = dao.find(id, em).toVo();
         return routevo;
     }
+    
+     public Integer findIdRoute(String originCity, String destinationCity, EntityManager em) {
+        RouteDAO dao = DAOFactory.getInstance().getRouteDAO();
+        Integer a = dao.findIdRoute(originCity, destinationCity, em);
+        return a;
+    }
 
     @Override
     public void update(RouteVo vo, EntityManager em) {
@@ -53,5 +59,4 @@ public class RouteService implements IService<RouteVo>{
     public List<RouteVo> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

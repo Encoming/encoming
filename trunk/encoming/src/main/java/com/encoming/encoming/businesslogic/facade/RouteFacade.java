@@ -16,5 +16,17 @@ public class RouteFacade extends Facade<RouteVo> {
     public RouteFacade(String PUName, RouteService service){
         super(PUName, service);
     }    
+
+    public Integer findIdRoute(String originCity, String destinationCity) {
+        try {
+            em = emf.createEntityManager();
+            return ((RouteService) service).findIdRoute(originCity, destinationCity, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
     
 }

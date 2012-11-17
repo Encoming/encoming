@@ -42,7 +42,6 @@ public class EncomingDAO implements IDAO<Encoming>{
     }
 
     public Integer finMaxIdEncoming (EntityManager em) {
-        int id = 0;
         javax.persistence.Query query = em.createQuery("SELECT Max(e.idEncoming) FROM Encoming e");
         return (Integer)query.getSingleResult();
     }

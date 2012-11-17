@@ -34,6 +34,13 @@ public class PointDAO implements IDAO<Point> {
     public Point find(Object id, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public Integer finIdPoint(String originCity, EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT p.idPoint FROM Point p"
+                + " WHERE p.name=:originCity")
+                .setParameter("originCity", originCity);
+        return (Integer)query.getSingleResult();
+    }
 
     @Override
     public void update(Point entity, EntityManager em) {

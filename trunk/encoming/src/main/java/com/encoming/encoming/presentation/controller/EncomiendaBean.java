@@ -4,8 +4,10 @@ import com.encoming.encoming.businesslogic.facade.EncomingFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.businesslogic.facade.ShippingFacade;
+import com.encoming.encoming.businesslogic.facade.VehicleFacade;
+import com.encoming.encoming.businesslogic.facade.PointFacade;
+import com.encoming.encoming.businesslogic.facade.RouteFacade;
 import com.encoming.encoming.vo.EncomingVo;
-import com.encoming.encoming.vo.InvoiceVo;
 import com.encoming.encoming.vo.PersonVo;
 import com.encoming.encoming.vo.PointVo;
 import com.encoming.encoming.vo.ShippingVo;
@@ -17,9 +19,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -118,8 +118,8 @@ public class EncomiendaBean {
             shippingVo.setCost(2333);
             shippingVo.setIdEncoming(findMaxIdEncoming());
             //shippingVo.setIdEncoming(1);
-            shippingVo.setIdVehicle(1);
-            shippingVo.setIdRoute(1);
+            shippingVo.setIdVehicle(findFreeVehicle(findIdPoint(getOriginCity())));
+            shippingVo.setIdRoute(findIdRoute(getOriginCity(), getDestinationCity()));
             shippingVo.setSendedDate(null);
             shippingVo.setArrivedDate(null);
             //shippingVo.setIdInvoice(idReceiver);
@@ -132,6 +132,8 @@ public class EncomiendaBean {
         }
         if (validator) {
             addMessage("Los datos han sido guardados");
+        } else {
+            addMessage("Error!! Los datos no pudieron ser guardados");
         }
     }
 
@@ -143,7 +145,23 @@ public class EncomiendaBean {
     public Integer findMaxIdEncoming() {
         EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
         return encomingFacade.findMaxIdEncoming();
-    }    
+    }
+    
+    public Integer findIdRoute(String originCity, String destinationCity) {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        return routeFacade.findIdRoute(originCity, destinationCity);
+        
+    }
+    
+    public Integer findFreeVehicle (Integer idPoint) {
+        VehicleFacade vehicleFacade = FacadeFactory.getInstance().getVehicleFacade();
+        return vehicleFacade.findFreeVehicle(idPoint);
+    }
+    
+    public Integer findIdPoint (String originCity){
+        PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
+        return pointFacade.findIdPoint(originCity);
+    }
 
     public void createperson(PersonVo person) {
         PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();

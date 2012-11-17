@@ -50,4 +50,8 @@ public class ServiceFactory {
     public InvoiceService getInvoiceService() {
         return InvoiceService.getInstance();
     }
+
+    public RouteService getRouteService() {
+        return RouteService.getInstance();
+    }
 }

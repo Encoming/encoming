@@ -5,6 +5,7 @@
 package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.dao.PointDAO;
 import com.encoming.encoming.entity.Point;
 import com.encoming.encoming.vo.PointVo;
 import java.util.ArrayList;
@@ -41,6 +42,12 @@ public class PointService implements IService<PointVo> {
     @Override
     public PointVo find(Object id, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Integer findIdPoint(String originCity, EntityManager em) {
+        PointDAO dao = DAOFactory.getInstance().getPointDAO();
+        Integer a= dao.finIdPoint(originCity, em);
+        return a;
     }
 
     @Override

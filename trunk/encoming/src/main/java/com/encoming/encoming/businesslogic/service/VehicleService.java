@@ -56,6 +56,12 @@ public class VehicleService implements IService<VehicleVo> {
 
     }
 
+    public Integer findFreeVehicle (Integer idPoint, EntityManager em) {
+        VehicleDAO dao = DAOFactory.getInstance().getVehicleDAO();
+        Integer a = dao.findFreeVehicle(idPoint, em);
+        return a;
+    }
+    
     @Override
     public void update(VehicleVo vo, EntityManager em) {
         Vehicle entity = new Vehicle();

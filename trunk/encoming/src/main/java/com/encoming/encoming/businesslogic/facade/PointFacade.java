@@ -16,4 +16,17 @@ public class PointFacade extends Facade<PointVo> {
     public PointFacade(String PUName, PointService service) {
         super(PUName, service);
     }
+
+    public Integer findIdPoint(String originCity) {
+        try {
+            em = emf.createEntityManager();
+            Integer a;
+            return ((PointService) service).findIdPoint(originCity, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
 }

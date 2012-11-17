@@ -41,6 +41,13 @@ public class RouteDAO implements IDAO<Route> {
         return (Route) query.getSingleResult();
 
     }
+    
+    public Integer findIdRoute(String originCity, String destinationCity, EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT r.idRoute FROM Route r"
+                + " WHERE r.originCity=:originCity AND r.destinationCity=:destinationCity")
+                .setParameter("originCity", originCity).setParameter("destinationCity", destinationCity);
+        return (Integer)query.getSingleResult();
+    }
 
     @Override
     public void update(Route entity, EntityManager em) {
