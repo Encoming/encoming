@@ -27,7 +27,7 @@ public class Facade<VO> {
             service.persist(vo, em);
             tx.commit();
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             if (em != null && tx != null) {
                 tx.rollback();
             }

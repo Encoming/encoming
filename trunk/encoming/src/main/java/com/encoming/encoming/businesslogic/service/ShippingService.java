@@ -39,15 +39,15 @@ public class ShippingService implements IService<ShippingVo> {
     @Override
     public void persist(ShippingVo vo, EntityManager em) {
         Shipping entity = new Shipping();
-        entity.setIdShipping(vo.getIdShipping());
+        //entity.setIdShipping(vo.getIdShipping());
         entity.setIdReceiver(vo.getIdReceiver());
         entity.setArrivedDate(vo.getArrivedDate());
         entity.setSendedDate(vo.getSendedDate());
         entity.setCost(vo.getCost());
         
-        InvoiceDAO invoiceDAO = DAOFactory.getInstance().getInvoiceDAO();
-        Invoice invoice = invoiceDAO.find(vo.getIdInvoice(), em);
-        entity.setInvoice(invoice);
+//        InvoiceDAO invoiceDAO = DAOFactory.getInstance().getInvoiceDAO();
+//        Invoice invoice = invoiceDAO.find(vo.getIdInvoice(), em);
+//        entity.setInvoice(invoice);
         
         PersonDAO persondao = DAOFactory.getInstance().getPersonDAO();
         Person person = persondao.find(vo.getIdPerson(), em);

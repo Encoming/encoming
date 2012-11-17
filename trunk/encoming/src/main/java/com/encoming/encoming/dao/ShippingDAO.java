@@ -34,8 +34,9 @@ public class ShippingDAO implements IDAO<Shipping> {
     }
 
     @Override
-    public Shipping find(Object id, EntityManager em) {
-        Query query = em.createQuery("SELECT shi FROM Shipping shi "
+    public Shipping find(Object idA, EntityManager em) {
+        Integer id = (Integer) idA;
+        javax.persistence.Query query = em.createQuery("SELECT shi FROM Shipping shi "
                 + "WHERE shi.idShipping =:idShipping")
                 .setParameter("idShipping", id);
         return (Shipping) query.getSingleResult();

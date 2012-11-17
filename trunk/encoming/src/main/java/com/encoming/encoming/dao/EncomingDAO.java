@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Tutas
+ * @author Andrezz
  */
 public class EncomingDAO implements IDAO<Encoming>{
     
@@ -35,7 +35,7 @@ public class EncomingDAO implements IDAO<Encoming>{
     @Override
     public Encoming find(Object idA, EntityManager em) {
         Integer id = (Integer) idA;
-        javax.persistence.Query query = em.createNamedQuery("Package.findByIdPackage")
+        javax.persistence.Query query = em.createNamedQuery("Encoming.findByIdPackage")
                 .setParameter("idPackage", id);
         return (Encoming)query.getSingleResult();
     }

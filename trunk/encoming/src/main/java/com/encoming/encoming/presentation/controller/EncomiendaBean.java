@@ -78,7 +78,7 @@ public class EncomiendaBean {
             createperson(personVo);
         } catch (Exception e) {
             validator = false;
-            addMessage("Error al ingresar la persona");
+            addMessage("Error al ingresar el cliente");
         }
 
 
@@ -94,7 +94,7 @@ public class EncomiendaBean {
             createperson(personRVo);
         } catch (Exception e) {
             validator = false;
-            addMessage("Error al ingresar la persona");
+            addMessage("Error al ingresar el destinatario");
         }
 
         if (validator) {
@@ -115,18 +115,18 @@ public class EncomiendaBean {
             ShippingVo shippingVo = new ShippingVo();
             shippingVo.setIdReceiver(getIdReceiver());
             shippingVo.setIdPerson(getIdPerson());
-            shippingVo.setCost(2333.02);
-            shippingVo.setIdEncoming(encomingVo.getIdEncoming());
-            shippingVo.setIdVehicle(23);
-            shippingVo.setIdRoute(22);
+            shippingVo.setCost(2333);
+            shippingVo.setIdEncoming(1);
+            shippingVo.setIdVehicle(1);
+            shippingVo.setIdRoute(1);
             shippingVo.setSendedDate(null);
             shippingVo.setArrivedDate(null);
-            shippingVo.setIdInvoice(idReceiver);
+            //shippingVo.setIdInvoice(idReceiver);
             try {
                 createshipping(shippingVo);
             } catch (Exception e) {
                 validator = false;
-                addMessage("Si aparece esto sirve!!!");
+                addMessage("No se pudo guardar el envío");
             }
         }
         if (validator) {
