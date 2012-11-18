@@ -17,11 +17,12 @@
                 <h2><small>Sistema para la Gestión de Transportes y Encomiendas</small></h2>
                 <p:separator id="customSeparator1" style="width:970px;height:5px" />
                 <div class="span8">
-                    <h:commandButton href="#tab2" data-toggle="tab" value="Inicio" class="btn btn-success"/>
-                    <h:commandButton href="#tab1" data-toggle="tab" value="¿Quiénes Somos?" class="btn btn-success"/>
-                    <h:commandButton action="#{indexMenuBean.ourPoints()}" value="Consultar Sucursales" class="btn btn-success" />
-                    <h:commandButton action="#" update="pag" value="Consultar Precios" class="btn btn-success" />
-                    <h:commandButton action="#" update="pag" value="Encomiendas" class="btn btn-info" />
+                    <div class="btn-group">
+                        <button  class="btn btn-success" href="#tab1" data-toggle="tab">Inicio</button>
+                        <button  class="btn btn-success" href="#tab1" data-toggle="tab">¿Quiénes Somos?</button>
+                        <button  class="btn btn-success" href="#tab2" data-toggle="tab">Nuestras Sucursales</button>
+                        <button  class="btn btn-success" href="#tab2" data-toggle="tab">Nuestros Precios</button>
+                    </div>
                 </div>
                 <div>
                     <h3><a data-toggle="modal" href="#shareModal" class="btn btn-info">Iniciar Sesión</a></h3>
@@ -31,23 +32,14 @@
 
                 <div class="tabbable"> <!-- Only required for left/right tabs -->
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab1" data-toggle="tab">¿Quiénes Somos?</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Nuestras Sucursales</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Nuestros Precios</a></li>
-                        <div class="btn-group">
-                            <button  class="btn btn-success" href="#tab2" data-toggle="tab">Inicio</button>
-                            <button  class="btn btn-success" href="#tab1" data-toggle="tab">¿Quiénes Somos?</button>
-                            <button  class="btn btn-success" href="#tab1" data-toggle="tab">Nuestras Sucursales</button>
-                            <button  class="btn btn-success" href="#tab1" data-toggle="tab">¿Quiénes Somos?</button>
-                            <button  class="btn btn-success">3</button>
-                        </div>
+
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
-                            <p>I'm in Section 1.</p>
+                            <ui:include src="/whoAreWe.xhtml"/>
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <p>Howdy, I'm in Section 2.</p>
+                            <ui:include src="/ourPoints.xhtml"/>
                         </div>
                     </div>
                 </div>
