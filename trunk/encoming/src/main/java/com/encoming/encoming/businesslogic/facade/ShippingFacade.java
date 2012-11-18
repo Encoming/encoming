@@ -16,5 +16,17 @@ public class ShippingFacade extends Facade<ShippingVo> {
     public ShippingFacade(String PUName, ShippingService service){
         super(PUName, service);
     }    
+
+    public Integer findMaxIdShipping() {
+        try {
+            em = emf.createEntityManager();
+            return ((ShippingService) service).findMaxIdShipping(em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
     
 }

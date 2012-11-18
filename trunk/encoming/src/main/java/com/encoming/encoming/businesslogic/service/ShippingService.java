@@ -75,6 +75,12 @@ public class ShippingService implements IService<ShippingVo> {
         ShippingVo shippingvo = dao.find(id, em).toVo();
         return shippingvo;
     }
+    
+    public Integer findMaxIdShipping(EntityManager em) {
+        ShippingDAO dao = DAOFactory.getInstance().getShippingDAO();
+        Integer a= dao.finMaxIdShipping(em);
+        return a;
+    }
 
     @Override
     public void update(ShippingVo vo, EntityManager em) {

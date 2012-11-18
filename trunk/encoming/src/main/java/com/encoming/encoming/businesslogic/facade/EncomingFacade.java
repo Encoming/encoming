@@ -21,7 +21,6 @@ public class EncomingFacade extends Facade<EncomingVo> {
     public Integer findMaxIdEncoming() {
         try {
             em = emf.createEntityManager();
-            Integer a;
             return ((EncomingService) service).findMaxIdEncoming(em);
         } finally {
             if (em != null) {

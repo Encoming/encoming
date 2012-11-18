@@ -41,6 +41,11 @@ public class ShippingDAO implements IDAO<Shipping> {
                 .setParameter("idShipping", id);
         return (Shipping) query.getSingleResult();
     }
+    
+    public Integer finMaxIdShipping(EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT Max(s.idShipping) FROM Shipping s");
+        return (Integer)query.getSingleResult();
+    }
 
     @Override
     public void update(Shipping entity, EntityManager em) {
