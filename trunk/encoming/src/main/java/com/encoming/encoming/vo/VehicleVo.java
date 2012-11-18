@@ -176,4 +176,20 @@ public class VehicleVo implements IValueObject{
     public void setIdDriver(Integer idDriver) {
         this.idDriver = idDriver;
     }
+
+    @Override
+    public String toString() {
+        return "VehicleVo{" 
+                + "\n\tidVehicle=" + idVehicle 
+                + ",\n\t plateNumber=" + plateNumber 
+                + ",\n\t plateLetters=" + plateLetters 
+                + ",\n\t type=" + type 
+                + ",\n\t manufacturer=" + manufacturer 
+                + ",\n\t model=" + model 
+                + ",\n\t capacity=" + capacity 
+                + ",\n\t status=" + status 
+                + ",\n\t shippingList=" + shippingList 
+                + ",\n\t idPoint=" + idPoint 
+                + ",\n\t idDriver=" + idDriver + '}';
+    }
 }

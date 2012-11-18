@@ -4,13 +4,11 @@
  */
 package com.encoming.encoming.businesslogic.service;
 
-import com.encoming.encoming.dao.AdministratorDAO;
 import com.encoming.encoming.dao.DAOFactory;
 import com.encoming.encoming.dao.DriverDAO;
 import com.encoming.encoming.dao.PersonDAO;
 import com.encoming.encoming.entity.Driver;
 import com.encoming.encoming.entity.Person;
-import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.DriverVo;
 import java.util.ArrayList;
 import java.util.List;

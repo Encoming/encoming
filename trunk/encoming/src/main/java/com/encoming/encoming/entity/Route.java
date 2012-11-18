@@ -46,7 +46,7 @@ public class Route implements Serializable, IEntity<RouteVo> {
     @Basic(optional = false)
     @NotNull
     @Column(name = "numberKilometers")
-    private int numberKilometers;
+    private double numberKilometers;
     @OneToOne
     private Point originPoint;
     @OneToOne
@@ -76,11 +76,11 @@ public class Route implements Serializable, IEntity<RouteVo> {
         this.idRoute = idRoute;
     }
 
-    public int getNumberKilometers() {
+    public double getNumberKilometers() {
         return numberKilometers;
     }
 
-    public void setNumberKilometers(int numberKilometers) {
+    public void setNumberKilometers(double numberKilometers) {
         this.numberKilometers = numberKilometers;
     }
 

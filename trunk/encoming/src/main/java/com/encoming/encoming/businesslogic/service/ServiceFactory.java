@@ -42,4 +42,8 @@ public class ServiceFactory {
     public EncomingService getEncomingService() {
         return EncomingService.getInstance();
     }
+
+    public RouteService getRouteService() {
+        return RouteService.getInstance();
+    }
 }

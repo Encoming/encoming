@@ -4,6 +4,11 @@
  */
 package com.encoming.encoming.presentation.controller;
 
+import com.encoming.encoming.businesslogic.facade.FacadeFactory;
+import com.encoming.encoming.vo.PointVo;
+import com.encoming.encoming.vo.RouteVo;
+import com.encoming.encoming.vo.ShippingVo;
+import com.encoming.encoming.vo.VehicleVo;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -12,20 +17,70 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean
 public class OptimalRouteBean {
-    
-    String valor;
-    
+
+    double routeDistance;
+    RouteVo route;
+    PointVo origin;
+    PointVo destiny;
+    String originCoordinates;
+    String destinyCoordinates;
+
     /**
      * Creates a new instance of OptimalRouteBean
      */
     public OptimalRouteBean() {
+        VehicleVo vehicleVo = FacadeFactory.getInstance().getVehicleFacade().find(2);
+        ShippingVo shippingVo = vehicleVo.getShippingList().get(0);
+        System.out.println(vehicleVo);
+
+        route = FacadeFactory.getInstance().getRouteFacade().find(shippingVo.getIdRoute());
+
+        System.out.println(route);
+
+        origin = FacadeFactory.getInstance().getPointFacade().find(route.getOriginPointId());
+        destiny = FacadeFactory.getInstance().getPointFacade().find(route.getDestinationPointId());
     }
 
-    public String getValor() {
-        return valor;
+    public RouteVo getRoute() {
+        return route;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setRoute(RouteVo route) {
+        this.route = route;
+    }
+
+    public PointVo getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(PointVo origin) {
+        this.origin = origin;
+    }
+
+    public PointVo getDestiny() {
+        return destiny;
+    }
+
+    public void setDestiny(PointVo destiny) {
+        this.destiny = destiny;
+    }
+
+    public String getOriginCoordinates() {
+        return originCoordinates = origin.getLatitude() + ", " + origin.getLongitude();
+    }
+
+    public String getDestinyCoordinates() {
+        return destinyCoordinates = destiny.getLatitude() + ", " + destiny.getLongitude();
+    }
+
+    public double getRouteDistance() {
+        return routeDistance;
+    }
+
+    public void setRouteDistance(double routeDistance) {
+        this.route.setNumberKilometers(routeDistance);
+        System.out.println("Distancia actualizada = "+route.getNumberKilometers()+"-------------------------------");
+        
+        
     }
 }

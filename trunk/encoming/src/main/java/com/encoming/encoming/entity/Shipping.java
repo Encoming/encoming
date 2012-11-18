@@ -182,7 +182,16 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.pruebaelementos.Shipping[ idShipping=" + idShipping + " ]";
+        return "Shipping{"
+                + "\n\tidShipping=" + idShipping
+                + "\n\t, idReceiver=" + idReceiver
+                + "\n\t, sendedDate=" + sendedDate
+                + "\n\t, arrivedDate=" + arrivedDate
+                + "\n\t, invoiceList=" + invoiceList
+                + "\n\t, vehicle=" + vehicle
+                + "\n\t, person=" + person 
+                + "\n\t, route=" + route 
+                + "\n\t, encoming=" + encoming + '}';
     }
 
     @Override

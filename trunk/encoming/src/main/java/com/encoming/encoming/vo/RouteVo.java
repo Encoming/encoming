@@ -13,7 +13,7 @@ import java.util.List;
 public class RouteVo implements IValueObject{
     
     private Integer idRoute;
-    private int numberKilometers;
+    private double numberKilometers;
     private Integer destinationPoint;
     private Integer originPoint;
     private List<PointVo> pointList;
@@ -37,15 +37,16 @@ public class RouteVo implements IValueObject{
     /**
      * @return the numberKilometers
      */
-    public int getNumberKilometers() {
+    public double getNumberKilometers() {
         return numberKilometers;
     }
 
     /**
      * @param numberKilometers the numberKilometers to set
      */
-    public void setNumberKilometers(int numberKilometers) {
+    public void setNumberKilometers(double numberKilometers) {
         this.numberKilometers = numberKilometers;
+        System.out.println("RouteVo = "+getNumberKilometers()+"-------------------------------");
     }
 
     /**
@@ -59,7 +60,7 @@ public class RouteVo implements IValueObject{
      * @param pointList the pointList to set
      */
     public void setPointList(List<PointVo> pointList) {
-        this.setPointList(pointList);
+        this.pointList =pointList;
     }
 
     /**
@@ -73,13 +74,13 @@ public class RouteVo implements IValueObject{
      * @param shippingList the shippingList to set
      */
     public void setShippingList(List<ShippingVo> shippingList) {
-        this.setShippingList(shippingList);
+        this.shippingList=shippingList;
     }
 
     /**
      * @return the destinationPoint
      */
-    public Integer getDestinationPoint() {
+    public Integer getDestinationPointId() {
         return destinationPoint;
     }
 
@@ -93,7 +94,7 @@ public class RouteVo implements IValueObject{
     /**
      * @return the originPoint
      */
-    public Integer getOriginPoint() {
+    public Integer getOriginPointId() {
         return originPoint;
     }
 
@@ -103,4 +104,17 @@ public class RouteVo implements IValueObject{
     public void setOriginPoint(Integer originPoint) {
         this.originPoint = originPoint;
     }
+
+    @Override
+    public String toString() {
+        return "RouteVo{" 
+                + "  \n\tidRoute=" + idRoute 
+                + ", \n\tnumberKilometers=" + numberKilometers 
+                + ", \n\tdestinationPoint=" + destinationPoint 
+                + ", \n\toriginPoint=" + originPoint 
+                + ", \n\tpointList=" + pointList 
+                + ", \n\tshippingList=" + shippingList + '}';
+    }
+    
+    
 }
