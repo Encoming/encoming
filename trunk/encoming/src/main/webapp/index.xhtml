@@ -19,33 +19,53 @@
                 <div class="span8">
                     <div class="btn-group">
                         <button  class="btn btn-success" href="#tab1" data-toggle="tab">Inicio</button>
-                        <button  class="btn btn-success" href="#tab1" data-toggle="tab">¿Quiénes Somos?</button>
-                        <button  class="btn btn-success" href="#tab2" data-toggle="tab">Nuestras Sucursales</button>
-                        <button  class="btn btn-success" href="#tab2" data-toggle="tab">Nuestros Precios</button>
+                        <button  class="btn btn-success" href="#tab2" data-toggle="tab">¿Quiénes Somos?</button>
+                        <button  class="btn btn-success" href="#tab3" data-toggle="tab">Nuestras Sucursales</button>
+                        <button  class="btn btn-success" href="#tab4" data-toggle="tab">Nuestros Precios</button>
                     </div>
                 </div>
                 <div>
                     <h3><a data-toggle="modal" href="#shareModal" class="btn btn-info">Iniciar Sesión</a></h3>
                 </div>
                 <p:separator id="customSeparator2" style="width:970px;height:5px" />
-
-
-                <div class="tabbable"> <!-- Only required for left/right tabs -->
-                    <ul class="nav nav-tabs">
-
-                    </ul>
+                <div class="tabbable">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
-                            <ui:include src="/whoAreWe.xhtml"/>
+                            "INICIO"
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <ui:include src="/ourPoints.xhtml"/>
+                            <h1 style="color: #08c">¿Quiénes Somos?</h1>
+                            <h:outputText value="Somos una empresa que le permite a usted y a su empresa enviar paquetes y mercancias en el territorio Colombiano,
+                                          con excelentes tiempos de entrega. ENCOMING le ofrece la posibilidad de conocer el estado de su envío y posteriormente
+                                          obtener un certificado de entrega."/>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            "NUESTRAS SUCURSALES"
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                            <h:form>
+                                <p:dataTable var="Costs">
+                                    <p:column headerText="Ciudad de Origen">
+                                        <h:outputText value=""/>
+                                    </p:column>
+
+                                    <p:column headerText="Ciudad de Destino">
+                                        <h:outputText value="" />
+                                    </p:column>
+
+                                    <p:column headerText="Número de Km.">
+                                        <h:outputText value="" />
+                                    </p:column>
+
+                                    <p:column headerText="Costo del envío">
+                                        <h:outputText value="" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
         <div class="row">
             <div class="span0">
