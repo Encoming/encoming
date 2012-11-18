@@ -5,6 +5,7 @@
 package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.entity.Route;
 import com.encoming.encoming.dao.RouteDAO;
 import com.encoming.encoming.dao.ShippingDAO;
 import com.encoming.encoming.vo.RouteVo;
@@ -29,7 +30,13 @@ public class RouteService implements IService<RouteVo>{
 
     @Override
     public void persist(RouteVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Route entity = new Route();
+        entity.setDestinationCity(vo.getDestinationCity());
+        entity.setOriginCity(vo.getOriginCity());
+        entity.setNumberKilometers(vo.getNumberKilometers());
+        entity.setNumberTolls(vo.getNumberTolls());
+
+        DAOFactory.getInstance().getRouteDAO().persist(entity, em);
     }
 
     @Override
@@ -44,6 +51,12 @@ public class RouteService implements IService<RouteVo>{
         Integer a = dao.findIdRoute(originCity, destinationCity, em);
         return a;
     }
+     
+    public Integer findNewIdRoute(EntityManager em) {
+        RouteDAO dao = DAOFactory.getInstance().getRouteDAO();
+        Integer a = dao.findNewIdRoute(em);
+        return a;
+    } 
 
     @Override
     public void update(RouteVo vo, EntityManager em) {

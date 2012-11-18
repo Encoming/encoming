@@ -13,6 +13,7 @@ import com.encoming.encoming.vo.PersonVo;
 import com.encoming.encoming.vo.PointVo;
 import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.InvoiceVo;
+import com.encoming.encoming.vo.RouteVo;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,7 +132,7 @@ public class EncomiendaBean {
                 addMessage("No se pudo guardar el envío");
             }
         }
-        
+
         if (validator) {
             InvoiceVo invoiceVo = new InvoiceVo();
             invoiceVo.setIdEncoming(findMaxIdEncoming());
@@ -152,41 +153,62 @@ public class EncomiendaBean {
             addMessage("Error!! Los datos no pudieron ser guardados");
         }
     }
-    
+
     public Integer findMaxIdEncoming() {
         EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
         return encomingFacade.findMaxIdEncoming();
     }
-    
+
     public Integer findMaxIdShipping() {
         ShippingFacade shippingFacade = FacadeFactory.getInstance().getShippingFacade();
         return shippingFacade.findMaxIdShipping();
     }
-    
+
 //  Este método busca el id de una ruta teniendo en cuenta la cuidad de origen y la ciudad de destino    
     public Integer findIdRoute(String originCity, String destinationCity) {
         RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
-        return routeFacade.findIdRoute(originCity, destinationCity);
-        
+        Integer a = routeFacade.findIdRoute(originCity, destinationCity);
+        if (a != null) {
+            return a;
+        } else {
+            RouteVo routeVo = new RouteVo();
+            routeVo.setDestinationCity(getDestinationCity());
+            routeVo.setOriginCity(getOriginCity());
+            routeVo.setNumberKilometers(-1);
+            routeVo.setNumberTolls(-1);
+            try {
+                createRoute(routeVo);
+                return findNewIdRoute();
+            } catch (Exception e) {
+                validator = false;
+                addMessage("No se pudo crear una nueva ruta");
+            }
+            return 0;
+        }
     }
-    
+
 //  Este método busca el id de un vehículo que se encuentre en una ciudad y q además esté libre
-    public Integer findFreeVehicle (Integer idPoint) {
+    public Integer findFreeVehicle(Integer idPoint) {
         VehicleFacade vehicleFacade = FacadeFactory.getInstance().getVehicleFacade();
         return vehicleFacade.findFreeVehicle(idPoint);
     }
-  
+
 //  Este método busca el id de un punto teniendo en cuenta el nombre de una ciudad
-    public Integer findIdPoint (String originCity){
+    public Integer findIdPoint(String originCity) {
         PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
         return pointFacade.findIdPoint(originCity);
     }
-    
+
+    private Integer findNewIdRoute() {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        return routeFacade.findNewIdRoute();
+    }
+
     public void createshipping(ShippingVo shipping) {
         ShippingFacade shippingFacade = FacadeFactory.getInstance().getShippingFacade();
         shippingFacade.persist(shipping);
     }
-    
+
     public void createInvoice(InvoiceVo invoice) {
         InvoiceFacade invoiceFacade = FacadeFactory.getInstance().getInvoiceFacade();
         invoiceFacade.persist(invoice);
@@ -200,7 +222,11 @@ public class EncomiendaBean {
     public void createencoming(EncomingVo paquete) {
         EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
         encomingFacade.persist(paquete);
+    }
 
+    public void createRoute(RouteVo route) {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        routeFacade.persist(route);
     }
 
     public void addMessage(String summary) {

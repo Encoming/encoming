@@ -4,11 +4,9 @@
  */
 package com.encoming.encoming.dao;
 
-import com.encoming.encoming.entity.Route;
 import com.encoming.encoming.entity.Shipping;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *

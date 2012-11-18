@@ -9,6 +9,7 @@ import com.encoming.encoming.entity.Encoming;
 import com.encoming.encoming.entity.Route;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -43,9 +44,18 @@ public class RouteDAO implements IDAO<Route> {
     }
     
     public Integer findIdRoute(String originCity, String destinationCity, EntityManager em) {
-        javax.persistence.Query query = em.createQuery("SELECT r.idRoute FROM Route r"
-                + " WHERE r.originCity=:originCity AND r.destinationCity=:destinationCity")
-                .setParameter("originCity", originCity).setParameter("destinationCity", destinationCity);
+        try {
+            javax.persistence.Query query = em.createQuery("SELECT r.idRoute FROM Route r"
+                    + " WHERE r.originCity=:originCity AND r.destinationCity=:destinationCity")
+                    .setParameter("originCity", originCity).setParameter("destinationCity", destinationCity);
+            return (Integer) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
+    public Integer findNewIdRoute(EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT Max(r.idRoute) FROM Route r");
         return (Integer)query.getSingleResult();
     }
 
