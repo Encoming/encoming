@@ -4,9 +4,13 @@
  */
 package com.encoming.encoming.entity;
 
+import com.encoming.encoming.vo.InvoiceVo;
 import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -34,14 +39,6 @@ import javax.validation.constraints.NotNull;
 public class Shipping implements Serializable, IEntity<ShippingVo> {
 
     private static long serialVersionUID = 1L;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
-    }
     @Id
     @Basic(optional = false)
     //@NotNull
@@ -79,8 +76,10 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
     @ManyToOne(optional = false)
     private Encoming encoming;
-    @OneToOne(mappedBy = "shipping")
-    private Invoice invoice;
+//    @OneToOne(mappedBy = "shipping")
+//    private Invoice invoice
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
+    private List<Invoice> invoiceList;
 
     public Shipping() {
     }
@@ -207,15 +206,21 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         shippingVo.setIdShipping(getIdShipping());
         shippingVo.setSendedDate(getSendedDate());
         shippingVo.setIdVehicle(getVehicle().getIdVehicle());
-        shippingVo.setIdInvoice(getInvoice().getIdInvoice());
+        
+        List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
+        for(Invoice entity : getInvoiceList()){
+            invoiceVos.add(entity.toVo());
+        }
+        shippingVo.setInvoiceList(invoiceVos);
+        
         return shippingVo;
     }
 
-    public void setInvoice(Invoice invoice) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public List<Invoice> getInvoiceList() {
+        return invoiceList;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public void setInvoiceList(List<Invoice> invoiceList) {
+        this.invoiceList = invoiceList;
     }
 }

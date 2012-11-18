@@ -136,6 +136,7 @@ public class EncomiendaBean {
             InvoiceVo invoiceVo = new InvoiceVo();
             invoiceVo.setIdEncoming(findMaxIdEncoming());
             invoiceVo.setIdShipping(findMaxIdShipping());
+            invoiceVo.setMoment(new Date());
             invoiceVo.setReceiver(getNameReceiver());
             invoiceVo.setSender(getName());
             try {

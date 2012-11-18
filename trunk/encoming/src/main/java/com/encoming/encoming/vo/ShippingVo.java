@@ -4,6 +4,8 @@
  */
 package com.encoming.encoming.vo;
 
+import java.util.List;
+
 /**
  *
  * @author FAMILIA
@@ -15,11 +17,12 @@ public class ShippingVo implements IValueObject {
     private String sendedDate;
     private String arrivedDate;
     private double cost;
-    private Integer idInvoice;
+//    private Integer idInvoice;
     private Integer idVehicle;
     private Integer idPerson;
     private Integer idRoute;
     private Integer idEncoming;
+    private List<InvoiceVo> invoiceList;
 
     /**
      * @return the idShipping
@@ -141,11 +144,19 @@ public class ShippingVo implements IValueObject {
         this.cost = cost;
     }
 
-    public Integer getIdInvoice() {
-        return idInvoice;
+//    public Integer getIdInvoice() {
+//        return idInvoice;
+//    }
+//
+//    public void setIdInvoice(Integer idInvoice) {
+//        this.idInvoice = idInvoice;
+//    }
+
+    public List<InvoiceVo> getInvoiceList() {
+        return invoiceList;
     }
 
-    public void setIdInvoice(Integer idInvoice) {
-        this.idInvoice = idInvoice;
+    public void setInvoiceList(List<InvoiceVo> invoiceList) {
+        this.invoiceList = invoiceList;
     }
 }

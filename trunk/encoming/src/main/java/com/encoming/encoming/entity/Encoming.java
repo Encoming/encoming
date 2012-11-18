@@ -73,8 +73,8 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
     @Column(name = "received_packet")
     //@Temporal(TemporalType.DATE)
     private String receivedPacket;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
-    private List<Invoice> invoiceList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
+//    private List<Invoice> invoiceList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
     private List<Shipping> shippingList;
 
@@ -142,13 +142,13 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.receivedPacket = receivedPacket;
     }
 
-    public List<Invoice> getInvoiceList() {
-        return invoiceList;
-    }
-
-    public void setInvoiceList(List<Invoice> invoiceList) {
-        this.invoiceList = invoiceList;
-    }
+//    public List<Invoice> getInvoiceList() {
+//        return invoiceList;
+//    }
+//
+//    public void setInvoiceList(List<Invoice> invoiceList) {
+//        this.invoiceList = invoiceList;
+//    }
 
     public List<Shipping> getShippingList() {
         return shippingList;
@@ -197,11 +197,11 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
             shippingVos.add(entity.toVo());
         }
         encomingVo.setShippingList(shippingVos);
-        List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
-        for(Invoice entity : getInvoiceList()){
-            invoiceVos.add(entity.toVo());
-        }
-        encomingVo.setShippingList(shippingVos);
+//        List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
+//        for(Invoice entity : getInvoiceList()){
+//            invoiceVos.add(entity.toVo());
+//        }
+//        encomingVo.setShippingList(shippingVos);
         
         return encomingVo;
     }

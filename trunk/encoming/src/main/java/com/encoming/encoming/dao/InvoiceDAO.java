@@ -25,10 +25,10 @@ public class InvoiceDAO implements IDAO<Invoice>{
     
     @Override
     public void persist(Invoice entity, EntityManager em) {
-        try {
+//        try {
             em.persist(entity);
-        } catch (Exception e) {
-        }
+//        } catch (Exception e) {
+//        }
     }    
     
     @Override
