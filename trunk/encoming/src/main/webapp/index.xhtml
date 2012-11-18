@@ -12,20 +12,48 @@
 
     <ui:define name="content">
         <div class="row">
-            <div class="hero-unit offset1 span10">
-                <h1>ENCOMING <small>Sistema para la Gestión de Transportes y Encomiendas</small></h1>
-                <p:separator id="customSeparator" style="width:970px;height:5px" />
+            <div class="hero-unit offset2 span10" style="background-color: #ffffff">
+                <h:graphicImage id="image" url="/resources/images/logoEncoming.png"> </h:graphicImage>               
+                <h2><small>Sistema para la Gestión de Transportes y Encomiendas</small></h2>
+                <p:separator id="customSeparator1" style="width:970px;height:5px" />
                 <div class="span8">
-                    <h:commandButton action="#" update="pag" value="Inicio" class="btn btn-success"/>
-                    <h:commandButton action="#" update="pag" value="¿Quiénes Somos?" class="btn btn-success"/>
-                    <h:commandButton action="#" update="pag" value="Consultar Sucursales" class="btn btn-success" />
+                    <h:commandButton href="#tab2" data-toggle="tab" value="Inicio" class="btn btn-success"/>
+                    <h:commandButton href="#tab1" data-toggle="tab" value="¿Quiénes Somos?" class="btn btn-success"/>
+                    <h:commandButton action="#{indexMenuBean.ourPoints()}" value="Consultar Sucursales" class="btn btn-success" />
                     <h:commandButton action="#" update="pag" value="Consultar Precios" class="btn btn-success" />
                     <h:commandButton action="#" update="pag" value="Encomiendas" class="btn btn-info" />
                 </div>
                 <div>
                     <h3><a data-toggle="modal" href="#shareModal" class="btn btn-info">Iniciar Sesión</a></h3>
                 </div>
+                <p:separator id="customSeparator2" style="width:970px;height:5px" />
+
+
+                <div class="tabbable"> <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">¿Quiénes Somos?</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Nuestras Sucursales</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Nuestros Precios</a></li>
+                        <div class="btn-group">
+                            <button  class="btn btn-success" href="#tab2" data-toggle="tab">Inicio</button>
+                            <button  class="btn btn-success" href="#tab1" data-toggle="tab">¿Quiénes Somos?</button>
+                            <button  class="btn btn-success" href="#tab1" data-toggle="tab">Nuestras Sucursales</button>
+                            <button  class="btn btn-success" href="#tab1" data-toggle="tab">¿Quiénes Somos?</button>
+                            <button  class="btn btn-success">3</button>
+                        </div>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <p>I'm in Section 1.</p>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <p>Howdy, I'm in Section 2.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
         </div>
         <div class="row">
             <div class="span0">
