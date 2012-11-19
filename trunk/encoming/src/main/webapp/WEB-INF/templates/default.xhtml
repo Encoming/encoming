@@ -56,15 +56,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">ENCOMING</a>
+                    <a class="brand" href="#{request.contextPath}/index.xhtml">ENCOMING</a>
 
                     <div class="nav-collapse">
                         <ui:fragment rendered="#{administratorBean.loggedIn}">
                             <ul class="nav pull-left">
-                                <li><a href="#">¿Quiénes Somos?</a></li>
-                                <li><a href="#">Sucursales</a></li>
-                                <li><a href="#">Precios</a></li>
-                                <li><a href="#">Encomiendas</a></li>
+                                <li><a href="#{request.contextPath}/adminPage.xhtml" action="#{adminMenuBean.createEncoming()}">Encomiendas</a></li>
+                                <li><a href="#{request.contextPath}/adminPage.xhtml" action="#{adminMenuBean.adminPoints()}">Sucursales</a></li>
+                                <li><a href="#{request.contextPath}/adminPage.xhtml" action="#{adminMenuBean.adminVehicles()}">Vehículos</a></li>
                             </ul> 
                             <ul class="nav pull-right">
                                 <li class="dropdown">
