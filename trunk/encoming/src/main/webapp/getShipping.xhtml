@@ -17,8 +17,8 @@
                 <h3><big>Recibir envio:</big></h3>
                 <p:separator/>
                 <h:form>
-                    <div class="hero-unit span6 offset0">
-                <h3 style="color: #005580">Sucursales:</h3>
+                    
+                <h3 style="color: #005580">Selecciona tu ubicación:</h3>
 
                 <h:form id="pointsForm">
                     <h:selectOneMenu id="point" required="true" value="#{getShippingBean.idPoint}"
@@ -28,7 +28,7 @@
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
                 </h:form>
-            </div>
+          
                     
                     <h:panelGroup>
                         <div class="control-group">
@@ -42,8 +42,7 @@
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <h:outputText value="letras : #{getShippingBean.vehiculoVo.getPlateLetters()}"/>
-                                <h:commandButton value="entrar" actionListener="#{getShippingBean.find()}"/>
+                                <h:commandButton value="entrar" actionListener="#{getShippingBean.operateShipping()}"/>
                             </div>
                         </div>
                     </h:panelGroup>
