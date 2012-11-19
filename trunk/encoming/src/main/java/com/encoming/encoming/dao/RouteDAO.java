@@ -36,12 +36,6 @@ public class RouteDAO implements IDAO<Route> {
         return (Route)query.getSingleResult();
     }
 
-    @Override
-    public Route find(Object idA, EntityManager em) {
-        Integer id = (Integer) idA;
-        Query query = em.createQuery("SELECT p FROM Route p WHERE p.idRoute=:idRoute").setParameter("idRoute", id);
-        return (Route) query.getSingleResult();
-    }
 
     @Override
     public void update(Route entity, EntityManager em) {

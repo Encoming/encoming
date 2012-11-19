@@ -54,7 +54,7 @@ public class tableBeanEmpleados {
         for(DriverVo driverVo : employeesDriv){
             System.out.println("ENTRA! EN DRIVER VO");
             PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade();
-            employeesDrivers.add(personFac.find(driverVo.getPersonidPerson()));    
+            employeesDrivers.add(personFac.find(driverVo.getPersonId()));    
            
             System.out.println("AGREGO UN DVO");
         }

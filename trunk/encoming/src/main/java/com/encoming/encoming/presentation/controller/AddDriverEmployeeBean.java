@@ -112,7 +112,7 @@ public class AddDriverEmployeeBean {
         DriverVo driverVo = new DriverVo();
         driverVo.setIdDriver(idDriver);
         driverVo.setLicense(license);
-        driverVo.setPersonidPerson(idPerson);
+        driverVo.setPersonId(idPerson);
         
         PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade(); 
         DriverFacade driverFac = FacadeFactory.getInstance().getDriverFacade();

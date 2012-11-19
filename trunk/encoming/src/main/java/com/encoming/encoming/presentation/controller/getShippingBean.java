@@ -24,14 +24,23 @@ import javax.faces.model.SelectItem;
 @ManagedBean
 @RequestScoped
 public class getShippingBean {
-    private String pointName;
+    private Integer idPoint;
     private String plateLetters;
     private Integer plateNumbers;
     private VehicleVo vehiculoVo;
-    private List<SelectItem> points; 
+    
     ArrayList<ShippingVo> filteredShipList = new ArrayList();
     private ArrayList<ShippingVo> shippingLessing = new ArrayList();
+    
     public getShippingBean() {
+    }
+
+    public Integer getIdPoint() {
+        return idPoint;
+    }
+
+    public void setIdPoint(Integer idPoint) {
+        this.idPoint = idPoint;
     }
 
     public String getPlateLetters() {
@@ -54,26 +63,8 @@ public class getShippingBean {
         return vehiculoVo;
     }
 
-    public String getIdPoint() {
-        return pointName;
-    }
 
-    public void setIdPoint(String idPoint) {
-        this.pointName= idPoint;
-    }
-    
-        public List<SelectItem> getPoints() {
-        if (points == null) {
-            points = new ArrayList<SelectItem>();
-            List<PointVo> pointList = FacadeFactory.getInstance().getPointFacade().getList();
-            if (pointList != null) {
-                for (PointVo point : pointList) {
-                    points.add(new SelectItem(point.getName(), point.getName()));
-                }
-            }
-        }
-        return points;
-    }
+
     public void find(){
         VehicleFacade vehFacade = FacadeFactory.getInstance().getVehicleFacade();
         vehiculoVo = vehFacade.findByPlate(plateNumbers, plateLetters);
@@ -89,18 +80,15 @@ public class getShippingBean {
         
         for(ShippingVo ship : vehiculoVo.getShippingList()){
             RouteVo routeVo = FacadeFactory.getInstance().getRouteFacade().find(ship.getIdRoute());     
-            if(routeVo.getDestinationCity().equals(pointName)){
-                
+            if(routeVo.getDestinationPointId().equals(idPoint)){
                 filteredShipList.add(ship);
             }else{
                 shippingLessing.add(ship);
             }
-            System.out.println("paso la mitad");
-        PointFacade pointFac = FacadeFactory.getInstance().getPointFacade();
-        PointVo pointVo = pointFac.findByName(pointName);
+       
         vehiculoVoAuxiliar.setCapacity(vehiculoVo.getCapacity());
         vehiculoVoAuxiliar.setIdDriver(vehiculoVo.getIdDriver());
-        vehiculoVoAuxiliar.setIdPoint(pointVo.getIdPoint());
+        vehiculoVoAuxiliar.setIdPoint(idPoint);
         vehiculoVoAuxiliar.setManufacturer(vehiculoVo.getManufacturer());
         vehiculoVoAuxiliar.setModel(vehiculoVo.getModel());
         vehiculoVoAuxiliar.setPlateLetters(vehiculoVo.getPlateLetters());

@@ -24,7 +24,7 @@
                     <h:selectOneMenu id="point" required="true" value="#{getShippingBean.idPoint}"
                                      requiredMessage="Selecciona un Punto:">
                         <f:selectItem itemLabel=""/>
-                        <f:selectItems value="#{getPointBean.points}"/>
+                        <f:selectItems value="#{pointBean.points}"/>
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
                 </h:form>

@@ -15,7 +15,7 @@ public class DriverVo implements IValueObject {
     private Integer idDriver;
     private String license;
     private List<VehicleVo> vehicleList = null;
-    private Integer personidPerson;
+    private Integer personId;
     private final String type = "Conductor";
 
     /**
