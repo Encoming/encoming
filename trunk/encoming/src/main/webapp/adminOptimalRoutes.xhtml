@@ -52,7 +52,8 @@
                     document.getElementById("getDistance").innerHTML = gdir.getSummaryHtml(); 
                     var drivingDistanceKilometers = gdir.getDistance().meters / 1000;
                     document.getElementById('results').innerHTML = 
-                        ' Se recorrerán ' + drivingDistanceKilometers + ' kilometros';
+                        ' Se recorrerán ' + drivingDistanceKilometers + ' kilometers';
+                    changeValue(drivingDistanceKilometers);
                 } 
 	
                 function mostrarError(){
@@ -66,13 +67,34 @@
                         alert("¡La clave proporcionada no es válida o no coincide con el dominio para el cual se ha indicado!");
                     else if (gdir.getStatus().code == G_GEO_BAD_REQUEST)
                         alert("¡No se ha podido analizar correctamente la solicitud de ruta!");
-                    else alert("Error desconocido.");
+                    else alert("Error desconocido, probablemente la ruta que deseas no es posible");
+                }
+                
+                function changeValue(values){
+
+                    document.getElementById('formsTab:hiddenButton').value = values;
+                    remoteChangeCommand();
                 }
             </script>
+
+
+            <h:form id="formsTab">
+                <h:inputHidden id="hiddenButton" value="#{optimalRouteBean.routeDistance}"/>
+                <p:remoteCommand name="remoteChangeCommand" process="hiddenButton"/>
+            </h:form>
+
+
+
             <div class="container">
                 <div class="row">
                     <div class="span5 offset0">
-                        <form action="#" name="form_ruta" onsubmit="getRoute(this.from.value, this.to.value); return false">
+                        <form action="#" name="form_ruta" onsubmit="getRoute(this.origin.value, this.destiny.value); return false">
+                            <h:inputHidden id="origin" value="#{optimalRouteBean.originCoordinates}"/>
+                            <h:outputText value="#{optimalRouteBean.originCoordinates}"/>
+                            <br/><h:inputHidden id="destiny" value="#{optimalRouteBean.destinyCoordinates}"/>
+                            <h:outputText value="#{optimalRouteBean.destinyCoordinates}"/>
+
+
                             <h2>Calcular Rutas</h2>
                             <label class="control-label " for="program">Ciudad de Partida:</label>
                             <div class="controls">
@@ -118,8 +140,8 @@
 
 
         <script>
-        window.onload = load;
-        window.onunload = GUnload;
+            window.onload = load;
+            window.onunload = GUnload;
         </script>
 
     </ui:define>

@@ -148,4 +148,19 @@ public class ShippingVo {
     public void setIdEncoming(Integer idEncoming) {
         this.idEncoming = idEncoming;
     }
+
+    @Override
+    public String toString() {
+        return "ShippingVo{" 
+                + "\n\tidShipping=" + idShipping 
+                + ",\n\t idReceiver=" + idReceiver 
+                + ",\n\t sendedDate=" + sendedDate 
+                + ",\n\t arrivedDate=" + arrivedDate 
+                + ",\n\t invoiceList=" + invoiceList 
+                + ",\n\t idVehicle=" + idVehicle 
+                + ",\n\t idPerson=" + idPerson 
+                + ",\n\t idRoute=" + idRoute 
+                + ",\n\t idEncoming=" + idEncoming + '}';
+    }
+    
 }

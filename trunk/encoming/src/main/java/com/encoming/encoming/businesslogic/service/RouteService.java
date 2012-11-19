@@ -6,6 +6,7 @@ package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
 import com.encoming.encoming.dao.RouteDAO;
+import com.encoming.encoming.entity.Route;
 import com.encoming.encoming.vo.RouteVo;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,8 +15,8 @@ import javax.persistence.EntityManager;
  *
  * @author FAMILIA
  */
-public class RouteService implements IService<RouteVo>{
-    
+public class RouteService implements IService<RouteVo> {
+
     private static RouteService instance;
 
     public static synchronized RouteService getInstance() {
@@ -33,8 +34,8 @@ public class RouteService implements IService<RouteVo>{
     @Override
     public RouteVo find(Object id, EntityManager em) {
         RouteDAO dao = DAOFactory.getInstance().getRouteDAO();
-        RouteVo routevo = dao.find(id, em).toVo();
-        return routevo;
+        RouteVo routeVo = dao.find(id, em).toVo();
+        return routeVo;
     }
 
     @Override
@@ -51,5 +52,8 @@ public class RouteService implements IService<RouteVo>{
     public List<RouteVo> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    public void updateKm(Integer idRoute, double numberKilometers, EntityManager em) {
+        DAOFactory.getInstance().getRouteDAO().updateKm(idRoute, numberKilometers, em);
+    }
 }

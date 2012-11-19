@@ -160,6 +160,10 @@ public class PointBean implements Serializable {
         return coordinates;
     }
 
+    public String getPointCoordinates(PointVo point) {
+        return point.getLatitude()+", "+point.getLongitude();
+    }
+    
     /**
      * @param latLngPoints the latLngPoints to set
      */
