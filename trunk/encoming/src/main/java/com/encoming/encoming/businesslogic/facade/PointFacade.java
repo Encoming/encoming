@@ -16,4 +16,16 @@ public class PointFacade extends Facade<PointVo> {
     public PointFacade(String PUName, PointService service) {
         super(PUName, service);
     }
+    
+    public PointVo findByName(Object name){
+        try {
+            em = emf.createEntityManager();
+            return ((PointService)service).findByName(em,name);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
 }

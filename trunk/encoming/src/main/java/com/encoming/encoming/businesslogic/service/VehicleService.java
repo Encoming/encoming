@@ -10,7 +10,9 @@ import com.encoming.encoming.dao.PointDAO;
 import com.encoming.encoming.dao.VehicleDAO;
 import com.encoming.encoming.entity.Driver;
 import com.encoming.encoming.entity.Point;
+import com.encoming.encoming.entity.Shipping;
 import com.encoming.encoming.entity.Vehicle;
+import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.VehicleVo;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,14 @@ public class VehicleService implements IService<VehicleVo> {
         entity.setPlateLetters(vo.getPlateLetters());
         entity.setPlateNumber(vo.getPlateNumbers());
         entity.setModel(vo.getModel());
+        ArrayList<Shipping> shipList = new ArrayList();
+        for(ShippingVo sVo : vo.getShippingList()){
+            Shipping ship = DAOFactory.getInstance().getShippingDAO().find(sVo.getIdShipping(), em);
+            shipList.add(ship);
+        }
+        entity.setShippingList(shipList);
+        Point point = DAOFactory.getInstance().getPointDAO().find(vo.getIdPoint(), em);
+        entity.setPoint(point);
         DAOFactory.getInstance().getVehicleDAO().update(entity, em);
     }
 
@@ -82,5 +92,13 @@ public class VehicleService implements IService<VehicleVo> {
             vehicles.add(p.toVo());
         }
         return vehicles;
+    }
+    
+    public VehicleVo findByPlate(EntityManager em ,Object plateNumbers 
+                                ,Object plateLetters)
+    {
+        VehicleDAO dao = DAOFactory.getInstance().getVehicleDAO();
+        VehicleVo vehVo = dao.findByPlate(em, plateNumbers, plateLetters);
+        return vehVo;
     }
 }

@@ -5,8 +5,10 @@
 package com.encoming.encoming.dao;
 
 import com.encoming.encoming.entity.Shipping;
+import com.encoming.encoming.vo.ShippingVo;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -48,4 +50,12 @@ public class ShippingDAO implements IDAO<Shipping>{
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    public ShippingVo findToGive(EntityManager em, Object idDestinationCity){
+        Query q = em.createQuery("SELECT ship FROM Shipping ship WHERE "
+                + "ship.route.destinationCity =:city").setParameter("city", idDestinationCity);
+        
+        return null;
+        
+        
+    }
 }

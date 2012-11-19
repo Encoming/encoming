@@ -5,6 +5,7 @@
 package com.encoming.encoming.dao;
 
 import com.encoming.encoming.entity.Vehicle;
+import com.encoming.encoming.vo.VehicleVo;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -54,6 +55,22 @@ public class VehicleDAO implements IDAO<Vehicle>{
         Query query = em.createNamedQuery("Vehicle.findAll");
         List<Vehicle> list = query.getResultList();
         return list;
+    }
+    
+    public VehicleVo findByPlate(EntityManager em, Object plateNumbers, Object plateLetters){
+        
+        Query q = em.createQuery("SELECT veh FROM Vehicle veh WHERE"
+                + " veh.plateLetters =:letters AND veh.plateNumber =:numbers")
+                .setParameter("letters", plateLetters)
+                .setParameter("numbers", plateNumbers);
+        
+        Vehicle veh = (Vehicle)q.getSingleResult();
+        
+        VehicleVo vehVo = veh.toVo();
+        
+        
+        System.out.println("vehVo" + vehVo.getPlateLetters());
+        return vehVo;
     }
     
 }

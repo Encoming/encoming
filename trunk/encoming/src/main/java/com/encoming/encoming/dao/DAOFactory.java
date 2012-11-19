@@ -42,4 +42,10 @@ public class DAOFactory {
     public EncomingDAO getEncomingDAO() {
         return EncomingDAO.getInstance();
     }
+    public RouteDAO getRouteDAO() {
+        return RouteDAO.getInstance();
+    }
+    public ShippingDAO getShippingDAO(){
+        return ShippingDAO.getInstance();
+    }
 }

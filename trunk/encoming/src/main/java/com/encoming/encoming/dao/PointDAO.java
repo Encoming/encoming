@@ -5,6 +5,7 @@
 package com.encoming.encoming.dao;
 
 import com.encoming.encoming.entity.Point;
+import com.encoming.encoming.vo.PointVo;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -53,5 +54,10 @@ public class PointDAO implements IDAO<Point> {
         Query q = em.createQuery(cq);
         return q.getResultList();
     }
-
+    public PointVo findByName(EntityManager em, Object name){
+        Query q = em.createNamedQuery("Point.findByName").setParameter("name", name);
+        Point point = (Point)q.getSingleResult();
+        PointVo pVo= point.toVo();
+        return pVo;
+    }
 }

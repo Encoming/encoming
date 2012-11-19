@@ -30,15 +30,5 @@ public class AdministratorFacade extends Facade<AdministratorVo> {
             }
         }
     }
-    public ArrayList<AdministratorVo> filter(Object parameter){
-         try {
-            em = emf.createEntityManager();
-            return ((AdministratorService)service).filter(parameter, em);
-        } finally {
-            if (em != null) {
-                em.clear();
-                em.close();
-            }
-        }
-    }
+
 }

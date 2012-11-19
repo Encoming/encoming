@@ -7,6 +7,7 @@ package com.encoming.encoming.dao;
 import com.encoming.encoming.entity.Route;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,12 +26,14 @@ public class RouteDAO implements IDAO<Route>{
     
     @Override
     public void persist(Route entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }    
     
     @Override
     public Route find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+       Query query = em.createNamedQuery("Route.findByIdRoute")
+                .setParameter("idRoute", id);
+        return (Route)query.getSingleResult();
     }
     
     @Override

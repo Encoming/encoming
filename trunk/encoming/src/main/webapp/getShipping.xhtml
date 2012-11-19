@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        Recibir Envío
+    </ui:define>
+
+    <ui:define name="content">             
+            
+            <p:panel header="Recibir Envíos">
+            <div class="hero-unit span5 offset1">
+                <h3><big>Recibir envio:</big></h3>
+                <p:separator/>
+                <h:form>
+                    <div class="hero-unit span6 offset0">
+                <h3 style="color: #005580">Sucursales:</h3>
+
+                <h:form id="pointsForm">
+                    <h:selectOneMenu id="point" required="true" value="#{getShippingBean.idPoint}"
+                                     requiredMessage="Selecciona un Punto:">
+                        <f:selectItem itemLabel=""/>
+                        <f:selectItems value="#{getPointBean.points}"/>
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
+                </h:form>
+            </div>
+                    
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:outputLabel id="plateId" value="Matricula"/>
+                                <p:inputText id="plateIt" label="Matricula" required="false" value="#{getShippingBean.plateLetters}"></p:inputText>
+                                <p:inputText id="numberIt" label="Matricula" required="false" value="#{getShippingBean.plateNumbers}"></p:inputText>
+                                <p:watermark for="numberIt" value="Números" />
+                                <p:watermark for="plateIt" value="Letras" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:outputText value="letras : #{getShippingBean.vehiculoVo.getPlateLetters()}"/>
+                                <h:commandButton value="entrar" actionListener="#{getShippingBean.find()}"/>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <p:separator/>
+                    
+                    
+                    
+                    
+                    
+                    
+                    </h:form>
+            </div>
+        </p:panel>
+                    
+    </ui:define>
+
+</ui:composition>
+
