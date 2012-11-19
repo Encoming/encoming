@@ -46,7 +46,6 @@ public class RouteVo implements IValueObject{
      */
     public void setNumberKilometers(double numberKilometers) {
         this.numberKilometers = numberKilometers;
-        System.out.println("RouteVo = "+getNumberKilometers()+"-------------------------------");
     }
 
     /**

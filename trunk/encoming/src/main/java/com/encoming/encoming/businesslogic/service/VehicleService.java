@@ -5,11 +5,8 @@
 package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
-import com.encoming.encoming.dao.DriverDAO;
-import com.encoming.encoming.dao.PointDAO;
 import com.encoming.encoming.dao.VehicleDAO;
 import com.encoming.encoming.entity.Driver;
-import com.encoming.encoming.entity.Point;
 import com.encoming.encoming.entity.Vehicle;
 import com.encoming.encoming.vo.VehicleVo;
 import java.util.ArrayList;

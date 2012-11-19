@@ -140,8 +140,16 @@ public class Route implements Serializable, IEntity<RouteVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.encoming.entity.Route[ idRoute=" + idRoute + " ]";
+        return "RouteE{" 
+                + "idRoute=" + idRoute 
+                + ",\n\t numberKilometers=" + numberKilometers 
+                + ",\n\t originPoint=" + originPoint 
+                + ",\n\t destinationPoint=" + destinationPoint 
+                + ",\n\t pointList=" + pointList 
+                + ",\n\t shippingList=" + shippingList + '}';
     }
+
+    
 
     @Override
     public RouteVo toVo() {

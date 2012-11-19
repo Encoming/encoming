@@ -10,12 +10,14 @@ import com.encoming.encoming.vo.RouteVo;
 import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.VehicleVo;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author juanmanuelmartinezromero
  */
 @ManagedBean
+@RequestScoped
 public class OptimalRouteBean {
 
     double routeDistance;
@@ -30,13 +32,9 @@ public class OptimalRouteBean {
      */
     public OptimalRouteBean() {
         VehicleVo vehicleVo = FacadeFactory.getInstance().getVehicleFacade().find(2);
-        ShippingVo shippingVo = vehicleVo.getShippingList().get(0);
-        System.out.println(vehicleVo);
-
+        ShippingVo shippingVo = vehicleVo.getShippingList().get(1);
         route = FacadeFactory.getInstance().getRouteFacade().find(shippingVo.getIdRoute());
-
-        System.out.println(route);
-
+        route.setIdRoute(shippingVo.getIdRoute());
         origin = FacadeFactory.getInstance().getPointFacade().find(route.getOriginPointId());
         destiny = FacadeFactory.getInstance().getPointFacade().find(route.getDestinationPointId());
     }
@@ -79,8 +77,6 @@ public class OptimalRouteBean {
 
     public void setRouteDistance(double routeDistance) {
         this.route.setNumberKilometers(routeDistance);
-        System.out.println("Distancia actualizada = "+route.getNumberKilometers()+"-------------------------------");
-        
-        
+        FacadeFactory.getInstance().getRouteFacade().updateKm(route.getIdRoute(), route.getNumberKilometers());
     }
 }
