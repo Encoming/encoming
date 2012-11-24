@@ -6,13 +6,6 @@ package com.encoming.dao;
  */
 public class DAOFactory {
 
-    private DAOFactory() {
-    }
-
-    public CursoDAO getCursoDAO() {
-        return CursoDAO.getInstance();
-    }
-    
     private static DAOFactory instance;
 
     public static synchronized DAOFactory getInstance() {
@@ -20,5 +13,20 @@ public class DAOFactory {
             instance = new DAOFactory();
         }
         return instance;
+    }
+
+    private DAOFactory() {
+    }
+
+    public EstudianteDAO getEstudianteDAO() {
+        return EstudianteDAO.getInstance();
+    }
+    
+    public CursoDAO getCursoDAO() {
+        return CursoDAO.getInstance();
+    }
+    
+    public InscripcionDAO getInscripcionDAO() {
+        return InscripcionDAO.getInstance();
     }
 }

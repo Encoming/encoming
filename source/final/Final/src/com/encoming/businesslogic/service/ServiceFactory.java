@@ -12,6 +12,14 @@ public class ServiceFactory {
     public CursoService getCursoService() {
         return CursoService.getInstance();
     }
+    
+    public EstudianteService getEstudianteService() {
+        return EstudianteService.getInstance();
+    }
+    
+    public InscripcionService getInscripcionService() {
+        return InscripcionService.getInstance();
+    }
    
     private static ServiceFactory instance;
 
