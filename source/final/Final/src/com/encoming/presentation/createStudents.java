@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -218,10 +219,13 @@ public class createStudents extends javax.swing.JPanel {
                     tfApellidos.getText(),
                     fecha,
                     tfDocumento.getText());
+            JOptionPane.showMessageDialog(this, "El estudiante se ha guardado", "Aviso!", JOptionPane.INFORMATION_MESSAGE);
         } catch (ExisteEstudianteException ex) {
             Logger.getLogger(createStudents.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "El estudiante no pudo ser guardado!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
         } catch (ParseException ex) {
             Logger.getLogger(createStudents.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "El estudiante no pudo ser guardado!!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_bIngresarEstudianteActionPerformed
 
