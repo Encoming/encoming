@@ -40,6 +40,11 @@ public class principal extends javax.swing.JFrame {
 
         bInscribirEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         bInscribirEstudiante.setText("Inscribir Un Estudiante");
+        bInscribirEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bInscribirEstudianteActionPerformed(evt);
+            }
+        });
 
         bIngresarEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         bIngresarEstudiante.setText("Ingresar Estudiante");
@@ -119,8 +124,12 @@ public class principal extends javax.swing.JFrame {
     private void bInscribirCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirCursosActionPerformed
         pPrincipal.setVisible(false);
         pPrincipal.removeAll();
-
     }//GEN-LAST:event_bInscribirCursosActionPerformed
+
+    private void bInscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirEstudianteActionPerformed
+        pPrincipal.setVisible(false);
+        pPrincipal.removeAll();
+    }//GEN-LAST:event_bInscribirEstudianteActionPerformed
 
     /**
      * @param args the command line arguments
