@@ -4,6 +4,8 @@
  */
 package com.encoming.businesslogic.service;
 
+import com.encoming.dao.DAOFactory;
+import com.encoming.entity.Estudiantes;
 import com.encoming.vo.EstudianteVo;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -27,7 +29,13 @@ public class EstudianteService implements IService<EstudianteVo> {
 
     @Override
     public void create(EstudianteVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Estudiantes estudiante = new Estudiantes();
+        estudiante.setActivo(vo.getActivo());
+        estudiante.setDocumento(vo.getDocumento());
+        estudiante.setFechaNacimiento(vo.getFechaNacimiento());
+        estudiante.setNombre(vo.getNombre());
+        
+        DAOFactory.getInstance().getEstudianteDAO().persist(estudiante, em);
     }
 
     @Override
