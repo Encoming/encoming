@@ -4,12 +4,21 @@
  */
 package com.encoming.presentation;
 
+import com.encoming.controller.CursoController;
+import com.encoming.utils.ExisteCursoException;
+import com.encoming.vo.CursoVo;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author FAMILIA
  */
 public class createsCourses extends javax.swing.JPanel {
-
+    
+    List<CursoVo> cursos = new ArrayList<CursoVo>();
     /**
      * Creates new form createsCourses
      */
@@ -142,7 +151,15 @@ public class createsCourses extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void listarCursos(){
+        cursos = new ArrayList<CursoVo>();
+        for(CursoVo curso : cursos){
+            cbPreRequisito.addItem(curso.getId());        
+        } 
+    }
+    
+    
     private void tfCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCostoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCostoActionPerformed
@@ -152,7 +169,13 @@ public class createsCourses extends javax.swing.JPanel {
     }//GEN-LAST:event_cbPreRequisitoActionPerformed
 
     private void bAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarCursoActionPerformed
-        // TODO add your handling code here:
+        try {
+            new CursoController().crearCurso(tfNombre.getText(),
+                                             (Integer)cbPreRequisito.getSelectedItem(),
+                                             new Long(tfCosto.getText()));
+        } catch (ExisteCursoException ex) {
+            Logger.getLogger(createsCourses.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bAgregarCursoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
