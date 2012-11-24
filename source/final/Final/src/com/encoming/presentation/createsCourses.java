@@ -66,6 +66,11 @@ public class createsCourses extends javax.swing.JPanel {
         bAgregarCurso.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         bAgregarCurso.setForeground(new java.awt.Color(0, 153, 153));
         bAgregarCurso.setText("AGREGAR CURSO");
+        bAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAgregarCursoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,6 +150,10 @@ public class createsCourses extends javax.swing.JPanel {
     private void cbPreRequisitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPreRequisitoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbPreRequisitoActionPerformed
+
+    private void bAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarCursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bAgregarCursoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAgregarCurso;
