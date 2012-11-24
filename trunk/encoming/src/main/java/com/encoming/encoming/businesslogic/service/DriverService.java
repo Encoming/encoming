@@ -76,5 +76,8 @@ public class DriverService implements IService<DriverVo> {
         }
         return drivers;
     }
+    public DriverVo findById(Object id, EntityManager em){
+         return DAOFactory.getInstance().getDriverDAO().find(id, em).toVo();
+    }
     
 }

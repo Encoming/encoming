@@ -54,4 +54,8 @@ public class DriverDAO implements IDAO<Driver> {
         List<Driver> lista = query.getResultList();
         return lista;
     }   
+    public Driver findById(Object id , EntityManager em){
+        Query query =  em.createNamedQuery("Driver.findByIdDriver").setParameter("idDriver", id);
+        return (Driver) query.getSingleResult();
+    }
 }

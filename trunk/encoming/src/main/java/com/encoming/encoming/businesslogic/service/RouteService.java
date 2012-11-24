@@ -31,13 +31,19 @@ public class RouteService implements IService<RouteVo> {
 
     @Override
     public void persist(RouteVo vo, EntityManager em) {
+        System.out.println("entra a persistir en routeservice");
         Route entity = new Route();
+        System.out.println("va a crear un pointdao");
         PointDAO pointDao = DAOFactory.getInstance().getPointDAO();
+        System.out.println("lo crea");
         entity.setDestinationPoint(pointDao.find(vo.getDestinationPointId(), em));
+        System.out.println("asigana el punto a la entidad ruta");
         entity.setOriginPoint(pointDao.find(vo.getOriginPointId(), em));
+        System.out.println("asigana el punto2 a la entidad ruta");    
         entity.setNumberKilometers(vo.getNumberKilometers());
-
+        System.out.println("v a persistr");
         DAOFactory.getInstance().getRouteDAO().persist(entity, em);
+        System.out.println("persiste");
     }
 
     @Override

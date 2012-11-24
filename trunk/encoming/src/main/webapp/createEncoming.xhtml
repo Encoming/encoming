@@ -82,19 +82,21 @@
                                              requiredMessage="¡Por favor ingrese el peso del paquete!" >
                                     <f:validateDoubleRange minimum="1.00" maximum="100.00" />
                                 </h:inputText>
+                                
                                 <h:outputLabel for="originCity" value="Ciudad de Origen: *" />
                                 <h:selectOneMenu id="point" required="true" value="#{encomiendaBean.originCity}"
                                                  requiredMessage="Selecciona una Ciudad de Origen">
                                     <f:selectItem itemLabel="Seleccione un punto" itemValue="" />
-                                    <f:selectItems value="#{PointBean.points}" />
+                                    <f:selectItems value="#{pointBean.points}"/>
+                                    <f:validateLongRange minimum="1" />
 
                                 </h:selectOneMenu>
-
+                                
                                 <h:outputLabel for="destinationCity" value="Ciudad de Destino: *" validator=""/>
                                 <h:selectOneMenu id="point1" required="true" value="#{encomiendaBean.destinationCity}"
                                                  requiredMessage="Selecciona una Ciudad de Destino">
                                     <f:selectItem itemLabel="Seleccione un punto" itemValue="" />
-                                    <f:selectItems value="#{PointBean.points}" />
+                                    <f:selectItems value="#{pointBean.points}" />
                                 </h:selectOneMenu>
                             </h:panelGrid>
                         </p:panel>

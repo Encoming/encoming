@@ -4,6 +4,7 @@
  */
 package com.encoming.entity;
 
+import com.encoming.vo.InscripcionVo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Inscripciones.findById", query = "SELECT i FROM Inscripciones i WHERE i.id = :id"),
     @NamedQuery(name = "Inscripciones.findByValorPagado", query = "SELECT i FROM Inscripciones i WHERE i.valorPagado = :valorPagado"),
     @NamedQuery(name = "Inscripciones.findByEstado", query = "SELECT i FROM Inscripciones i WHERE i.estado = :estado")})
-public class Inscripciones implements Serializable {
+public class Inscripciones implements Serializable, IEntity<InscripcionVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,6 +125,17 @@ public class Inscripciones implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.entity.Inscripciones[ id=" + id + " ]";
+    }
+
+    @Override
+    public InscripcionVo toVo() {
+        InscripcionVo inscripcionVo = new InscripcionVo();
+        inscripcionVo.setCursoId(getCursoId().getId());
+        inscripcionVo.setEstado(getEstado());
+        inscripcionVo.setEstudianteId(getEstudianteId().getId());
+        inscripcionVo.setId(getId());
+        inscripcionVo.setValorPagado(getValorPagado());
+        return inscripcionVo;
     }
     
 }
