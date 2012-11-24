@@ -82,16 +82,6 @@ public final class principal extends javax.swing.JFrame {
         this.setSize(this.getPreferredSize());
     }
 
-    private void bInscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirEstudianteActionPerformed
-        pPrincipal.setVisible(false);
-        pPrincipal.removeAll();
-    }//GEN-LAST:event_bInscribirEstudianteActionPerformed
-
-    private void bInscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirEstudianteActionPerformed
-        pPrincipal.setVisible(false);
-        pPrincipal.removeAll();
-    }//GEN-LAST:event_bInscribirEstudianteActionPerformed
-
     /**
      * @param args the command line arguments
      */
