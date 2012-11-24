@@ -92,10 +92,11 @@ public class PPrincipal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bInscribirCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirCursosActionPerformed
+        principal.cambiarPanel(new createsCourses(principal));
     }//GEN-LAST:event_bInscribirCursosActionPerformed
 
     private void bIngresarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarEstudianteActionPerformed
-        principal.cambiarPanel(this);
+        principal.cambiarPanel(new createStudents(principal));
     }//GEN-LAST:event_bIngresarEstudianteActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bIngresarEstudiante;

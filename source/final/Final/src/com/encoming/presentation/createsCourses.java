@@ -19,12 +19,15 @@ import java.util.logging.Logger;
 public class createsCourses extends javax.swing.JPanel {
     
     List<CursoVo> cursos = new ArrayList<CursoVo>();
+    private principal principal;
     /**
      * Creates new form createsCourses
      */
-    public createsCourses() {
+    public createsCourses(principal parent) {
+        principal = parent;
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +48,7 @@ public class createsCourses extends javax.swing.JPanel {
         cbPreRequisito = new javax.swing.JComboBox();
         tfCosto = new javax.swing.JTextField();
         bAgregarCurso = new javax.swing.JButton();
+        tfPrerequisito = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
@@ -59,7 +63,6 @@ public class createsCourses extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
         jLabel4.setText("COSTO");
 
-        cbPreRequisito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbPreRequisito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPreRequisitoActionPerformed(evt);
@@ -81,6 +84,12 @@ public class createsCourses extends javax.swing.JPanel {
             }
         });
 
+        tfPrerequisito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPrerequisitoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -90,7 +99,7 @@ public class createsCourses extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -109,7 +118,9 @@ public class createsCourses extends javax.swing.JPanel {
                             .addComponent(tfCosto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(117, 117, 117)
-                        .addComponent(bAgregarCurso)))
+                        .addComponent(bAgregarCurso)
+                        .addGap(30, 30, 30)
+                        .addComponent(tfPrerequisito, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -130,7 +141,9 @@ public class createsCourses extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(tfCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(bAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfPrerequisito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 
@@ -155,7 +168,7 @@ public class createsCourses extends javax.swing.JPanel {
     public void listarCursos(){
         cursos = new ArrayList<CursoVo>();
         for(CursoVo curso : cursos){
-            cbPreRequisito.addItem(curso.getId());        
+            cbPreRequisito.addItem(curso);        
         } 
     }
     
@@ -171,12 +184,17 @@ public class createsCourses extends javax.swing.JPanel {
     private void bAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarCursoActionPerformed
         try {
             new CursoController().crearCurso(tfNombre.getText(),
-                                             (Integer)cbPreRequisito.getSelectedItem(),
+                                             //(Integer)cbPreRequisito.getSelectedItem(),
+                                             new Integer(tfPrerequisito.getText()),
                                              new Long(tfCosto.getText()));
         } catch (ExisteCursoException ex) {
             Logger.getLogger(createsCourses.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bAgregarCursoActionPerformed
+
+    private void tfPrerequisitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrerequisitoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPrerequisitoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAgregarCurso;
@@ -189,5 +207,6 @@ public class createsCourses extends javax.swing.JPanel {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField tfCosto;
     private javax.swing.JTextField tfNombre;
+    private javax.swing.JTextField tfPrerequisito;
     // End of variables declaration//GEN-END:variables
 }
