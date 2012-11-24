@@ -48,7 +48,8 @@ public class Cursos implements Serializable {
 //    @OneToMany(mappedBy = "prerrequisitoCursoId")
 //    private List<Cursos> cursosList;
     @OneToOne
-    private Cursos curso;
+    @Column(name = "PRERREQUISITO_CURSO_ID")
+    private Cursos prerequisito;
     @JoinColumn(name = "PRERREQUISITO_CURSO_ID", referencedColumnName = "ID")
     @ManyToOne
     private Cursos prerrequisitoCursoId;
@@ -93,11 +94,11 @@ public class Cursos implements Serializable {
     }
 
     public Cursos getCurso() {
-        return curso;
+        return prerequisito;
     }
 
     public void setCurso(Cursos curso) {
-        this.curso = curso;
+        this.prerequisito = curso;
     }
 
     public Cursos getPrerrequisitoCursoId() {
