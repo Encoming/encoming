@@ -5,7 +5,6 @@
 package com.encoming.businesslogic.facade;
 
 import com.encoming.businesslogic.service.EstudianteService;
-import com.encoming.businesslogic.service.InscripcionService;
 import com.encoming.vo.EstudianteVo;
 
 /**

@@ -4,17 +4,20 @@
  */
 package com.encoming.presentation;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author FAMILIA
  */
-public class principal extends javax.swing.JFrame {
+public final class principal extends javax.swing.JFrame {
 
     /**
      * Creates new form principal
      */
     public principal() {
         initComponents();
+        cambiarPanel(new PPrincipal(this));
     }
 
     /**
@@ -27,74 +30,27 @@ public class principal extends javax.swing.JFrame {
     private void initComponents() {
 
         pPrincipal = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        bInscribirEstudiante = new javax.swing.JButton();
-        bIngresarEstudiante = new javax.swing.JButton();
-        bInscribirCursos = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel1.setText("PARCIAL FINAL");
+        pPrincipal.setLayout(new java.awt.BorderLayout());
 
-        bInscribirEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        bInscribirEstudiante.setText("Inscribir Un Estudiante");
-
-        bIngresarEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        bIngresarEstudiante.setText("Ingresar Estudiante");
-        bIngresarEstudiante.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bIngresarEstudianteActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
-
-        bInscribirCursos.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        bInscribirCursos.setText("Inscribir Curso");
-        bInscribirCursos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bInscribirCursosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pPrincipalLayout = new javax.swing.GroupLayout(pPrincipal);
-        pPrincipal.setLayout(pPrincipalLayout);
-        pPrincipalLayout.setHorizontalGroup(
-            pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pPrincipalLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(bIngresarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(bInscribirCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-            .addGroup(pPrincipalLayout.createSequentialGroup()
-                .addGroup(pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pPrincipalLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel1))
-                    .addGroup(pPrincipalLayout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(bInscribirEstudiante)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pPrincipalLayout.setVerticalGroup(
-            pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addGroup(pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bIngresarEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(bInscribirCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(bInscribirEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(btnVolver)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -104,22 +60,27 @@ public class principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bIngresarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarEstudianteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bIngresarEstudianteActionPerformed
-
-    private void bInscribirCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirCursosActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        cambiarPanel(new PPrincipal(this));
+    }//GEN-LAST:event_btnVolverActionPerformed
+    
+    public void cambiarPanel(JPanel panel) {
         pPrincipal.setVisible(false);
         pPrincipal.removeAll();
-
-    }//GEN-LAST:event_bInscribirCursosActionPerformed
+        pPrincipal.add(panel);
+        pPrincipal.setSize(panel.getPreferredSize());
+        pPrincipal.setVisible(true);
+        this.setSize(this.getPreferredSize());
+    }
 
     /**
      * @param args the command line arguments
@@ -156,10 +117,7 @@ public class principal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bIngresarEstudiante;
-    private javax.swing.JButton bInscribirCursos;
-    private javax.swing.JButton bInscribirEstudiante;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JPanel pPrincipal;
     // End of variables declaration//GEN-END:variables
 }

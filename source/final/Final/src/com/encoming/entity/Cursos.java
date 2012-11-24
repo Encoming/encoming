@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -48,7 +49,7 @@ public class Cursos implements Serializable, IEntity<CursoVo> {
     @Column(name = "VALOR_CURSO")
     private long valorCurso;
     @OneToOne
-    @Column(name = "PRERREQUISITO_CURSO_ID")
+    @JoinColumn(name = "PRERREQUISITO_CURSO_ID", referencedColumnName = "ID")
     private Cursos prerequisito;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoId")
     private List<Inscripciones> inscripcionesList;
