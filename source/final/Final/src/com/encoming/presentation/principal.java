@@ -112,7 +112,8 @@ public class principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bIngresarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarEstudianteActionPerformed
-        // TODO add your handling code here:
+        pPrincipal.setVisible(false);
+        pPrincipal.removeAll();
     }//GEN-LAST:event_bIngresarEstudianteActionPerformed
 
     private void bInscribirCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirCursosActionPerformed
