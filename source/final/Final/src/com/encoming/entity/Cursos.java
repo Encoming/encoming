@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -44,8 +45,10 @@ public class Cursos implements Serializable {
     @Basic(optional = false)
     @Column(name = "VALOR_CURSO")
     private long valorCurso;
-    @OneToMany(mappedBy = "prerrequisitoCursoId")
-    private List<Cursos> cursosList;
+//    @OneToMany(mappedBy = "prerrequisitoCursoId")
+//    private List<Cursos> cursosList;
+    @OneToOne
+    private Cursos curso;
     @JoinColumn(name = "PRERREQUISITO_CURSO_ID", referencedColumnName = "ID")
     @ManyToOne
     private Cursos prerrequisitoCursoId;
@@ -89,12 +92,12 @@ public class Cursos implements Serializable {
         this.valorCurso = valorCurso;
     }
 
-    public List<Cursos> getCursosList() {
-        return cursosList;
+    public Cursos getCurso() {
+        return curso;
     }
 
-    public void setCursosList(List<Cursos> cursosList) {
-        this.cursosList = cursosList;
+    public void setCurso(Cursos curso) {
+        this.curso = curso;
     }
 
     public Cursos getPrerrequisitoCursoId() {
