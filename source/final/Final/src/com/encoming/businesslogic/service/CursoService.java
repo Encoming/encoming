@@ -42,10 +42,10 @@ public class CursoService implements IService<CursoVo> {
         curso.setValorCurso(vo.getValorCurso());
         CursoDAO cursoPre = DAOFactory.getInstance().getCursoDAO();
         curso.setPrerequisito(cursoPre.find(vo.getPrerequisitoCursoId(), em));
-        for(InscripcionVo ins : vo.getInscripcionesList()){
-            InscripcionDAO insDao = DAOFactory.getInstance().getInscripcionDAO();
-            inscripciones.add(insDao.find(ins.getId(), em));
-            }
+        //for(InscripcionVo ins : vo.getInscripcionesList()){
+        //    InscripcionDAO insDao = DAOFactory.getInstance().getInscripcionDAO();
+         //   inscripciones.add(insDao.find(ins.getId(), em));
+         //   }
         curso.setInscripcionesList(inscripciones);
         cursoNew.persist(curso, em);
     }

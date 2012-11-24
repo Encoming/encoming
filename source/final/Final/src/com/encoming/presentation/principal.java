@@ -114,6 +114,7 @@ public final class principal extends javax.swing.JFrame {
             public void run() {
                 new principal().setVisible(true);
             }
+            
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
