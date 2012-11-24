@@ -222,10 +222,10 @@ public class createStudents extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "El estudiante se ha guardado", "Aviso!", JOptionPane.INFORMATION_MESSAGE);
         } catch (ExisteEstudianteException ex) {
             Logger.getLogger(createStudents.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "El estudiante no pudo ser guardado!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El estudiante ya EXISTE!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
         } catch (ParseException ex) {
             Logger.getLogger(createStudents.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "El estudiante no pudo ser guardado!!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "La fecha es incorrecta!!!", "Aviso!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_bIngresarEstudianteActionPerformed
 
