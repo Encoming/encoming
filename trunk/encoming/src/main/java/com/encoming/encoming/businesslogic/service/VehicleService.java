@@ -38,7 +38,7 @@ public class VehicleService implements IService<VehicleVo> {
         System.out.println("hace una entidad vehicle");
         entity.setCapacity(vo.getCapacity());
         System.out.println("va a poner un conductor");
-        entity.setDriver(DAOFactory.getInstance().getDriverDAO().find(vo.getIdDriver(), em));
+        entity.setDriver(DAOFactory.getInstance().getDriverDAO().findById(vo.getIdDriver(), em));
         System.out.println("pone el conductor");
         entity.setManufacturer(vo.getManufacturer());
         entity.setModel(vo.getModel());
