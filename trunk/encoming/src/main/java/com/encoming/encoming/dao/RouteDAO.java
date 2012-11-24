@@ -4,9 +4,12 @@
  */
 package com.encoming.encoming.dao;
 
+import com.encoming.encoming.entity.Administrator;
+import com.encoming.encoming.entity.Encoming;
 import com.encoming.encoming.entity.Route;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -31,11 +34,27 @@ public class RouteDAO implements IDAO<Route> {
     
     @Override
     public Route find(Object id, EntityManager em) {
-       Query query = em.createNamedQuery("Route.findByIdRoute")
+        Query query = em.createNamedQuery("Route.findByIdRoute")
                 .setParameter("idRoute", id);
-        return (Route)query.getSingleResult();
-    }
+        return (Route) query.getSingleResult();
 
+    }
+    
+    public Integer findIdRoute(String originCity, String destinationCity, EntityManager em) {
+        try {
+            javax.persistence.Query query = em.createQuery("SELECT r.idRoute FROM Route r"
+                    + " WHERE r.originCity=:originCity AND r.destinationCity=:destinationCity")
+                    .setParameter("originCity", originCity).setParameter("destinationCity", destinationCity);
+            return (Integer) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
+    public Integer findNewIdRoute(EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT Max(r.idRoute) FROM Route r");
+        return (Integer)query.getSingleResult();
+    }
 
     @Override
     public void update(Route entity, EntityManager em) {

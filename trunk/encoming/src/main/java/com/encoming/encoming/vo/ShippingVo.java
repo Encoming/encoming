@@ -11,12 +11,18 @@ import java.util.List;
  *
  * @author FAMILIA
  */
-public class ShippingVo {
+public class ShippingVo implements IValueObject {
 
     private Integer idShipping;
-    private int idReceiver;
-    private Date sendedDate;
-    private Date arrivedDate;
+    private Integer idReceiver;
+    private String sendedDate;
+    private String arrivedDate;
+    private double cost;
+//    private Integer idInvoice;
+    private Integer idVehicle;
+    private Integer idPerson;
+    private Integer idRoute;
+    private Integer idEncoming;
     private List<InvoiceVo> invoiceList;
     private Integer idVehicle;
     private Integer idPerson;
@@ -40,57 +46,43 @@ public class ShippingVo {
     /**
      * @return the idReceiver
      */
-    public int getIdReceiver() {
+    public Integer getIdReceiver() {
         return idReceiver;
     }
 
     /**
      * @param idReceiver the idReceiver to set
      */
-    public void setIdReceiver(int idReceiver) {
+    public void setIdReceiver(Integer idReceiver) {
         this.idReceiver = idReceiver;
     }
 
     /**
      * @return the sendedDate
      */
-    public Date getSendedDate() {
+    public String getSendedDate() {
         return sendedDate;
     }
 
     /**
      * @param sendedDate the sendedDate to set
      */
-    public void setSendedDate(Date sendedDate) {
+    public void setSendedDate(String sendedDate) {
         this.sendedDate = sendedDate;
     }
 
     /**
      * @return the arrivedDate
      */
-    public Date getArrivedDate() {
+    public String getArrivedDate() {
         return arrivedDate;
     }
 
     /**
      * @param arrivedDate the arrivedDate to set
      */
-    public void setArrivedDate(Date arrivedDate) {
+    public void setArrivedDate(String arrivedDate) {
         this.arrivedDate = arrivedDate;
-    }
-
-    /**
-     * @return the invoiceList
-     */
-    public List<InvoiceVo> getInvoiceList() {
-        return invoiceList;
-    }
-
-    /**
-     * @param invoiceList the invoiceList to set
-     */
-    public void setInvoiceList(List<InvoiceVo> invoiceList) {
-        this.invoiceList = invoiceList;
     }
 
     /**
@@ -149,18 +141,27 @@ public class ShippingVo {
         this.idEncoming = idEncoming;
     }
 
-    @Override
-    public String toString() {
-        return "ShippingVo{" 
-                + "\n\tidShipping=" + idShipping 
-                + ",\n\t idReceiver=" + idReceiver 
-                + ",\n\t sendedDate=" + sendedDate 
-                + ",\n\t arrivedDate=" + arrivedDate 
-                + ",\n\t invoiceList=" + invoiceList 
-                + ",\n\t idVehicle=" + idVehicle 
-                + ",\n\t idPerson=" + idPerson 
-                + ",\n\t idRoute=" + idRoute 
-                + ",\n\t idEncoming=" + idEncoming + '}';
+    public double getCost() {
+        return cost;
     }
-    
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+//    public Integer getIdInvoice() {
+//        return idInvoice;
+//    }
+//
+//    public void setIdInvoice(Integer idInvoice) {
+//        this.idInvoice = idInvoice;
+//    }
+
+    public List<InvoiceVo> getInvoiceList() {
+        return invoiceList;
+    }
+
+    public void setInvoiceList(List<InvoiceVo> invoiceList) {
+        this.invoiceList = invoiceList;
+    }
 }

@@ -46,6 +46,12 @@ public class PointService implements IService<PointVo> {
         return pointVo;
     }
 
+    public Integer findIdPoint(String originCity, EntityManager em) {
+        PointDAO dao = DAOFactory.getInstance().getPointDAO();
+        Integer a= dao.finIdPoint(originCity, em);
+        return a;
+    }
+
     @Override
     public void update(PointVo vo, EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");

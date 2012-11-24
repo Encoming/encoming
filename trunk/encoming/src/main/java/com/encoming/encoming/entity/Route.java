@@ -40,7 +40,7 @@ public class Route implements Serializable, IEntity<RouteVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "idRoute")
     private Integer idRoute;
     @Basic(optional = false)

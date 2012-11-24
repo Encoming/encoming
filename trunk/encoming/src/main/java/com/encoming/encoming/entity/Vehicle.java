@@ -78,6 +78,9 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
     @Size(min = 1, max = 10)
     @Column(name = "capacity")
     private String capacity;
+    @Size(min = 1, max = 30)
+    @Column(name = "destinationCity")
+    private String destinationCity;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -99,11 +102,12 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
         this.idVehicle = idVehicle;
     }
 
-    public Vehicle(Integer idVehicle, int plateNumber, String plateLetters, String type, String manufacturer, String model, String capacity, String status) {
+    public Vehicle(Integer idVehicle, int plateNumber, String plateLetters, String type, String manufacturer, String model, String capacity, String status,String destinationCity) {
         this.idVehicle = idVehicle;
         this.plateNumber = plateNumber;
         this.plateLetters = plateLetters;
         this.type = type;
+        this.destinationCity = destinationCity;
         this.manufacturer = manufacturer;
         this.model = model;
         this.capacity = capacity;
@@ -231,6 +235,7 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
         vehicleVo.setIdPoint(getPoint().getIdPoint());
         vehicleVo.setCapacity(getCapacity());
         vehicleVo.setManufacturer(getManufacturer());
+        vehicleVo.setDestinationCity(getDestinationCity());        
         vehicleVo.setModel(getModel());
         vehicleVo.setPlateLetters(getPlateLetters());
         vehicleVo.setPlateNumber(getPlateNumber());
@@ -242,5 +247,13 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
          }
          vehicleVo.setShippingList(shippingVos);
         return vehicleVo;
+    }
+
+    public String getDestinationCity() {
+        return destinationCity;
+    }
+
+    public void setDestinationCity(String destinationCity) {
+        this.destinationCity = destinationCity;
     }
 }

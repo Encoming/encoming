@@ -45,7 +45,16 @@ public class FacadeFactory {
     public EncomingFacade getEncomingFacade() {
         return new EncomingFacade(PU, ServiceFactory.getInstance().getEncomingService());
     }
-     public RouteFacade getRouteFacade() {
+
+    public ShippingFacade getShippingFacade() {
+        return new ShippingFacade(PU, ServiceFactory.getInstance().getShippingService());
+    }
+    
+    public InvoiceFacade getInvoiceFacade() {
+        return new InvoiceFacade(PU, ServiceFactory.getInstance().getInvoiceService());
+    }
+    
+    public RouteFacade getRouteFacade() {
         return new RouteFacade(PU, ServiceFactory.getInstance().getRouteService());
     }
 }

@@ -38,6 +38,13 @@ public class VehicleDAO implements IDAO<Vehicle> {
         return (Vehicle) query.getSingleResult();
 
     }
+    
+    public Integer findFreeVehicle (Integer idPoint, EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT Min(v.idVehicle) FROM Vehicle v"
+                + " WHERE v.status='disponible' AND v.point.idPoint=:idPoint")
+                .setParameter("idPoint", idPoint);
+        return (Integer)query.getSingleResult();
+    }
 
     @Override
     public void update(Vehicle entity, EntityManager em) {

@@ -8,7 +8,6 @@ import com.encoming.encoming.vo.InvoiceVo;
 import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,25 +42,29 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "idShipping")
     private Integer idShipping;
     @Basic(optional = false)
     @NotNull
     @Column(name = "idReceiver")
-    private int idReceiver;
+    private Integer idReceiver;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "sendedDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date sendedDate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private String sendedDate;
+    @Basic(optional = false)
+    //@NotNull
+    @Column(name = "arrivedDate")
+    //@Temporal(TemporalType.TIMESTAMP)
+    private String arrivedDate;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "arrivedDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date arrivedDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
-    private List<Invoice> invoiceList;
+    @Column(name = "cost")
+    private double cost;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
+//    private List<Invoice> invoiceList;
     @JoinColumn(name = "Vehicle_idVehicle", referencedColumnName = "idVehicle")
     @ManyToOne(optional = false)
     private Vehicle vehicle;
@@ -73,6 +77,10 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
     @JoinColumn(name = "Package_idPackage", referencedColumnName = "idPackage")
     @ManyToOne(optional = false)
     private Encoming encoming;
+//    @OneToOne(mappedBy = "shipping")
+//    private Invoice invoice
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipping")
+    private List<Invoice> invoiceList;
 
     public Shipping() {
     }
@@ -81,11 +89,13 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.idShipping = idShipping;
     }
 
-    public Shipping(Integer idShipping, int idReceiver, Date sendedDate, Date arrivedDate) {
+    public Shipping(Integer idShipping, Integer idReceiver, String sendedDate, String arrivedDate, Double cost) {
         this.idShipping = idShipping;
         this.idReceiver = idReceiver;
         this.sendedDate = sendedDate;
         this.arrivedDate = arrivedDate;
+        this.cost = cost;
+
     }
 
     public Integer getIdShipping() {
@@ -96,36 +106,28 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.idShipping = idShipping;
     }
 
-    public int getIdReceiver() {
+    public Integer getIdReceiver() {
         return idReceiver;
     }
 
-    public void setIdReceiver(int idReceiver) {
+    public void setIdReceiver(Integer idReceiver) {
         this.idReceiver = idReceiver;
     }
 
-    public Date getSendedDate() {
+    public String getSendedDate() {
         return sendedDate;
     }
 
-    public void setSendedDate(Date sendedDate) {
+    public void setSendedDate(String sendedDate) {
         this.sendedDate = sendedDate;
     }
 
-    public Date getArrivedDate() {
+    public String getArrivedDate() {
         return arrivedDate;
     }
 
-    public void setArrivedDate(Date arrivedDate) {
+    public void setArrivedDate(String arrivedDate) {
         this.arrivedDate = arrivedDate;
-    }
-
-    public List<Invoice> getInvoiceList() {
-        return invoiceList;
-    }
-
-    public void setInvoiceList(List<Invoice> invoiceList) {
-        this.invoiceList = invoiceList;
     }
 
     public Vehicle getVehicle() {
@@ -160,10 +162,18 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         this.encoming = encoming;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idShipping != null ? idShipping.hashCode() : 0);
+        hash += (getIdShipping() != null ? getIdShipping().hashCode() : 0);
         return hash;
     }
 
@@ -174,7 +184,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
             return false;
         }
         Shipping other = (Shipping) object;
-        if ((this.idShipping == null && other.idShipping != null) || (this.idShipping != null && !this.idShipping.equals(other.idShipping))) {
+        if ((this.getIdShipping() == null && other.getIdShipping() != null) || (this.getIdShipping() != null && !this.idShipping.equals(other.idShipping))) {
             return false;
         }
         return true;
@@ -182,16 +192,7 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
 
     @Override
     public String toString() {
-        return "Shipping{"
-                + "\n\tidShipping=" + idShipping
-                + "\n\t, idReceiver=" + idReceiver
-                + "\n\t, sendedDate=" + sendedDate
-                + "\n\t, arrivedDate=" + arrivedDate
-                + "\n\t, invoiceList=" + invoiceList
-                + "\n\t, vehicle=" + vehicle
-                + "\n\t, person=" + person 
-                + "\n\t, route=" + route 
-                + "\n\t, encoming=" + encoming + '}';
+        return "com.encoming.encoming.entity.Shipping[ idShipping=" + getIdShipping() + " ]";
     }
 
     @Override
@@ -201,15 +202,26 @@ public class Shipping implements Serializable, IEntity<ShippingVo> {
         shippingVo.setIdEncoming(getEncoming().getIdEncoming());
         shippingVo.setIdPerson(getPerson().getIdPerson());
         shippingVo.setIdReceiver(getIdReceiver());
+        shippingVo.setCost(getCost());
         shippingVo.setIdRoute(getRoute().getIdRoute());
         shippingVo.setIdShipping(getIdShipping());
+        shippingVo.setSendedDate(getSendedDate());
         shippingVo.setIdVehicle(getVehicle().getIdVehicle());
+        
         List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
         for (Invoice entity : getInvoiceList()) {
             invoiceVos.add(entity.toVo());
         }
         shippingVo.setInvoiceList(invoiceVos);
-        shippingVo.setSendedDate(getSendedDate());
+        
         return shippingVo;
+    }
+
+    public List<Invoice> getInvoiceList() {
+        return invoiceList;
+    }
+
+    public void setInvoiceList(List<Invoice> invoiceList) {
+        this.invoiceList = invoiceList;
     }
 }

@@ -5,7 +5,10 @@
 package com.encoming.encoming.entity;
 
 import com.encoming.encoming.vo.EncomingVo;
+import com.encoming.encoming.vo.InvoiceVo;
+import com.encoming.encoming.vo.ShippingVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -68,10 +71,10 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
     @Basic(optional = false)
     @NotNull
     @Column(name = "received_packet")
-    @Temporal(TemporalType.DATE)
-    private Date receivedPacket;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
-    private List<Invoice> invoiceList;
+    //@Temporal(TemporalType.DATE)
+    private String receivedPacket;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
+//    private List<Invoice> invoiceList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encoming")
     private List<Shipping> shippingList;
 
@@ -82,7 +85,7 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.idEncoming = idPackage;
     }
 
-    public Encoming(Integer idPackage, String type, String volume, String priority, float weight, Date receivedPacket) {
+    public Encoming(Integer idPackage, String type, String volume, String priority, float weight, String receivedPacket) {
         this.idEncoming = idPackage;
         this.type = type;
         this.volume = volume;
@@ -131,21 +134,21 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
         this.weight = weight;
     }
 
-    public Date getReceivedPacket() {
+    public String getReceivedPacket() {
         return receivedPacket;
     }
 
-    public void setReceivedPacket(Date receivedPacket) {
+    public void setReceivedPacket(String receivedPacket) {
         this.receivedPacket = receivedPacket;
     }
 
-    public List<Invoice> getInvoiceList() {
-        return invoiceList;
-    }
-
-    public void setInvoiceList(List<Invoice> invoiceList) {
-        this.invoiceList = invoiceList;
-    }
+//    public List<Invoice> getInvoiceList() {
+//        return invoiceList;
+//    }
+//
+//    public void setInvoiceList(List<Invoice> invoiceList) {
+//        this.invoiceList = invoiceList;
+//    }
 
     public List<Shipping> getShippingList() {
         return shippingList;
@@ -177,11 +180,29 @@ public class Encoming implements Serializable, IEntity<EncomingVo> {
 
     @Override
     public String toString() {
-        return "com.encoming.pruebaelementos.Encoming[ idPackage=" + idEncoming + " ]";
+        return "com.encoming.encoming.entity.Encoming[ idPackage=" + idEncoming + " ]";
     }
 
     @Override
     public EncomingVo toVo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EncomingVo encomingVo = new EncomingVo();
+        encomingVo.setIdEncoming(getIdEncoming());
+        encomingVo.setType(getType());
+        encomingVo.setVolume(getVolume());
+        encomingVo.setPriority(getPriority());
+        encomingVo.setWeight(getWeight());
+        encomingVo.setReceived_packet(getReceivedPacket());
+        List<ShippingVo> shippingVos = new ArrayList<ShippingVo>();
+        for(Shipping entity : getShippingList()){
+            shippingVos.add(entity.toVo());
+        }
+        encomingVo.setShippingList(shippingVos);
+//        List<InvoiceVo> invoiceVos = new ArrayList<InvoiceVo>();
+//        for(Invoice entity : getInvoiceList()){
+//            invoiceVos.add(entity.toVo());
+//        }
+//        encomingVo.setShippingList(shippingVos);
+        
+        return encomingVo;
     }
 }

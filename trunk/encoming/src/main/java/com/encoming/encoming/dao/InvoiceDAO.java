@@ -25,12 +25,19 @@ public class InvoiceDAO implements IDAO<Invoice>{
     
     @Override
     public void persist(Invoice entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+//        try {
+            em.persist(entity);
+//        } catch (Exception e) {
+//        }
     }    
     
     @Override
-    public Invoice find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Invoice find(Object idA, EntityManager em) {
+        Integer id = (Integer) idA;
+        javax.persistence.Query query = em.createQuery("SELECT i FROM Invoice i "
+                + "WHERE i.idInvoice =:idInvoice")
+                .setParameter("idInvoice", id);
+        return (Invoice) query.getSingleResult();
     }
     
     @Override

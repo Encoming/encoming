@@ -3,15 +3,30 @@ package com.encoming.encoming.presentation.controller;
 import com.encoming.encoming.businesslogic.facade.EncomingFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
+import com.encoming.encoming.businesslogic.facade.ShippingFacade;
+import com.encoming.encoming.businesslogic.facade.VehicleFacade;
+import com.encoming.encoming.businesslogic.facade.PointFacade;
+import com.encoming.encoming.businesslogic.facade.RouteFacade;
+import com.encoming.encoming.businesslogic.facade.InvoiceFacade;
 import com.encoming.encoming.vo.EncomingVo;
 import com.encoming.encoming.vo.PersonVo;
+import com.encoming.encoming.vo.PointVo;
+import com.encoming.encoming.vo.ShippingVo;
+import com.encoming.encoming.vo.InvoiceVo;
+import com.encoming.encoming.vo.RouteVo;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -19,35 +34,42 @@ import org.primefaces.event.FlowEvent;
  * @author Andrezz
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class EncomiendaBean {
-    
+
+    private List<SelectItem> points;
     private boolean skip;
-    private static Logger logger = Logger.getLogger(EncomiendaBean.class.getName());
+    private static final Logger logger = Logger.getLogger(EncomiendaBean.class.getName());
     private String name;
     private String lastNames;
     private Integer idPerson;
     private String mail;
     private Integer phone;
     private String adress;
-    
     private String type;
     private String volume;
     private String priority;
     private float weigth;
     private String originCity;
     private String destinationCity;
-    
     private Integer idReceiver;
     private String nameReceiver;
     private String lastNamesReceiver;
     private Integer phoneReceiver;
     private String mailReceiver;
     private String adressReceiver;
-    
-     public void addPerson(ActionEvent actionEvent) {
+    private boolean validator = true;
 
-//                Persona que envia el paquete
+    public String dateTime() {
+        Date fecha = new Date();
+        SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault());
+        String fecha2 = formato2.format(fecha);
+        return fecha2;
+
+    }
+
+    public void addPerson(ActionEvent actionEvent) {
+//        Persona que envia el paquete
         PersonVo personVo = new PersonVo();
         personVo.setName(getName());
         personVo.setLastName(getLastNames());
@@ -55,7 +77,12 @@ public class EncomiendaBean {
         personVo.setMail(getMail());
         personVo.setPhone(getPhone());
         personVo.setAdress(getAdress());
-        createperson(personVo);
+        try {
+            createperson(personVo);
+        } catch (Exception e) {
+            validator = false;
+            addMessage("Error al ingresar el cliente");
+        }
 
 //      Persona que recibe el paquete
         PersonVo personRVo = new PersonVo();
@@ -65,17 +92,126 @@ public class EncomiendaBean {
         personRVo.setMail(getMailReceiver());
         personRVo.setPhone(getPhoneReceiver());
         personRVo.setAdress(getAdressReceiver());
-        createperson(personRVo);
-        
-        //   Persistencia del paquete q se va a enviar  
-        EncomingVo encomingVo = new EncomingVo();
-        //packageVo.setIdPackage(0);
-        encomingVo.setPriority(getPriority());
-        encomingVo.setType(getType());
-        encomingVo.setVolume(getVolume());
-        encomingVo.setWeight(75);
+        try {
+            createperson(personRVo);
+        } catch (Exception e) {
+            validator = false;
+            addMessage("Error al ingresar el destinatario");
+        }
+
+        if (validator) {
+//        Persistencia del paquete q se va a enviar  
+            EncomingVo encomingVo = new EncomingVo();
+            encomingVo.setPriority(getPriority());
+            encomingVo.setType(getType());
+            encomingVo.setVolume(getVolume());
+            encomingVo.setWeight(getWeigth());
+            encomingVo.setReceived_packet(dateTime());
+            try {
+                createencoming(encomingVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("error al asignar el paquete");
+            }
+//        Creacion de una shipping
+            ShippingVo shippingVo = new ShippingVo();
+            shippingVo.setIdReceiver(getIdReceiver());
+            shippingVo.setIdPerson(getIdPerson());
+            shippingVo.setCost(2333);
+            shippingVo.setIdEncoming(findMaxIdEncoming());
+            //shippingVo.setIdEncoming(1);
+            shippingVo.setIdVehicle(findFreeVehicle(findIdPoint(getOriginCity())));
+            shippingVo.setIdRoute(findIdRoute(getOriginCity(), getDestinationCity()));
+            shippingVo.setSendedDate(null);
+            shippingVo.setArrivedDate(null);
+            //shippingVo.setIdInvoice(idReceiver);
+            try {
+                createshipping(shippingVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("No se pudo guardar el envío");
+            }
+        }
+
+        if (validator) {
+            InvoiceVo invoiceVo = new InvoiceVo();
+            invoiceVo.setIdEncoming(findMaxIdEncoming());
+            invoiceVo.setIdShipping(findMaxIdShipping());
+            invoiceVo.setMoment(new Date());
+            invoiceVo.setReceiver(getNameReceiver());
+            invoiceVo.setSender(getName());
+            try {
+                createInvoice(invoiceVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("No se pudo guardar Recibo");
+            }
+        }
+        if (validator) {
+            addMessage("Los datos han sido guardados");
+        } else {
+            addMessage("Error!! Los datos no pudieron ser guardados");
+        }
+    }
+
+    public Integer findMaxIdEncoming() {
         EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
-        encomingFacade.persist(encomingVo);
+        return encomingFacade.findMaxIdEncoming();
+    }
+
+    public Integer findMaxIdShipping() {
+        ShippingFacade shippingFacade = FacadeFactory.getInstance().getShippingFacade();
+        return shippingFacade.findMaxIdShipping();
+    }
+
+//  Este método busca el id de una ruta teniendo en cuenta la cuidad de origen y la ciudad de destino    
+    public Integer findIdRoute(String originCity, String destinationCity) {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        Integer a = routeFacade.findIdRoute(originCity, destinationCity);
+        if (a != null) {
+            return a;
+        } else {
+            RouteVo routeVo = new RouteVo();
+            routeVo.setDestinationCity(getDestinationCity());
+            routeVo.setOriginCity(getOriginCity());
+            routeVo.setNumberKilometers(-1);
+            routeVo.setNumberTolls(-1);
+            try {
+                createRoute(routeVo);
+                return findNewIdRoute();
+            } catch (Exception e) {
+                validator = false;
+                addMessage("No se pudo crear una nueva ruta");
+            }
+            return 0;
+        }
+    }
+
+//  Este método busca el id de un vehículo que se encuentre en una ciudad y q además esté libre
+    public Integer findFreeVehicle(Integer idPoint) {
+        VehicleFacade vehicleFacade = FacadeFactory.getInstance().getVehicleFacade();
+        return vehicleFacade.findFreeVehicle(idPoint);
+    }
+
+//  Este método busca el id de un punto teniendo en cuenta el nombre de una ciudad
+    public Integer findIdPoint(String originCity) {
+        PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
+        return pointFacade.findIdPoint(originCity);
+    }
+
+    private Integer findNewIdRoute() {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        return routeFacade.findNewIdRoute();
+    }
+
+    public void createshipping(ShippingVo shipping) {
+        ShippingFacade shippingFacade = FacadeFactory.getInstance().getShippingFacade();
+        shippingFacade.persist(shipping);
+    }
+
+    public void createInvoice(InvoiceVo invoice) {
+        InvoiceFacade invoiceFacade = FacadeFactory.getInstance().getInvoiceFacade();
+        invoiceFacade.persist(invoice);
     }
 
     public void createperson(PersonVo person) {
@@ -83,15 +219,38 @@ public class EncomiendaBean {
         personFacade.persist(person);
     }
 
-    public void createpersonx(PersonVo person) {
-        PersonFacade personFacadex = FacadeFactory.getInstance().getPersonFacade();
-        personFacadex.persist(person);
-    }  
-    
+    public void createencoming(EncomingVo paquete) {
+        EncomingFacade encomingFacade = FacadeFactory.getInstance().getEncomingFacade();
+        encomingFacade.persist(paquete);
+    }
+
+    public void createRoute(RouteVo route) {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        routeFacade.persist(route);
+    }
+
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public List<SelectItem> getPoints() {
+        if (points == null) {
+            points = new ArrayList<SelectItem>();
+            List<PointVo> pointList = FacadeFactory.getInstance().getPointFacade().getList();
+            if (pointList != null) {
+                for (PointVo point : pointList) {
+                    points.add(new SelectItem(point.getName()));
+                }
+            }
+        }
+        return points;
+    }
+
     public static Logger getLogger() {
         return logger;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -236,7 +395,6 @@ public class EncomiendaBean {
         this.adressReceiver = adressReceiver;
     }
 
-   
     public void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
@@ -263,5 +421,4 @@ public class EncomiendaBean {
     public void setSkip(boolean skip) {
         this.skip = skip;
     }
-
 }

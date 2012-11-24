@@ -4,8 +4,6 @@
  */
 package com.encoming.encoming.vo;
 
-import com.encoming.encoming.entity.Shipping;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,15 +16,12 @@ public class EncomingVo implements IValueObject {
     private String type;
     private String volume;
     private String priority;
-    private String origin;
-    private String destiny;
     private Integer idVehicle;
-    private Integer idClient;
     private Integer idRoute;
     private List<InvoiceVo> invoiceList;
     private float weight;
-    private Date receivedPacket;
-    private List<Shipping> shippingList;
+    private String received_packet;
+    private List<ShippingVo> shippingList;
 
     /**
      * @return the idEncoming
@@ -85,34 +80,6 @@ public class EncomingVo implements IValueObject {
     }
 
     /**
-     * @return the origin
-     */
-    public String getOrigin() {
-        return origin;
-    }
-
-    /**
-     * @param origin the origin to set
-     */
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    /**
-     * @return the destiny
-     */
-    public String getDestiny() {
-        return destiny;
-    }
-
-    /**
-     * @param destiny the destiny to set
-     */
-    public void setDestiny(String destiny) {
-        this.destiny = destiny;
-    }
-
-    /**
      * @return the idVehicle
      */
     public Integer getIdVehicle() {
@@ -124,20 +91,6 @@ public class EncomingVo implements IValueObject {
      */
     public void setIdVehicle(Integer idVehicle) {
         this.idVehicle = idVehicle;
-    }
-
-    /**
-     * @return the idClient
-     */
-    public Integer getIdClient() {
-        return idClient;
-    }
-
-    /**
-     * @param idClient the idClient to set
-     */
-    public void setIdClient(Integer idClient) {
-        this.idClient = idClient;
     }
 
     /**
@@ -183,30 +136,24 @@ public class EncomingVo implements IValueObject {
     }
 
     /**
-     * @return the receivedPacket
-     */
-    public Date getReceivedPacket() {
-        return receivedPacket;
-    }
-
-    /**
-     * @param receivedPacket the receivedPacket to set
-     */
-    public void setReceivedPacket(Date receivedPacket) {
-        this.receivedPacket = receivedPacket;
-    }
-
-    /**
      * @return the shippingList
      */
-    public List<Shipping> getShippingList() {
+    public List<ShippingVo> getShippingList() {
         return shippingList;
     }
 
     /**
      * @param shippingList the shippingList to set
      */
-    public void setShippingList(List<Shipping> shippingList) {
+    public void setShippingList(List<ShippingVo> shippingList) {
         this.shippingList = shippingList;
+    }
+
+    public String getReceived_packet() {
+        return received_packet;
+    }
+
+    public void setReceived_packet(String received_packet) {
+        this.received_packet = received_packet;
     }
 }
