@@ -168,7 +168,7 @@ public class EncomiendaBean {
     public Integer findIdRoute(Integer originCity, Integer destinationCity) {
         RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
         PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
-        Integer a = routeFacade.findIdRoute(originCity, destinationCity);
+        Integer a = routeFacade.findIdRoute(getOriginCity(), getDestinationCity());
         if (a != null) {
             return a;
         } else {
@@ -178,8 +178,13 @@ public class EncomiendaBean {
             routeVo.setOriginPoint(getOriginCity());
             routeVo.setNumberKilometers(-1);
             try {
+                System.out.println("si entra ene l try de la ruta");
                 createRoute(routeVo);
-                return findNewIdRoute();
+                System.out.println("si persiste la ruta");
+                return FacadeFactory.getInstance().getRouteFacade()
+                        .findIdRoute(getOriginCity(), getDestinationCity());
+                
+                
             } catch (Exception e) {
                 validator = false;
                 addMessage("No se pudo crear una nueva ruta");
