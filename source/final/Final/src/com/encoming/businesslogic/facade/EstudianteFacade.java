@@ -17,6 +17,13 @@ public class EstudianteFacade extends Facade<EstudianteVo> {
     }
 
     public Object findByDocument(String documento) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        try {
+            return ((EstudianteService) service).findByDocument(documento, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.encoming.businesslogic.facade;
 
 import com.encoming.businesslogic.service.IService;
+import com.encoming.utils.DataBaseException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,7 +24,7 @@ public class Facade<VO> {
         this.service = service;
     }
 
-    public void create(VO vo) {
+    public void create(VO vo) throws DataBaseException {
         EntityTransaction tx = null;
         try {
             tx = em.getTransaction();
@@ -31,10 +32,10 @@ public class Facade<VO> {
             service.create(vo, em);
             tx.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (em != null && tx != null) {
                 tx.rollback();
             }
+            throw new DataBaseException("Hubo un error al persistir");
         } finally {
             if (em != null) {
                 em.clear();

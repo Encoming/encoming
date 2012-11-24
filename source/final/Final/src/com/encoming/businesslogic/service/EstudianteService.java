@@ -58,5 +58,14 @@ public class EstudianteService implements IService<EstudianteVo> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public EstudianteVo findByDocument(String documento, EntityManager em) {
+        Estudiantes student = DAOFactory.getInstance().getEstudianteDAO().findByDocument(documento, em);
+        if (student.getDocumento() != null) {
+            return student.toVo();
+        } else {
+            return null;
+        }
+    }
+
    
 }

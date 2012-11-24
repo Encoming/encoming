@@ -4,9 +4,6 @@
  */
 package com.encoming.presentation;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.JComboBox;
-
 /**
  *
  * @author juanmanuelmartinezromero
@@ -95,7 +92,7 @@ public class PPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_bInscribirCursosActionPerformed
 
     private void bIngresarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarEstudianteActionPerformed
-        principal.cambiarPanel(this);
+        principal.cambiarPanel(new createStudents(principal));
     }//GEN-LAST:event_bIngresarEstudianteActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bIngresarEstudiante;

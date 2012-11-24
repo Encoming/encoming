@@ -7,6 +7,7 @@ package com.encoming.dao;
 import com.encoming.entity.Estudiantes;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -51,5 +52,16 @@ public class EstudianteDAO implements IDAO<Estudiantes> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public Estudiantes findByDocument(String documento, EntityManager em) {
+        Estudiantes student;
+        Query q = em.createQuery("SELECT t FROM Estudiantes t WHERE t.documento LIKE :documento").
+                setParameter("documento", documento);
 
+        try {
+            student = (Estudiantes) q.getSingleResult();
+        } catch (Exception e) {
+            student = new Estudiantes();
+        }
+        return student;
+    }
 }
