@@ -41,5 +41,29 @@ public class RouteFacade extends Facade<RouteVo> {
             }
         }
     }
+    public Integer findIdRoute(Object originCity, Object destinationCity) {
+        try {
+            em = emf.createEntityManager();
+            return ((RouteService) service).findIdRoute(originCity, destinationCity, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
+
+    public Integer findNewIdRoute() {
+        try {
+            em = emf.createEntityManager();
+            return ((RouteService) service).findNewIdRoute(em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
+
     
 }

@@ -40,10 +40,10 @@ public class RouteDAO implements IDAO<Route> {
 
     }
     
-    public Integer findIdRoute(String originCity, String destinationCity, EntityManager em) {
+    public Integer findIdRoute(Object originCity, Object destinationCity, EntityManager em) {
         try {
             javax.persistence.Query query = em.createQuery("SELECT r.idRoute FROM Route r"
-                    + " WHERE r.originCity=:originCity AND r.destinationCity=:destinationCity")
+                    + " WHERE r.originPoint.idPoint=:originCity AND r.destinationPoint.idPoint=:destinationCity")
                     .setParameter("originCity", originCity).setParameter("destinationCity", destinationCity);
             return (Integer) query.getSingleResult();
         } catch (NoResultException e) {

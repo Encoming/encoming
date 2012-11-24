@@ -50,8 +50,8 @@ public class EncomiendaBean {
     private String volume;
     private String priority;
     private float weigth;
-    private String originCity;
-    private String destinationCity;
+    private Integer originCity;
+    private Integer destinationCity;
     private Integer idReceiver;
     private String nameReceiver;
     private String lastNamesReceiver;
@@ -120,7 +120,7 @@ public class EncomiendaBean {
             shippingVo.setCost(2333);
             shippingVo.setIdEncoming(findMaxIdEncoming());
             //shippingVo.setIdEncoming(1);
-            shippingVo.setIdVehicle(findFreeVehicle(findIdPoint(getOriginCity())));
+            shippingVo.setIdVehicle(findFreeVehicle(getOriginCity()));
             shippingVo.setIdRoute(findIdRoute(getOriginCity(), getDestinationCity()));
             shippingVo.setSendedDate(null);
             shippingVo.setArrivedDate(null);
@@ -165,17 +165,18 @@ public class EncomiendaBean {
     }
 
 //  Este método busca el id de una ruta teniendo en cuenta la cuidad de origen y la ciudad de destino    
-    public Integer findIdRoute(String originCity, String destinationCity) {
+    public Integer findIdRoute(Integer originCity, Integer destinationCity) {
         RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
         Integer a = routeFacade.findIdRoute(originCity, destinationCity);
         if (a != null) {
             return a;
         } else {
             RouteVo routeVo = new RouteVo();
-            routeVo.setDestinationCity(getDestinationCity());
-            routeVo.setOriginCity(getOriginCity());
+            
+            routeVo.setDestinationPoint(getDestinationCity());
+            routeVo.setOriginPoint(getOriginCity());
             routeVo.setNumberKilometers(-1);
-            routeVo.setNumberTolls(-1);
             try {
                 createRoute(routeVo);
                 return findNewIdRoute();
@@ -190,7 +191,7 @@ public class EncomiendaBean {
 //  Este método busca el id de un vehículo que se encuentre en una ciudad y q además esté libre
     public Integer findFreeVehicle(Integer idPoint) {
         VehicleFacade vehicleFacade = FacadeFactory.getInstance().getVehicleFacade();
-        return vehicleFacade.findFreeVehicle(idPoint);
+        return vehicleFacade.findFreeVehicle(getOriginCity());
     }
 
 //  Este método busca el id de un punto teniendo en cuenta el nombre de una ciudad
@@ -331,24 +332,24 @@ public class EncomiendaBean {
         this.weigth = weigth;
     }
 
-    public String getOriginCity() {
+    public Integer getIdReceiver() {
+        return idReceiver;
+    }
+
+    public Integer getOriginCity() {
         return originCity;
     }
 
-    public void setOriginCity(String originCity) {
+    public void setOriginCity(Integer originCity) {
         this.originCity = originCity;
     }
 
-    public String getDestinationCity() {
+    public Integer getDestinationCity() {
         return destinationCity;
     }
 
-    public void setDestinationCity(String destinationCity) {
+    public void setDestinationCity(Integer destinationCity) {
         this.destinationCity = destinationCity;
-    }
-
-    public Integer getIdReceiver() {
-        return idReceiver;
     }
 
     public void setIdReceiver(Integer idReceiver) {

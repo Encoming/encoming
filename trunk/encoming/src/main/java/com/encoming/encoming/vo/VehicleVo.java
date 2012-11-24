@@ -22,6 +22,7 @@ public class VehicleVo implements IValueObject{
     private List<ShippingVo> shippingList;
     private Integer idPoint;
     private Integer idDriver;
+    private String DestinationCity;
 
     /**
      * @return the idVehicle
@@ -176,6 +177,15 @@ public class VehicleVo implements IValueObject{
     public void setIdDriver(Integer idDriver) {
         this.idDriver = idDriver;
     }
+
+    public String getDestinationCity() {
+        return DestinationCity;
+    }
+
+    public void setDestinationCity(String DestinationCity) {
+        this.DestinationCity = DestinationCity;
+    }
+    
 
     @Override
     public String toString() {

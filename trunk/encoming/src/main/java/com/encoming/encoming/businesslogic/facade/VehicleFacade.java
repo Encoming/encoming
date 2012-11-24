@@ -29,6 +29,17 @@ public class VehicleFacade extends Facade<VehicleVo> {
             }
         }
     }
+            public Integer findFreeVehicle(Integer idPoint) {
+        try {
+            em = emf.createEntityManager();
+            return ((VehicleService) service).findFreeVehicle(idPoint,em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
         
 }
 

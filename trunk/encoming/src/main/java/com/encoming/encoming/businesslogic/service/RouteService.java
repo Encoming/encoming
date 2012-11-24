@@ -5,6 +5,7 @@
 package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
+import com.encoming.encoming.dao.PointDAO;
 import com.encoming.encoming.entity.Route;
 import com.encoming.encoming.dao.RouteDAO;
 import com.encoming.encoming.dao.ShippingDAO;
@@ -31,10 +32,10 @@ public class RouteService implements IService<RouteVo> {
     @Override
     public void persist(RouteVo vo, EntityManager em) {
         Route entity = new Route();
-        entity.setDestinationCity(vo.getDestinationCity());
-        entity.setOriginCity(vo.getOriginCity());
+        PointDAO pointDao = DAOFactory.getInstance().getPointDAO();
+        entity.setDestinationPoint(pointDao.find(vo.getDestinationPointId(), em));
+        entity.setOriginPoint(pointDao.find(vo.getOriginPointId(), em));
         entity.setNumberKilometers(vo.getNumberKilometers());
-        entity.setNumberTolls(vo.getNumberTolls());
 
         DAOFactory.getInstance().getRouteDAO().persist(entity, em);
     }
@@ -46,7 +47,7 @@ public class RouteService implements IService<RouteVo> {
         return routeVo;
     }
     
-     public Integer findIdRoute(String originCity, String destinationCity, EntityManager em) {
+     public Integer findIdRoute(Object originCity, Object destinationCity, EntityManager em) {
         RouteDAO dao = DAOFactory.getInstance().getRouteDAO();
         Integer a = dao.findIdRoute(originCity, destinationCity, em);
         return a;

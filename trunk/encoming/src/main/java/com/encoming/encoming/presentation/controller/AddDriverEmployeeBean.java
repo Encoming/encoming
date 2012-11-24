@@ -100,7 +100,7 @@ public class AddDriverEmployeeBean {
     
     public void addDriver(){
         PersonVo personVo = new PersonVo();
-        
+        System.out.println("crea la persona");
         personVo.setAdress(adress);
         personVo.setIdPerson(idPerson);
         personVo.setLastName(lastName);
@@ -113,10 +113,13 @@ public class AddDriverEmployeeBean {
         driverVo.setIdDriver(idDriver);
         driverVo.setLicense(license);
         driverVo.setPersonId(idPerson);
-        
+        System.out.println("ya casi");
         PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade(); 
         DriverFacade driverFac = FacadeFactory.getInstance().getDriverFacade();
+        System.out.println("crea las instancias");
         personFac.persist(personVo);
+        System.out.println("persiste la persona");
         driverFac.persist(driverVo);
+        System.out.println("persiste al driver");
     }
 }

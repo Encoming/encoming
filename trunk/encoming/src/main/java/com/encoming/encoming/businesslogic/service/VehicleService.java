@@ -33,17 +33,25 @@ public class VehicleService implements IService<VehicleVo> {
 
     @Override
     public void persist(VehicleVo vo, EntityManager em) {
+        System.out.println("entra en el servicio");
         Vehicle entity = new Vehicle();
+        System.out.println("hace una entidad vehicle");
         entity.setCapacity(vo.getCapacity());
+        System.out.println("va a poner un conductor");
         entity.setDriver(DAOFactory.getInstance().getDriverDAO().find(vo.getIdDriver(), em));
+        System.out.println("pone el conductor");
         entity.setManufacturer(vo.getManufacturer());
         entity.setModel(vo.getModel());
         entity.setPlateLetters(vo.getPlateLetters());
         entity.setPlateNumber(vo.getPlateNumbers());
+        System.out.println("va a poner un punto");
         entity.setPoint(DAOFactory.getInstance().getPointDAO().find(vo.getIdPoint(), em));
+        System.out.println("pone un punto");
         entity.setStatus(vo.getStatus());
         entity.setType(vo.getType());       
+        System.out.println("llena la entidad bien");
         DAOFactory.getInstance().getVehicleDAO().persist(entity, em);
+        System.out.println("lleva a persistir");
     }
 
     @Override

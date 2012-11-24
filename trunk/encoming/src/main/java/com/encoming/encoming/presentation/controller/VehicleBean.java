@@ -344,7 +344,7 @@ public class VehicleBean implements Serializable{
     }
 
     public void addVehicle(ActionEvent actionEvent) {
-
+        System.out.println("entra en addvehicle");
         VehicleVo vehicleVo = new VehicleVo();
 
         vehicleVo.setCapacity(getCapacity());
@@ -356,7 +356,8 @@ public class VehicleBean implements Serializable{
         vehicleVo.setPlateNumber(getPlateNumbers());
         vehicleVo.setStatus(getStatus());
         vehicleVo.setType(getType());
-
+        System.out.println("asigna el vo completo");
         FacadeFactory.getInstance().getVehicleFacade().persist(vehicleVo);
+        System.out.println("puede persistir");
     }
 }

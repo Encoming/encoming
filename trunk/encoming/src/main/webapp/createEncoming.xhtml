@@ -86,7 +86,7 @@
                                 <h:selectOneMenu id="point" required="true" value="#{encomiendaBean.originCity}"
                                                  requiredMessage="Selecciona una Ciudad de Origen">
                                     <f:selectItem itemLabel="Seleccione un punto" itemValue="" />
-                                    <f:selectItems value="#{encomiendaBean.points}" />
+                                    <f:selectItems value="#{PointBean.points}" />
 
                                 </h:selectOneMenu>
 
@@ -94,7 +94,7 @@
                                 <h:selectOneMenu id="point1" required="true" value="#{encomiendaBean.destinationCity}"
                                                  requiredMessage="Selecciona una Ciudad de Destino">
                                     <f:selectItem itemLabel="Seleccione un punto" itemValue="" />
-                                    <f:selectItems value="#{encomiendaBean.points}" />
+                                    <f:selectItems value="#{PointBean.points}" />
                                 </h:selectOneMenu>
                             </h:panelGrid>
                         </p:panel>

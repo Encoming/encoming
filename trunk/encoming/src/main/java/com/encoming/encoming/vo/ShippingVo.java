@@ -24,11 +24,7 @@ public class ShippingVo implements IValueObject {
     private Integer idRoute;
     private Integer idEncoming;
     private List<InvoiceVo> invoiceList;
-    private Integer idVehicle;
-    private Integer idPerson;
-    private Integer idRoute;
-    private Integer idEncoming;
-    
+ 
     /**
      * @return the idShipping
      */
