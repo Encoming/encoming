@@ -6,7 +6,7 @@ package com.encoming.vo;
 
 /**
  *
- * @author Zergio
+ * @author Jmmartinezro
  */
 public interface IValueObject {
     

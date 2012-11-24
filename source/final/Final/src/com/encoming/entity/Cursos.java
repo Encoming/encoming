@@ -4,7 +4,10 @@
  */
 package com.encoming.entity;
 
+import com.encoming.vo.CursoVo;
+import com.encoming.vo.InscripcionVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -13,8 +16,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,7 +33,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Cursos.findById", query = "SELECT c FROM Cursos c WHERE c.id = :id"),
     @NamedQuery(name = "Cursos.findByNombre", query = "SELECT c FROM Cursos c WHERE c.nombre = :nombre"),
     @NamedQuery(name = "Cursos.findByValorCurso", query = "SELECT c FROM Cursos c WHERE c.valorCurso = :valorCurso")})
-public class Cursos implements Serializable {
+public class Cursos implements Serializable, IEntity<CursoVo> {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,14 +47,9 @@ public class Cursos implements Serializable {
     @Basic(optional = false)
     @Column(name = "VALOR_CURSO")
     private long valorCurso;
-//    @OneToMany(mappedBy = "prerrequisitoCursoId")
-//    private List<Cursos> cursosList;
     @OneToOne
     @Column(name = "PRERREQUISITO_CURSO_ID")
     private Cursos prerequisito;
-    @JoinColumn(name = "PRERREQUISITO_CURSO_ID", referencedColumnName = "ID")
-    @ManyToOne
-    private Cursos prerrequisitoCursoId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoId")
     private List<Inscripciones> inscripcionesList;
 
@@ -93,20 +90,12 @@ public class Cursos implements Serializable {
         this.valorCurso = valorCurso;
     }
 
-    public Cursos getCurso() {
+    public Cursos getPrerequisito() {
         return prerequisito;
     }
 
-    public void setCurso(Cursos curso) {
-        this.prerequisito = curso;
-    }
-
-    public Cursos getPrerrequisitoCursoId() {
-        return prerrequisitoCursoId;
-    }
-
-    public void setPrerrequisitoCursoId(Cursos prerrequisitoCursoId) {
-        this.prerrequisitoCursoId = prerrequisitoCursoId;
+    public void setPrerequisito(Cursos prerequisito) {
+        this.prerequisito = prerequisito;
     }
 
     public List<Inscripciones> getInscripcionesList() {
@@ -141,5 +130,21 @@ public class Cursos implements Serializable {
     public String toString() {
         return "com.encoming.entity.Cursos[ id=" + id + " ]";
     }
-    
+
+    @Override
+    public CursoVo toVo() {
+        CursoVo cursoVo = new CursoVo();
+        cursoVo.setId(getId());
+
+        List<InscripcionVo> inscripcionVo = new ArrayList<InscripcionVo>();
+        for (Inscripciones entity : getInscripcionesList()) {
+            inscripcionVo.add(entity.toVo());
+        }
+        cursoVo.setInscripcionesList(inscripcionVo);
+        cursoVo.setNombre(getNombre());
+        cursoVo.setPrerequisitoCursoId(getPrerequisito().getId());
+        cursoVo.setValorCurso(getValorCurso());
+
+        return cursoVo;
+    }
 }

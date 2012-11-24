@@ -4,7 +4,10 @@
  */
 package com.encoming.entity;
 
+import com.encoming.vo.EstudianteVo;
+import com.encoming.vo.InscripcionVo;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -34,7 +37,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Estudiantes.findByDocumento", query = "SELECT e FROM Estudiantes e WHERE e.documento = :documento"),
     @NamedQuery(name = "Estudiantes.findByFechaNacimiento", query = "SELECT e FROM Estudiantes e WHERE e.fechaNacimiento = :fechaNacimiento"),
     @NamedQuery(name = "Estudiantes.findByActivo", query = "SELECT e FROM Estudiantes e WHERE e.activo = :activo")})
-public class Estudiantes implements Serializable {
+public class Estudiantes implements Serializable, IEntity<EstudianteVo> {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -143,6 +146,25 @@ public class Estudiantes implements Serializable {
     @Override
     public String toString() {
         return "com.encoming.entity.Estudiantes[ id=" + id + " ]";
+    }
+
+    @Override
+    public EstudianteVo toVo() {
+        EstudianteVo estudianteVo = new EstudianteVo();
+        estudianteVo.setActivo(getActivo());
+        estudianteVo.setDocumento(getDocumento());
+        estudianteVo.setFechaNacimiento(getFechaNacimiento());
+        estudianteVo.setId(getId());
+        
+        List<InscripcionVo> inscripcionVos = new ArrayList<InscripcionVo>();
+        for(Inscripciones inscripciones:getInscripcionesList()){
+            inscripcionVos.add(inscripciones.toVo());
+        }        
+        estudianteVo.setInscripcionesList(inscripcionVos);
+        
+        estudianteVo.setNombre(getNombre());
+        
+        return estudianteVo;
     }
     
 }
