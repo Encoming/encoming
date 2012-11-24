@@ -17,14 +17,21 @@ import java.util.Date;
 public class EstudianteController {
 
     public void IngresarEstudiante(String nombres, String apellidos, Date fechaDeNacimiento, String documento) throws ExisteEstudianteException {
+        
+        EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
+        String nombreCompleto = nombres + " " + apellidos;
+
+        if(estudianteFacade.findByDocument(documento) != null){
+            
+        }
+
 
         EstudianteVo estudianteVo = new EstudianteVo();
         estudianteVo.setDocumento(documento);
         estudianteVo.setFechaNacimiento(fechaDeNacimiento);
         estudianteVo.setActivo(true);
-        estudianteVo.setNombre(nombres + " " + apellidos);
-        
-        EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
+        estudianteVo.setNombre(nombreCompleto);
+
         estudianteFacade.create(estudianteVo);
     }
 }

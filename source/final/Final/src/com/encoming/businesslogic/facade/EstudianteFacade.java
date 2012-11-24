@@ -15,4 +15,8 @@ public class EstudianteFacade extends Facade<EstudianteVo> {
     public EstudianteFacade(String PUName, EstudianteService service) {
         super(PUName, service);
     }
+
+    public Object findByDocument(String documento) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
