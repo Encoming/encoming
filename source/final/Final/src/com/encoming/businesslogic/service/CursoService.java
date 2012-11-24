@@ -6,12 +6,12 @@ package com.encoming.businesslogic.service;
 
 import com.encoming.dao.CursoDAO;
 import com.encoming.dao.DAOFactory;
-import com.encoming.dao.InscripcionDAO;
 import com.encoming.entity.Cursos;
 import com.encoming.entity.Inscripciones;
 import com.encoming.vo.CursoVo;
-import com.encoming.vo.InscripcionVo;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -68,12 +68,19 @@ public class CursoService implements IService<CursoVo> {
 
     @Override
     public List<CursoVo> getList(EntityManager em) {
-        List<Cursos> cursos =  DAOFactory.getInstance().getCursoDAO().getList(em);
-        ArrayList<CursoVo> cursosVo = new ArrayList();
-        for (Cursos cur:cursos){
-            cursosVo.add(cur.toVo());
-        
+        List<CursoVo> list = new ArrayList<CursoVo>();
+        for (Cursos curso : DAOFactory.getInstance().getCursoDAO().getList(em)) {
+            list.add((curso).toVo());
         }
-        return cursosVo;
+        Collections.sort(list, new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                CursoVo p1 = (CursoVo) o1;
+                CursoVo p2 = (CursoVo) o2;
+                return p1.getId().compareTo(p2.getId());
+            }
+        });
+        return list;
     }
 }

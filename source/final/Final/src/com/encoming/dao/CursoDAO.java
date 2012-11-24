@@ -8,6 +8,7 @@ import com.encoming.entity.Cursos;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -52,7 +53,9 @@ public class CursoDAO implements IDAO<Cursos> {
 
     @Override
     public List<Cursos> getList(EntityManager em) {
-        Query query = em.createNamedQuery("Cursos.findAll");
-        return (List<Cursos>)query.getSingleResult();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Cursos.class));
+        Query q = em.createQuery(cq);
+        return q.getResultList();
     }
 }

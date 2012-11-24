@@ -4,16 +4,19 @@
  */
 package com.encoming.presentation;
 
+import com.encoming.controller.CursoController;
+
 /**
  *
  * @author andres
  */
 public class enrollStudent extends javax.swing.JPanel {
-
+    principal principal;
     /**
      * Creates new form enrollStudent
      */
-    public enrollStudent() {
+    public enrollStudent(principal principal) {
+        this.principal=principal;
         initComponents();
     }
 
@@ -44,7 +47,7 @@ public class enrollStudent extends javax.swing.JPanel {
 
         jLabel4.setText("Seleccionar curso:");
 
-        cbCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCurso.setModel(new javax.swing.DefaultComboBoxModel(new CursoController().getCursosNames()));
 
         bInscribir.setText("Inscribir");
 

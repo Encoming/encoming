@@ -40,6 +40,11 @@ public class PPrincipal extends javax.swing.JPanel {
 
         bInscribirEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         bInscribirEstudiante.setText("Inscribir Un Estudiante");
+        bInscribirEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bInscribirEstudianteActionPerformed(evt);
+            }
+        });
 
         bIngresarEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         bIngresarEstudiante.setText("Ingresar Estudiante");
@@ -65,15 +70,14 @@ public class PPrincipal extends javax.swing.JPanel {
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(bIngresarEstudiante, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 204, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(bInscribirCursos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 204, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(jLabel1)
+                        .add(0, 0, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(bInscribirEstudiante)
-                            .add(jLabel1))
-                        .add(0, 0, Short.MAX_VALUE))))
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(bInscribirEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(bIngresarEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(bInscribirCursos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -95,6 +99,11 @@ public class PPrincipal extends javax.swing.JPanel {
     private void bIngresarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarEstudianteActionPerformed
         principal.cambiarPanel(new createStudents(principal));
     }//GEN-LAST:event_bIngresarEstudianteActionPerformed
+
+    private void bInscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirEstudianteActionPerformed
+        principal.cambiarPanel(new enrollStudent(principal));
+    }//GEN-LAST:event_bInscribirEstudianteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bIngresarEstudiante;
     private javax.swing.JButton bInscribirCursos;
