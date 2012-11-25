@@ -31,7 +31,7 @@ public class VehicleBean implements Serializable{
     private String manufacturer;
     private String model;
     private String capacity;
-    private String status;
+    private String status = "Disponible";
     private Integer idDriver;
     private Integer idPoint;
     private Integer plateNumbers;

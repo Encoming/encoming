@@ -18,8 +18,9 @@
                     <f:view>
                         <h:form>   
                             <p:menu> 
-                                <p:submenu label="Nueva Encomienda" >  
+                                <p:submenu label="Administrar Encomienda" >  
                                     <p:menuitem value="Crear" icon="ui-icon-document" action="#{adminMenuBean.createEncoming}" ajax ="false"/>  
+                                    <p:menuitem value="Recibir" icon="ui-icon-document" action="#{adminMenuBean.getShipping}" ajax ="false"/>
                                 </p:submenu>
 
                                 <p:submenu label="Administrar Personal" >  

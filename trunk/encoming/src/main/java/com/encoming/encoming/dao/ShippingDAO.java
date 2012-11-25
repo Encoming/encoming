@@ -70,4 +70,23 @@ public class ShippingDAO implements IDAO<Shipping> {
         
         
     }
-}
+    
+    public List<Shipping> findToLess(Object point, Object idVehicle, EntityManager em){
+        
+        Query q = em.createQuery("SELECT ship FROM Shipping ship WHERE ship.route.destinationCity =:city AND"
+                + " ship.vehicle:= idVehicle AND ship.arrivedDate IS NULL").setParameter("city", point);
+        return (List<Shipping>) q.getResultList();
+        
+    }
+   
+    
+    public void updateArrivedDate(Object arrivedDate,Object idShipping, EntityManager em){
+    em.createQuery("UPDATE Shipping shi SET shi.arrivedDate =:arrivedDate WHERE shi.idShipping =:idShip")
+            .setParameter("idShip", idShipping).setParameter("arrivedDate", arrivedDate)
+            .executeUpdate();
+
+            }
+    }
+
+
+
