@@ -36,10 +36,10 @@ public class PPrincipal extends javax.swing.JPanel {
         bInscritosPorCurso = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel1.setForeground(new java.awt.Color(0, 51, 102));
         jLabel1.setText("PARCIAL FINAL");
 
-        bInscribirEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bInscribirEstudiante.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         bInscribirEstudiante.setText("Inscribir un Estudiante a un Curso");
         bInscribirEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -47,7 +47,7 @@ public class PPrincipal extends javax.swing.JPanel {
             }
         });
 
-        bIngresarEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bIngresarEstudiante.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         bIngresarEstudiante.setText("Crear Estudiante");
         bIngresarEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,7 +55,7 @@ public class PPrincipal extends javax.swing.JPanel {
             }
         });
 
-        bInscribirCursos.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bInscribirCursos.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         bInscribirCursos.setText("Crear Curso");
         bInscribirCursos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +63,7 @@ public class PPrincipal extends javax.swing.JPanel {
             }
         });
 
-        bInscritosPorCurso.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bInscritosPorCurso.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         bInscritosPorCurso.setText("Ver Inscritos por Curso");
         bInscritosPorCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,12 +81,12 @@ public class PPrincipal extends javax.swing.JPanel {
                     .add(layout.createSequentialGroup()
                         .add(jLabel1)
                         .add(0, 13, Short.MAX_VALUE))
-                    .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(bInscribirEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(bIngresarEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(bInscribirCursos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(bInscritosPorCurso, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, bInscribirEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, bIngresarEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, bInscribirCursos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, bInscritosPorCurso, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -94,11 +94,11 @@ public class PPrincipal extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(bInscribirEstudiante)
+                .add(bInscribirCursos)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(bIngresarEstudiante)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(bInscribirCursos)
+                .add(bInscribirEstudiante)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(bInscritosPorCurso)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

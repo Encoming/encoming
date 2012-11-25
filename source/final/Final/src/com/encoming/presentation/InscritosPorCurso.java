@@ -45,7 +45,6 @@ public class InscritosPorCurso extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jlInscritos = new javax.swing.JList();
-        bVerEstudiantes = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -63,22 +62,20 @@ public class InscritosPorCurso extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel1.setText("Inscritos por Curso");
+        jLabel1.setText("Inscritos por Curso:");
 
         jLabel2.setText("Seleccione el curso:");
 
         cbCursos.setModel(new javax.swing.DefaultComboBoxModel(new CursoController().getCursosNames()));
+        cbCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCursosActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Estudiantes Inscritos:");
 
         jScrollPane3.setViewportView(jlInscritos);
-
-        bVerEstudiantes.setText("Ver");
-        bVerEstudiantes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bVerEstudiantesActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,9 +95,7 @@ public class InscritosPorCurso extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bVerEstudiantes)
-                        .addGap(52, 52, 52)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,26 +108,23 @@ public class InscritosPorCurso extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(cbCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(bVerEstudiantes))
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bVerEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerEstudiantesActionPerformed
+    private void cbCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCursosActionPerformed
         listaEstudiantes.clear();
         jlInscritos.setModel(listaEstudiantes);
         Object c = cbCursos.getSelectedItem();
         String nombreCurso = c.toString();
         listaEstudiantes.addElement(new CursoController().EstudiantesPorCurso(nombreCurso));
         jlInscritos.setModel(listaEstudiantes);
-    }//GEN-LAST:event_bVerEstudiantesActionPerformed
+    }//GEN-LAST:event_cbCursosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bVerEstudiantes;
     private javax.swing.JComboBox cbCursos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

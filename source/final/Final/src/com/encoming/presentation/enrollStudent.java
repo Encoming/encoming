@@ -18,7 +18,7 @@ public class enrollStudent extends javax.swing.JPanel {
      * Creates new form enrollStudent
      */
     public enrollStudent(principal principal) {
-        this.principal=principal;
+        this.principal = principal;
         initComponents();
     }
 
