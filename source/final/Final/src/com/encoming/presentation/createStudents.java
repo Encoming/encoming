@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,12 +20,12 @@ import java.util.logging.Logger;
 public class createStudents extends javax.swing.JPanel {
 
     private principal principal;
-    
+
     /**
      * Creates new form createStudents
      */
     public createStudents(principal parent) {
-        principal=parent;
+        principal = parent;
         initComponents();
     }
 
@@ -211,6 +212,15 @@ public class createStudents extends javax.swing.JPanel {
 
     private void bIngresarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarEstudianteActionPerformed
         Date fecha;
+        String str;
+
+        str = tfNombres.getText();
+        String verificator = EstudianteController.validateName(str);
+        if (!verificator.equals("Validado")) {
+            JOptionPane.showMessageDialog(this, verificator, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             fecha = simpleDateFormat.parse(tfYear.getText() + "-" + tfMes.getText() + "-" + tfDia.getText());
@@ -218,10 +228,13 @@ public class createStudents extends javax.swing.JPanel {
                     tfApellidos.getText(),
                     fecha,
                     tfDocumento.getText());
+            JOptionPane.showMessageDialog(this, "El estudiante se ha guardado", "Aviso!", JOptionPane.INFORMATION_MESSAGE);
         } catch (ExisteEstudianteException ex) {
             Logger.getLogger(createStudents.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "El estudiante ya EXISTE!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
         } catch (ParseException ex) {
             Logger.getLogger(createStudents.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "La fecha es incorrecta!!!", "Aviso!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_bIngresarEstudianteActionPerformed
 

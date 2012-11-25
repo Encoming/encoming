@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  */
 public class EstudianteController {
 
+
     public void IngresarEstudiante(String nombres, String apellidos, Date fechaDeNacimiento, String documento) throws ExisteEstudianteException {
 
         EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
