@@ -46,6 +46,11 @@ public class enrollStudent extends javax.swing.JPanel {
         jLabel3.setText("Seleccionar estudiante:");
 
         cbEstudiante.setModel(new javax.swing.DefaultComboBoxModel(new EstudianteController().getEstudiantesIDNames()));
+        cbEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstudianteActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Seleccionar curso:");
 
@@ -120,6 +125,10 @@ public class enrollStudent extends javax.swing.JPanel {
         //principal.cambiarPanel(new confirmEnroll(principal,(String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem()));
         principal.cambiarPanel(new confirmEnroll(principal,new InscripcionController().getInscripcionVo((String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem())));
     }//GEN-LAST:event_bInscribirActionPerformed
+
+    private void cbEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstudianteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEstudianteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bInscribir;
