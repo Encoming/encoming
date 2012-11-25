@@ -238,6 +238,7 @@ public class createStudents extends javax.swing.JPanel {
             id=Integer.parseInt(str);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "El documento es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         str = EstudianteController.validateId(id);
         if(!str.equals("Validado")){
