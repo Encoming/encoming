@@ -64,6 +64,7 @@ public class createsCourses extends javax.swing.JPanel {
         jLabel4.setText("COSTO");
 
         cbPreRequisito.setModel(new javax.swing.DefaultComboBoxModel(new CursoController().getCursosNames()));
+        cbPreRequisito.addItem("Ninguno");
         cbPreRequisito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPreRequisitoActionPerformed(evt);
