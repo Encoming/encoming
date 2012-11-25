@@ -190,6 +190,7 @@ public class createsCourses extends javax.swing.JPanel {
         } catch (ExisteCursoException ex) {
             Logger.getLogger(createsCourses.class.getName()).log(Level.SEVERE, null, ex);
         }
+        principal.cambiarPanel(new PPrincipal(principal));
     }//GEN-LAST:event_bAgregarCursoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
