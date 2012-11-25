@@ -24,6 +24,7 @@ public class InscritosPorCurso extends javax.swing.JPanel {
     public InscritosPorCurso(principal parent) {
         principal = parent;
         initComponents();
+        listStudents();
     }
 
     /**
@@ -115,13 +116,17 @@ public class InscritosPorCurso extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCursosActionPerformed
+    private void listStudents(){
         listaEstudiantes.clear();
         jlInscritos.setModel(listaEstudiantes);
         Object c = cbCursos.getSelectedItem();
         String nombreCurso = c.toString();
         listaEstudiantes.addElement(new CursoController().EstudiantesPorCurso(nombreCurso));
         jlInscritos.setModel(listaEstudiantes);
+    }
+    
+    private void cbCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCursosActionPerformed
+        listStudents();
     }//GEN-LAST:event_cbCursosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -75,7 +75,7 @@ public class CursoController {
             for(Integer idEstudiante : idEstudiantes){
                     for (EstudianteVo estudianteVo : estudianteVos){
                         if(idEstudiante == estudianteVo.getId()){
-                            nombres.add(estudianteVo.getNombre());
+                            nombres.add("\n"+estudianteVo.getNombre());
                         }
                     }    
             }
