@@ -143,7 +143,10 @@ public class Cursos implements Serializable, IEntity<CursoVo> {
         }
         cursoVo.setInscripcionesList(inscripcionVo);
         cursoVo.setNombre(getNombre());
-        //cursoVo.setPrerequisitoCursoId(getPrerequisito().getId());
+        try {
+            cursoVo.setPrerequisitoCursoId(getPrerequisito().getId());
+        } catch (NullPointerException e) {
+        }
         cursoVo.setValorCurso(getValorCurso());
 
         return cursoVo;

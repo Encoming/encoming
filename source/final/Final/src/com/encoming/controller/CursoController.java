@@ -6,13 +6,10 @@ package com.encoming.controller;
 
 import com.encoming.businesslogic.facade.CursoFacade;
 import com.encoming.businesslogic.facade.FacadeFactory;
-import com.encoming.utils.DataBaseException;
 import com.encoming.utils.ExisteCursoException;
 import com.encoming.vo.CursoVo;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,23 +19,32 @@ public class CursoController {
 
     public static String validateName(String text) {
         int a = text.length();
-        if (a<4 || a>15) {
+        if (a<4 || a>25) {
             return "La longitud del nombre debe estar entre 4 y 15";
         }
         return "Validado";
     }
     
-    public void crearCurso(String nombre, int idPrerequisito, long valor) throws ExisteCursoException{
-        CursoVo cursoVo = new CursoVo();
-        cursoVo.setNombre(nombre);
-        cursoVo.setPrerequisitoCursoId(idPrerequisito);
-        cursoVo.setValorCurso(valor);
-        CursoFacade cursoFacade = FacadeFactory.getInstance().getCursoFacade();
-        try {
-            cursoFacade.create(cursoVo);
-        } catch (DataBaseException ex) {
-            Logger.getLogger(CursoController.class.getName()).log(Level.SEVERE, null, ex);
+    public void crearCurso(String nombre, String prerequisito, long valor) throws ExisteCursoException{
+        if (FacadeFactory.getInstance().getCursoFacade().findByName(nombre)==null) {
+            CursoVo prerequisitos = FacadeFactory.getInstance().getCursoFacade().findByName(prerequisito);
+            System.out.println("Prereq = " + prerequisitos);
+            
+            CursoVo cursoVo = new CursoVo();
+            cursoVo.setNombre(nombre);
+            try {
+                cursoVo.setPrerequisitoCursoId(prerequisitos.getId());
+            } catch (NullPointerException e) {
+            }
+            cursoVo.setValorCurso(valor);
+            System.out.println("Curso = " + cursoVo);
+            CursoFacade cursoFacade = FacadeFactory.getInstance().getCursoFacade();
+            
+            cursoFacade.create1(cursoVo);
+        } else {
+            throw new ExisteCursoException("Ya existe el curso");
         }
+        
     }
     
     public Object[] getCursosNames(){

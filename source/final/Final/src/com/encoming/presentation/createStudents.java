@@ -231,7 +231,7 @@ public class createStudents extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, verificator1, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         str = tfDocumento.getText();
         int id=0;
         try{
@@ -243,6 +243,27 @@ public class createStudents extends javax.swing.JPanel {
         str = EstudianteController.validateId(id);
         if(!str.equals("Validado")){
             JOptionPane.showMessageDialog(this, str, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        str=tfDia.getText();
+        String verificator2 = EstudianteController.validateDay(str);
+        if (!verificator2.equals("Validado")) {
+            JOptionPane.showMessageDialog(this, verificator2, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        str=tfMes.getText();
+        String verificator3 = EstudianteController.validateMonth(str);
+        if (!verificator3.equals("Validado")) {
+            JOptionPane.showMessageDialog(this, verificator3, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        str=tfYear.getText();
+        String verificator4 = EstudianteController.validateYear(str);
+        if (!verificator4.equals("Validado")) {
+            JOptionPane.showMessageDialog(this, verificator4, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

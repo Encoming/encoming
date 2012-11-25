@@ -26,4 +26,15 @@ public class CursoFacade extends Facade<CursoVo> {
             }
         }
     }
+
+    public CursoVo findById(Integer cursoId) {
+        try {
+            return ((CursoService) service).findById(cursoId, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
 }

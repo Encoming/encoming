@@ -44,6 +44,26 @@ public class Facade<VO> {
         }
     }
 
+    public void create1(VO vo) {
+        EntityTransaction tx = null;
+        try {
+            tx = em.getTransaction();
+            tx.begin();
+            service.create(vo, em);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em != null && tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
+
     public VO find(Object id) {
         try {
             return (VO) service.find(id, em);
