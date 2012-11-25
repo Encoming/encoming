@@ -85,7 +85,7 @@ public class CursoService implements IService<CursoVo> {
         
         DAOFactory.getInstance().getCursoDAO().update(curso, em);
     }
-
+   
     @Override
     public void delete(Object id, EntityManager em) {
         DAOFactory.getInstance().getCursoDAO().delete(id, em);

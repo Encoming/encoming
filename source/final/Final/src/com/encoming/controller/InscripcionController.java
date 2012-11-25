@@ -22,13 +22,13 @@ import java.util.logging.Logger;
  */
 public class InscripcionController {
 
-    public void inscribirEstudiante(String nombreEstudiante, String nombreMateria)throws NoActivoException{
+    public void inscribirEstudiante(String nombreEstudiante, String nombreMateria) throws NoActivoException {
         EstudianteVo estudianteVo = FacadeFactory.getInstance().getEstudianteFacade().findByName(nombreEstudiante);
         if (!estudianteVo.getActivo()) {
             throw new NoActivoException("El estudiante no esta activo");
         }
         CursoVo cursoVo = FacadeFactory.getInstance().getCursoFacade().findByName(nombreMateria);
-        
+
         InscripcionVo inscripcionVo = new InscripcionVo();
 
         inscripcionVo.setEstado("Inscrito");
@@ -37,15 +37,20 @@ public class InscripcionController {
         inscripcionVo.setValorPagado(cursoVo.getValorCurso());
 
         InscripcionFacade inscripcionFacade = FacadeFactory.getInstance().getInscripcionFacade();
+
         try {
+            boolean inscrito = inscripcionFacade.estudianteCumplePreRequisitos(estudianteVo.getId(), cursoVo.getId());
             boolean cumplePrerequisitos = inscripcionFacade.estudianteCumplePreRequisitos(estudianteVo.getId(), cursoVo.getPrerequisitoCursoId());
-            if (cumplePrerequisitos==false) {
+            if (inscrito) {
+                throw new NoPrerrequisitosException("El estudiante ya se encuentra inscrito");
+            } else if (cumplePrerequisitos == false) {
                 throw new NoPrerrequisitosException("No se cumplen con los prerequisitos");
+            } else {
+                inscripcionFacade.create(inscripcionVo);
             }
-            inscripcionFacade.create(inscripcionVo);
         } catch (NoPrerrequisitosException ex) {
             Logger.getLogger(InscripcionController.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (DataBaseException ex) {
+        } catch (DataBaseException ex) {
             Logger.getLogger(InscripcionController.class.getName()).log(Level.SEVERE, null, ex);
         }
         List<InscripcionVo> inscripcionVos = cursoVo.getInscripcionesList();
@@ -81,6 +86,6 @@ public class InscripcionController {
 
     private boolean cumplePreRequisitos(EstudianteVo estudianteVo, CursoVo cursoVo) {
         InscripcionFacade inscripcionFacade = FacadeFactory.getInstance().getInscripcionFacade();
-        return inscripcionFacade.estudianteCumplePreRequisitos(estudianteVo,cursoVo);
+        return inscripcionFacade.estudianteCumplePreRequisitos(estudianteVo, cursoVo);
     }
 }
