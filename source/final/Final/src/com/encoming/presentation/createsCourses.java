@@ -187,8 +187,10 @@ public class createsCourses extends javax.swing.JPanel {
             new CursoController().crearCurso(tfNombre.getText(),
                     (String)cbPreRequisito.getSelectedItem(),
                     new Long(tfCosto.getText()));
+            JOptionPane.showMessageDialog(this, "El curso se ha guardado", "Aviso!", JOptionPane.INFORMATION_MESSAGE);
         } catch (ExisteCursoException ex) {
             Logger.getLogger(createsCourses.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "El curso ya EXISTE!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_bAgregarCursoActionPerformed
 
