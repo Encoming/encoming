@@ -26,20 +26,24 @@ public class CursoController {
     }
     
     public void crearCurso(String nombre, String prerequisito, long valor) throws ExisteCursoException{
-        CursoVo prerequisitos=FacadeFactory.getInstance().getCursoFacade().findByName(prerequisito);
-        System.out.println("Prereq = "+prerequisitos);
-        
-        CursoVo cursoVo = new CursoVo();
-        cursoVo.setNombre(nombre);
-        try {
-            cursoVo.setPrerequisitoCursoId(prerequisitos.getId());
-        } catch (NullPointerException e) {
+        if (FacadeFactory.getInstance().getCursoFacade().findByName(nombre)==null) {
+            CursoVo prerequisitos = FacadeFactory.getInstance().getCursoFacade().findByName(prerequisito);
+            System.out.println("Prereq = " + prerequisitos);
+            
+            CursoVo cursoVo = new CursoVo();
+            cursoVo.setNombre(nombre);
+            try {
+                cursoVo.setPrerequisitoCursoId(prerequisitos.getId());
+            } catch (NullPointerException e) {
+            }
+            cursoVo.setValorCurso(valor);
+            System.out.println("Curso = " + cursoVo);
+            CursoFacade cursoFacade = FacadeFactory.getInstance().getCursoFacade();
+            
+            cursoFacade.create1(cursoVo);
+        } else {
+            throw new ExisteCursoException("Ya existe el curso");
         }
-        cursoVo.setValorCurso(valor);
-        System.out.println("Curso = "+cursoVo);
-        CursoFacade cursoFacade = FacadeFactory.getInstance().getCursoFacade();
-        
-        cursoFacade.create1(cursoVo);
         
     }
     
