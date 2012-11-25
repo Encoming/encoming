@@ -19,6 +19,14 @@ import java.util.logging.Logger;
  * @author andres
  */
 public class CursoController {       
+
+    public static String validateName(String text) {
+        int a = text.length();
+        if (a<4 || a>15) {
+            return "La longitud del nombre debe estar entre 4 y 15";
+        }
+        return "Validado";
+    }
     
     public void crearCurso(String nombre, int idPrerequisito, long valor) throws ExisteCursoException{
         CursoVo cursoVo = new CursoVo();

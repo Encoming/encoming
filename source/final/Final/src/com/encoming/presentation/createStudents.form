@@ -177,6 +177,9 @@
         <Component class="javax.swing.JTextField" name="tfNombres">
         </Component>
         <Component class="javax.swing.JTextField" name="tfApellidos">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfApellidosActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfDia">
           <Events>
