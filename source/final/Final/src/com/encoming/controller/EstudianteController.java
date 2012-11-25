@@ -22,8 +22,7 @@ public class EstudianteController {
     public void IngresarEstudiante(String nombres, String apellidos, Date fechaDeNacimiento, String documento) throws ExisteEstudianteException {
 
         EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
-        String nombreCompleto = nombres + " " + apellidos;
-        
+        String nombreCompleto = nombres + " " + apellidos;    
         if (FacadeFactory.getInstance().getEstudianteFacade().findByDocument(documento) == null) {
             EstudianteVo estudianteVo = new EstudianteVo();
             estudianteVo.setDocumento(documento);
