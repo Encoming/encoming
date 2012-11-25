@@ -37,4 +37,15 @@ public class EstudianteFacade extends Facade<EstudianteVo> {
             }
         }
     }
+
+    public EstudianteVo findById(Integer estudianteId) {
+        try {
+            return ((EstudianteService) service).findById(estudianteId, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
 }

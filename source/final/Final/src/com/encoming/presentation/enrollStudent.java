@@ -122,7 +122,8 @@ public class enrollStudent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirActionPerformed
-        new InscripcionController().inscribirEstudiante((String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem());
+        //principal.cambiarPanel(new confirmEnroll(principal,(String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem()));
+        principal.cambiarPanel(new confirmEnroll(principal,new InscripcionController().getInscripcionVo((String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem())));
     }//GEN-LAST:event_bInscribirActionPerformed
 
     private void cbEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstudianteActionPerformed

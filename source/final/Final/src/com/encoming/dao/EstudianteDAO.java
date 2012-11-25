@@ -78,7 +78,21 @@ public class EstudianteDAO implements IDAO<Estudiantes> {
                 setParameter("nombre", nombreEstudiante);
         try {
             student = (Estudiantes) q.getSingleResult();
-            System.out.println("student = "+student);
+        } catch (NonUniqueResultException e) {
+            student = (Estudiantes) q.getResultList().get(0);
+        } catch (NoResultException e) {
+            student = null;
+        }
+        return student;
+    }
+
+    public Estudiantes findById(Integer estudianteId, EntityManager em) {
+        Estudiantes student;
+        Query q = em.createQuery("SELECT t FROM Estudiantes t WHERE t.id LIKE :id").
+                //setParameter("nombre", nombreEstudiante);
+                setParameter("id", estudianteId+"");
+        try {
+            student = (Estudiantes) q.getSingleResult();
         } catch (NonUniqueResultException e) {
             student = (Estudiantes) q.getResultList().get(0);
         } catch (NoResultException e) {

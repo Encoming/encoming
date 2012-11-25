@@ -92,5 +92,14 @@ public class EstudianteService implements IService<EstudianteVo> {
         }
     }
 
+    public EstudianteVo findById(Integer estudianteId, EntityManager em) {
+        Estudiantes student = DAOFactory.getInstance().getEstudianteDAO().findById(estudianteId, em);
+        if (student.getNombre() != null) {
+            return student.toVo();
+        } else {
+            return null;
+        }
+    }
+
    
 }
