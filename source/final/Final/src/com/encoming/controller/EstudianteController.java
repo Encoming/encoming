@@ -22,8 +22,41 @@ import java.util.logging.Logger;
 public class EstudianteController {
 
     public static String validateId(int id) {
-        if (id<10000000 || id>999999999) {
+        if (id < 10000000 || id > 999999999) {
             return "El documento debe ser un número entre 10000000 y 999999999";
+        }
+        return "Validado";
+    }
+
+    public static String validateDay(String str) {
+        if (str.length() == 0) {
+            return "Validado";
+        }
+        Integer id = Integer.parseInt(str);
+        if (id < 1 || id > 31) {
+            return "¡El dia debe estar en un rango valido!";
+        }
+        return "Validado";
+    }
+
+    public static String validateMonth(String str) {
+        if (str.length() == 0) {
+            return "Validado";
+        }
+        Integer id = Integer.parseInt(str);
+        if (id < 1 || id > 12) {
+            return "¡El mes debe estar en un rango valido,1-12!";
+        }
+        return "Validado";
+    }
+
+    public static String validateYear(String str) {
+        if (str.length() == 0) {
+            return "Validado";
+        }
+        Integer id = Integer.parseInt(str);
+        if (id < 1960 || id > 2002) {
+            return "¡El año tiene que estar entre 1960 y 2002!";
         }
         return "Validado";
     }
@@ -31,7 +64,7 @@ public class EstudianteController {
     public void IngresarEstudiante(String nombres, String apellidos, Date fechaDeNacimiento, String documento) throws ExisteEstudianteException {
 
         EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
-        String nombreCompleto = nombres + " " + apellidos;    
+        String nombreCompleto = nombres + " " + apellidos;
         if (FacadeFactory.getInstance().getEstudianteFacade().findByDocument(documento) == null) {
             EstudianteVo estudianteVo = new EstudianteVo();
             estudianteVo.setDocumento(documento);
@@ -47,18 +80,18 @@ public class EstudianteController {
             throw new ExisteEstudianteException("Ya existe el estudiante");
         }
     }
-    
-    public Object[] getEstudiantesIDNames(){
+
+    public Object[] getEstudiantesIDNames() {
         List<String> nombres = new ArrayList<String>();
-        List<EstudianteVo> estudiantes=FacadeFactory.getInstance().getEstudianteFacade().getList();
-        if (estudiantes !=null){
-            for(EstudianteVo estudianteVo:estudiantes){
+        List<EstudianteVo> estudiantes = FacadeFactory.getInstance().getEstudianteFacade().getList();
+        if (estudiantes != null) {
+            for (EstudianteVo estudianteVo : estudiantes) {
                 nombres.add(estudianteVo.getNombre());
             }
-        }        
+        }
         return nombres.toArray();
     }
-    
+
     public static String validateName(String name) {
         int a = name.length();
         if (a < 3 || a > 15) {
@@ -87,8 +120,8 @@ public class EstudianteController {
             return "Validado";
         }
     }
-    
-        public static String validateLastName(String name) {
+
+    public static String validateLastName(String name) {
         int a = name.length();
         if (a < 5 || a > 25) {
             return "¡La longitud del apellido debe estar entre 5 y 25!";
@@ -116,5 +149,4 @@ public class EstudianteController {
             return "Validado";
         }
     }
-    
 }
