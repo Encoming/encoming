@@ -26,6 +26,11 @@ public class CursoController {
     }
     
     public void crearCurso(String nombre, String prerequisito, long valor) throws ExisteCursoException{
+        assert !"Prueba0".equals(nombre) : "Tratando de crear un curso Prueba0";
+//        if("Prueba0".equals(nombre)){
+//            System.out.println("Tratando de crear un curso Prueba0");
+//            return;
+//        }
         if (FacadeFactory.getInstance().getCursoFacade().findByName(nombre)==null) {
             CursoVo prerequisitos = FacadeFactory.getInstance().getCursoFacade().findByName(prerequisito);
             System.out.println("Prereq = " + prerequisitos);
