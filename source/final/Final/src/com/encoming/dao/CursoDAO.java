@@ -77,11 +77,9 @@ public class CursoDAO implements IDAO<Cursos> {
     public Cursos findById(Integer cursoId, EntityManager em) {
         Cursos curso;
         Query q = em.createQuery("SELECT c FROM Cursos c WHERE c.id LIKE :id").
-                //setParameter("nombre", nombreEstudiante);
                 setParameter("id", cursoId+"");
         try {
             curso = (Cursos) q.getSingleResult();
-            System.out.println("student = "+curso);
         } catch (NonUniqueResultException e) {
             curso = (Cursos) q.getResultList().get(0);
         } catch (NoResultException e) {

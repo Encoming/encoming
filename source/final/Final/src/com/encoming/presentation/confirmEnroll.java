@@ -15,20 +15,22 @@ import java.util.logging.Logger;
  * @author andres
  */
 public class confirmEnroll extends javax.swing.JPanel {
+
     principal principal;
     InscripcionVo inscripcionVo;
     InscripcionController inscripcionController = new InscripcionController();
+
     /**
      * Creates new form enrollStudent
      */
-    public confirmEnroll(principal principal,InscripcionVo inscripcionVo) {
-        this.principal=principal;
-        this.inscripcionVo=inscripcionVo;
+    public confirmEnroll(principal principal, InscripcionVo inscripcionVo) {
+        this.principal = principal;
+        this.inscripcionVo = inscripcionVo;
         initComponents();
         taConfirmacion.setText(
-                "Desea inscribir el estudiante "+inscripcionController.getNameStudentFromInscription(inscripcionVo) +
-                " \na la materia "+inscripcionController.getNameCourseFromInscription(inscripcionVo)+"?"+
-                "\n\n Costo de inscripción:\t$"+inscripcionVo.getValorPagado());
+                "Desea inscribir el estudiante " + inscripcionController.getNameStudentFromInscription(inscripcionVo)
+                + " \na la materia " + inscripcionController.getNameCourseFromInscription(inscripcionVo) + "?"
+                + "\n\n Costo de inscripción:\t$" + inscripcionVo.getValorPagado());
     }
 
     /**
@@ -128,12 +130,12 @@ public class confirmEnroll extends javax.swing.JPanel {
         } catch (NoActivoException ex) {
             Logger.getLogger(confirmEnroll.class.getName()).log(Level.SEVERE, null, ex);
         }
+        principal.cambiarPanel(new enrollStudent(principal));
     }//GEN-LAST:event_bInscribirActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        principal.cambiarPanel(new enrollStudent(principal));
+        principal.cambiarPanel(new PPrincipal(principal));
     }//GEN-LAST:event_VolverActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Volver;
     private javax.swing.JButton bInscribir;

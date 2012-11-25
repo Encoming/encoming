@@ -27,7 +27,7 @@ public class InscripcionController {
             throw new NoActivoException("El estudiante no esta activo");
         }
         CursoVo cursoVo = FacadeFactory.getInstance().getCursoFacade().findByName(nombreMateria);
-        System.out.println(cursoVo);
+        
         InscripcionVo inscripcionVo = new InscripcionVo();
 
         inscripcionVo.setEstado("Inscrito");
@@ -53,9 +53,6 @@ public class InscripcionController {
     public InscripcionVo getInscripcionVo(String nombreEstudiante, String nombreMateria) {
         EstudianteVo estudianteVo = FacadeFactory.getInstance().getEstudianteFacade().findByName(nombreEstudiante);
         CursoVo cursoVo = FacadeFactory.getInstance().getCursoFacade().findByName(nombreMateria);
-
-        System.out.println(cursoVo);
-        System.out.println(estudianteVo);
 
         InscripcionVo inscripcionVo = new InscripcionVo();
 

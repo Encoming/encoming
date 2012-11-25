@@ -78,7 +78,6 @@ public class EstudianteDAO implements IDAO<Estudiantes> {
                 setParameter("nombre", nombreEstudiante);
         try {
             student = (Estudiantes) q.getSingleResult();
-            System.out.println("student = "+student);
         } catch (NonUniqueResultException e) {
             student = (Estudiantes) q.getResultList().get(0);
         } catch (NoResultException e) {
@@ -94,7 +93,6 @@ public class EstudianteDAO implements IDAO<Estudiantes> {
                 setParameter("id", estudianteId+"");
         try {
             student = (Estudiantes) q.getSingleResult();
-            System.out.println("student = "+student);
         } catch (NonUniqueResultException e) {
             student = (Estudiantes) q.getResultList().get(0);
         } catch (NoResultException e) {
