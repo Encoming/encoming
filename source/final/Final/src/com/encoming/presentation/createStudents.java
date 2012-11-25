@@ -70,6 +70,12 @@ public class createStudents extends javax.swing.JPanel {
 
         jLabel4.setText("FECHA DE NACIMIENTO");
 
+        tfApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfApellidosActionPerformed(evt);
+            }
+        });
+
         tfDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDiaActionPerformed(evt);
@@ -193,8 +199,6 @@ public class createStudents extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel5.getAccessibleContext().setAccessibleName("/");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,6 +222,13 @@ public class createStudents extends javax.swing.JPanel {
         String verificator = EstudianteController.validateName(str);
         if (!verificator.equals("Validado")) {
             JOptionPane.showMessageDialog(this, verificator, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        str = tfApellidos.getText();
+        String verificator1 = EstudianteController.validateLastName(str);
+        if (!verificator1.equals("Validado")) {
+            JOptionPane.showMessageDialog(this, verificator1, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -249,6 +260,10 @@ public class createStudents extends javax.swing.JPanel {
     private void tfYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfYearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfYearActionPerformed
+
+    private void tfApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfApellidosActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bIngresarEstudiante;
     private javax.swing.JLabel jLabel1;
