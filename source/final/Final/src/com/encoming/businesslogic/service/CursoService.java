@@ -8,6 +8,7 @@ import com.encoming.dao.DAOFactory;
 import com.encoming.entity.Cursos;
 import com.encoming.entity.Inscripciones;
 import com.encoming.vo.CursoVo;
+import com.encoming.vo.InscripcionVo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -66,7 +67,23 @@ public class CursoService implements IService<CursoVo> {
 
     @Override
     public void update(CursoVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Cursos curso = DAOFactory.getInstance().getCursoDAO().findById(vo.getId(), em);
+        List<InscripcionVo> inscripcionVos = vo.getInscripcionesList();
+        InscripcionVo ins = inscripcionVos.get(inscripcionVos.size()-1);
+        Inscripciones inscripcion = DAOFactory.getInstance().getInscripcionDAO().findSubscriptionByStudentAndCourse(
+                ins.getEstudianteId(), ins.getCursoId(), em);
+        curso.setId(vo.getId());   
+        List<Inscripciones> inscripciones=curso.getInscripcionesList();
+        inscripciones.add(inscripcion);
+        curso.setInscripcionesList(inscripciones);
+        curso.setNombre(vo.getNombre());
+        
+        Cursos prerequisito = DAOFactory.getInstance().getCursoDAO().findById(vo.getPrerequisitoCursoId(), em);
+        curso.setPrerequisito(prerequisito);
+        
+        curso.setValorCurso(vo.getValorCurso());
+        
+        DAOFactory.getInstance().getCursoDAO().update(curso, em);
     }
 
     @Override

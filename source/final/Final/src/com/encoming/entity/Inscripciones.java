@@ -122,11 +122,23 @@ public class Inscripciones implements Serializable, IEntity<InscripcionVo> {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "com.encoming.entity.Inscripciones[ id=" + id + " ]";
+//    }
+
     @Override
     public String toString() {
-        return "com.encoming.entity.Inscripciones[ id=" + id + " ]";
+        return "Inscripciones{" 
+                + "\nid=" + id 
+                + ",\n valorPagado=" + valorPagado 
+                + ",\n estado=" + estado 
+                + ",\n estudianteId=" + estudianteId 
+                + ",\n cursoId=" + cursoId + '}';
     }
 
+    
+    
     @Override
     public InscripcionVo toVo() {
         InscripcionVo inscripcionVo = new InscripcionVo();

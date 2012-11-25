@@ -90,9 +90,20 @@ public class InscripcionVo implements Serializable, IValueObject {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "com.encoming.entity.Inscripciones[ id=" + id + " ]";
+//    }
+
     @Override
     public String toString() {
-        return "com.encoming.entity.Inscripciones[ id=" + id + " ]";
+        return "InscripcionVo{" 
+                + "\nid=" + id 
+                + ",\n valorPagado=" + valorPagado 
+                + ",\n estado=" + estado 
+                + ",\n estudianteId=" + estudianteId 
+                + ",\n cursoId=" + cursoId + '}';
     }
+    
     
 }

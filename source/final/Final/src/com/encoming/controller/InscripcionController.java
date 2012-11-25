@@ -12,6 +12,7 @@ import com.encoming.utils.NoPrerrequisitosException;
 import com.encoming.vo.CursoVo;
 import com.encoming.vo.EstudianteVo;
 import com.encoming.vo.InscripcionVo;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,6 +48,10 @@ public class InscripcionController {
         }catch (DataBaseException ex) {
             Logger.getLogger(InscripcionController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        List<InscripcionVo> inscripcionVos = cursoVo.getInscripcionesList();
+        inscripcionVos.add(inscripcionVo);
+        cursoVo.setInscripcionesList(inscripcionVos);
+        FacadeFactory.getInstance().getCursoFacade().update(cursoVo);
 
     }
 

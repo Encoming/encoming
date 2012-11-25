@@ -43,7 +43,7 @@ public class CursoDAO implements IDAO<Cursos> {
 
     @Override
     public void update(Cursos entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.merge(entity);
     }
 
     @Override

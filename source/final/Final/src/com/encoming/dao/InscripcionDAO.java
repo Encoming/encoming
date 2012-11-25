@@ -38,7 +38,7 @@ public class InscripcionDAO implements IDAO<Inscripciones> {
 
     @Override
     public Inscripciones find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (Inscripciones) em.find(Inscripciones.class, id);
     }
 
     @Override
@@ -56,13 +56,13 @@ public class InscripcionDAO implements IDAO<Inscripciones> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public boolean findSubscription(Integer estudianteId, Integer prerequisitoCursoId, EntityManager em) {
+    public boolean isStudentSubscribed(Integer estudianteId, Integer prerequisitoCursoId, EntityManager em) {
         Inscripciones inscripcion;
         Estudiantes estudiante = DAOFactory.getInstance().getEstudianteDAO().findById(estudianteId, em);
         Cursos prerequisito = DAOFactory.getInstance().getCursoDAO().findById(prerequisitoCursoId, em);
         Query q = em.createQuery("SELECT c FROM Inscripciones c WHERE c.estudianteId =:eid AND c.cursoId =:prerequisitoCursoId")
                 .setParameter("eid", estudiante)
-                .setParameter("prerequisitoCursoId", prerequisito);        
+                .setParameter("prerequisitoCursoId", prerequisito);
         try {
             inscripcion = (Inscripciones) q.getSingleResult();
             return true;
@@ -75,5 +75,21 @@ public class InscripcionDAO implements IDAO<Inscripciones> {
         }
     }
 
-    
+    public Inscripciones findSubscriptionByStudentAndCourse(Integer estudianteId, Integer cursoId, EntityManager em) {
+        Inscripciones inscripcion;
+        Estudiantes estudiante = DAOFactory.getInstance().getEstudianteDAO().findById(estudianteId, em);
+        Cursos prerequisito = DAOFactory.getInstance().getCursoDAO().findById(cursoId, em);
+        Query q = em.createQuery("SELECT c FROM Inscripciones c WHERE c.estudianteId =:eid AND c.cursoId =:prerequisitoCursoId")
+                .setParameter("eid", estudiante)
+                .setParameter("prerequisitoCursoId", prerequisito);
+        try {
+            return inscripcion = (Inscripciones) q.getSingleResult();
+            
+        } catch (NonUniqueResultException e) {
+            return inscripcion = (Inscripciones) q.getResultList().get(0);
+            
+        } catch (NoResultException e) {
+            return inscripcion = null;
+        }
+    }
 }

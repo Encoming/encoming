@@ -105,7 +105,7 @@ public class InscripcionService implements IService<InscripcionVo> {
         if (prerequisitoCursoId == null) {
             return true;
         } else {
-            return DAOFactory.getInstance().getInscripcionDAO().findSubscription(estudianteId, prerequisitoCursoId, em);
+            return DAOFactory.getInstance().getInscripcionDAO().isStudentSubscribed(estudianteId, prerequisitoCursoId, em);
         }
     }
 }
