@@ -9,7 +9,9 @@ import com.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.utils.DataBaseException;
 import com.encoming.utils.ExisteEstudianteException;
 import com.encoming.vo.EstudianteVo;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,4 +41,16 @@ public class EstudianteController {
             throw new ExisteEstudianteException("Ya existe el estudiante");
         }
     }
+    
+    public Object[] getEstudiantesIDNames(){
+        List<String> nombres = new ArrayList<String>();
+        List<EstudianteVo> estudiantes=FacadeFactory.getInstance().getEstudianteFacade().getList();
+        if (estudiantes !=null){
+            for(EstudianteVo estudianteVo:estudiantes){
+                nombres.add(estudianteVo.getNombre());
+            }
+        }        
+        return nombres.toArray();
+    }
+    
 }

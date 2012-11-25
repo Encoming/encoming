@@ -7,6 +7,9 @@ package com.encoming.businesslogic.service;
 import com.encoming.dao.DAOFactory;
 import com.encoming.entity.Estudiantes;
 import com.encoming.vo.EstudianteVo;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -55,12 +58,34 @@ public class EstudianteService implements IService<EstudianteVo> {
 
     @Override
     public List<EstudianteVo> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<EstudianteVo> list = new ArrayList<EstudianteVo>();
+        for (Estudiantes estudiantes : DAOFactory.getInstance().getEstudianteDAO().getList(em)) {
+            list.add((estudiantes).toVo());
+        }
+        Collections.sort(list, new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                EstudianteVo p1 = (EstudianteVo) o1;
+                EstudianteVo p2 = (EstudianteVo) o2;
+                return p1.getId().compareTo(p2.getId());
+            }
+        });
+        return list;
     }
 
     public EstudianteVo findByDocument(String documento, EntityManager em) {
         Estudiantes student = DAOFactory.getInstance().getEstudianteDAO().findByDocument(documento, em);
         if (student.getDocumento() != null) {
+            return student.toVo();
+        } else {
+            return null;
+        }
+    }
+
+    public EstudianteVo findByName(String nombreEstudiante, EntityManager em) {
+        Estudiantes student = DAOFactory.getInstance().getEstudianteDAO().findByName(nombreEstudiante, em);
+        if (student.getNombre() != null) {
             return student.toVo();
         } else {
             return null;

@@ -28,7 +28,7 @@ public class InscripcionDAO implements IDAO<Inscripciones> {
 
     @Override
     public void persist(Inscripciones entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }
 
     @Override

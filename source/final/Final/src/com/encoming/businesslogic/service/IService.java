@@ -18,6 +18,5 @@ public interface IService<VO> {
     void delete(Object id, EntityManager em);
 
     List<VO> getList(EntityManager em);
-
     
 }

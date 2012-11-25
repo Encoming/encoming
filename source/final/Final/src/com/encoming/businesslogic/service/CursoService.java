@@ -83,4 +83,13 @@ public class CursoService implements IService<CursoVo> {
         });
         return list;
     }
+
+    public CursoVo findByName(String nombreMateria, EntityManager em) {
+        Cursos curso = DAOFactory.getInstance().getCursoDAO().findByName(nombreMateria, em);
+        if (curso.getNombre() != null) {
+            return curso.toVo();
+        } else {
+            return null;
+        }
+    }
 }
