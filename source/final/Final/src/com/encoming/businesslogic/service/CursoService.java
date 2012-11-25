@@ -4,7 +4,6 @@
  */
 package com.encoming.businesslogic.service;
 
-import com.encoming.dao.CursoDAO;
 import com.encoming.dao.DAOFactory;
 import com.encoming.entity.Cursos;
 import com.encoming.entity.Inscripciones;
@@ -34,20 +33,29 @@ public class CursoService implements IService<CursoVo> {
 
     @Override
     public void create(CursoVo vo, EntityManager em) {
-        ArrayList<Inscripciones> inscripciones = new ArrayList();
+        
         Cursos curso = new Cursos();
-        CursoDAO cursoNew = DAOFactory.getInstance().getCursoDAO();
-        curso.setId(vo.getId());
+        
+        curso.setInscripcionesList(new ArrayList<Inscripciones>());
         curso.setNombre(vo.getNombre());
+        curso.setPrerequisito(DAOFactory.getInstance().getCursoDAO().findById(vo.getPrerequisitoCursoId(), em));
         curso.setValorCurso(vo.getValorCurso());
-        CursoDAO cursoPre = DAOFactory.getInstance().getCursoDAO();
-        curso.setPrerequisito(cursoPre.find(vo.getPrerequisitoCursoId(), em));
-        //for(InscripcionVo ins : vo.getInscripcionesList()){
-        //    InscripcionDAO insDao = DAOFactory.getInstance().getInscripcionDAO();
-         //   inscripciones.add(insDao.find(ins.getId(), em));
-         //   }
-        curso.setInscripcionesList(inscripciones);
-        cursoNew.persist(curso, em);
+        
+        DAOFactory.getInstance().getCursoDAO().persist(curso, em);
+        
+        
+//        CursoDAO cursoNew = DAOFactory.getInstance().getCursoDAO();
+//        curso.setId(vo.getId());
+//        curso.setNombre(vo.getNombre());
+//        curso.setValorCurso(vo.getValorCurso());
+//        CursoDAO cursoPre = DAOFactory.getInstance().getCursoDAO();
+//        curso.setPrerequisito(cursoPre.find(vo.getPrerequisitoCursoId(), em));
+//        //for(InscripcionVo ins : vo.getInscripcionesList()){
+//        //    InscripcionDAO insDao = DAOFactory.getInstance().getInscripcionDAO();
+//         //   inscripciones.add(insDao.find(ins.getId(), em));
+//         //   }
+//        curso.setInscripcionesList(inscripciones);
+//        cursoNew.persist(curso, em);
     }
 
     @Override

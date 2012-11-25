@@ -28,17 +28,19 @@ public class CursoController {
         return "Validado";
     }
     
-    public void crearCurso(String nombre, int idPrerequisito, long valor) throws ExisteCursoException{
+    public void crearCurso(String nombre, String prerequisito, long valor) throws ExisteCursoException{
+        CursoVo prerequisitos=FacadeFactory.getInstance().getCursoFacade().findByName(prerequisito);
+        System.out.println("Prereq = "+prerequisito);
+        
         CursoVo cursoVo = new CursoVo();
         cursoVo.setNombre(nombre);
-        cursoVo.setPrerequisitoCursoId(idPrerequisito);
+        cursoVo.setPrerequisitoCursoId(prerequisitos.getId());
         cursoVo.setValorCurso(valor);
+        System.out.println("Curso = "+cursoVo);
         CursoFacade cursoFacade = FacadeFactory.getInstance().getCursoFacade();
-        try {
-            cursoFacade.create(cursoVo);
-        } catch (DataBaseException ex) {
-            Logger.getLogger(CursoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        cursoFacade.create1(cursoVo);
+        
     }
     
     public Object[] getCursosNames(){

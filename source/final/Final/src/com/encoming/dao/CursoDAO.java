@@ -32,7 +32,7 @@ public class CursoDAO implements IDAO<Cursos> {
 
     @Override
     public void persist(Cursos entity, EntityManager em) {
-        em.persist(em);
+        em.persist(entity);
     }
 
     @Override
