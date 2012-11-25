@@ -9,7 +9,9 @@ import com.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.utils.DataBaseException;
 import com.encoming.utils.ExisteEstudianteException;
 import com.encoming.vo.EstudianteVo;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,33 +40,16 @@ public class EstudianteController {
             throw new ExisteEstudianteException("Ya existe el estudiante");
         }
     }
-
-    public static String validateName(String name) {
-        int a = name.length();
-        if (a < 3 || a > 15) {
-            return "¡La longitud del nombre debe estar entre 3 y 15!";
-        } else if (name.contains("1")
-                || name.contains("2")
-                || name.contains("3")
-                || name.contains("4")
-                || name.contains("5")
-                || name.contains("6")
-                || name.contains("7")
-                || name.contains("8")
-                || name.contains("9")
-                || name.contains("0")) {
-            return "¡El nombre no debe contener números!";
-        } else if (name.contains("!")
-                || name.contains("#")
-                || name.contains("$")
-                || name.contains("&")
-                || name.contains("/")
-                || name.contains("(")
-                || name.contains(")")
-                || name.contains("@")) {
-            return "¡El nombre no debe contener símbolos!";
-        } else {
-            return "Validado";
-        }
+    
+    public Object[] getEstudiantesIDNames(){
+        List<String> nombres = new ArrayList<String>();
+        List<EstudianteVo> estudiantes=FacadeFactory.getInstance().getEstudianteFacade().getList();
+        if (estudiantes !=null){
+            for(EstudianteVo estudianteVo:estudiantes){
+                nombres.add(estudianteVo.getNombre());
+            }
+        }        
+        return nombres.toArray();
     }
+    
 }

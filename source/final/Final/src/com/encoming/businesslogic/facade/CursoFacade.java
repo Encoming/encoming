@@ -15,4 +15,15 @@ public class CursoFacade extends Facade<CursoVo> {
     public CursoFacade(String PUName, CursoService service) {
         super(PUName, service);
     }
+
+    public CursoVo findByName(String nombreMateria) {
+        try {
+            return ((CursoService) service).findByName(nombreMateria, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
 }

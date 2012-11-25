@@ -58,4 +58,17 @@ public class CursoDAO implements IDAO<Cursos> {
         Query q = em.createQuery(cq);
         return q.getResultList();
     }
+
+    public Cursos findByName(String nombreMateria, EntityManager em) {
+        Cursos curso;
+        Query q = em.createQuery("SELECT c FROM Cursos c WHERE c.nombre LIKE :nombre").
+                setParameter("nombre", nombreMateria);
+
+        try {
+            curso = (Cursos) q.getSingleResult();
+        } catch (Exception e) {
+            curso = new Cursos();
+        }
+        return curso;
+    }
 }

@@ -16,9 +16,20 @@ public class EstudianteFacade extends Facade<EstudianteVo> {
         super(PUName, service);
     }
 
-    public Object findByDocument(String documento) {
+    public EstudianteVo findByDocument(String documento) {
         try {
             return ((EstudianteService) service).findByDocument(documento, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
+
+    public EstudianteVo findByName(String nombreEstudiante) {
+         try {
+            return ((EstudianteService) service).findByName(nombreEstudiante, em);
         } finally {
             if (em != null) {
                 em.clear();

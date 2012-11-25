@@ -6,7 +6,6 @@ package com.encoming.controller;
 
 import com.encoming.businesslogic.facade.CursoFacade;
 import com.encoming.businesslogic.facade.FacadeFactory;
-import com.encoming.entity.Cursos;
 import com.encoming.utils.DataBaseException;
 import com.encoming.utils.ExisteCursoException;
 import com.encoming.vo.CursoVo;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 
 /**
  *

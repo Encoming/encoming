@@ -4,6 +4,13 @@
  */
 package com.encoming.businesslogic.service;
 
+import com.encoming.dao.CursoDAO;
+import com.encoming.dao.DAOFactory;
+import com.encoming.dao.EstudianteDAO;
+import com.encoming.dao.InscripcionDAO;
+import com.encoming.entity.Cursos;
+import com.encoming.entity.Estudiantes;
+import com.encoming.entity.Inscripciones;
 import com.encoming.vo.InscripcionVo;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -27,7 +34,13 @@ public class InscripcionService implements IService<InscripcionVo> {
 
     @Override
     public void create(InscripcionVo vo, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Inscripciones inscripcion = new Inscripciones();
+        inscripcion.setCursoId(DAOFactory.getInstance().getCursoDAO().find(vo.getCursoId(), em));
+        inscripcion.setEstado(vo.getEstado());
+        inscripcion.setEstudianteId(DAOFactory.getInstance().getEstudianteDAO().find(vo.getEstudianteId(), em));
+        inscripcion.setValorPagado(vo.getValorPagado());
+        
+        DAOFactory.getInstance().getInscripcionDAO().persist(inscripcion, em);
     }
 
     @Override
@@ -48,6 +61,23 @@ public class InscripcionService implements IService<InscripcionVo> {
     @Override
     public List<InscripcionVo> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void inscribirEstudiante(String nombreEstudiante, String nombreMateria,EntityManager em) {
+        EstudianteDAO estudianteDAO = DAOFactory.getInstance().getEstudianteDAO();
+        Estudiantes estudiantes = estudianteDAO.findByName(nombreEstudiante,em);
+        
+        CursoDAO cursoDAO = DAOFactory.getInstance().getCursoDAO();
+        Cursos curso = cursoDAO.findByName(nombreMateria,em);
+               
+        Inscripciones inscripcion = new Inscripciones();
+        inscripcion.setEstudianteId(estudiantes);
+        inscripcion.setCursoId(curso);
+        inscripcion.setValorPagado(curso.getValorCurso());
+        inscripcion.setEstado("Inscrito");
+        
+     InscripcionDAO inscripcionDAO = DAOFactory.getInstance().getInscripcionDAO();
+     inscripcionDAO.persist(inscripcion, em);
     }
 
 }

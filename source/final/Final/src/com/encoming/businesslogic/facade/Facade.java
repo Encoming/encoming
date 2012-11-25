@@ -35,7 +35,7 @@ public class Facade<VO> {
             if (em != null && tx != null) {
                 tx.rollback();
             }
-            throw new DataBaseException("Hubo un error al persistir");
+            throw new DataBaseException("Ha ocurrido un error al persistir");
         } finally {
             if (em != null) {
                 em.clear();
