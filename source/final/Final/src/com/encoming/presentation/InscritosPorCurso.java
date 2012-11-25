@@ -5,22 +5,24 @@
 package com.encoming.presentation;
 
 import com.encoming.controller.CursoController;
+import java.util.List;
+import javax.swing.DefaultListCellRenderer.UIResource;
 import javax.swing.DefaultListModel;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author andres
  */
 public class InscritosPorCurso extends javax.swing.JPanel {
-    
+
     private principal principal;
     DefaultListModel model = new DefaultListModel();
     DefaultListModel listaEstudiantes = new DefaultListModel();
-    
+
     /**
      * Creates new form InscritosPorCurso
      */
-
     public InscritosPorCurso(principal parent) {
         principal = parent;
         initComponents();
@@ -116,19 +118,20 @@ public class InscritosPorCurso extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listStudents(){
+    private void listStudents() {
         listaEstudiantes.clear();
         jlInscritos.setModel(listaEstudiantes);
-        Object c = cbCursos.getSelectedItem();
-        String nombreCurso = c.toString();
-        listaEstudiantes.addElement(new CursoController().EstudiantesPorCurso(nombreCurso));
+        List<String> ls =new CursoController().EstudiantesPorCurso(cbCursos.getSelectedItem().toString());
+        for(String str:ls){
+            listaEstudiantes.addElement(str);
+        }
         jlInscritos.setModel(listaEstudiantes);
+        
     }
-    
+
     private void cbCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCursosActionPerformed
         listStudents();
     }//GEN-LAST:event_cbCursosActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbCursos;
     private javax.swing.JLabel jLabel1;
