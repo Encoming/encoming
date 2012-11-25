@@ -117,4 +117,36 @@ public class EstudianteController {
         }
         return "Validado";
     }
+    public static String validateDay(String str) {
+        if (str.length() == 0) {
+            return "Validado";
+        }
+        Integer id = Integer.parseInt(str);
+        if (id < 1 || id > 31) {
+            return "¡El dia debe estar en un rango valido!";
+        }
+        return "Validado";
+    }
+
+    public static String validateMonth(String str) {
+        if (str.length() == 0) {
+            return "Validado";
+        }
+        Integer id = Integer.parseInt(str);
+        if (id < 1 || id > 12) {
+            return "¡El mes debe estar en un rango valido,1-12!";
+        }
+        return "Validado";
+    }
+
+    public static String validateYear(String str) {
+        if (str.length() == 0) {
+            return "Validado";
+        }
+        Integer id = Integer.parseInt(str);
+        if (id < 1960 || id > 2002) {
+            return "¡El año tiene que estar entre 1960 y 2002!";
+        }
+        return "Validado";
+    }
 }
