@@ -14,6 +14,7 @@ import javax.swing.DefaultListModel;
 public class InscritosPorCurso extends javax.swing.JPanel {
     
     private principal principal;
+    DefaultListModel model = new DefaultListModel();
     DefaultListModel listaEstudiantes = new DefaultListModel();
     
     /**
@@ -122,6 +123,8 @@ public class InscritosPorCurso extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bVerEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerEstudiantesActionPerformed
+        listaEstudiantes.clear();
+        jlInscritos.setModel(listaEstudiantes);
         Object c = cbCursos.getSelectedItem();
         String nombreCurso = c.toString();
         listaEstudiantes.addElement(new CursoController().EstudiantesPorCurso(nombreCurso));
