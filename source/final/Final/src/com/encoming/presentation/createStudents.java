@@ -20,12 +20,12 @@ import javax.swing.JOptionPane;
 public class createStudents extends javax.swing.JPanel {
 
     private principal principal;
-    
+
     /**
      * Creates new form createStudents
      */
     public createStudents(principal parent) {
-        principal=parent;
+        principal = parent;
         initComponents();
     }
 
@@ -212,6 +212,15 @@ public class createStudents extends javax.swing.JPanel {
 
     private void bIngresarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarEstudianteActionPerformed
         Date fecha;
+        String str;
+
+        str = tfNombres.getText();
+        String verificator = EstudianteController.validateName(str);
+        if (!verificator.equals("Validado")) {
+            JOptionPane.showMessageDialog(this, verificator, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             fecha = simpleDateFormat.parse(tfYear.getText() + "-" + tfMes.getText() + "-" + tfDia.getText());
