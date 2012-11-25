@@ -23,7 +23,7 @@ public class EstudianteController {
 
         EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
         String nombreCompleto = nombres + " " + apellidos;
-
+        
         if (FacadeFactory.getInstance().getEstudianteFacade().findByDocument(documento) == null) {
             EstudianteVo estudianteVo = new EstudianteVo();
             estudianteVo.setDocumento(documento);
