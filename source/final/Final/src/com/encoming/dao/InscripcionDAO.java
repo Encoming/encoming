@@ -4,9 +4,14 @@
  */
 package com.encoming.dao;
 
+import com.encoming.entity.Cursos;
+import com.encoming.entity.Estudiantes;
 import com.encoming.entity.Inscripciones;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 
 /**
  *
@@ -49,6 +54,25 @@ public class InscripcionDAO implements IDAO<Inscripciones> {
     @Override
     public List<Inscripciones> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public boolean findSubscription(Integer estudianteId, Integer prerequisitoCursoId, EntityManager em) {
+        Inscripciones inscripcion;
+        Estudiantes estudiante = DAOFactory.getInstance().getEstudianteDAO().findById(estudianteId, em);
+        Cursos prerequisito = DAOFactory.getInstance().getCursoDAO().findById(prerequisitoCursoId, em);
+        Query q = em.createQuery("SELECT c FROM Inscripciones c WHERE c.estudianteId =:eid AND c.cursoId =:prerequisitoCursoId")
+                .setParameter("eid", estudiante)
+                .setParameter("prerequisitoCursoId", prerequisito);        
+        try {
+            inscripcion = (Inscripciones) q.getSingleResult();
+            return true;
+        } catch (NonUniqueResultException e) {
+            inscripcion = (Inscripciones) q.getResultList().get(0);
+            return true;
+        } catch (NoResultException e) {
+            inscripcion = null;
+            return false;
+        }
     }
 
     

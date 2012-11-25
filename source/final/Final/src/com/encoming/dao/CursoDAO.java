@@ -7,6 +7,8 @@ package com.encoming.dao;
 import com.encoming.entity.Cursos;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -68,6 +70,22 @@ public class CursoDAO implements IDAO<Cursos> {
             curso = (Cursos) q.getSingleResult();
         } catch (Exception e) {
             curso = new Cursos();
+        }
+        return curso;
+    }
+
+    public Cursos findById(Integer cursoId, EntityManager em) {
+        Cursos curso;
+        Query q = em.createQuery("SELECT c FROM Cursos c WHERE c.id LIKE :id").
+                //setParameter("nombre", nombreEstudiante);
+                setParameter("id", cursoId+"");
+        try {
+            curso = (Cursos) q.getSingleResult();
+            System.out.println("student = "+curso);
+        } catch (NonUniqueResultException e) {
+            curso = (Cursos) q.getResultList().get(0);
+        } catch (NoResultException e) {
+            curso = null;
         }
         return curso;
     }

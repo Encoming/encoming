@@ -92,4 +92,13 @@ public class CursoService implements IService<CursoVo> {
             return null;
         }
     }
+
+    public CursoVo findById(Integer cursoId, EntityManager em) {
+        Cursos curso = DAOFactory.getInstance().getCursoDAO().findById(cursoId, em);
+        if (curso.getNombre() != null) {
+            return curso.toVo();
+        } else {
+            return null;
+        }
+    }
 }

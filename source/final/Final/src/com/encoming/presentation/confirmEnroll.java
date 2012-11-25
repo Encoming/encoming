@@ -4,22 +4,28 @@
  */
 package com.encoming.presentation;
 
-import com.encoming.controller.CursoController;
-import com.encoming.controller.EstudianteController;
 import com.encoming.controller.InscripcionController;
+import com.encoming.vo.InscripcionVo;
 
 /**
  *
  * @author andres
  */
-public class enrollStudent extends javax.swing.JPanel {
+public class confirmEnroll extends javax.swing.JPanel {
     principal principal;
+    InscripcionVo inscripcionVo;
+    InscripcionController inscripcionController = new InscripcionController();
     /**
      * Creates new form enrollStudent
      */
-    public enrollStudent(principal principal) {
+    public confirmEnroll(principal principal,InscripcionVo inscripcionVo) {
         this.principal=principal;
+        this.inscripcionVo=inscripcionVo;
         initComponents();
+        taConfirmacion.setText(
+                "Desea inscribir el estudiante "+inscripcionController.getNameStudentFromInscription(inscripcionVo) +
+                " \na la materia "+inscripcionController.getNameCourseFromInscription(inscripcionVo)+"?"+
+                "\n\n Costo de inscripción:\t$"+inscripcionVo.getValorPagado());
     }
 
     /**
@@ -33,23 +39,14 @@ public class enrollStudent extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        cbEstudiante = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        cbCurso = new javax.swing.JComboBox();
         bInscribir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taConfirmacion = new javax.swing.JTextArea();
+        Volver = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel2.setText("Inscribir Estudiante");
-
-        jLabel3.setText("Seleccionar estudiante:");
-
-        cbEstudiante.setModel(new javax.swing.DefaultComboBoxModel(new EstudianteController().getEstudiantesIDNames()));
-
-        jLabel4.setText("Seleccionar curso:");
-
-        cbCurso.setModel(new javax.swing.DefaultComboBoxModel(new CursoController().getCursosNames()));
+        jLabel2.setText("Confirmación de inscripción de estudiante");
 
         bInscribir.setText("Inscribir");
         bInscribir.addActionListener(new java.awt.event.ActionListener() {
@@ -58,46 +55,50 @@ public class enrollStudent extends javax.swing.JPanel {
             }
         });
 
+        taConfirmacion.setEditable(false);
+        taConfirmacion.setColumns(20);
+        taConfirmacion.setRows(5);
+        jScrollPane1.setViewportView(taConfirmacion);
+
+        Volver.setText("Volver");
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(cbEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(cbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel2))
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(bInscribir)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addGap(102, 102, 102)
+                        .addComponent(bInscribir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Volver)))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(bInscribir)
+                    .addComponent(bInscribir)
+                    .addComponent(Volver))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        Volver.getAccessibleContext().setAccessibleName("Volver");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -117,17 +118,21 @@ public class enrollStudent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirActionPerformed
-        //principal.cambiarPanel(new confirmEnroll(principal,(String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem()));
-        principal.cambiarPanel(new confirmEnroll(principal,new InscripcionController().getInscripcionVo((String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem())));
+        new InscripcionController().inscribirEstudiante(
+                inscripcionController.getNameStudentFromInscription(inscripcionVo),
+                inscripcionController.getNameCourseFromInscription(inscripcionVo));
     }//GEN-LAST:event_bInscribirActionPerformed
 
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        principal.cambiarPanel(new enrollStudent(principal));
+    }//GEN-LAST:event_VolverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Volver;
     private javax.swing.JButton bInscribir;
-    private javax.swing.JComboBox cbCurso;
-    private javax.swing.JComboBox cbEstudiante;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea taConfirmacion;
     // End of variables declaration//GEN-END:variables
 }
