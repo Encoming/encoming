@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -182,6 +183,13 @@ public class createsCourses extends javax.swing.JPanel {
     }//GEN-LAST:event_cbPreRequisitoActionPerformed
 
     private void bAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarCursoActionPerformed
+        String str;
+        str = CursoController.validateName(tfNombre.getText());
+        if (!str.equals("Validado")){
+            JOptionPane.showMessageDialog(this, str, "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }        
+        
         try {
             new CursoController().crearCurso(tfNombre.getText(),
                                              //(Integer)cbPreRequisito.getSelectedItem(),
