@@ -231,6 +231,15 @@ public class createStudents extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, verificator1, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        str = tfDocumento.getText();
+        int id;
+        try{
+            Integer.parseInt(str);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "El documento es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        //String verificador1 = EstudianteController.validateId();
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
