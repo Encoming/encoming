@@ -7,6 +7,7 @@ package com.encoming.controller;
 import com.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.businesslogic.facade.InscripcionFacade;
 import com.encoming.utils.DataBaseException;
+import com.encoming.utils.NoActivoException;
 import com.encoming.utils.NoPrerrequisitosException;
 import com.encoming.vo.CursoVo;
 import com.encoming.vo.EstudianteVo;
@@ -20,8 +21,11 @@ import java.util.logging.Logger;
  */
 public class InscripcionController {
 
-    public void inscribirEstudiante(String nombreEstudiante, String nombreMateria) {
+    public void inscribirEstudiante(String nombreEstudiante, String nombreMateria)throws NoActivoException{
         EstudianteVo estudianteVo = FacadeFactory.getInstance().getEstudianteFacade().findByName(nombreEstudiante);
+        if (!estudianteVo.getActivo()) {
+            throw new NoActivoException("El estudiante no esta activo");
+        }
         CursoVo cursoVo = FacadeFactory.getInstance().getCursoFacade().findByName(nombreMateria);
         System.out.println(cursoVo);
         InscripcionVo inscripcionVo = new InscripcionVo();
