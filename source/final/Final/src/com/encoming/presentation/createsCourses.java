@@ -183,12 +183,13 @@ public class createsCourses extends javax.swing.JPanel {
     }//GEN-LAST:event_cbPreRequisitoActionPerformed
 
     private void bAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarCursoActionPerformed
-        String str;
-        str = CursoController.validateName(tfNombre.getText());
+        String str = tfNombre.getText();
+        assert !str.equals("Prueba0"):"Se ha intentado agregar el curso Prueba0";
+        str = CursoController.validateName(str);
         if (!str.equals("Validado")){
             JOptionPane.showMessageDialog(this, str, "Error", JOptionPane.WARNING_MESSAGE);
             return;
-        }        
+        }
         
         try {
             new CursoController().crearCurso(tfNombre.getText(),
