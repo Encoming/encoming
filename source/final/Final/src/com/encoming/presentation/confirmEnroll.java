@@ -5,7 +5,10 @@
 package com.encoming.presentation;
 
 import com.encoming.controller.InscripcionController;
+import com.encoming.utils.NoActivoException;
 import com.encoming.vo.InscripcionVo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -118,9 +121,13 @@ public class confirmEnroll extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirActionPerformed
-        new InscripcionController().inscribirEstudiante(
-                inscripcionController.getNameStudentFromInscription(inscripcionVo),
-                inscripcionController.getNameCourseFromInscription(inscripcionVo));
+        try {
+            new InscripcionController().inscribirEstudiante(
+                    inscripcionController.getNameStudentFromInscription(inscripcionVo),
+                    inscripcionController.getNameCourseFromInscription(inscripcionVo));
+        } catch (NoActivoException ex) {
+            Logger.getLogger(confirmEnroll.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bInscribirActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
