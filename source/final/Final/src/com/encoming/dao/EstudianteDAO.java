@@ -7,6 +7,10 @@ package com.encoming.dao;
 import com.encoming.entity.Estudiantes;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -28,12 +32,12 @@ public class EstudianteDAO implements IDAO<Estudiantes> {
 
     @Override
     public void persist(Estudiantes entity, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        em.persist(entity);
     }
 
     @Override
     public Estudiantes find(Object id, EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (Estudiantes) em.find(Estudiantes.class, id);
     }
 
     @Override
@@ -48,8 +52,52 @@ public class EstudianteDAO implements IDAO<Estudiantes> {
 
     @Override
     public List<Estudiantes> getList(EntityManager em) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Estudiantes.class));
+        Query q = em.createQuery(cq);
+        return q.getResultList();
     }
 
+    public Estudiantes findByDocument(String documento, EntityManager em) {
+        Estudiantes student;
+        Query q = em.createQuery("SELECT t FROM Estudiantes t WHERE t.documento LIKE :documento").
+                setParameter("documento", documento);
 
+        try {
+            student = (Estudiantes) q.getSingleResult();
+        } catch (Exception e) {
+            student = new Estudiantes();
+        }
+        return student;
+    }
+
+    public Estudiantes findByName(String nombreEstudiante, EntityManager em) {
+        Estudiantes student;
+        Query q = em.createQuery("SELECT t FROM Estudiantes t WHERE t.nombre LIKE :nombre").
+                //setParameter("nombre", nombreEstudiante);
+                setParameter("nombre", nombreEstudiante);
+        try {
+            student = (Estudiantes) q.getSingleResult();
+        } catch (NonUniqueResultException e) {
+            student = (Estudiantes) q.getResultList().get(0);
+        } catch (NoResultException e) {
+            student = null;
+        }
+        return student;
+    }
+
+    public Estudiantes findById(Integer estudianteId, EntityManager em) {
+        Estudiantes student;
+        Query q = em.createQuery("SELECT t FROM Estudiantes t WHERE t.id LIKE :id").
+                //setParameter("nombre", nombreEstudiante);
+                setParameter("id", estudianteId+"");
+        try {
+            student = (Estudiantes) q.getSingleResult();
+        } catch (NonUniqueResultException e) {
+            student = (Estudiantes) q.getResultList().get(0);
+        } catch (NoResultException e) {
+            student = null;
+        }
+        return student;
+    }
 }

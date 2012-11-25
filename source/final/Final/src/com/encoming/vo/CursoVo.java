@@ -89,8 +89,15 @@ public class CursoVo implements Serializable, IValueObject {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "com.encoming.entity.Cursos[ id=" + id + " ]";
+//    }
+
     @Override
     public String toString() {
-        return "com.encoming.entity.Cursos[ id=" + id + " ]";
+        return "CursoVo{" + "id=" + id + ", nombre=" + nombre + ", valorCurso=" + valorCurso + ", prerequisitoCursoId=" + prerequisitoCursoId + ", inscripcionesList=" + inscripcionesList + '}';
     }
+    
+    
 }

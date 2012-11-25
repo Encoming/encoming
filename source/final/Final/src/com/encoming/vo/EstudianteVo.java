@@ -103,9 +103,14 @@ public class EstudianteVo implements Serializable, IValueObject {
         return true;
     }
 
+//    @Override
+//    public String toString() {
+//        return "com.encoming.entity.Estudiantes[ id=" + id + " ]";
+//    }
+
     @Override
     public String toString() {
-        return "com.encoming.entity.Estudiantes[ id=" + id + " ]";
+        return "EstudianteVo{" + "id=" + id + ", nombre=" + nombre + ", documento=" + documento + ", fechaNacimiento=" + fechaNacimiento + ", activo=" + activo + ", inscripcionesList=" + inscripcionesList + '}';
     }
     
 }

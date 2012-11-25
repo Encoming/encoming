@@ -7,7 +7,10 @@ package com.encoming.dao;
 import com.encoming.entity.Cursos;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  *
@@ -29,7 +32,7 @@ public class CursoDAO implements IDAO<Cursos> {
 
     @Override
     public void persist(Cursos entity, EntityManager em) {
-        em.persist(em);
+        em.persist(entity);
     }
 
     @Override
@@ -52,7 +55,36 @@ public class CursoDAO implements IDAO<Cursos> {
 
     @Override
     public List<Cursos> getList(EntityManager em) {
-        Query query = em.createNamedQuery("Cursos.findAll");
-        return (List<Cursos>)query.getSingleResult();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Cursos.class));
+        Query q = em.createQuery(cq);
+        return q.getResultList();
+    }
+
+    public Cursos findByName(String nombreMateria, EntityManager em) {
+        Cursos curso;
+        Query q = em.createQuery("SELECT c FROM Cursos c WHERE c.nombre LIKE :nombre").
+                setParameter("nombre", nombreMateria);
+
+        try {
+            curso = (Cursos) q.getSingleResult();
+        } catch (Exception e) {
+            curso = new Cursos();
+        }
+        return curso;
+    }
+
+    public Cursos findById(Integer cursoId, EntityManager em) {
+        Cursos curso;
+        Query q = em.createQuery("SELECT c FROM Cursos c WHERE c.id LIKE :id").
+                setParameter("id", cursoId+"");
+        try {
+            curso = (Cursos) q.getSingleResult();
+        } catch (NonUniqueResultException e) {
+            curso = (Cursos) q.getResultList().get(0);
+        } catch (NoResultException e) {
+            curso = null;
+        }
+        return curso;
     }
 }

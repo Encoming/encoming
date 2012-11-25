@@ -4,16 +4,21 @@
  */
 package com.encoming.presentation;
 
+import com.encoming.controller.CursoController;
+import com.encoming.controller.EstudianteController;
+import com.encoming.controller.InscripcionController;
+
 /**
  *
  * @author andres
  */
 public class enrollStudent extends javax.swing.JPanel {
-
+    principal principal;
     /**
      * Creates new form enrollStudent
      */
-    public enrollStudent() {
+    public enrollStudent(principal principal) {
+        this.principal = principal;
         initComponents();
     }
 
@@ -40,13 +45,23 @@ public class enrollStudent extends javax.swing.JPanel {
 
         jLabel3.setText("Seleccionar estudiante:");
 
-        cbEstudiante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbEstudiante.setModel(new javax.swing.DefaultComboBoxModel(new EstudianteController().getEstudiantesIDNames()));
+        cbEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstudianteActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Seleccionar curso:");
 
-        cbCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCurso.setModel(new javax.swing.DefaultComboBoxModel(new CursoController().getCursosNames()));
 
         bInscribir.setText("Inscribir");
+        bInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bInscribirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,6 +120,16 @@ public class enrollStudent extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscribirActionPerformed
+        //principal.cambiarPanel(new confirmEnroll(principal,(String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem()));
+        principal.cambiarPanel(new confirmEnroll(principal,new InscripcionController().getInscripcionVo((String)cbEstudiante.getSelectedItem(), (String)cbCurso.getSelectedItem())));
+    }//GEN-LAST:event_bInscribirActionPerformed
+
+    private void cbEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstudianteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEstudianteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bInscribir;
     private javax.swing.JComboBox cbCurso;
