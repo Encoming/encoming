@@ -19,8 +19,8 @@ public class CursoController {
 
     public static String validateName(String text) {
         int a = text.length();
-        if (a<4 || a>15) {
-            return "La longitud del nombre debe estar entre 4 y 15";
+        if (a<4 || a>25) {
+            return "La longitud del nombre debe estar entre 4 y 25";
         }
         return "Validado";
     }
