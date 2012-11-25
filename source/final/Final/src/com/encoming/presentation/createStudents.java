@@ -233,13 +233,17 @@ public class createStudents extends javax.swing.JPanel {
         }
         
         str = tfDocumento.getText();
-        int id;
+        int id=0;
         try{
-            Integer.parseInt(str);
+            id=Integer.parseInt(str);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "El documento es incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        //String verificador1 = EstudianteController.validateId();
+        str = EstudianteController.validateId(id);
+        if(!str.equals("Validado")){
+            JOptionPane.showMessageDialog(this, str, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

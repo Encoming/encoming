@@ -21,6 +21,13 @@ import java.util.logging.Logger;
  */
 public class EstudianteController {
 
+    public static String validateId(int id) {
+        if (id<10000000 || id>999999999) {
+            return "El documento debe ser un número entre 10000000 y 999999999";
+        }
+        return "Validado";
+    }
+
     public void IngresarEstudiante(String nombres, String apellidos, Date fechaDeNacimiento, String documento) throws ExisteEstudianteException {
 
         EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
