@@ -9,6 +9,8 @@ import com.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.utils.DataBaseException;
 import com.encoming.utils.ExisteCursoException;
 import com.encoming.vo.CursoVo;
+import com.encoming.vo.EstudianteVo;
+import com.encoming.vo.InscripcionVo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,8 +20,10 @@ import java.util.logging.Logger;
  *
  * @author andres
  */
-public class CursoController {       
-
+public class CursoController { 
+    
+    public List<Integer> idEstudiantes = new ArrayList<Integer>();
+            
     public static String validateName(String text) {
         int a = text.length();
         if (a<4 || a>15) {
@@ -50,6 +54,29 @@ public class CursoController {
             }
         }        
         return nombres.toArray();
+    } 
+    
+    public List<String> EstudiantesPorCurso(String nombre){
+        idEstudiantes = new ArrayList<Integer>();
+        CursoVo curso = FacadeFactory.getInstance().getCursoFacade().findByName(nombre);
+        if (curso.getInscripcionesList() != null || curso.getInscripcionesList().isEmpty()){
+            for (InscripcionVo inscripcion : curso.getInscripcionesList()){
+                idEstudiantes.add(inscripcion.getEstudianteId());
+            }
+        }
+        List<String> nombres = new ArrayList<String>();
+        List<EstudianteVo> estudianteVos = FacadeFactory.getInstance().getEstudianteFacade().getList();
+        if (estudianteVos != null){
+            for(Integer idEstudiante : idEstudiantes){
+                    for (EstudianteVo estudianteVo : estudianteVos){
+                        if(idEstudiante == estudianteVo.getId()){
+                            nombres.add(estudianteVo.getNombre());
+                        }
+                    }    
+            }
+        }
+        return nombres;
     }
+
     
 }

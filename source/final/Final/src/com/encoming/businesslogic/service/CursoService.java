@@ -34,7 +34,7 @@ public class CursoService implements IService<CursoVo> {
 
     @Override
     public void create(CursoVo vo, EntityManager em) {
-        ArrayList<Inscripciones> inscripciones = new ArrayList();
+        /*ArrayList<Inscripciones> inscripciones = new ArrayList();
         Cursos curso = new Cursos();
         CursoDAO cursoNew = DAOFactory.getInstance().getCursoDAO();
         curso.setId(vo.getId());
@@ -47,7 +47,16 @@ public class CursoService implements IService<CursoVo> {
          //   inscripciones.add(insDao.find(ins.getId(), em));
          //   }
         curso.setInscripcionesList(inscripciones);
-        cursoNew.persist(curso, em);
+        cursoNew.persist(curso, em);*/
+        
+        Cursos curso = new Cursos();
+        curso.setId(vo.getId());
+        curso.setNombre(vo.getNombre());
+        curso.setValorCurso(vo.getValorCurso());
+        CursoDAO cursoPre = DAOFactory.getInstance().getCursoDAO();
+        curso.setPrerequisito(cursoPre.find(vo.getPrerequisitoCursoId(), em));
+        
+        DAOFactory.getInstance().getCursoDAO().persist(curso, em);
     }
 
     @Override

@@ -33,13 +33,14 @@ public class PPrincipal extends javax.swing.JPanel {
         bInscribirEstudiante = new javax.swing.JButton();
         bIngresarEstudiante = new javax.swing.JButton();
         bInscribirCursos = new javax.swing.JButton();
+        bInscritosPorCurso = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setText("PARCIAL FINAL");
 
         bInscribirEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        bInscribirEstudiante.setText("Inscribir Un Estudiante");
+        bInscribirEstudiante.setText("Inscribir un Estudiante a un Curso");
         bInscribirEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bInscribirEstudianteActionPerformed(evt);
@@ -47,7 +48,7 @@ public class PPrincipal extends javax.swing.JPanel {
         });
 
         bIngresarEstudiante.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        bIngresarEstudiante.setText("Ingresar Estudiante");
+        bIngresarEstudiante.setText("Crear Estudiante");
         bIngresarEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bIngresarEstudianteActionPerformed(evt);
@@ -55,10 +56,18 @@ public class PPrincipal extends javax.swing.JPanel {
         });
 
         bInscribirCursos.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        bInscribirCursos.setText("Inscribir Curso");
+        bInscribirCursos.setText("Crear Curso");
         bInscribirCursos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bInscribirCursosActionPerformed(evt);
+            }
+        });
+
+        bInscritosPorCurso.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        bInscritosPorCurso.setText("Ver Inscritos por Curso");
+        bInscritosPorCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bInscritosPorCursoActionPerformed(evt);
             }
         });
 
@@ -71,13 +80,14 @@ public class PPrincipal extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(jLabel1)
-                        .add(0, 0, Short.MAX_VALUE))
+                        .add(0, 13, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(bInscribirEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(bIngresarEstudiante, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(bInscribirCursos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .add(bInscribirCursos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(bInscritosPorCurso, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -88,7 +98,10 @@ public class PPrincipal extends javax.swing.JPanel {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(bIngresarEstudiante)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(bInscribirCursos))
+                .add(bInscribirCursos)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(bInscritosPorCurso)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -104,10 +117,15 @@ public class PPrincipal extends javax.swing.JPanel {
         principal.cambiarPanel(new enrollStudent(principal));
     }//GEN-LAST:event_bInscribirEstudianteActionPerformed
 
+    private void bInscritosPorCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInscritosPorCursoActionPerformed
+        principal.cambiarPanel(new InscritosPorCurso(principal));
+    }//GEN-LAST:event_bInscritosPorCursoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bIngresarEstudiante;
     private javax.swing.JButton bInscribirCursos;
     private javax.swing.JButton bInscribirEstudiante;
+    private javax.swing.JButton bInscritosPorCurso;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

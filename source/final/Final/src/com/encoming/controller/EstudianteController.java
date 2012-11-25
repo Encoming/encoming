@@ -8,6 +8,7 @@ import com.encoming.businesslogic.facade.EstudianteFacade;
 import com.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.utils.DataBaseException;
 import com.encoming.utils.ExisteEstudianteException;
+import com.encoming.vo.CursoVo;
 import com.encoming.vo.EstudianteVo;
 import java.util.ArrayList;
 import java.util.Date;
@@ -91,6 +92,8 @@ public class EstudianteController {
         }
         return nombres.toArray();
     }
+    
+    
 
     public static String validateName(String name) {
         int a = name.length();
