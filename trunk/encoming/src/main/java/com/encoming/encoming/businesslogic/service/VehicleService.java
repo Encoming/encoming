@@ -113,4 +113,10 @@ public class VehicleService implements IService<VehicleVo> {
         VehicleVo vehVo = dao.findByPlate(em, plateNumbers, plateLetters);
         return vehVo;
     }
+    
+        public void updatePoint(Object idpoint, Object id, EntityManager em) {
+        Point point = DAOFactory.getInstance().getPointDAO().find(id, em);
+        DAOFactory.getInstance().getVehicleDAO().updatePoint(point, id, em);
+
+        }
 }

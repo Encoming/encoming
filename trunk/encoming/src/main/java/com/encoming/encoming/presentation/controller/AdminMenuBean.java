@@ -33,6 +33,10 @@ public class AdminMenuBean implements Serializable{
         page = "/createEncoming.xhtml";
     }
     
+    public void getShipping(){
+        page = "/getShipping.xhtml";
+    }
+    
     public void adminPersonal(){
         page = "/adminPersonal.xhtml";
     }
@@ -57,7 +61,4 @@ public class AdminMenuBean implements Serializable{
         page = "/seeEmployees.xhtml";
     }
     
-    public void shippingGet(){
-        page = "/getShipping.xhtml";
-    }
 }

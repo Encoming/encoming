@@ -18,6 +18,7 @@ import com.encoming.encoming.entity.Route;
 import com.encoming.encoming.entity.Shipping;
 import com.encoming.encoming.entity.Vehicle;
 import com.encoming.encoming.vo.ShippingVo;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -96,4 +97,18 @@ public class ShippingService implements IService<ShippingVo> {
     public List<ShippingVo> getList(EntityManager em) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    public List<ShippingVo> findToLess(Object point, Object idveh,EntityManager em){
+        List<Shipping> lista = DAOFactory.getInstance().getShippingDAO().findToLess(point, idveh, em);
+        ArrayList<ShippingVo> listaVo = new ArrayList<ShippingVo>();
+        for (Shipping ship : lista){
+            listaVo.add(ship.toVo());
+        }
+        return listaVo;
+    }
+    
+    public void updateArrivedDate(Object arrivedDate,Object idShipping, EntityManager em) {
+
+        DAOFactory.getInstance().getShippingDAO().updateArrivedDate(arrivedDate, idShipping, em);
+
+        }
 }

@@ -4,6 +4,7 @@
  */
 package com.encoming.encoming.dao;
 
+import com.encoming.encoming.entity.Point;
 import com.encoming.encoming.entity.Vehicle;
 import com.encoming.encoming.vo.VehicleVo;
 import java.util.List;
@@ -80,4 +81,10 @@ public class VehicleDAO implements IDAO<Vehicle> {
         return vehVo;
     }
     
-}
+    public void updatePoint(Point point, Object id, EntityManager em){
+    em.createQuery("UPDATE Vehicle veh SET veh.point =:pointt WHERE veh.idVehicle =:idveh")
+            .setParameter("idveh", id).setParameter("pointt", point)
+            .executeUpdate();
+
+            }
+    }

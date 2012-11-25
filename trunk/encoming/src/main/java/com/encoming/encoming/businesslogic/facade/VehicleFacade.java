@@ -8,6 +8,7 @@ import com.encoming.encoming.businesslogic.service.VehicleService;
 import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.VehicleVo;
 import java.util.ArrayList;
+import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -40,6 +41,26 @@ public class VehicleFacade extends Facade<VehicleVo> {
             }
         }
     }
+            
+        public void updatePoint(Object idPoint,Object id) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+        tx = em.getTransaction();
+        tx.begin();
+        ((VehicleService)service).updatePoint(idPoint, id, em);
+        tx.commit();
+        } catch (Exception e) {
+        e.printStackTrace();
+        if (em != null && tx != null) {
+        tx.rollback();
+        }
+            } finally {
+        if (em != null) {
+        em.clear();
+        em.close();
+                 }
+            }
+        } 
         
 }
 
