@@ -192,6 +192,7 @@ public class createsCourses extends javax.swing.JPanel {
             Logger.getLogger(createsCourses.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "El curso ya EXISTE!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
         }
+        principal.cambiarPanel(new PPrincipal(principal));
     }//GEN-LAST:event_bAgregarCursoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
