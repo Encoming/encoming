@@ -19,7 +19,6 @@ import java.util.logging.Logger;
  */
 public class EstudianteController {
 
-
     public void IngresarEstudiante(String nombres, String apellidos, Date fechaDeNacimiento, String documento) throws ExisteEstudianteException {
 
         EstudianteFacade estudianteFacade = FacadeFactory.getInstance().getEstudianteFacade();
@@ -40,33 +39,32 @@ public class EstudianteController {
             throw new ExisteEstudianteException("Ya existe el estudiante");
         }
     }
-    
-    public static String validateName(String name){
+
+    public static String validateName(String name) {
         int a = name.length();
-        if(a < 3 || a > 15){
+        if (a < 3 || a > 15) {
             return "¡La longitud del nombre debe estar entre 3 y 15!";
-        }else if(name.contains("1") || 
-                name.contains("2") || 
-                name.contains("3") || 
-                name.contains("4") || 
-                name.contains("5") || 
-                name.contains("6") || 
-                name.contains("7") || 
-                name.contains("8") || 
-                name.contains("9") || 
-                name.contains("0")) {
+        } else if (name.contains("1")
+                || name.contains("2")
+                || name.contains("3")
+                || name.contains("4")
+                || name.contains("5")
+                || name.contains("6")
+                || name.contains("7")
+                || name.contains("8")
+                || name.contains("9")
+                || name.contains("0")) {
             return "¡El nombre no debe contener números!";
-        }
-        else if(name.contains("!") ||
-                name.contains("#") ||
-                name.contains("$") ||
-                name.contains("&") ||
-                name.contains("/") ||
-                name.contains("(") ||
-                name.contains(")") ||
-                name.contains("@")) {
+        } else if (name.contains("!")
+                || name.contains("#")
+                || name.contains("$")
+                || name.contains("&")
+                || name.contains("/")
+                || name.contains("(")
+                || name.contains(")")
+                || name.contains("@")) {
             return "¡El nombre no debe contener símbolos!";
-        } else{
+        } else {
             return "Validado";
         }
     }
