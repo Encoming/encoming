@@ -5,6 +5,7 @@
 package com.encoming.presentation;
 
 import com.encoming.controller.CursoController;
+import com.encoming.controller.EstudianteController;
 import com.encoming.utils.ExisteCursoException;
 import com.encoming.vo.CursoVo;
 import java.util.ArrayList;
@@ -18,9 +19,10 @@ import javax.swing.JOptionPane;
  * @author FAMILIA
  */
 public class createsCourses extends javax.swing.JPanel {
-    
+
     List<CursoVo> cursos = new ArrayList<CursoVo>();
     private principal principal;
+
     /**
      * Creates new form createsCourses
      */
@@ -28,7 +30,6 @@ public class createsCourses extends javax.swing.JPanel {
         principal = parent;
         initComponents();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -157,15 +158,14 @@ public class createsCourses extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void listarCursos(){
+
+    public void listarCursos() {
         cursos = new ArrayList<CursoVo>();
-        for(CursoVo curso : cursos){
-            cbPreRequisito.addItem(curso);        
-        } 
+        for (CursoVo curso : cursos) {
+            cbPreRequisito.addItem(curso);
+        }
     }
-    
-    
+
     private void tfCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCostoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCostoActionPerformed
@@ -176,25 +176,32 @@ public class createsCourses extends javax.swing.JPanel {
 
     private void bAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarCursoActionPerformed
         String str = tfNombre.getText();
-        assert !str.equals("Prueba0"):"Se ha intentado agregar el curso Prueba0";
+        assert !str.equals("Prueba0") : "Se ha intentado agregar el curso Prueba0";
         str = CursoController.validateName(str);
-        if (!str.equals("Validado")){
+        if (!str.equals("Validado")) {
             JOptionPane.showMessageDialog(this, str, "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
+        str = tfCosto.getText();
+        String verificator2 = CursoController.validateCost(str);
+        if (!verificator2.equals("Validado")) {
+            JOptionPane.showMessageDialog(this, verificator2, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             new CursoController().crearCurso(tfNombre.getText(),
-                    (String)cbPreRequisito.getSelectedItem(),
+                    (String) cbPreRequisito.getSelectedItem(),
                     new Long(tfCosto.getText()));
             JOptionPane.showMessageDialog(this, "El curso se ha guardado", "Aviso!", JOptionPane.INFORMATION_MESSAGE);
+            principal.cambiarPanel(new PPrincipal(principal));
         } catch (ExisteCursoException ex) {
             Logger.getLogger(createsCourses.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "El curso ya EXISTE!!", "Aviso!", JOptionPane.ERROR_MESSAGE);
         }
-        principal.cambiarPanel(new PPrincipal(principal));
+        
     }//GEN-LAST:event_bAgregarCursoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAgregarCurso;
     private javax.swing.JComboBox cbPreRequisito;

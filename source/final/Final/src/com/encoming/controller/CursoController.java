@@ -19,8 +19,8 @@ public class CursoController {
 
     public static String validateName(String text) {
         int a = text.length();
-        if (a < 4 || a > 25) {
-            return "La longitud del nombre debe estar entre 4 y 25";
+        if (a < 4 || a > 50) {
+            return "La longitud del nombre debe estar entre 4 y 50";
         }
         return "Validado";
     }
@@ -55,5 +55,16 @@ public class CursoController {
             }
         }
         return nombres.toArray();
+    }
+
+    public static String validateCost(String str) {
+        if (str.length() == 0) {
+            return "¡El costo debe ser mayor a $0!";
+        }
+        Integer id = Integer.parseInt(str);
+        if (id < 30000 || id > 500000) {
+            return "¡El costo debe estar entre $30000 y $500000¡";
+        }
+        return "Validado";
     }
 }

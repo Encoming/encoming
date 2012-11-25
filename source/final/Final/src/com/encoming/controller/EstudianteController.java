@@ -117,6 +117,7 @@ public class EstudianteController {
         }
         return "Validado";
     }
+    
     public static String validateDay(String str) {
         if (str.length() == 0) {
             return "Validado";
