@@ -1,0 +1,2 @@
+Exception Description: 
+The attribute [invoiceList] in entity class [class com.encoming.encoming.entity.Shipping] has a mappedBy value of [shippingidShipping] which does not exist in its owning entity class [class com.encoming.encoming.entity.Invoice]. If the owning entity class is a @MappedSuperclass, this is invalid, and your attribute should reference the correct subclass
