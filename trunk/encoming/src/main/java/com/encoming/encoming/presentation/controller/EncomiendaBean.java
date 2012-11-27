@@ -58,6 +58,8 @@ public class EncomiendaBean {
     private Integer phoneReceiver;
     private String mailReceiver;
     private String adressReceiver;
+    private String origin;
+    private String destinity;
     private boolean validator = true;
     boolean enBD = true;
 
@@ -422,6 +424,7 @@ public class EncomiendaBean {
 
     public void setOriginCity(Integer originCity) {
         this.originCity = originCity;
+        setOrigin(findNamePoint(getOriginCity()));
     }
 
     public Integer getDestinationCity() {
@@ -430,6 +433,7 @@ public class EncomiendaBean {
 
     public void setDestinationCity(Integer destinationCity) {
         this.destinationCity = destinationCity;
+        setDestinity(findNamePoint(getDestinationCity()));
     }
 
     public void setIdReceiver(Integer idReceiver) {
@@ -510,6 +514,7 @@ public class EncomiendaBean {
 
     public void backToTop() {
         AdminMenuBean a = new AdminMenuBean();
+        setSkip(true);
         setName(null);
         setLastNames(null);
         setIdPerson(null);
@@ -523,5 +528,26 @@ public class EncomiendaBean {
         setMailReceiver(null);
         setPhoneReceiver(null);
         a.getShipping();
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestinity() {
+        return destinity;
+    }
+
+    public void setDestinity(String destinity) {
+        this.destinity = destinity;
+    }
+    
+    public String findNamePoint (Integer idPoint) {
+        PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
+        return pointFacade.findNamePoint(idPoint);
     }
 }
