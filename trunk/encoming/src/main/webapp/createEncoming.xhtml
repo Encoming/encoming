@@ -14,43 +14,60 @@
     <ui:define name="content">
         <p:panel header="Crear Encomienda">
             <h:form>
-                <p:growl id="growl" sticky="true" showDetail="true"/>  
-                <p:wizard id="wizard"
-                          flowListener="#{encomiendaBean.onFlowProcess}"> >
-                    <p:tab id="tab1" title="Datos cliente">
-                        <p:panel header="Datos Personales del Cliente">
-                            <p:messages errorClass="error"/>
-                            <h:panelGrid columns="2" columnClasses="label , value" styleClass="grid">
 
+                <p:wizard id="wizard"
+                          flowListener="#{encomiendaBean.onFlowProcess}"> 
+
+                    <p:tab id="tab0" title="Datos cliente">
+                        <h:form>
+                            <p:panel id="document" header="Documento cliente">
+                                <p:messages id="mensaje"/>
+                                <h:panelGrid columns="3">
+                                    <h:outputLabel for="idClient" value="Documento: *" />
+                                    <h:inputText id="idClient" required="true" value="#{encomiendaBean.idPerson}"
+                                                 requiredMessage="¡Por favor ingresa un Documento!" validatorMessage="El documento es incorrecto, por favor verifiquelo">
+                                        <f:validateLongRange minimum="999999" maximum="9999999999"/>                                
+                                    </h:inputText>
+                                    <h:commandButton value="Buscar" action="#{encomiendaBean.findPerson(actionEvent)}" update="mensaje" />
+                                </h:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </p:tab>
+
+
+                    <p:tab id="tab1" title="Datos cliente">
+                        <p:panel id="documento" header="Documento cliente">
+                            <p:messages id="mensajes"/>
+                            <h:panelGrid columns="2" styleClass="grid">
                                 <h:outputLabel for="name" value="Nombres: *" styleClass="requiredLb1"/>
                                 <h:inputText id="name" required="true" value="#{encomiendaBean.name}"
                                              requiredMessage="¡Por favor ingrese los Nombres!" validatorMessage="El Nombre es incorrecto">
                                     <f:validateLength minimum="4" />
                                 </h:inputText>
+
                                 <h:outputLabel for="lastNames" value="Apellidos: *" styleClass="requiredLb1"/>
                                 <h:inputText id="lastNames" required="true" value="#{encomiendaBean.lastNames}"
                                              requiredMessage="¡Por favor ingrese los Apellidos!">
                                     <f:validateLength minimum="2" />
                                 </h:inputText>
-                                <h:outputLabel for="idClient" value="Documento: *" />
-                                <h:inputText id="idClient" required="true" value="#{encomiendaBean.idPerson}"
-                                             requiredMessage="¡Por favor ingresa un Documento!" validatorMessage="El documento es incorrecto, por favor verifiquelo">
-                                    <f:validateLongRange minimum="700000" maximum="100000000000"/>                                
-                                </h:inputText>    
+
                                 <h:outputLabel for="mail" value="E-mail :*"/>
                                 <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}" >
                                     <f:validator validatorId="emailValidatorBean" />
-                                </h:inputText> 
+                                </h:inputText>
+
                                 <h:outputLabel for="phone"  value="Teléfono :"/>
                                 <p:inputMask id="phone"
                                              mask="9999999" 
                                              value="#{encomiendaBean.phone}"
                                              size="7" style="optionalLb1"/>
+
                                 <h:outputLabel for="adress" value="Dirección: *"/>
                                 <h:inputText id="adress" required="true" value="#{encomiendaBean.adress}"
                                              requiredMessage="¡Por favor ingrese una Dirección!">
                                     <f:validateLength minimum="8" />
-                                </h:inputText>    
+                                </h:inputText>
+
                             </h:panelGrid>  
                         </p:panel>
                     </p:tab>
@@ -82,16 +99,14 @@
                                              requiredMessage="¡Por favor ingrese el peso del paquete!" >
                                     <f:validateDoubleRange minimum="1.00" maximum="100.00" />
                                 </h:inputText>
-                                
+
                                 <h:outputLabel for="originCity" value="Ciudad de Origen: *" />
                                 <h:selectOneMenu id="point" required="true" value="#{encomiendaBean.originCity}"
                                                  requiredMessage="Selecciona una Ciudad de Origen">
                                     <f:selectItem itemLabel="Seleccione un punto" itemValue="" />
                                     <f:selectItems value="#{pointBean.points}"/>
                                     <f:validateLongRange minimum="1" />
-
                                 </h:selectOneMenu>
-                                
                                 <h:outputLabel for="destinationCity" value="Ciudad de Destino: *" validator=""/>
                                 <h:selectOneMenu id="point1" required="true" value="#{encomiendaBean.destinationCity}"
                                                  requiredMessage="Selecciona una Ciudad de Destino">
@@ -103,14 +118,26 @@
                     </p:tab>
 
                     <p:tab id="tab3" title="Destinatario">
+                        <h:form>
+                            <p:panel id="documentR" header="Documento Destinatario">
+                                <p:messages id="mensajex"/>
+                                <h:panelGrid columns="3" >
+                                    <h:outputLabel for="idReceiver" value="Documento: *" />
+                                    <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
+                                                 requiredMessage="¡Por favor ingresa un Documento!">
+                                        <f:validateLongRange minimum="700000" maximum="100000000000"/> 
+                                    </h:inputText> 
+                                    <h:commandButton value="Buscar" action="#{encomiendaBean.findReceiver(actionEvent)}" update="mensajex" />
+                                </h:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </p:tab>
+
+                    <p:tab id="tab4" title="Destinatario">
                         <p:panel header="Datos Personales del Destinatario">
                             <p:messages errorClass="error"/>
                             <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
-                                <h:outputLabel for="idReceiver" value="Documento: *" />
-                                <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
-                                             requiredMessage="¡Por favor ingresa un Documento!">
-                                    <f:validateLongRange minimum="700000" maximum="100000000000"/> 
-                                </h:inputText>    
+
                                 <h:outputLabel for="nameReceiver" value="Nombres: *" />
                                 <h:inputText id="nameReceiver" required="true" value="#{encomiendaBean.nameReceiver}"
                                              requiredMessage="¡Por favor ingresa los Nombres!" validatorMessage="El Nombre es incorrecto">
@@ -143,7 +170,7 @@
                         <p:panel header="Verificación"> 
                             <p:messages id="messages"/>
 
-                            <h:panelGrid id="verificar" columns="6">  
+                            <h:panelGrid id="verificar" columns="2">  
                                 <h:outputText value="Nombre: " />  
                                 <h:outputText styleClass="outputLabel"  
                                               value="#{encomiendaBean.name}" />  
@@ -218,5 +245,4 @@
             </h:form>
         </p:panel>
     </ui:define>
-
 </ui:composition>

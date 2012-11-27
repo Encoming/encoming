@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -27,7 +26,7 @@ import org.primefaces.model.map.Marker;
  * @author juanmanuelmartinezromero
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class PointBean implements Serializable {
 
     private MapModel model;

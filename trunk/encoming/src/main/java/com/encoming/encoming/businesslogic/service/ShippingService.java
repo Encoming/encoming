@@ -6,13 +6,11 @@ package com.encoming.encoming.businesslogic.service;
 
 import com.encoming.encoming.dao.DAOFactory;
 import com.encoming.encoming.dao.EncomingDAO;
-import com.encoming.encoming.dao.InvoiceDAO;
 import com.encoming.encoming.dao.PersonDAO;
 import com.encoming.encoming.dao.RouteDAO;
 import com.encoming.encoming.dao.ShippingDAO;
 import com.encoming.encoming.dao.VehicleDAO;
 import com.encoming.encoming.entity.Encoming;
-import com.encoming.encoming.entity.Invoice;
 import com.encoming.encoming.entity.Person;
 import com.encoming.encoming.entity.Route;
 import com.encoming.encoming.entity.Shipping;
@@ -45,7 +43,6 @@ public class ShippingService implements IService<ShippingVo> {
         entity.setArrivedDate(vo.getArrivedDate());
         entity.setSendedDate(vo.getSendedDate());
         entity.setCost(vo.getCost());
-        
 //        InvoiceDAO invoiceDAO = DAOFactory.getInstance().getInvoiceDAO();
 //        Invoice invoice = invoiceDAO.find(vo.getIdInvoice(), em);
 //        entity.setInvoice(invoice);

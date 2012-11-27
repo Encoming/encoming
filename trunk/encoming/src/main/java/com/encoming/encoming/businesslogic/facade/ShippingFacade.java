@@ -7,7 +7,6 @@ package com.encoming.encoming.businesslogic.facade;
 import com.encoming.encoming.businesslogic.service.ShippingService;
 import com.encoming.encoming.vo.ShippingVo;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
