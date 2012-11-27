@@ -20,7 +20,7 @@ import javax.faces.validator.ValidatorException;
 //@ManagedBean
 //@RequestScoped
 @FacesValidator(value = "emailValidatorBean")
-public class EmailValidatorBean  implements Validator {
+public class EmailValidatorBean implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component,
@@ -28,14 +28,17 @@ public class EmailValidatorBean  implements Validator {
         String email = String.valueOf(value);
         boolean valid = true;
         if (email.length() == 0) {
-            valid = false;
-        } else if (!email.endsWith("@gmail.com")
-                && !email.endsWith("@hotmail.com")
-                && !email.endsWith("@yahoo.es")
-                && !email.endsWith("@unal.edu.co")) {
-            valid = false;
-        } else if (email.indexOf('@') < 5 || email.indexOf('@') > 15) {
-            valid = false;
+            valid = true;
+        } else {
+            if (!email.endsWith("@gmail.com")
+                    && !email.endsWith("@hotmail.com")
+                    && !email.endsWith("@yahoo.es")
+                    && !email.endsWith("@unal.edu.co")) {
+                valid = false;
+            }
+            if (email.indexOf('@') < 4 || email.indexOf('@') > 20) {
+                valid = false;
+            }
         }
         if (!valid) {
             FacesMessage message = new FacesMessage(

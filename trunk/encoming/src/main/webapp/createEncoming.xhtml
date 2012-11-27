@@ -49,7 +49,7 @@
                                     <f:validateLength minimum="2" />
                                 </h:inputText>
 
-                                <h:outputLabel for="mail" value="E-mail :*"/>
+                                <h:outputLabel for="mail" value="E-mail :"/>
                                 <h:inputText id="mail" required="false" value="#{encomiendaBean.mail}" >
                                     <f:validator validatorId="emailValidatorBean" />
                                 </h:inputText>
@@ -85,19 +85,11 @@
                                              requiredMessage="¡Por favor ingrese el Tamaño del paquete!" >
                                     <f:validateDoubleRange minimum="0.00" maximum="100.0" />
                                 </h:inputText>     
-                                <h:outputLabel for="priority" value="Prioridad: *" />
-
-                                <h:selectOneMenu id="priority" value="#{encomiendaBean.priority}">
-                                    <f:selectItem itemLabel="Alta" itemValue="Alta" />
-                                    <f:selectItem itemLabel="Moderada" itemValue="Moderada" />
-                                    <f:selectItem itemLabel="Baja" itemValue="Baja" />
-                                </h:selectOneMenu>
                                 <h:outputLabel for="weigth" value="Peso (Kg): *" />
                                 <h:inputText id="weigth" required="true" value="#{encomiendaBean.weigth}"
                                              requiredMessage="¡Por favor ingrese el peso del paquete!" >
                                     <f:validateDoubleRange minimum="1.00" maximum="100.00" />
                                 </h:inputText>
-
                                 <h:outputLabel for="originCity" value="Ciudad de Origen: *" />
                                 <h:selectOneMenu id="point" required="true" value="#{encomiendaBean.originCity}"
                                                  requiredMessage="Selecciona una Ciudad de Origen">
@@ -134,12 +126,12 @@
                             <p:messages errorClass="error"/>
                             <h:panelGrid columns="2" styleClass="grid">
 
-                                <h:outputLabel for="nameReceiver" value="Nombres: *" />
+                                <h:outputLabel for="nameReceiver" value="Nombres :*" />
                                 <h:inputText id="nameReceiver" required="true" value="#{encomiendaBean.nameReceiver}"
                                              requiredMessage="¡Por favor ingresa los Nombres!" validatorMessage="El Nombre es incorrecto">
                                     <f:validateLength minimum="4" />
                                 </h:inputText>    
-                                <h:outputLabel for="lastNamesReceiver" value="Apellidos: *"/>
+                                <h:outputLabel for="lastNamesReceiver" value="Apellidos :*"/>
                                 <h:inputText id="lastNamesReceiver" required="true" value="#{encomiendaBean.lastNamesReceiver}"
                                              requiredMessage="¡Por favor ingresa los Apellidos!">
                                     <f:validateLength minimum="4" />
@@ -149,11 +141,11 @@
                                              mask="9999999" 
                                              value="#{encomiendaBean.phoneReceiver}"
                                              size="7" style="optionalLb1"/>
-                                <h:outputLabel for="mailReceiver" value="E-mail:*" />
+                                <h:outputLabel for="mailReceiver" value="E-mail :" />
                                 <h:inputText id="mailReceiver" required="false" value="#{encomiendaBean.mailReceiver}" >
                                     <f:validator validatorId="emailValidatorBean" />
                                 </h:inputText> 
-                                <h:outputLabel for="adressReceiver" value="Dirección: *" />
+                                <h:outputLabel for="adressReceiver" value="Dirección :*" />
                                 <h:inputText id="adressReceiver" required="true" value="#{encomiendaBean.adressReceiver}" >
                                     <f:validateLength minimum="8" />
                                 </h:inputText>
@@ -237,7 +229,7 @@
 
                             <h:panelGrid id="botones" columns="2">  
                                 <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}" update="messages"/>
-                                <p:commandButton value="Volver" icon="ui-icon-document" action="#{adminMenuBean.getShipping}" ajax ="false"/>
+                                <p:commandButton value="Volver" icon="ui-icon-document" action="#{encomiendaBean.backToTop}" ajax ="false"/>
                             </h:panelGrid>
                         </p:panel>  
                     </p:tab> 

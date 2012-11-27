@@ -14,20 +14,20 @@ import javax.persistence.EntityTransaction;
  * @author Andrezz
  */
 public class RouteFacade extends Facade<RouteVo> {
-    
-    protected RouteService service = new RouteService();
-    
-    public RouteFacade(String PUName, RouteService service){
-        super(PUName, service);
-    }    
 
-    public void updateKm(Integer idRoute,double numberKilometers) {
+    protected RouteService service = new RouteService();
+
+    public RouteFacade(String PUName, RouteService service) {
+        super(PUName, service);
+    }
+
+    public void updateKm(Integer idRoute, double numberKilometers) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
-            tx = em.getTransaction();   
+            tx = em.getTransaction();
             tx.begin();
-            service.updateKm(idRoute,numberKilometers,em);
+            service.updateKm(idRoute, numberKilometers, em);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,10 +41,11 @@ public class RouteFacade extends Facade<RouteVo> {
             }
         }
     }
+
     public Integer findIdRoute(Object originCity, Object destinationCity) {
         try {
             em = emf.createEntityManager();
-            return ((RouteService) service).findIdRoute(originCity,destinationCity,em);
+            return ((RouteService) service).findIdRoute(originCity, destinationCity, em);
         } finally {
             if (em != null) {
                 em.clear();
@@ -74,7 +75,6 @@ public class RouteFacade extends Facade<RouteVo> {
                 em.clear();
                 em.close();
             }
+        }
     }
-
-    
 }

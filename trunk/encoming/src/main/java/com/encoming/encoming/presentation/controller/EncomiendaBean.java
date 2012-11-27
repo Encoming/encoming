@@ -61,6 +61,7 @@ public class EncomiendaBean {
     private String origin;
     private String destinity;
     private boolean validator = true;
+    private Integer change=0;
     boolean enBD = true;
 
     public String dateTime() {
@@ -124,7 +125,7 @@ public class EncomiendaBean {
 
 //        Persistencia del paquete q se va a enviar  
             EncomingVo encomingVo = new EncomingVo();
-            encomingVo.setPriority(getPriority());
+            encomingVo.setPriority("Alta");
             encomingVo.setType(getType());
             encomingVo.setVolume(getVolume());
             encomingVo.setWeight(getWeigth());
@@ -153,7 +154,7 @@ public class EncomiendaBean {
                 System.out.println(" ID de la ruta " + findIdRoute(getOriginCity(), getDestinationCity()));
                 shippingVo.setSendedDate(null);
                 shippingVo.setArrivedDate(null);
-                shippingVo.setCost(calculateCost(shippingVo.getIdEncoming(), shippingVo.getIdRoute()));
+                shippingVo.setCost(calculateCost(encomingVo, shippingVo.getIdRoute()));
                 //shippingVo.setIdInvoice(idReceiver);
                 createshipping(shippingVo);
             } catch (Exception e) {
@@ -244,6 +245,7 @@ public class EncomiendaBean {
             setPhone(null);
             enBD = false;
         }
+        change=1;
     }
 
     public void findReceiver() {
@@ -268,6 +270,7 @@ public class EncomiendaBean {
             setPhoneReceiver(null);
             enBD = false;
         }
+        change=1;
     }
 
 //  Este método busca el id de un vehículo que se encuentre en una ciudad y q además esté libre
@@ -545,19 +548,30 @@ public class EncomiendaBean {
     public void setDestinity(String destinity) {
         this.destinity = destinity;
     }
-    
-    public String findNamePoint (Integer idPoint) {
+
+    public String findNamePoint(Integer idPoint) {
         PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
         return pointFacade.findNamePoint(idPoint);
     }
-    
-    public Double findKm (Integer idRoute) {
+
+    public Double findKm(Integer idRoute) {
         RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
         return routeFacade.findKm(idRoute);
     }
-    
-    public Double calculateCost (Integer idEncoming, Integer idRoute) {
-        Double km = findKm(idRoute);
-        
+
+    public Double calculateCost(EncomingVo encomingVo, Integer idRoute) {
+        String type = encomingVo.getType();
+        Float weight = encomingVo.getWeight();
+        Double costo = 2000.00;
+        if (type.equals("Caja")) {
+            costo = weight * 1.12;
+        }
+        if (type.equals("Sobre")) {
+            costo = weight * 1.07;
+        }
+        if (type.equals("Otro")) {
+            costo = weight * 1.17;
+        }
+        return costo;
     }
 }
