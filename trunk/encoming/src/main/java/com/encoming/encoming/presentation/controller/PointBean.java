@@ -26,7 +26,7 @@ import org.primefaces.model.map.Marker;
  * @author juanmanuelmartinezromero
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class PointBean implements Serializable {
 
     private MapModel model;

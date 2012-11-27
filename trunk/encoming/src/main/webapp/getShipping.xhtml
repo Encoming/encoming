@@ -21,14 +21,12 @@
                     
                 <h3 style="color: #005580">Selecciona tu ubicación:</h3>
 
-                <h:form id="pointsForm">
                     <h:selectOneMenu id="point" required="true" value="#{getShippingBean.idPoint}"
                                      requiredMessage="Selecciona un Punto:">
                         <f:selectItem itemLabel=""/>
                         <f:selectItems value="#{pointBean.points}"/>
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
-                </h:form>
           
                     
                     <h:panelGroup>

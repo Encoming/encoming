@@ -60,7 +60,10 @@ public class VehicleFacade extends Facade<VehicleVo> {
         } 
         
         
-        public List<VehicleVo> getListByPoint(Object idPoint){
+       
+        
+}
+     public List<VehicleVo> getListByPoint(Object idPoint){
              try {
             em = emf.createEntityManager();
             return ((VehicleService) service).getListByPoint(idPoint, em);
@@ -71,5 +74,4 @@ public class VehicleFacade extends Facade<VehicleVo> {
             }
         }
         }
-        
 }
