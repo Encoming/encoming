@@ -43,43 +43,58 @@ public class ShippingFacade extends Facade<ShippingVo> {
         }
     }
       
+      public List<ShippingVo> findToSend(Object idveh){
+        try {
+            em = emf.createEntityManager();
+            return ((ShippingService)service).findToSend(idveh, em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
+      
       
       public void updateArrivedDate(Object arrivedDate,Object idShipping) {
-
-
         EntityTransaction tx = em.getTransaction();
         try {
-
         tx = em.getTransaction();
-
         tx.begin();
-
         ((ShippingService)service).updateArrivedDate(arrivedDate, idShipping, em);
-
         tx.commit();
-
         } catch (Exception e) {
-
         e.printStackTrace();
-
         if (em != null && tx != null) {
-
         tx.rollback();
-
         }
-
             } finally {
-
         if (em != null) {
-
         em.clear();
-
         em.close();
-
                  }
-
             }
-
         }
+      
+      public void updateSendedDate(Object sendedDate,Object idShipping) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+        tx = em.getTransaction();
+        tx.begin();
+        ((ShippingService)service).updateSendedDate(sendedDate, idShipping, em);
+        tx.commit();
+        } catch (Exception e) {
+        e.printStackTrace();
+        if (em != null && tx != null) {
+        tx.rollback();
+        }
+            } finally {
+        if (em != null) {
+        em.clear();
+        em.close();
+                 }
+            }
+        }
+      
     
 }

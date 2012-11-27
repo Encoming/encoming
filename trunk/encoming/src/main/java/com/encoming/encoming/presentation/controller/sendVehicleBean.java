@@ -5,9 +5,14 @@
 package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
+import com.encoming.encoming.businesslogic.facade.ShippingFacade;
+import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.VehicleVo;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
@@ -20,7 +25,9 @@ import javax.faces.model.SelectItem;
 @RequestScoped
 public class sendVehicleBean {
     private List<SelectItem> vehicles;
+    private Integer idVehicle;
     private Integer idPoint = null;
+    private VehicleVo vehicle;
     
     public sendVehicleBean() {
     }
@@ -29,10 +36,10 @@ public class sendVehicleBean {
             vehicles = new ArrayList<SelectItem>();
             List<VehicleVo> vehiclesList = FacadeFactory.getInstance().getVehicleFacade().getListByPoint(idPoint);
             if (vehiclesList != null) {
-                for (VehicleVo vehicle : vehiclesList) {
-                    vehicles.add(new SelectItem(vehicle.getIdVehicle(), 
-                            vehicle.getPlateLetters() + " " 
-                            +vehicle.getPlateNumbers()));
+                for (VehicleVo vehicleVo : vehiclesList) {
+                    vehicles.add(new SelectItem(vehicleVo.getIdVehicle(), 
+                            vehicleVo.getPlateLetters() + " " 
+                            +vehicleVo.getPlateNumbers()));
                 }
             }
         }
@@ -46,8 +53,30 @@ public class sendVehicleBean {
     public void setIdPoint(Integer idPoint) {
         this.idPoint = idPoint;
     }
+     public String dateTime() {
+        Date fecha = new Date();
+        SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault());
+        String fecha2 = formato2.format(fecha);
+        return fecha2;
+
+    }
     
     public void sendVehicle(){
+       List<ShippingVo> list = FacadeFactory.getInstance().getShippingFacade().findToSend(idVehicle);
+       for(ShippingVo ship : list){
+           ShippingFacade shipFacFor =  FacadeFactory.getInstance().getShippingFacade();
+           shipFacFor.updateSendedDate(dateTime(), ship.getIdShipping());
+       }
+        
         
     }
+
+    public Integer getIdVehicle() {
+        return idVehicle;
+    }
+
+    public void setIdVehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
+    }
+    
 }
