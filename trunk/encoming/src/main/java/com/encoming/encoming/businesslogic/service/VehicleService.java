@@ -119,4 +119,12 @@ public class VehicleService implements IService<VehicleVo> {
         DAOFactory.getInstance().getVehicleDAO().updatePoint(point, id, em);
 
         }
+        public List<VehicleVo> getListByPoint(Object idPoint, EntityManager em){
+            List<Vehicle> entityList = DAOFactory.getInstance().getVehicleDAO().getListByPoint(idPoint, em);
+            ArrayList<VehicleVo> voList = new ArrayList<VehicleVo>();
+            for(Vehicle veh : entityList){
+                voList.add(veh.toVo());
+            }
+            return voList;
+        }
 }
