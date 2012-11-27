@@ -73,7 +73,7 @@
                     <p:tab id="tab2" title="Datos paquete">
                         <p:panel header="Datos del paquete">
                             <p:messages errorClass="error"/>
-                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                            <h:panelGrid columns="2" styleClass="grid">
                                 <h:outputLabel for="type" value="Tipo de paquete: *" />
                                 <h:selectOneMenu id="type" value="#{encomiendaBean.type}">
                                     <f:selectItem itemLabel="Sobre" itemValue="Sobre" />
@@ -132,7 +132,7 @@
                     <p:tab id="tab4" title="Destinatario">
                         <p:panel header="Datos Personales del Destinatario">
                             <p:messages errorClass="error"/>
-                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                            <h:panelGrid columns="2" styleClass="grid">
 
                                 <h:outputLabel for="nameReceiver" value="Nombres: *" />
                                 <h:inputText id="nameReceiver" required="true" value="#{encomiendaBean.nameReceiver}"
