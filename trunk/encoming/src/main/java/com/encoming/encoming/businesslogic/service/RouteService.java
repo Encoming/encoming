@@ -55,7 +55,12 @@ public class RouteService implements IService<RouteVo> {
     
      public Integer findIdRoute(Object originCity, Object destinationCity, EntityManager em) {
         RouteDAO dao = DAOFactory.getInstance().getRouteDAO();
-        Integer a = dao.findIdRoute(originCity, destinationCity, em);
+        Integer a;
+        try{
+        a = dao.findIdRoute(originCity,destinationCity, em);
+        }catch (NullPointerException e){
+            return null;
+        }
         return a;
     }
      
@@ -82,5 +87,11 @@ public class RouteService implements IService<RouteVo> {
 
     public void updateKm(Integer idRoute, double numberKilometers, EntityManager em) {
         DAOFactory.getInstance().getRouteDAO().updateKm(idRoute, numberKilometers, em);
+    }
+
+    public Double findKm(EntityManager em) {
+        RouteDAO dao = DAOFactory.getInstance().getRouteDAO();
+        Double a = dao.findKm(em);
+        return a;
     }
 }

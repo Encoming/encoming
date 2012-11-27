@@ -1,4 +1,3 @@
-package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.EncomingFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
@@ -8,6 +7,7 @@ import com.encoming.encoming.businesslogic.facade.VehicleFacade;
 import com.encoming.encoming.businesslogic.facade.PointFacade;
 import com.encoming.encoming.businesslogic.facade.RouteFacade;
 import com.encoming.encoming.businesslogic.facade.InvoiceFacade;
+import com.encoming.encoming.presentation.controller.AdminMenuBean;
 import com.encoming.encoming.vo.EncomingVo;
 import com.encoming.encoming.vo.PersonVo;
 import com.encoming.encoming.vo.PointVo;
@@ -58,7 +58,11 @@ public class EncomiendaBean {
     private Integer phoneReceiver;
     private String mailReceiver;
     private String adressReceiver;
+    private String origin;
+    private String destinity;
     private boolean validator = true;
+    private Integer change=0;
+    boolean enBD = true;
 
     public String dateTime() {
         Date fecha = new Date();
@@ -77,11 +81,20 @@ public class EncomiendaBean {
         personVo.setMail(getMail());
         personVo.setPhone(getPhone());
         personVo.setAdress(getAdress());
-        try {
-            createperson(personVo);
-        } catch (Exception e) {
-            validator = false;
-            addMessage("Error al ingresar el cliente");
+        if (!enBD) {
+            try {
+                createperson(personVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("Error al ingresar el cliente");
+            }
+        } else {
+            try {
+                updateperson(personVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("Error al actualizar el cliente");
+            }
         }
 
 //      Persona que recibe el paquete
@@ -92,17 +105,27 @@ public class EncomiendaBean {
         personRVo.setMail(getMailReceiver());
         personRVo.setPhone(getPhoneReceiver());
         personRVo.setAdress(getAdressReceiver());
-        try {
-            createperson(personRVo);
-        } catch (Exception e) {
-            validator = false;
-            addMessage("Error al ingresar el destinatario");
+        if (!enBD) {
+            try {
+                createperson(personRVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("Error al ingresar el destinatario");
+            }
+        } else {
+            try {
+                updateperson(personRVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("Error al actualizar el destinatario");
+            }
         }
 
         if (validator) {
+
 //        Persistencia del paquete q se va a enviar  
             EncomingVo encomingVo = new EncomingVo();
-            encomingVo.setPriority(getPriority());
+            encomingVo.setPriority("Alta");
             encomingVo.setType(getType());
             encomingVo.setVolume(getVolume());
             encomingVo.setWeight(getWeigth());
@@ -113,19 +136,26 @@ public class EncomiendaBean {
                 validator = false;
                 addMessage("error al asignar el paquete");
             }
+
 //        Creacion de una shipping
-            ShippingVo shippingVo = new ShippingVo();
-            shippingVo.setIdReceiver(getIdReceiver());
-            shippingVo.setIdPerson(getIdPerson());
-            shippingVo.setCost(2333);
-            shippingVo.setIdEncoming(findMaxIdEncoming());
-            //shippingVo.setIdEncoming(1);
-            shippingVo.setIdVehicle(findFreeVehicle(getOriginCity()));
-            shippingVo.setIdRoute(findIdRoute(getOriginCity(), getDestinationCity()));
-            shippingVo.setSendedDate(null);
-            shippingVo.setArrivedDate(null);
-            //shippingVo.setIdInvoice(idReceiver);
             try {
+                ShippingVo shippingVo = new ShippingVo();
+                shippingVo.setIdReceiver(getIdReceiver());
+                System.out.println(getIdReceiver());
+                shippingVo.setIdPerson(getIdPerson());
+                System.out.println(getIdPerson());
+                shippingVo.setIdEncoming(findMaxIdEncoming());
+                System.out.println("Encomienda " + findMaxIdEncoming());
+
+                shippingVo.setIdVehicle(findFreeVehicle(getOriginCity()));
+                System.out.println("Id vehicle " + findFreeVehicle(getOriginCity()));
+
+                shippingVo.setIdRoute(findIdRoute(getOriginCity(), getDestinationCity()));
+                System.out.println(" ID de la ruta " + findIdRoute(getOriginCity(), getDestinationCity()));
+                shippingVo.setSendedDate(null);
+                shippingVo.setArrivedDate(null);
+                shippingVo.setCost(calculateCost(encomingVo, shippingVo.getIdRoute()));
+                //shippingVo.setIdInvoice(idReceiver);
                 createshipping(shippingVo);
             } catch (Exception e) {
                 validator = false;
@@ -167,13 +197,13 @@ public class EncomiendaBean {
 //  Este método busca el id de una ruta teniendo en cuenta la cuidad de origen y la ciudad de destino    
     public Integer findIdRoute(Integer originCity, Integer destinationCity) {
         RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
-        PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
         Integer a = routeFacade.findIdRoute(getOriginCity(), getDestinationCity());
         if (a != null) {
+            System.out.println(a);
             return a;
         } else {
             RouteVo routeVo = new RouteVo();
-            
+
             routeVo.setDestinationPoint(getDestinationCity());
             routeVo.setOriginPoint(getOriginCity());
             routeVo.setNumberKilometers(-1);
@@ -183,14 +213,64 @@ public class EncomiendaBean {
                 System.out.println("si persiste la ruta");
                 return FacadeFactory.getInstance().getRouteFacade()
                         .findIdRoute(getOriginCity(), getDestinationCity());
-                
-                
+
+
             } catch (Exception e) {
-                validator = false;
+//                validator = false;
                 addMessage("No se pudo crear una nueva ruta");
             }
             return 0;
         }
+    }
+
+    public void findPerson(ActionEvent actionEvent) {
+        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+        PersonVo personVo;
+        try {
+            personVo = personFacade.findPerson(getIdPerson());
+            setName(personVo.getName());
+            setLastNames(personVo.getLastName());
+            setIdPerson(personVo.getIdPerson());
+            setAdress(personVo.getAdress());
+            setMail(personVo.getMail());
+            setPhone(personVo.getPhone());
+            addMessage("La persona ya se encuentra en la BD");
+        } catch (NullPointerException e) {
+            addMessage("La persona no se encuentra en la BD");
+            setName(null);
+            setLastNames(null);
+            setIdPerson(null);
+            setAdress(null);
+            setMail(null);
+            setPhone(null);
+            enBD = false;
+        }
+        change=1;
+    }
+
+    public void findReceiver() {
+        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+        PersonVo personVo;
+        try {
+            personVo = personFacade.findPerson(getIdReceiver());
+            setNameReceiver(personVo.getName());
+            setLastNamesReceiver(personVo.getLastName());
+            setIdReceiver(personVo.getIdPerson());
+            setAdressReceiver(personVo.getAdress());
+            setMailReceiver(personVo.getMail());
+            setPhoneReceiver(personVo.getPhone());
+            addMessage("La persona ya se encuentra en la BD");
+        } catch (NullPointerException e) {
+            addMessage("La persona no se encuentra en la BD");
+            setNameReceiver(null);
+            setLastNamesReceiver(null);
+            setIdReceiver(null);
+            setAdressReceiver(null);
+            setMailReceiver(null);
+            setPhoneReceiver(null);
+            enBD = false;
+        }
+        change=1;
     }
 
 //  Este método busca el id de un vehículo que se encuentre en una ciudad y q además esté libre
@@ -347,6 +427,7 @@ public class EncomiendaBean {
 
     public void setOriginCity(Integer originCity) {
         this.originCity = originCity;
+        setOrigin(findNamePoint(getOriginCity()));
     }
 
     public Integer getDestinationCity() {
@@ -355,6 +436,7 @@ public class EncomiendaBean {
 
     public void setDestinationCity(Integer destinationCity) {
         this.destinationCity = destinationCity;
+        setDestinity(findNamePoint(getDestinationCity()));
     }
 
     public void setIdReceiver(Integer idReceiver) {
@@ -426,5 +508,70 @@ public class EncomiendaBean {
 
     public void setSkip(boolean skip) {
         this.skip = skip;
+    }
+
+    public void updateperson(PersonVo person) {
+        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+        personFacade.update(person);
+    }
+
+    public void backToTop() {
+        AdminMenuBean a = new AdminMenuBean();
+        setSkip(true);
+        setName(null);
+        setLastNames(null);
+        setIdPerson(null);
+        setAdress(null);
+        setMail(null);
+        setPhone(null);
+        setNameReceiver(null);
+        setLastNamesReceiver(null);
+        setIdReceiver(null);
+        setAdressReceiver(null);
+        setMailReceiver(null);
+        setPhoneReceiver(null);
+        a.getShipping();
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestinity() {
+        return destinity;
+    }
+
+    public void setDestinity(String destinity) {
+        this.destinity = destinity;
+    }
+
+    public String findNamePoint(Integer idPoint) {
+        PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
+        return pointFacade.findNamePoint(idPoint);
+    }
+
+    public Double findKm(Integer idRoute) {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        return routeFacade.findKm(idRoute);
+    }
+
+    public Double calculateCost(EncomingVo encomingVo, Integer idRoute) {
+        String type = encomingVo.getType();
+        Float weight = encomingVo.getWeight();
+        Double costo = 2000.00;
+        if (type.equals("Caja")) {
+            costo = weight * 1.12;
+        }
+        if (type.equals("Sobre")) {
+            costo = weight * 1.07;
+        }
+        if (type.equals("Otro")) {
+            costo = weight * 1.17;
+        }
+        return costo;
     }
 }

@@ -7,6 +7,7 @@ package com.encoming.encoming.dao;
 import com.encoming.encoming.entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -31,10 +32,14 @@ public class PersonDAO implements IDAO<Person> {
 
     @Override
     public Person find(Object idA, EntityManager em) {
-        Integer id = (Integer) idA;
-        Query query = em.createNamedQuery("Person.findByIdPerson")
-                .setParameter("idPerson", id);
-        return (Person)query.getSingleResult();
+        try {
+            Integer id = (Integer) idA;
+            Query query = em.createNamedQuery("Person.findByIdPerson")
+                    .setParameter("idPerson", id);
+            return (Person) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
@@ -44,7 +49,7 @@ public class PersonDAO implements IDAO<Person> {
 
     @Override
     public void delete(Object id, EntityManager em) {
-        Person person = find(id,em);
+        Person person = find(id, em);
         em.remove(person);
     }
 
@@ -54,24 +59,22 @@ public class PersonDAO implements IDAO<Person> {
         List<Person> lista = query.getResultList();
         return lista;
     }
-    
-/*
-    public Person login(Person entity, EntityManager em) {
-        Person person;
-        Query q = em.createQuery("SELECT u FROM Person u "
-                + "WHERE u.idPerson LIKE :idPerson "
-                + "AND u.password LIKE :password")
-                .setParameter("idPerson", entity.getIdPerson().toString())
-                .setParameter("password", entity.getPassword());
-        try {
-            person = (Person) q.getSingleResult();
-        } catch (NonUniqueResultException e) {
-            person = (Person) q.getResultList().get(0);
-        } catch (NoResultException e) {
-            person = null;
-        }
-        return person;
-    }
- */
-    
+    /*
+     public Person login(Person entity, EntityManager em) {
+     Person person;
+     Query q = em.createQuery("SELECT u FROM Person u "
+     + "WHERE u.idPerson LIKE :idPerson "
+     + "AND u.password LIKE :password")
+     .setParameter("idPerson", entity.getIdPerson().toString())
+     .setParameter("password", entity.getPassword());
+     try {
+     person = (Person) q.getSingleResult();
+     } catch (NonUniqueResultException e) {
+     person = (Person) q.getResultList().get(0);
+     } catch (NoResultException e) {
+     person = null;
+     }
+     return person;
+     }
+     */
 }

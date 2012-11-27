@@ -17,8 +17,9 @@ import javax.persistence.EntityManager;
  * @author juanmanuelmartinezromero
  */
 public class PersonService implements IService<PersonVo> {
-    private static  PersonService instance;
-    
+
+    private static PersonService instance;
+
     public static synchronized PersonService getInstance() {
         if (instance == null) {
             instance = new PersonService();
@@ -54,14 +55,14 @@ public class PersonService implements IService<PersonVo> {
         person.setAdress(vo.getAdress());
         person.setIdPerson(vo.getIdPerson());
         person.setLastanames(vo.getLastName());
-        person.setMail(vo.getLastName());
+        person.setMail(vo.getMail());
         person.setPhone(vo.getPhone());
         dao.update(person, em);
     }
 
     @Override
     public void delete(Object id, EntityManager em) {
-        PersonDAO dao =  DAOFactory.getInstance().getPersonDAO();
+        PersonDAO dao = DAOFactory.getInstance().getPersonDAO();
         dao.delete(id, em);
     }
 
@@ -73,5 +74,21 @@ public class PersonService implements IService<PersonVo> {
         }
         return list;
     }
-       
+
+    public PersonVo findPerson(Object id, EntityManager em) {
+        PersonDAO dao = DAOFactory.getInstance().getPersonDAO();
+        PersonVo personVo = new PersonVo();
+        try {
+            Person b = dao.find(id, em);
+            personVo.setName(b.getName());
+            personVo.setIdPerson(b.getIdPerson());
+            personVo.setLastName(b.getLastanames());
+            personVo.setAdress(b.getAdress());
+            personVo.setMail(b.getMail());
+            personVo.setPhone(b.getPhone());
+        } catch (NullPointerException e) {
+            return null;
+        }
+        return personVo;
+    }
 }

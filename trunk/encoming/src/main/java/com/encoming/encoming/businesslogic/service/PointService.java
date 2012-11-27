@@ -81,4 +81,10 @@ public class PointService implements IService<PointVo> {
     public PointVo findByName(EntityManager em , Object name){
         return DAOFactory.getInstance().getPointDAO().findByName(em, name);
     }
+
+    public String findNamePoint(Integer idPoint, EntityManager em) {
+        PointDAO dao = DAOFactory.getInstance().getPointDAO();
+        String a = dao.findNamePoint(idPoint, em);
+        return a;
+    }
 }

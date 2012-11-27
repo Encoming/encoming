@@ -67,4 +67,11 @@ public class PointDAO implements IDAO<Point> {
         PointVo pVo= point.toVo();
         return pVo;
     }
+
+    public String findNamePoint(Integer idPoint, EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT p.name FROM Point p"
+                + " WHERE p.idPoint=:idPoint")
+                .setParameter("idPoint", idPoint);
+        return (String)query.getSingleResult();
+    }
 }

@@ -41,4 +41,16 @@ public class PointFacade extends Facade<PointVo> {
             }
         }
     }
+
+    public String findNamePoint(Integer idPoint) {
+        try {
+            em = emf.createEntityManager();
+            return ((PointService) service).findNamePoint(idPoint, em);
+        } finally {
+            if(em != null) {
+                em.clear();
+                em.close();
+            }
+        }
+    }
 }

@@ -77,4 +77,9 @@ public class RouteDAO implements IDAO<Route> {
                 .setParameter("numberKilometres", numberKilometres)
                 .executeUpdate();
     }
+
+    public Double findKm(EntityManager em) {
+        javax.persistence.Query query = em.createQuery("SELECT r.numberKilometers FROM Route r WHERE Route.idRoute=:idRoute");
+        return (Double)query.getSingleResult();
+    }
 }

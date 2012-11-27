@@ -78,7 +78,7 @@ public class Vehicle implements Serializable, IEntity<VehicleVo> {
     @Size(min = 1, max = 10)
     @Column(name = "capacity")
     private String capacity;
-    @Size(min = 1, max =  30)
+    @Size(min = 1, max = 30)
     @Column(name = "destinationCity")
     private String destinationCity;
     @Basic(optional = false)
