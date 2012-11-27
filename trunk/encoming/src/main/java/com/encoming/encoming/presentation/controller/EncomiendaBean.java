@@ -143,7 +143,6 @@ public class EncomiendaBean {
                 System.out.println(getIdReceiver());
                 shippingVo.setIdPerson(getIdPerson());
                 System.out.println(getIdPerson());
-                shippingVo.setCost(2333);
                 shippingVo.setIdEncoming(findMaxIdEncoming());
                 System.out.println("Encomienda " + findMaxIdEncoming());
 
@@ -154,6 +153,7 @@ public class EncomiendaBean {
                 System.out.println(" ID de la ruta " + findIdRoute(getOriginCity(), getDestinationCity()));
                 shippingVo.setSendedDate(null);
                 shippingVo.setArrivedDate(null);
+                shippingVo.setCost(calculateCost(shippingVo.getIdEncoming(), shippingVo.getIdRoute()));
                 //shippingVo.setIdInvoice(idReceiver);
                 createshipping(shippingVo);
             } catch (Exception e) {
@@ -549,5 +549,15 @@ public class EncomiendaBean {
     public String findNamePoint (Integer idPoint) {
         PointFacade pointFacade = FacadeFactory.getInstance().getPointFacade();
         return pointFacade.findNamePoint(idPoint);
+    }
+    
+    public Double findKm (Integer idRoute) {
+        RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
+        return routeFacade.findKm(idRoute);
+    }
+    
+    public Double calculateCost (Integer idEncoming, Integer idRoute) {
+        Double km = findKm(idRoute);
+        
     }
 }

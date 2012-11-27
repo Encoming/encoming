@@ -65,5 +65,16 @@ public class RouteFacade extends Facade<RouteVo> {
         }
     }
 
+    public double findKm(Integer idRoute) {
+        try {
+            em = emf.createEntityManager();
+            return ((RouteService) service).findKm(em);
+        } finally {
+            if (em != null) {
+                em.clear();
+                em.close();
+            }
+    }
+
     
 }
