@@ -23,18 +23,25 @@
                             <div class="controls">
                         <h3 style="color: #005580">Selecciona tu ubicación:</h3>
 
-                
-                        <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idPoint}"
+                    <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idPoint}"
                                      requiredMessage="Selecciona un Punto:">
                         <f:selectItem itemLabel=""/>
-                        <f:selectItems value="#{sendVehicleBean.getVehicles}"/>
+                        <f:selectItems value="#{pointBean.points}"/>
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
+
+                        
+                        <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idVehicle}"
+                                     requiredMessage="Selecciona un Punto:">
+                        <f:selectItem itemLabel=""/>
+                        <f:selectItems value="#{sendVehicleBean.vehicles}"/>
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
                             </div>
                         </div>
                         
                        <div class="form-actions">
-                                <h:commandButton action="#{getShippingBean.operateShipping()}" value="Guardar" class="btn btn-large btn-primary" />
+                                <h:commandButton action="#{sendVehicleBean.sendVehicle()}" value="Despachar" class="btn btn-large btn-primary" />
                             </div>
                     </h:panelGroup>
                     <p:separator/>

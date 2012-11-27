@@ -108,4 +108,18 @@ public class ShippingService implements IService<ShippingVo> {
         DAOFactory.getInstance().getShippingDAO().updateArrivedDate(arrivedDate, idShipping, em);
 
         }
+    public void updateSendedDate(Object sendedDate,Object idShipping, EntityManager em) {
+
+        DAOFactory.getInstance().getShippingDAO().updateArrivedDate(sendedDate, idShipping, em);
+
+        }
+    
+    public List<ShippingVo> findToSend(Object idveh,EntityManager em){
+        List<Shipping> lista = DAOFactory.getInstance().getShippingDAO().findTosend(idveh, em);
+        ArrayList<ShippingVo> listaVo = new ArrayList<ShippingVo>();
+        for (Shipping ship : lista){
+            listaVo.add(ship.toVo());
+        }
+        return listaVo;
+    }
 }
