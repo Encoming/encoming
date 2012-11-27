@@ -19,19 +19,17 @@
                           flowListener="#{encomiendaBean.onFlowProcess}"> 
 
                     <p:tab id="tab0" title="Datos cliente">
-                        <h:form>
-                            <p:panel id="document" header="Documento cliente">
-                                <p:messages id="mensaje"/>
-                                <h:panelGrid columns="3">
-                                    <h:outputLabel for="idClient" value="Documento: *" />
-                                    <h:inputText id="idClient" required="true" value="#{encomiendaBean.idPerson}"
-                                                 requiredMessage="¡Por favor ingresa un Documento!" validatorMessage="El documento es incorrecto, por favor verifiquelo">
-                                        <f:validateLongRange minimum="999999" maximum="9999999999"/>                                
-                                    </h:inputText>
-                                    <h:commandButton value="Buscar" action="#{encomiendaBean.findPerson(actionEvent)}" update="mensaje" />
-                                </h:panelGrid>
-                            </p:panel>
-                        </h:form>
+                        <p:panel id="document" header="Documento cliente">
+                            <p:messages id="mensaje"/>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel for="idClient" value="Documento: *" />
+                                <h:inputText id="idClient" required="true" value="#{encomiendaBean.idPerson}"
+                                             requiredMessage="¡Por favor ingresa un Documento!" validatorMessage="El documento es incorrecto, por favor verifiquelo">
+                                    <f:validateLongRange minimum="999999" maximum="9999999999"/>                                
+                                </h:inputText>
+                            </h:panelGrid>
+                            <p:commandButton value="Buscar" actionListener="#{encomiendaBean.findPerson}" update="mensaje" />
+                        </p:panel>
                     </p:tab>
 
 
@@ -118,19 +116,17 @@
                     </p:tab>
 
                     <p:tab id="tab3" title="Destinatario">
-                        <h:form>
-                            <p:panel id="documentR" header="Documento Destinatario">
-                                <p:messages id="mensajex"/>
-                                <h:panelGrid columns="3" >
-                                    <h:outputLabel for="idReceiver" value="Documento: *" />
-                                    <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
-                                                 requiredMessage="¡Por favor ingresa un Documento!">
-                                        <f:validateLongRange minimum="700000" maximum="100000000000"/> 
-                                    </h:inputText> 
-                                    <h:commandButton value="Buscar" action="#{encomiendaBean.findReceiver(actionEvent)}" update="mensajex" />
-                                </h:panelGrid>
-                            </p:panel>
-                        </h:form>
+                        <p:panel id="documentR" header="Documento Destinatario">
+                            <p:messages id="mensajex"/>
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel for="idReceiver" value="Documento: *" />
+                                <h:inputText id="idReceiver" required="true" value="#{encomiendaBean.idReceiver}"
+                                             requiredMessage="¡Por favor ingresa un Documento!">
+                                    <f:validateLongRange minimum="700000" maximum="100000000000"/> 
+                                </h:inputText>                                     
+                            </h:panelGrid>
+                            <p:commandButton value="Buscar" action="#{encomiendaBean.findReceiver}" update="mensajex" />
+                        </p:panel>
                     </p:tab>
 
                     <p:tab id="tab4" title="Destinatario">

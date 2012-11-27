@@ -55,7 +55,7 @@ public class PersonService implements IService<PersonVo> {
         person.setAdress(vo.getAdress());
         person.setIdPerson(vo.getIdPerson());
         person.setLastanames(vo.getLastName());
-        person.setMail(vo.getLastName());
+        person.setMail(vo.getMail());
         person.setPhone(vo.getPhone());
         dao.update(person, em);
     }

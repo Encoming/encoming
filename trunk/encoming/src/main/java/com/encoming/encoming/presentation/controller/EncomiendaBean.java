@@ -84,6 +84,13 @@ public class EncomiendaBean {
                 validator = false;
                 addMessage("Error al ingresar el cliente");
             }
+        } else {
+            try {
+                updateperson(personVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("Error al actualizar el cliente");
+            }
         }
 
 //      Persona que recibe el paquete
@@ -101,10 +108,17 @@ public class EncomiendaBean {
                 validator = false;
                 addMessage("Error al ingresar el destinatario");
             }
+        }else {
+            try {
+                updateperson(personRVo);
+            } catch (Exception e) {
+                validator = false;
+                addMessage("Error al actualizar el destinatario");
+            }
         }
-        
+
         if (validator) {
-            
+
 //        Persistencia del paquete q se va a enviar  
             EncomingVo encomingVo = new EncomingVo();
             encomingVo.setPriority(getPriority());
@@ -118,7 +132,7 @@ public class EncomiendaBean {
                 validator = false;
                 addMessage("error al asignar el paquete");
             }
-            
+
 //        Creacion de una shipping
             try {
                 ShippingVo shippingVo = new ShippingVo();
@@ -128,13 +142,13 @@ public class EncomiendaBean {
                 System.out.println(getIdPerson());
                 shippingVo.setCost(2333);
                 shippingVo.setIdEncoming(findMaxIdEncoming());
-                System.out.println("Encomienda "+ findMaxIdEncoming());
-                
-                shippingVo.setIdVehicle(findFreeVehicle(getOriginCity()));
-                                System.out.println("Id vehicle "+ findFreeVehicle(getOriginCity()));
+                System.out.println("Encomienda " + findMaxIdEncoming());
 
-                shippingVo.setIdRoute(findIdRoute(getOriginCity(),getDestinationCity()));
-                System.out.println(" ID de la ruta " + findIdRoute(getOriginCity(),getDestinationCity()));
+                shippingVo.setIdVehicle(findFreeVehicle(getOriginCity()));
+                System.out.println("Id vehicle " + findFreeVehicle(getOriginCity()));
+
+                shippingVo.setIdRoute(findIdRoute(getOriginCity(), getDestinationCity()));
+                System.out.println(" ID de la ruta " + findIdRoute(getOriginCity(), getDestinationCity()));
                 shippingVo.setSendedDate(null);
                 shippingVo.setArrivedDate(null);
                 //shippingVo.setIdInvoice(idReceiver);
@@ -179,7 +193,7 @@ public class EncomiendaBean {
 //  Este método busca el id de una ruta teniendo en cuenta la cuidad de origen y la ciudad de destino    
     public Integer findIdRoute(Integer originCity, Integer destinationCity) {
         RouteFacade routeFacade = FacadeFactory.getInstance().getRouteFacade();
-        Integer a = routeFacade.findIdRoute(getOriginCity(),getDestinationCity());
+        Integer a = routeFacade.findIdRoute(getOriginCity(), getDestinationCity());
         if (a != null) {
             System.out.println(a);
             return a;
@@ -223,7 +237,7 @@ public class EncomiendaBean {
         }
     }
 
-    public void findReceiver(ActionEvent actionEvent) {
+    public void findReceiver() {
         PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
         PersonVo personVo;
         try {
@@ -474,5 +488,10 @@ public class EncomiendaBean {
 
     public void setSkip(boolean skip) {
         this.skip = skip;
+    }
+
+    private void updateperson(PersonVo person) {
+        PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
+        personFacade.update(person);
     }
 }
