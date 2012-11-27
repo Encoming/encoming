@@ -7,6 +7,7 @@ import com.encoming.encoming.businesslogic.facade.VehicleFacade;
 import com.encoming.encoming.businesslogic.facade.PointFacade;
 import com.encoming.encoming.businesslogic.facade.RouteFacade;
 import com.encoming.encoming.businesslogic.facade.InvoiceFacade;
+import com.encoming.encoming.presentation.controller.AdminMenuBean;
 import com.encoming.encoming.vo.EncomingVo;
 import com.encoming.encoming.vo.PersonVo;
 import com.encoming.encoming.vo.PointVo;
@@ -108,7 +109,7 @@ public class EncomiendaBean {
                 validator = false;
                 addMessage("Error al ingresar el destinatario");
             }
-        }else {
+        } else {
             try {
                 updateperson(personRVo);
             } catch (Exception e) {
@@ -233,6 +234,12 @@ public class EncomiendaBean {
             addMessage("La persona ya se encuentra en la BD");
         } catch (NullPointerException e) {
             addMessage("La persona no se encuentra en la BD");
+            setName(null);
+            setLastNames(null);
+            setIdPerson(null);
+            setAdress(null);
+            setMail(null);
+            setPhone(null);
             enBD = false;
         }
     }
@@ -251,6 +258,12 @@ public class EncomiendaBean {
             addMessage("La persona ya se encuentra en la BD");
         } catch (NullPointerException e) {
             addMessage("La persona no se encuentra en la BD");
+            setNameReceiver(null);
+            setLastNamesReceiver(null);
+            setIdReceiver(null);
+            setAdressReceiver(null);
+            setMailReceiver(null);
+            setPhoneReceiver(null);
             enBD = false;
         }
     }
@@ -490,8 +503,25 @@ public class EncomiendaBean {
         this.skip = skip;
     }
 
-    private void updateperson(PersonVo person) {
+    public void updateperson(PersonVo person) {
         PersonFacade personFacade = FacadeFactory.getInstance().getPersonFacade();
         personFacade.update(person);
+    }
+
+    public void backToTop() {
+        AdminMenuBean a = new AdminMenuBean();
+        setName(null);
+        setLastNames(null);
+        setIdPerson(null);
+        setAdress(null);
+        setMail(null);
+        setPhone(null);
+        setNameReceiver(null);
+        setLastNamesReceiver(null);
+        setIdReceiver(null);
+        setAdressReceiver(null);
+        setMailReceiver(null);
+        setPhoneReceiver(null);
+        a.getShipping();
     }
 }

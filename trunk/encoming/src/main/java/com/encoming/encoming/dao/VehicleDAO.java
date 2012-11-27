@@ -10,7 +10,6 @@ import com.encoming.encoming.vo.VehicleVo;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.validation.ConstraintViolationException;
 
 /**
  *

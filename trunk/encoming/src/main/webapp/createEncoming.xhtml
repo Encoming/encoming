@@ -234,7 +234,11 @@
                                 <h:outputText value="#{encomiendaBean.adressReceiver}"/>
                             </h:panelGrid>  
 
-                            <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}" update="messages"/>
+
+                            <h:panelGrid id="botones" columns="2">  
+                                <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}" update="messages"/>
+                                <p:commandButton value="Volver" icon="ui-icon-document" action="#{encomiendaBean.backToTop()}" ajax ="false"/>
+                            </h:panelGrid>
                         </p:panel>  
                     </p:tab> 
                 </p:wizard>
