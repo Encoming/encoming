@@ -31,13 +31,13 @@ private String status = "";
         if(shipVo.getSendedDate() != null){
             status += "fue despachado: \n " + shipVo.getSendedDate();
                 if(shipVo.getArrivedDate() != null){
-                    status += " \n fue recibido en la sucursal en : \n " + shipVo.getArrivedDate();
+                    status += " \n fue recibido en la sucursal : \n " + shipVo.getArrivedDate();
                 }                
         }else {
             status += "Aun no ha sido despachado";
         }
             
-        }catch(NullPointerException e){
+        }catch(Exception e){
             status  = "Numero de Envio Inválido";
         }
         
