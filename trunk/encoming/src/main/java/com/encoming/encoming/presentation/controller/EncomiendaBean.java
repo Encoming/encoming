@@ -69,7 +69,6 @@ public class EncomiendaBean {
         SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault());
         String fecha2 = formato2.format(fecha);
         return fecha2;
-
     }
 
     public void addPerson(ActionEvent actionEvent) {
@@ -239,7 +238,7 @@ public class EncomiendaBean {
             addMessage("La persona no se encuentra en la BD");
             setName(null);
             setLastNames(null);
-            setIdPerson(null);
+            //setIdPerson(null);
             setAdress(null);
             setMail(null);
             setPhone(null);
@@ -263,7 +262,7 @@ public class EncomiendaBean {
             addMessage("La persona no se encuentra en la BD");
             setNameReceiver(null);
             setLastNamesReceiver(null);
-            setIdReceiver(null);
+            //setIdReceiver(null);
             setAdressReceiver(null);
             setMailReceiver(null);
             setPhoneReceiver(null);
