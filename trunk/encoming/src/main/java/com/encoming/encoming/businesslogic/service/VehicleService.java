@@ -48,7 +48,7 @@ public class VehicleService implements IService<VehicleVo> {
         entity.setPoint(DAOFactory.getInstance().getPointDAO().find(vo.getIdPoint(), em));
         System.out.println("pone un punto");
         entity.setStatus(vo.getStatus());
-        entity.setType(vo.getType());       
+        entity.setType(vo.getType());
         System.out.println("llena la entidad bien");
         DAOFactory.getInstance().getVehicleDAO().persist(entity, em);
         System.out.println("lleva a persistir");
@@ -62,12 +62,12 @@ public class VehicleService implements IService<VehicleVo> {
 
     }
 
-    public Integer findFreeVehicle (Integer idPoint, EntityManager em) {
+    public Integer findFreeVehicle(Integer idPoint, EntityManager em) {
         VehicleDAO dao = DAOFactory.getInstance().getVehicleDAO();
         Integer a = dao.findFreeVehicle(idPoint, em);
         return a;
     }
-    
+
     @Override
     public void update(VehicleVo vo, EntityManager em) {
         Vehicle entity = new Vehicle();
@@ -79,7 +79,7 @@ public class VehicleService implements IService<VehicleVo> {
         entity.setPlateNumber(vo.getPlateNumbers());
         entity.setModel(vo.getModel());
         ArrayList<Shipping> shipList = new ArrayList();
-        for(ShippingVo sVo : vo.getShippingList()){
+        for (ShippingVo sVo : vo.getShippingList()) {
             Shipping ship = DAOFactory.getInstance().getShippingDAO().find(sVo.getIdShipping(), em);
             shipList.add(ship);
         }
@@ -105,30 +105,33 @@ public class VehicleService implements IService<VehicleVo> {
         }
         return vehicles;
     }
-    
-    public VehicleVo findByPlate(EntityManager em ,Object plateNumbers 
-                                ,Object plateLetters)
-    {
-        VehicleDAO dao = DAOFactory.getInstance().getVehicleDAO();
-        VehicleVo vehVo = dao.findByPlate(em, plateNumbers, plateLetters);
-        return vehVo;
+
+    public VehicleVo findByPlate(EntityManager em, Object plateNumbers, Object plateLetters) {
+        try {
+            VehicleDAO dao = DAOFactory.getInstance().getVehicleDAO();
+            VehicleVo vehVo = dao.findByPlate(em, plateNumbers, plateLetters);
+            return vehVo;
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
-    
-        public void updatePoint(Object idpoint, Object id, EntityManager em) {
+
+    public void updatePoint(Object idpoint, Object id, EntityManager em) {
         Point point = DAOFactory.getInstance().getPointDAO().find(id, em);
         DAOFactory.getInstance().getVehicleDAO().updatePoint(point, id, em);
 
+    }
+
+    public List<VehicleVo> getListByPoint(Object idPoint, EntityManager em) {
+        List<Vehicle> entityList = DAOFactory.getInstance().getVehicleDAO().getListByPoint(idPoint, em);
+        ArrayList<VehicleVo> voList = new ArrayList<VehicleVo>();
+        for (Vehicle veh : entityList) {
+            voList.add(veh.toVo());
         }
-        public List<VehicleVo> getListByPoint(Object idPoint, EntityManager em){
-            List<Vehicle> entityList = DAOFactory.getInstance().getVehicleDAO().getListByPoint(idPoint, em);
-            ArrayList<VehicleVo> voList = new ArrayList<VehicleVo>();
-            for(Vehicle veh : entityList){
-                voList.add(veh.toVo());
-            }
-            return voList;
-        }
-        
-        public void updateStatus(Object status, Object id, EntityManager em) {      
+        return voList;
+    }
+
+    public void updateStatus(Object status, Object id, EntityManager em) {
         DAOFactory.getInstance().getVehicleDAO().updateStatus(status, id, em);
-                 }
+    }
 }

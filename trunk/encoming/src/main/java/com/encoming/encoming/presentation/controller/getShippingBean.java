@@ -18,22 +18,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 /**
  * @author THOKK
  */
-
 @ManagedBean
-@ViewScoped
-public class getShippingBean implements Serializable{
+@SessionScoped
+public class getShippingBean implements Serializable {
+
     private Integer idPoint;
     private String plateLetters;
     private Integer plateNumbers;
     private VehicleVo vehiculoVo;
-    
+
     public getShippingBean() {
     }
 
@@ -60,18 +63,17 @@ public class getShippingBean implements Serializable{
     public void setPlateNumbers(Integer plateNumbers) {
         this.plateNumbers = plateNumbers;
     }
-    
+
     public VehicleVo getVehiculoVo() {
         return vehiculoVo;
     }
 
-
-
-    public void find(){
+    public void find() {
         VehicleFacade vehFacade = FacadeFactory.getInstance().getVehicleFacade();
         vehiculoVo = vehFacade.findByPlate(plateNumbers, plateLetters);
-        
+
     }
+
     public String dateTime() {
         Date fecha = new Date();
         SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault());
@@ -79,61 +81,66 @@ public class getShippingBean implements Serializable{
         return fecha2;
 
     }
-    
-    public void operateShipping(){
-        
-      
-       System.out.println("entra en operate shipping");
-       find();
-       if(vehiculoVo.getStatus().equals("En Ruta")){
-       FacadeFactory.getInstance().getVehicleFacade().updateStatus("Disponible", this);
-       
-       ShippingFacade shipFac =  FacadeFactory.getInstance().getShippingFacade();
-       List<ShippingVo> ShippingVoList = shipFac.findToLess(idPoint, vehiculoVo.getIdVehicle());
-       
-       for(ShippingVo ship : ShippingVoList){
-           ShippingFacade shipFacFor =  FacadeFactory.getInstance().getShippingFacade();
-           shipFacFor.updateArrivedDate(dateTime(), ship.getIdShipping());
-       }
-       FacadeFactory.getInstance().getVehicleFacade().updatePoint(idPoint, vehiculoVo.getIdVehicle());
-       }
-    }
-        
-}
-       /* 
-        filteredShipList.clear();
-        shippingLessing.clear();
-        
-        
-        
-        for(ShippingVo ship : vehiculoVo.getShippingList()){
-            RouteVo routeVo = FacadeFactory.getInstance().getRouteFacade().find(ship.getIdRoute());     
-            if(routeVo.getDestinationPointId().equals(idPoint)){
-                filteredShipList.add(ship);
-            }else{
-                shippingLessing.add(ship);
-            }
-       
-        vehiculoVoAuxiliar.setCapacity(vehiculoVo.getCapacity());
-        vehiculoVoAuxiliar.setIdDriver(vehiculoVo.getIdDriver());
-        vehiculoVoAuxiliar.setIdPoint(idPoint);
-        vehiculoVoAuxiliar.setManufacturer(vehiculoVo.getManufacturer());
-        vehiculoVoAuxiliar.setModel(vehiculoVo.getModel());
-        vehiculoVoAuxiliar.setPlateLetters(vehiculoVo.getPlateLetters());
-        vehiculoVoAuxiliar.setPlateNumber(vehiculoVo.getPlateNumbers());
-        if(shippingLessing.isEmpty())
-        {
-        vehiculoVoAuxiliar.setStatus("Disponible");
-        }else{
-            vehiculoVoAuxiliar.setStatus(vehiculoVo.getStatus());
-        }
-        
-        vehiculoVoAuxiliar.setType(vehiculoVo.getType());
-        vehiculoVoAuxiliar.setShippingList(shippingLessing);
-        VehicleFacade vFac = FacadeFactory.getInstance().getVehicleFacade();
-        vFac.update(vehiculoVoAuxiliar);
-        }
-    }
-*/
-    
 
+    public void operateShipping() {
+        System.out.println("entra en operate shipping");
+
+        try {
+            find();
+            if (vehiculoVo.getStatus().equals("En Ruta")) {
+                FacadeFactory.getInstance().getVehicleFacade().updateStatus("Disponible", this);
+                ShippingFacade shipFac = FacadeFactory.getInstance().getShippingFacade();
+                List<ShippingVo> ShippingVoList = shipFac.findToLess(idPoint, vehiculoVo.getIdVehicle());
+                for (ShippingVo ship : ShippingVoList) {
+                    ShippingFacade shipFacFor = FacadeFactory.getInstance().getShippingFacade();
+                    shipFacFor.updateArrivedDate(dateTime(), ship.getIdShipping());
+                }
+                FacadeFactory.getInstance().getVehicleFacade().updatePoint(idPoint, vehiculoVo.getIdVehicle());
+                addMessage("Recibida encomienda satisfactoriamente");
+            }
+
+        } catch (NullPointerException e) {
+            addMessage("Error al recibir el vehiculo y la encomienda");
+        }
+    }
+
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+}
+/* 
+ filteredShipList.clear();
+ shippingLessing.clear();
+        
+        
+        
+ for(ShippingVo ship : vehiculoVo.getShippingList()){
+ RouteVo routeVo = FacadeFactory.getInstance().getRouteFacade().find(ship.getIdRoute());     
+ if(routeVo.getDestinationPointId().equals(idPoint)){
+ filteredShipList.add(ship);
+ }else{
+ shippingLessing.add(ship);
+ }
+       
+ vehiculoVoAuxiliar.setCapacity(vehiculoVo.getCapacity());
+ vehiculoVoAuxiliar.setIdDriver(vehiculoVo.getIdDriver());
+ vehiculoVoAuxiliar.setIdPoint(idPoint);
+ vehiculoVoAuxiliar.setManufacturer(vehiculoVo.getManufacturer());
+ vehiculoVoAuxiliar.setModel(vehiculoVo.getModel());
+ vehiculoVoAuxiliar.setPlateLetters(vehiculoVo.getPlateLetters());
+ vehiculoVoAuxiliar.setPlateNumber(vehiculoVo.getPlateNumbers());
+ if(shippingLessing.isEmpty())
+ {
+ vehiculoVoAuxiliar.setStatus("Disponible");
+ }else{
+ vehiculoVoAuxiliar.setStatus(vehiculoVo.getStatus());
+ }
+        
+ vehiculoVoAuxiliar.setType(vehiculoVo.getType());
+ vehiculoVoAuxiliar.setShippingList(shippingLessing);
+ VehicleFacade vFac = FacadeFactory.getInstance().getVehicleFacade();
+ vFac.update(vehiculoVoAuxiliar);
+ }
+ }
+ */

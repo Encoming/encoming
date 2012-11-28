@@ -9,6 +9,7 @@ import com.encoming.encoming.entity.Vehicle;
 import com.encoming.encoming.vo.VehicleVo;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -38,12 +39,12 @@ public class VehicleDAO implements IDAO<Vehicle> {
         return (Vehicle) query.getSingleResult();
 
     }
-    
-    public Integer findFreeVehicle (Integer idPoint, EntityManager em) {
+
+    public Integer findFreeVehicle(Integer idPoint, EntityManager em) {
         javax.persistence.Query query = em.createQuery("SELECT Min(v.idVehicle) FROM Vehicle v"
                 + " WHERE v.status='disponible' AND v.point.idPoint=:idPoint")
                 .setParameter("idPoint", idPoint);
-        return (Integer)query.getSingleResult();
+        return (Integer) query.getSingleResult();
     }
 
     @Override
@@ -63,37 +64,38 @@ public class VehicleDAO implements IDAO<Vehicle> {
         List<Vehicle> list = query.getResultList();
         return list;
     }
-    
-    public VehicleVo findByPlate(EntityManager em, Object plateNumbers, Object plateLetters){
-        
-        Query q = em.createQuery("SELECT veh FROM Vehicle veh WHERE"
-                + " veh.plateLetters =:letters AND veh.plateNumber =:numbers")
-                .setParameter("letters", plateLetters)
-                .setParameter("numbers", plateNumbers);
-        
-        Vehicle veh = (Vehicle)q.getSingleResult();
-        
-        VehicleVo vehVo = veh.toVo();
-        
-        
-        System.out.println("vehVo" + vehVo.getPlateLetters());
-        return vehVo;
-    }
-    
-    public void updatePoint(Point point, Object id, EntityManager em){
-    em.createQuery("UPDATE Vehicle veh SET veh.point =:pointt WHERE veh.idVehicle =:idveh")
-            .setParameter("idveh", id).setParameter("pointt", point)
-            .executeUpdate();
 
-            }
-    public List<Vehicle> getListByPoint(Object idPoint, EntityManager em){
+    public VehicleVo findByPlate(EntityManager em, Object plateNumbers, Object plateLetters) {
+        try {
+            Query q = em.createQuery("SELECT veh FROM Vehicle veh WHERE"
+                    + " veh.plateLetters =:letters AND veh.plateNumber =:numbers")
+                    .setParameter("letters", plateLetters)
+                    .setParameter("numbers", plateNumbers);
+            Vehicle veh = (Vehicle) q.getSingleResult();
+            VehicleVo vehVo = veh.toVo();
+            System.out.println("vehVo" + vehVo.getPlateLetters());
+            return vehVo;
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public void updatePoint(Point point, Object id, EntityManager em) {
+        em.createQuery("UPDATE Vehicle veh SET veh.point =:pointt WHERE veh.idVehicle =:idveh")
+                .setParameter("idveh", id).setParameter("pointt", point)
+                .executeUpdate();
+
+    }
+
+    public List<Vehicle> getListByPoint(Object idPoint, EntityManager em) {
         Query query = em.createQuery("SELECT veh FROM Vehicle veh WHERE"
-                + " veh.point.idPoint =:idpoint").setParameter("idpoint",idPoint);
-        return (List<Vehicle>)query.getResultList();
+                + " veh.point.idPoint =:idpoint").setParameter("idpoint", idPoint);
+        return (List<Vehicle>) query.getResultList();
     }
-    public void updateStatus(Object status, Object id, EntityManager em){
-    em.createQuery("UPDATE Vehicle veh SET veh.status =:statuss WHERE veh.idVehicle =:idveh")
-            .setParameter("idveh", id).setParameter("statuss", status)
-            .executeUpdate();
-            }
+
+    public void updateStatus(Object status, Object id, EntityManager em) {
+        em.createQuery("UPDATE Vehicle veh SET veh.status =:statuss WHERE veh.idVehicle =:idveh")
+                .setParameter("idveh", id).setParameter("statuss", status)
+                .executeUpdate();
     }
+}
