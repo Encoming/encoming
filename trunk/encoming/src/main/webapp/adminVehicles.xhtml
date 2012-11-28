@@ -50,7 +50,7 @@
                                      validatorMessage="Selecciona un tipo de Vehículo">
                         <f:selectItem itemLabel="--Tipo de vehículo--" itemValue="A" />
                         <f:selectItem itemLabel="Camioneta" itemValue="Camioneta" />
-                        <f:selectItem itemLabel="Camión Con Carrocería Furgón" itemValue="Furgón" />
+                        <f:selectItem itemLabel="Camión Con Carrocería Furgón" itemValue="Furgon" />
                         <f:selectItem itemLabel="Portacontenedor" itemValue="Portacontenedor" />
                         <f:selectItem itemLabel="Recolector" itemValue="Recolector" />
                         <f:selectItem itemLabel="Reparto" itemValue="Reparto" />
@@ -59,7 +59,7 @@
                     </h:selectOneMenu>
                     <h:selectOneMenu id="manufacturer" required="true" value="#{vehicleBean.manufacturer}"
                                      validatorMessage="Selecciona un fabricante">
-                        <f:selectItem itemLabel="--Tipo de Fabricante--" itemValue="" />
+                        <f:selectItem itemLabel="--Tipo de Fabricante--" itemValue="a" />
                         <f:selectItem itemLabel="Mercedes Benz" itemValue="Mercedes Benz" />
                         <f:selectItem itemLabel="Agrale" itemValue="Agrale" />
                         <f:selectItem itemLabel="American Motors" itemValue="American Motors" />
@@ -89,7 +89,7 @@
                         <f:selectItem itemLabel="Kenworth" itemValue="Kenworth" />
                         <f:selectItem itemLabel="Kia" itemValue="Kia" />
                         <f:selectItem itemLabel="Ssangyong" itemValue="Ssangyong" />
-                        <f:validateLength minimum="1" />
+                        <f:validateLength minimum="2" />
                     </h:selectOneMenu>
                     
                     <p:message id="typeMessage" for="type" />
@@ -97,7 +97,7 @@
                     
                     <h:selectOneMenu id="model" required="true" value="#{vehicleBean.model}"
                                      validatorMessage="Selecciona un modelo">
-                        <f:selectItem itemLabel="--Modelo del Vehículo--" itemValue="" />
+                        <f:selectItem itemLabel="--Modelo del Vehículo--" itemValue="a" />
                         <f:selectItem itemLabel="2000" itemValue="2000" />
                         <f:selectItem itemLabel="2001" itemValue="2001" />
                         <f:selectItem itemLabel="2002" itemValue="2002" />
@@ -112,19 +112,19 @@
                         <f:selectItem itemLabel="2011" itemValue="2011" />
                         <f:selectItem itemLabel="2012" itemValue="2012" />
                         <f:selectItem itemLabel="2013" itemValue="2013" />
-                        <f:validateLongRange minimum="1" />
+                        <f:validateLongRange minimum="2" />
                     </h:selectOneMenu>
                     
                     <h:selectOneMenu id="capacity" required="true" value="#{vehicleBean.capacity}"
                                      validatorMessage="Selecciona la capacidad del vehículo">
-                        <f:selectItem itemLabel="--Capacidad del Vehículo--" itemValue="" />
+                        <f:selectItem itemLabel="--Capacidad del Vehículo--" itemValue="a" />
                         <f:selectItem itemLabel="0,5 Toneladas" itemValue="0,5 Ton" />
                         <f:selectItem itemLabel="1 Tonelada" itemValue="1 Ton" />
                         <f:selectItem itemLabel="2 Toneladas" itemValue="2 Ton" />
                         <f:selectItem itemLabel="3 Toneladas" itemValue="3 Ton" />
                         <f:selectItem itemLabel="4 Toneladas" itemValue="4 Ton" />
                         <f:selectItem itemLabel="5 Toneladas" itemValue="5 Ton" />
-                        <f:validateLength minimum="1" />
+                        <f:validateLength minimum="2" />
                     </h:selectOneMenu>
                     
                     <p:message id="modelMessage" for="model" />

@@ -9,10 +9,12 @@ import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.vo.AdministratorVo;
 import com.encoming.encoming.vo.PersonVo;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -28,13 +30,10 @@ public class AddEmployeeBean {
     private String mail;
     private Integer phone;
     private String adress;
-    
     private Integer idAdministrator;
     private String username;
     private String password;
     private Integer personidPerson;
-    
-    
 
     public Integer getPersonidPerson() {
         return personidPerson;
@@ -67,7 +66,6 @@ public class AddEmployeeBean {
     public void setPassword(String password) {
         this.password = password;
     }
- 
 
     public Integer getIdPerson() {
         return idPerson;
@@ -117,10 +115,10 @@ public class AddEmployeeBean {
         this.adress = adress;
     }
 
-    
     public AddEmployeeBean() {
     }
-    public void addEmployee(){
+
+    public void addEmployee() {
         this.personidPerson = idPerson;
         PersonVo personVo = new PersonVo();
         personVo.setAdress(adress);
@@ -129,18 +127,27 @@ public class AddEmployeeBean {
         personVo.setMail(mail);
         personVo.setName(name);
         personVo.setPhone(phone);
-        
+
         AdministratorVo adminVo = new AdministratorVo();
         adminVo.setIdAdministrator(idAdministrator);
         adminVo.setPassword(password);
-        adminVo.setUsername(username);     
+        adminVo.setUsername(username);
         adminVo.setPersonidPerson(personidPerson);
-        
-        PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade(); 
-        AdministratorFacade adminFac = FacadeFactory.getInstance().getAdministratorFacade();   
-        
-        personFac.persist(personVo);
-        adminFac.persist(adminVo);
+
+        PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade();
+        AdministratorFacade adminFac = FacadeFactory.getInstance().getAdministratorFacade();
+
+        try {
+            personFac.persist(personVo);
+            adminFac.persist(adminVo);
+            addMessage("Los datos fueron guardados");
+        } catch (Exception e) {
+            addMessage("Los datos no pudieron ser guardados");
+        }
     }
 
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 }
