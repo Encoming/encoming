@@ -233,6 +233,7 @@
 
                             <h:panelGrid id="botones" columns="2">  
                                 <p:commandButton value="Asignar" actionListener="#{encomiendaBean.addPerson}" update="messages"/>
+                                <p:commandButton value="Generar Factura" actionListener="#{encomiendaBean.printPdf(evt)}" ajax="false"/>
                                 <p:commandButton value="Volver" icon="ui-icon-document" action="#{encomiendaBean.backToTop}" ajax ="false"/>
                             </h:panelGrid>
                         </p:panel>  
