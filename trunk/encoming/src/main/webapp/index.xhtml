@@ -4,7 +4,8 @@
                 template="./WEB-INF/templates/default.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:h="http://java.sun.com/jsf/html">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="title">
         Bienvenidos
@@ -41,7 +42,28 @@
                                           obtener un certificado de entrega."/>
                         </div>
                         <div class="tab-pane" id="tab3">
-                            "NUESTRAS SUCURSALES"
+                            <p:panel header="Nuestras Sucursales"> 
+                                <h:form>  
+
+                                    <p:dataTable id="dataTable" var="pointVo" value="#{tableBeanPoint.points}" widgetVar="pointTable"   
+                                                 emptyMessage="No se encontraron empleados con el criterio de busqueda" filteredValue="#{tableBeanPoint.filteredPoints}">  
+
+                                        <f:facet name="header">  
+                                            <p:outputPanel>  
+                                                <h:outputText value="Nuestras Sucursales" />   
+                                            </p:outputPanel>  
+                                        </f:facet>  
+
+                                        <p:column id="nameColumn" 
+                                                  headerText="Ubicacion" sortBy="#{pointVo.name}" 
+                                                  filterBy="#{pointVo.name}" filterMatchMode="startsWith">  
+                                            <h:outputText value="#{pointVo.name}" />  
+                                        </p:column>  
+
+                                    </p:dataTable>   
+                                </h:form>
+                            </p:panel>
+
                         </div>
                         <div class="tab-pane" id="tab4">
 
