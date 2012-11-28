@@ -358,6 +358,7 @@ public class VehicleBean implements Serializable {
         vehicleVo.setPlateNumber(getPlateNumbers());
         vehicleVo.setStatus(getStatus());
         vehicleVo.setType(getType());
+        vehicleVo.setDestinationCity("Enviado");
         System.out.println("asigna el vo completo");
         try {
             FacadeFactory.getInstance().getVehicleFacade().persist(vehicleVo);
