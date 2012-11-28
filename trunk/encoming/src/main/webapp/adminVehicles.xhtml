@@ -13,6 +13,7 @@
 
     <ui:define name="content">
         <p:panel header="Administración de Vehículos">
+
             <style type="text/css">
                 .ui-growl {
                     top: 10%
@@ -24,54 +25,132 @@
             <h:form>
 
                 <h:outputLabel id="plateId" value="Matricula"/>
-                <p:inputText id="plateIt" label="Matricula" required="false" value="#{vehicleBean.plateLetters}"></p:inputText>
-                <p:inputText id="numberIt" label="Matricula" required="false" value="#{vehicleBean.plateNumbers}"></p:inputText>
+                <h:panelGrid columns="2" styleClass="grid">
+                    <h:inputText id="plateIt" label="Matricula" required="true" 
+                                 requiredMessage="Por favor completa este campo" value="#{vehicleBean.plateLetters}">
+                        <f:validateLength maximum="3" minimum="3"/>
+                    </h:inputText>             
+                    <h:inputText id="numberIt" label="Matricula" required="true" 
+                                 requiredMessage="Por favor completa este campo" value="#{vehicleBean.plateNumbers}">
+                        <f:validateLongRange minimum="0" maximum="999"/>
+                    </h:inputText>
+                    <p:message id="plateMessage" for="plateIt" />
+                    <p:message id="numbermessage" for="numberIt" />
+                </h:panelGrid>
+
                 <p:watermark for="numberIt" value="Números" />
                 <p:watermark for="plateIt" value="Letras" />
+
                 <p:separator/>
 
+                <h:panelGrid columns="2" styleClass="grid">
 
-                <p:inputText id="typeIT" label="Tipo" required="false" value="#{vehicleBean.type}"/>
-                <p:watermark for="typeIT" value="Tipo" />
+                    <h:selectOneMenu id="type" value="#{vehicleBean.type}"
+                                     requiredMessage="Selecciona un tipo de Vehículo">
+                        <f:selectItem itemLabel="--Tipo de vehículo--" itemValue="" />
+                        <f:selectItem itemLabel="Camioneta" itemValue="Camioneta" />
+                        <f:selectItem itemLabel="Camión Con Carrocería Furgón" itemValue="Camión Con Carrocería Furgón" />
+                        <f:selectItem itemLabel="Portacontenedor" itemValue="Portacontenedor" />
+                        <f:selectItem itemLabel="Recolector" itemValue="Recolector" />
+                        <f:selectItem itemLabel="Reparto" itemValue="Reparto" />
+                        <f:selectItem itemLabel="Tractocamión" itemValue="Tractocamión" />
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
+                    <h:selectOneMenu id="manufacturer" value="#{vehicleBean.manufacturer}"
+                                     requiredMessage="Selecciona un fabricante">
+                        <f:selectItem itemLabel="--Tipo de Fabricante--" itemValue="" />
+                        <f:selectItem itemLabel="Mercedes Benz" itemValue="Mercedes Benz" />
+                        <f:selectItem itemLabel="Agrale" itemValue="Agrale" />
+                        <f:selectItem itemLabel="American Motors" itemValue="American Motors" />
+                        <f:selectItem itemLabel="Land Rover" itemValue="Land Rover" />
+                        <f:selectItem itemLabel="Mazda" itemValue="Mazda" />
+                        <f:selectItem itemLabel="Asia Towner" itemValue="Asia Towner" />
+                        <f:selectItem itemLabel="Austin" itemValue="Austin" />
+                        <f:selectItem itemLabel="Autocar" itemValue="Autocar" />
+                        <f:selectItem itemLabel="Baw" itemValue="Baw" />
+                        <f:selectItem itemLabel="Beijing" itemValue="Beijing" />
+                        <f:selectItem itemLabel="Bock Wall" itemValue="Bock Wall" />
+                        <f:selectItem itemLabel="Chana" itemValue="Chana" />
+                        <f:selectItem itemLabel="Changfeng" itemValue="Changfeng" />
+                        <f:selectItem itemLabel="Chevrolet " itemValue="Chevrolet " />
+                        <f:selectItem itemLabel="Citroen" itemValue="Citroen" />
+                        <f:selectItem itemLabel="Daewoo" itemValue="Daewoo" />
+                        <f:selectItem itemLabel="Daihatsu" itemValue="Daihatsu" />
+                        <f:selectItem itemLabel="Dodge" itemValue="Dodge" />
+                        <f:selectItem itemLabel="Ford" itemValue="Ford" />
+                        <f:selectItem itemLabel="Fiat" itemValue="Fiat" />
+                        <f:selectItem itemLabel="Foton" itemValue="Foton" />
+                        <f:selectItem itemLabel="G.M.C" itemValue="G.M.C" />
+                        <f:selectItem itemLabel="Hino" itemValue="Hino" />
+                        <f:selectItem itemLabel="Honda" itemValue="Honda" />
+                        <f:selectItem itemLabel="Hyundai" itemValue="Hyundai" />
+                        <f:selectItem itemLabel="Jac" itemValue="Jac" />
+                        <f:selectItem itemLabel="Kenworth" itemValue="Kenworth" />
+                        <f:selectItem itemLabel="Kia" itemValue="Kia" />
+                        <f:selectItem itemLabel="Ssangyong" itemValue="Ssangyong" />
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
+                    
+                    <p:message id="typeMessage" for="type" />
+                    <p:message id="manufacturerMessage" for="manufacturer" />
+                    
+                    <h:selectOneMenu id="model" value="#{vehicleBean.model}"
+                                     requiredMessage="Selecciona un modelo">
+                        <f:selectItem itemLabel="--Modelo del Vehículo--" itemValue="" />
+                        <f:selectItem itemLabel="2000" itemValue="2000" />
+                        <f:selectItem itemLabel="2001" itemValue="2001" />
+                        <f:selectItem itemLabel="2002" itemValue="2002" />
+                        <f:selectItem itemLabel="2003" itemValue="2003" />
+                        <f:selectItem itemLabel="2004" itemValue="2004" />
+                        <f:selectItem itemLabel="2005" itemValue="2005" />
+                        <f:selectItem itemLabel="2006" itemValue="2006" />
+                        <f:selectItem itemLabel="2007" itemValue="2007" />
+                        <f:selectItem itemLabel="2008" itemValue="2008" />
+                        <f:selectItem itemLabel="2009" itemValue="2009" />
+                        <f:selectItem itemLabel="2010" itemValue="2010" />
+                        <f:selectItem itemLabel="2011" itemValue="2011" />
+                        <f:selectItem itemLabel="2012" itemValue="2012" />
+                        <f:selectItem itemLabel="2013" itemValue="2013" />
+                        <f:validateLongRange minimum="1" />
+                    </h:selectOneMenu>
 
-                <p:inputText id="manufacturerIT" label="Manufacturado por" required="false" value="#{vehicleBean.manufacturer}"/>
-                <p:watermark for="manufacturerIT" value="Manufacturado por" />
+                    <h:inputText id="capacityIT" label="Capacidad" required="true" 
+                                 requiredMessage="¡La capacidad debe estar entre 10 y 50!" value="#{vehicleBean.capacity} ">
+                        <f:validateDoubleRange minimum="10" maximum="50"/>
+                    </h:inputText>
+                    
+                    <p:message id="modelMessage" for="model" />
+                    <p:message id="capacityMessage" for="capacityIT"/>
 
-                <div>
-
-                    <p:inputText id="modelIT" label="Modelo" required="false" value="#{vehicleBean.model}"/>
-                    <p:watermark for="modelIT" value="Modelo" /> 
-
-                    <p:inputText id="capacityIT" label="Capacidad" required="false" value="#{vehicleBean.capacity}"/>
-                    <p:watermark for="capacityIT" value="Capacidad" />
-                </div>
+                </h:panelGrid>
+                <p:watermark for="capacityIT" value="Capacidad" />
 
                 <!--<p:watermark for="driverIT" value="Conductor" />
                 <p:inputText id="driverIT" label="Conductor" required="false" value="#{vehicleBean.idDriver}"></p:inputText>-->
                 <p:separator/>
-                
+
                 <h:outputLabel value="Conductores Disponibles" />  
                 <h:selectOneMenu id="driver" value="#{vehicleBean.idDriver}" required="true"
-                                 requiredMessage="Por favor selecciona uno">
+                                 requiredMessage="Por favor seleccione un conductor">
+                    <f:selectItem itemLabel="--Seleccione un conductor--" itemValue="" />
                     <f:selectItems value="#{driverBean.drivers}" />
                     <f:validateLongRange minimum="1"/>
                 </h:selectOneMenu>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <!--<p:watermark for="actualPointIT" value="Punto Actual" />
-                        <p:inputText id="actualPointIT" label="Punto Actual" required="false" value="#{vehicleBean.idPoint}"></p:inputText>-->
-                        <h:outputLabel value="Punto Actual" />  
-                        <h:selectOneMenu id="point" value="#{vehicleBean.idPoint}" required="true"
-                                         requiredMessage="Por favor selecciona uno">
-                            <f:selectItems value="#{pointBean.points}" />
-                            <f:validateLongRange minimum="1" />
-                        </h:selectOneMenu>
-                    </div>
-                </div>
-                <h:panelGrid columns="3">
+                <p:message id="driverMessage" for="driver"/>
 
-                </h:panelGrid>
+                <!--<p:watermark for="actualPointIT" value="Punto Actual" />
+                <p:inputText id="actualPointIT" label="Punto Actual" required="false" value="#{vehicleBean.idPoint}"></p:inputText>-->
+                <h:outputLabel value="Punto Actual" />  
+                <h:selectOneMenu id="point" value="#{vehicleBean.idPoint}" required="true"
+                                 requiredMessage="Por favor selecciona un punto">
+                    <f:selectItem itemLabel="--Seleccione un punto--" itemValue="" />
+                    <f:selectItems value="#{pointBean.points}" />
+                    <f:validateLongRange minimum="1" />
+                </h:selectOneMenu>
+
+                <p:message id="pointMessage" for="point"/>
+
                 <div class="form-actions">
                     <h:commandButton action="#{vehicleBean.addVehicle(actionEvent)}" value="Guardar"/>
                 </div>
