@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        title
+    </ui:define>
+
+    <ui:define name="content">
+
+        <p:panel header="Todos los Vehiculos"> 
+            <h:form>  
+
+                <p:dataTable id="dataTable" var="vehicleVo" value="#{tableBeanVehicles.vehicles}" widgetVar="vehicleTable"   
+                             emptyMessage="No se encontraron empleados con el criterio de busqueda" filteredValue="#{tableBeanVehicles.filteredVehicles}">  
+
+                    <f:facet name="header">  
+                        <p:outputPanel>  
+                            <h:outputText value="Buscar en todos los campos:    " />  
+                            <p:inputText id="globalFilter" onkeyup="vehicleTable.filter()" style="width:150px" />  
+                        </p:outputPanel>  
+                    </f:facet>  
+
+                    <p:column id="lettersColumn" 
+                              headerText="Letras Placa" sortBy="#{vehicleVo.plateLetters}" 
+                              filterBy="#{vehicleVo.plateLetters}" filterMatchMode="startsWith">  
+                        <h:outputText value="#{vehicleVo.plateLetters.toUpperCase()}" />  
+                    </p:column>  
+
+                    <p:column id="numbersColumn"  sortBy="#{vehicleVo.plateNumbers}"
+                              headerText="Numeros Placa" filterBy="#{vehicleVo.plateNumbers}" filterMatchMode="startsWith">  
+                        <h:outputText value="#{vehicleVo.plateNumbers}"  />  
+                    </p:column>  
+
+                    <p:column id="manufacturerColumn"    
+                              headerText="Marca" sortBy="#{vehicleVo.manufacturer}"  
+                              filterBy="#{vehicleVo.manufacturer}" filterMatchMode="startsWith">  
+                        <h:outputText value="#{vehicleVo.manufacturer}" />  
+                    </p:column>  
+
+                    <p:column id="modelColumn"  sortBy="#{vehicleVo.model}"
+                              headerText="Modelo" filterBy="#{vehicleVo.model}" filterMatchMode="startsWith"> 
+                        <h:outputText value="#{vehicleVo.model}" />  
+                    </p:column>  
+                    <p:column id="capacityColumn"  sortBy="#{vehicleVo.capacity}"
+                              headerText="Capacidad" filterBy="#{vehicleVo.capacity}" filterMatchMode="startsWith"> 
+                        <h:outputText value="#{vehicleVo.capacity}" />  
+                    </p:column> 
+                </p:dataTable>   
+            </h:form>
+        </p:panel>
+
+    </ui:define>
+
+</ui:composition>
