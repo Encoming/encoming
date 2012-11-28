@@ -1,3 +1,4 @@
+package com.encoming.encoming.presentation.controller;
 
 import com.encoming.encoming.businesslogic.facade.EncomingFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
@@ -61,7 +62,6 @@ public class EncomiendaBean {
     private String origin;
     private String destinity;
     private boolean validator = true;
-    private Integer change=0;
     boolean enBD = true;
 
     public String dateTime() {
@@ -245,7 +245,6 @@ public class EncomiendaBean {
             setPhone(null);
             enBD = false;
         }
-        change=1;
     }
 
     public void findReceiver() {
@@ -270,7 +269,6 @@ public class EncomiendaBean {
             setPhoneReceiver(null);
             enBD = false;
         }
-        change=1;
     }
 
 //  Este método busca el id de un vehículo que se encuentre en una ciudad y q además esté libre
