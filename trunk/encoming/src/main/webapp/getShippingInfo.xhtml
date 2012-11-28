@@ -3,20 +3,25 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./WEB-INF/templates/default.xhtml"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html">
 
+    <f:metadata>
+        <f:viewParam name="query" value="#{getShippingInfoBean.idShipping}"/>
+    </f:metadata>
+    
     <ui:define name="title">
         Información De Envios
     </ui:define>
 
     <ui:define name="content">
-        <p:panel header="Estado de un Envío">
+        
             <style type="text/css">
                 .ui-growl {
                     top: 10%
                 }
             </style>
-            <div class="hero-unit span5 offset1">
+            <div class="hero-unit span5 offset4">
                 <h2><big>Estado de un Envío:</big></h2>
                 <p:separator/>
                 <h:form>
@@ -41,7 +46,7 @@
                     </h:panelGroup>
                 </h:form>
             </div>
-        </p:panel>
+ 
 
     </ui:define>
 

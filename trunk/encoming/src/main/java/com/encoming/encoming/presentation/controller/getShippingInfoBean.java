@@ -20,13 +20,17 @@ import javax.faces.bean.RequestScoped;
 public class getShippingInfoBean {
 private Integer idShipping;
 private String status = "";
+private String query;
+
     public getShippingInfoBean() {
         
     }
     
     public void findStatus(){
+        
+        query = idShipping + "";
         try{
-            ShippingVo shipVo = FacadeFactory.getInstance().getShippingFacade().find(idShipping);
+            ShippingVo shipVo = FacadeFactory.getInstance().getShippingFacade().find(query);
         status += "Respetado usuario su envio ";
         if(shipVo.getSendedDate() != null){
             status += "fue despachado: \n " + shipVo.getSendedDate();
@@ -34,11 +38,11 @@ private String status = "";
                     status += " \n fue recibido en la sucursal : \n " + shipVo.getArrivedDate();
                 }                
         }else {
-            status += "Aun no ha sido despachado";
+            status += "aun no ha sido despachado";
         }
             
         }catch(Exception e){
-            status  = "Numero de Envio Inválido";
+            status  = "¡El número de Envío no existe!";
         }
         
     }
@@ -58,6 +62,15 @@ private String status = "";
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+    
     
     
 }
