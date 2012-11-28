@@ -16,7 +16,7 @@
             <div class="hero-unit span5 offset1">
                 <h3><big>Despachar Vehiculo:</big></h3>
                 <p:separator/>
-                <h:form id="controls">
+                <h:form id="contrl">
                      
                     <h:panelGroup>
                         <div class="control-group">
@@ -24,15 +24,16 @@
                         <h3 style="color: #005580">Selecciona tu ubicación:</h3>
 
                     <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idPoint}"
-                                     requiredMessage="Selecciona un Punto:">
+                                     requiredMessage="Selecciona un Punto:"
+                                     valueChangeListener="#{sendVehicleBean.updateVehicle}" onchange="submit()">
                         <f:selectItem itemLabel=""/>
                         <f:selectItems value="#{pointBean.points}"/>
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
 
                         
-                        <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idVehicle}"
-                                     requiredMessage="Selecciona un Punto:">
+                        <h:selectOneMenu id="vehicle" required="true" value="#{sendVehicleBean.idVehicle}"
+                                     requiredMessage="Selecciona un Vehiculo:" >
                         <f:selectItem itemLabel=""/>
                         <f:selectItems value="#{sendVehicleBean.vehicles}"/>
                         <f:validateLongRange minimum="1" />

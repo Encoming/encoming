@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/templates/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">
+        Información De Envios
+    </ui:define>
+
+    <ui:define name="content">
+        <p:panel header="Informaci&oacute;n de envios">
+            <style type="text/css">
+                .ui-growl {
+                    top: 10%
+                }
+            </style>
+            <div class="hero-unit span5 offset1">
+                <h2><big>Informaci&oacute;n de Envios:</big></h2>
+                <p:separator/>
+                <h:form>
+                    <h:panelGroup>
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:outputLabel id="welcomeOut" value="Numero de Env&iacute;o : "/>
+                                <p:inputText id="welcome" label="Numero de envio"
+                                             required="true" value="#{getShippingInfoBean.idShipping}"></p:inputText>
+                                <p:watermark for="welcome" value="N&uacute;mero de envio" />
+                                
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:outputText value="#{getShippingInfoBean.status}" />  
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <h:commandButton action="#{getShippingInfoBean.findStatus()}" value="Enviar"/>
+                    </div>
+                    </h:panelGroup>
+                </h:form>
+            </div>
+        </p:panel>
+        
+    </ui:define>
+
+</ui:composition>

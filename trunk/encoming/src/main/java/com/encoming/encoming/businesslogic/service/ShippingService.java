@@ -110,7 +110,7 @@ public class ShippingService implements IService<ShippingVo> {
         }
     public void updateSendedDate(Object sendedDate,Object idShipping, EntityManager em) {
 
-        DAOFactory.getInstance().getShippingDAO().updateArrivedDate(sendedDate, idShipping, em);
+        DAOFactory.getInstance().getShippingDAO().updateSendedDate(sendedDate, idShipping, em);
 
         }
     
