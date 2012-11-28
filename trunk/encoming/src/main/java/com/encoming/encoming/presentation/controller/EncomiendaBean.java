@@ -8,7 +8,6 @@ import com.encoming.encoming.businesslogic.facade.VehicleFacade;
 import com.encoming.encoming.businesslogic.facade.PointFacade;
 import com.encoming.encoming.businesslogic.facade.RouteFacade;
 import com.encoming.encoming.businesslogic.facade.InvoiceFacade;
-import com.encoming.encoming.presentation.controller.AdminMenuBean;
 import com.encoming.encoming.vo.EncomingVo;
 import com.encoming.encoming.vo.PersonVo;
 import com.encoming.encoming.vo.PointVo;
