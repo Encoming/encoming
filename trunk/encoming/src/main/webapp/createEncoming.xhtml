@@ -102,7 +102,7 @@
                                 <h:outputLabel for="destinationCity" value="Ciudad de Destino: *" validator=""/>
                                 <h:selectOneMenu id="point1" required="true" value="#{encomiendaBean.destinationCity}"
                                                  requiredMessage="Selecciona una Ciudad de Destino">
-                                    <f:selectItem itemLabel="Seleccione un punto" itemValue="" />
+                                    <f:selectItem itemLabel="--Seleccione un punto--" itemValue="" />
                                     <f:selectItems value="#{pointBean.points}" />
                                 </h:selectOneMenu>
                             </h:panelGrid>
