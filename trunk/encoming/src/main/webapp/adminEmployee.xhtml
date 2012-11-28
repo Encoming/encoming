@@ -14,7 +14,8 @@
 
     <ui:define name="content">
         <p:tabView orientation="top" >  
-            <p:tab title="Nuevo Administrador"> 
+            <p:tab title="Nuevo Administrador">
+                <p:growl id="mensaje"/>
                 <div class="span5 offset0">
                     <div class="hero-unit">
                         <f:view>
@@ -126,7 +127,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <h:commandButton action="#{addEmployeeBean.addEmployee()}" value="Guardar" class="btn btn-large btn-primary" />
+                                    <h:commandButton action="#{addEmployeeBean.addEmployee()}" value="Guardar" class="btn btn-large btn-primary" update="mensaje"/>
                                 </div>
                             </h:form>
                         </f:view>
@@ -136,7 +137,8 @@
 
 
 
-            <p:tab title="Nuevo Conductor">  
+            <p:tab title="Nuevo Conductor">
+                <p:growl id="mensajes1" />
 
                 <div class="span5 offset0">
                     <div class="hero-unit">
@@ -228,7 +230,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <h:commandButton action="#{addDriverEmployeeBean.addDriver()}" value="Agregar" class="btn btn-large btn-primary" />
+                                    <h:commandButton action="#{addDriverEmployeeBean.addDriver()}" value="Agregar" class="btn btn-large btn-primary" update="mensajes1"/>
                                 </div>
                             </h:form>
                         </f:view>
@@ -237,7 +239,8 @@
 
             </p:tab>
 
-            <p:tab title="Borrar Empleado">   
+            <p:tab title="Borrar Empleado">
+                <p:growl id="mensajes2" />
                 <div class="span5 offset0">
                     <div class="hero-unit">
                         <f:view>
@@ -262,7 +265,7 @@
                                         <h:outputText id="phoneDrivero" value="Telefono : #{removeEmployeeBean.auxPerson.getPhone()}"/><br/>
                                         <h:outputText id="mailDrivero" value="Email : #{removeEmployeeBean.auxPerson.getMail()}"/><br/>
                                         <div class="form-actions">
-                                            <h:commandButton action="#{removeEmployeeBean.delete()}" value="Borrar" class="btn btn-large btn-primary" />
+                                            <h:commandButton action="#{removeEmployeeBean.delete()}" value="Borrar" class="btn btn-large btn-primary" update="mensajes2" />
                                         </div>
                                     </div>
                                 </div>
