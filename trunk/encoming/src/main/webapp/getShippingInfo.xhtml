@@ -10,24 +10,24 @@
     </ui:define>
 
     <ui:define name="content">
-        <p:panel header="Informaci&oacute;n de envios">
+        <p:panel header="Estado de un Envío">
             <style type="text/css">
                 .ui-growl {
                     top: 10%
                 }
             </style>
             <div class="hero-unit span5 offset1">
-                <h2><big>Informaci&oacute;n de Envios:</big></h2>
+                <h2><big>Estado de un Envío:</big></h2>
                 <p:separator/>
                 <h:form>
                     <h:panelGroup>
                         <div class="control-group">
                             <div class="controls">
-                                <h:outputLabel id="welcomeOut" value="Numero de Env&iacute;o : "/>
-                                <p:inputText id="welcome" label="Numero de envio"
+                                <h:outputLabel id="welcomeOut" value="Código del Envío: "/>
+                                <p:inputText id="welcome" label="Código del Envío"
                                              required="true" value="#{getShippingInfoBean.idShipping}"></p:inputText>
-                                <p:watermark for="welcome" value="N&uacute;mero de envio" />
-                                
+                                <p:watermark for="welcome" value="Código del Envío" />
+
                             </div>
                         </div>
                         <div class="control-group">
@@ -36,13 +36,13 @@
                             </div>
                         </div>
                         <div class="form-actions">
-                            <h:commandButton action="#{getShippingInfoBean.findStatus()}" value="Enviar"/>
-                    </div>
+                            <h:commandButton class="btn-success" action="#{getShippingInfoBean.findStatus()}" value="Aceptar"/>
+                        </div>
                     </h:panelGroup>
                 </h:form>
             </div>
         </p:panel>
-        
+
     </ui:define>
 
 </ui:composition>

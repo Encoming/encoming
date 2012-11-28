@@ -104,24 +104,24 @@
                                     <h:form>   
                                         <p:menu> 
                                             <p:submenu label="ENVÍOS" >
-                                                <p:menuitem value="Crear Encomienda" icon="ui-icon-document" action="/createEncoming.xhtml" ajax ="false"/>  
-                                                <p:menuitem value="Recibir Encomienda" icon="ui-icon-document" action="/getShipping.xhtml" ajax ="false"/>
+                                                <p:menuitem value="Crear Encomienda" icon="ui-icon-document" action="/createEncoming.xhtml?redirect=true" ajax ="false"/>  
+                                                <p:menuitem value="Recibir Encomienda" icon="ui-icon-document" action="/getShipping.xhtml?redirect=true" ajax ="false"/>
                                             </p:submenu>
 
                                             <p:submenu label="PERSONAL" >  
-                                                <p:menuitem value="Nuevo Empleado" icon="ui-icon-document" action="/adminEmployee.xhtml" ajax ="false"/>
-                                                <p:menuitem value="Ver Empleados" icon="ui-icon-arrowthick-1-s" action="/seeEmployees.xhtml" ajax ="false"/>
+                                                <p:menuitem value="Nuevo Empleado" icon="ui-icon-document" action="/adminEmployee.xhtml?redirect=true" ajax ="false"/>
+                                                <p:menuitem value="Ver Empleados" icon="ui-icon-arrowthick-1-s" action="/seeEmployees.xhtml?redirect=true" ajax ="false"/>
                                             </p:submenu>  
 
                                             <p:submenu label="SUCURSALES">  
-                                                <p:menuitem value="Agregar Sucursal" icon="ui-icon-home" action="/adminPoints.xhtml" ajax ="false"/>  
-                                                <p:menuitem value="Generar Rutas" icon="ui-icon-arrowthick-1-s" action="/adminRoutes.html" ajax ="false"/>
+                                                <p:menuitem value="Agregar Sucursal" icon="ui-icon-home" action="/adminPoints.xhtml?redirect=true" ajax ="false"/>  
+                                                <p:menuitem value="Generar Rutas" icon="ui-icon-arrowthick-1-s" action="/adminRoutes.html?redirect=true" ajax ="false"/>
                                             </p:submenu>  
 
                                             <p:submenu label="VEHÍCULOS"> 
-                                                <p:menuitem value="Despachar Vehículo" icon="ui-icon-document" action="/sendVehicle.xhtml" ajax ="false"/>
-                                                <p:menuitem value="Nuevo Vehículo" icon="ui-icon-document" action="/adminVehicles.xhtml" ajax ="false"/>
-                                                <p:menuitem value="Ver Vehículos" icon="ui-icon-document" action="/seeVehicles.xhtml" ajax ="false"/>
+                                                <p:menuitem value="Despachar Vehículo" icon="ui-icon-document" action="/sendVehicle.xhtml?redirect=true" ajax ="false"/>
+                                                <p:menuitem value="Nuevo Vehículo" icon="ui-icon-document" action="/adminVehicles.xhtml?redirect=true" ajax ="false"/>
+                                                <p:menuitem value="Ver Vehículos" icon="ui-icon-document" action="/seeVehicles.xhtml?redirect=true" ajax ="false"/>
                                             </p:submenu>
                                         </p:menu>  
                                     </h:form>
