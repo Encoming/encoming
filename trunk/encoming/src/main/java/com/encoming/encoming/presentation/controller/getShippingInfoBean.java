@@ -30,7 +30,7 @@ private String query;
         
         query = idShipping + "";
         try{
-            ShippingVo shipVo = FacadeFactory.getInstance().getShippingFacade().find(query);
+            ShippingVo shipVo = FacadeFactory.getInstance().getShippingFacade().find(idShipping);
         status += "Respetado usuario su envio ";
         if(shipVo.getSendedDate() != null){
             status += "fue despachado: \n " + shipVo.getSendedDate();
