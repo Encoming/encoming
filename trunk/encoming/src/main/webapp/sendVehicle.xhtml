@@ -11,47 +11,48 @@
     </ui:define>
 
     <ui:define name="content">
-        
-               <p:panel header="Despachar Vehiculo">
+
+        <p:panel header="Despachar Vehiculo">
+            <p:message id="mensaje"/>
             <div class="hero-unit span5 offset1">
                 <h3><big>Despachar Vehiculo:</big></h3>
                 <p:separator/>
                 <h:form id="contrl">
-                     
+
                     <h:panelGroup>
                         <div class="control-group">
                             <div class="controls">
-                        <h3 style="color: #005580">Selecciona tu ubicación:</h3>
+                                <h3 style="color: #005580">Selecciona tu ubicación:</h3>
 
-                    <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idPoint}"
-                                     requiredMessage="Selecciona un Punto:"
-                                     valueChangeListener="#{sendVehicleBean.updateVehicle}" onchange="submit()">
-                        <f:selectItem itemLabel=""/>
-                        <f:selectItems value="#{pointBean.points}"/>
-                        <f:validateLongRange minimum="1" />
-                    </h:selectOneMenu>
+                                <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idPoint}"
+                                                 requiredMessage="Selecciona un Punto:"
+                                                 valueChangeListener="#{sendVehicleBean.updateVehicle}" onchange="submit()">
+                                    <f:selectItem itemLabel=""/>
+                                    <f:selectItems value="#{pointBean.points}"/>
+                                    <f:validateLongRange minimum="1" />
+                                </h:selectOneMenu>
 
-                        
-                        <h:selectOneMenu id="vehicle" required="true" value="#{sendVehicleBean.idVehicle}"
-                                     requiredMessage="Selecciona un Vehiculo:" >
-                        <f:selectItem itemLabel=""/>
-                        <f:selectItems value="#{sendVehicleBean.vehicles}"/>
-                        <f:validateLongRange minimum="1" />
-                    </h:selectOneMenu>
+
+                                <h:selectOneMenu id="vehicle" required="true" value="#{sendVehicleBean.idVehicle}"
+                                                 requiredMessage="Selecciona un Vehiculo:" >
+                                    <f:selectItem itemLabel=""/>
+                                    <f:selectItems value="#{sendVehicleBean.vehicles}"/>
+                                    <f:validateLongRange minimum="1" />
+                                </h:selectOneMenu>
                             </div>
                         </div>
-                        
-                       <div class="form-actions">
-                                <h:commandButton action="#{sendVehicleBean.sendVehicle()}" value="Despachar" class="btn btn-large btn-primary" />
-                            </div>
+
+                        <div class="form-actions">
+                            <h:commandButton action="#{sendVehicleBean.sendVehicle()}" value="Despachar" class="btn btn-large btn-primary" update="mensaje"/>
+                        </div>
                     </h:panelGroup>
                     <p:separator/>
-                   </h:form>
-           
+                </h:form>
+
             </div>
-         </p:panel>
-        
-      
+        </p:panel>
+
+
     </ui:define>
 
 </ui:composition>

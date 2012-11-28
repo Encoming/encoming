@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
@@ -26,23 +28,25 @@ import javax.faces.model.SelectItem;
 @ManagedBean
 @ViewScoped
 public class sendVehicleBean {
+
     private List<SelectItem> vehicles;
     private Integer idVehicle;
     private Integer idPoint = null;
     private VehicleVo vehicle;
-    
+
     public sendVehicleBean() {
     }
-     public List<SelectItem> getVehicles() {
-         System.out.println("entra en getVehicles  punto : " + idPoint);
-            if(idPoint != null){
+
+    public List<SelectItem> getVehicles() {
+        System.out.println("entra en getVehicles  punto : " + idPoint);
+        if (idPoint != null) {
             vehicles = new ArrayList<SelectItem>();
             List<VehicleVo> vehiclesList = FacadeFactory.getInstance().getVehicleFacade().getListByPoint(idPoint);
             if (vehiclesList != null) {
                 for (VehicleVo vehicleVo : vehiclesList) {
-                    vehicles.add(new SelectItem(vehicleVo.getIdVehicle(), 
-                            vehicleVo.getPlateLetters().toUpperCase() + " " 
-                            +vehicleVo.getPlateNumbers()));
+                    vehicles.add(new SelectItem(vehicleVo.getIdVehicle(),
+                            vehicleVo.getPlateLetters().toUpperCase() + " "
+                            + vehicleVo.getPlateNumbers()));
                 }
             }
         }
@@ -56,23 +60,33 @@ public class sendVehicleBean {
     public void setIdPoint(Integer idPoint) {
         this.idPoint = idPoint;
     }
-     public String dateTime() {
+
+    public String dateTime() {
         Date fecha = new Date();
         SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy  hh:mm:ss  a", Locale.getDefault());
         String fecha2 = formato2.format(fecha);
         return fecha2;
 
     }
-    
-    public void sendVehicle(){
-       List<ShippingVo> list = FacadeFactory.getInstance().getShippingFacade().findToSend(idVehicle);
-       for(ShippingVo ship : list){
-           ShippingFacade shipFacFor = FacadeFactory.getInstance().getShippingFacade();
-           shipFacFor.updateSendedDate(dateTime(), ship.getIdShipping());
-       }
-       FacadeFactory.getInstance().getVehicleFacade().updateStatus("En Ruta", idVehicle);
-       
-            }
+
+    public void sendVehicle() {
+        List<ShippingVo> list = FacadeFactory.getInstance().getShippingFacade().findToSend(idVehicle);
+        for (ShippingVo ship : list) {
+            ShippingFacade shipFacFor = FacadeFactory.getInstance().getShippingFacade();
+            shipFacFor.updateSendedDate(dateTime(), ship.getIdShipping());
+        }
+        try {
+            FacadeFactory.getInstance().getVehicleFacade().updateStatus("En Ruta", idVehicle);
+            addMessage("El vehículo fué enviado exitosamente");
+        } catch (Exception e) {
+            addMessage("Error al enviar el vehiculo y la encomienda");
+        }
+    }
+
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 
     public Integer getIdVehicle() {
         return idVehicle;
@@ -81,19 +95,18 @@ public class sendVehicleBean {
     public void setIdVehicle(Integer idVehicle) {
         this.idVehicle = idVehicle;
     }
-    
+
     public void updateVehicle(ValueChangeEvent event) {
         System.out.println("entro en el del update vehicle");
         idPoint = (Integer) event.getNewValue();
-           vehicles = new ArrayList<SelectItem>();
-            List<VehicleVo> vehiclesList = FacadeFactory.getInstance().getVehicleFacade().getListByPoint(idPoint);
-            if (vehiclesList != null) {
-                for (VehicleVo vehicleVo : vehiclesList) {
-                    vehicles.add(new SelectItem(vehicleVo.getIdVehicle(), 
-                            vehicleVo.getPlateLetters() + " " 
-                            +vehicleVo.getPlateNumbers()));
-                }
+        vehicles = new ArrayList<SelectItem>();
+        List<VehicleVo> vehiclesList = FacadeFactory.getInstance().getVehicleFacade().getListByPoint(idPoint);
+        if (vehiclesList != null) {
+            for (VehicleVo vehicleVo : vehiclesList) {
+                vehicles.add(new SelectItem(vehicleVo.getIdVehicle(),
+                        vehicleVo.getPlateLetters() + " "
+                        + vehicleVo.getPlateNumbers()));
             }
         }
     }
-
+}

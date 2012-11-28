@@ -9,8 +9,10 @@ import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
 import com.encoming.encoming.vo.DriverVo;
 import com.encoming.encoming.vo.PersonVo;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -117,9 +119,19 @@ public class AddDriverEmployeeBean {
         PersonFacade personFac = FacadeFactory.getInstance().getPersonFacade(); 
         DriverFacade driverFac = FacadeFactory.getInstance().getDriverFacade();
         System.out.println("crea las instancias");
+        try {
         personFac.persist(personVo);
         System.out.println("persiste la persona");
         driverFac.persist(driverVo);
         System.out.println("persiste al driver");
+            addMessage("Los datos fueron guardados");
+        } catch (Exception e) {
+            addMessage("¡Los datos no pudieron ser guardados!");
+        }
+    }
+    
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
