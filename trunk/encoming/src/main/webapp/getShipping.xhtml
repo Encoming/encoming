@@ -29,19 +29,20 @@
                         <div class="controls">
                             <h4 style="color: #005580">Matricula del vehiculo</h4>
                             <h:inputText id="plateIt" label="Matricula" required="false" value="#{getShippingBean.plateLetters}" 
-                                         validatorMessage="¡Por favor ingrese una placa numerica correcta!">
-                                <f:validateLongRange minimum="0" maximum="999"/>
+                                         validatorMessage="¡Por favor ingrese una placa alfabetica correcta!">
+                                 <f:validateLength  maximum="3"/>
                             </h:inputText>
                             <h:inputText id="numberIt" label="Matricula" required="false" value="#{getShippingBean.plateNumbers}"
-                                         validatorMessage="¡Por favor ingrese una placa alfabetica correcta!">
-                                <f:validateLength  maximum="3"/>
+                                         validatorMessage="¡Por favor ingrese una placa numerica correcta!">
+                                <f:validateLongRange minimum="0" maximum="999"/>
+                               
                             </h:inputText>
                             <p:watermark for="numberIt" value="Números" />
                             <p:watermark for="plateIt" value="Letras" />                                
                         </div>
                     </div>
                     <div class="form-actions">
-                        <h:commandButton action="#{getShippingBean.operateShipping()}" value="Guardar" class="btn btn-large btn-primary" update="mensajex" />
+                        <h:commandButton action="#{getShippingBean.operateShipping()}" value="Guardar" class="btn btn-large btn-primary" update="menssages" />
                     </div>                    
                 </h:panelGroup>
                 <p:separator/>
