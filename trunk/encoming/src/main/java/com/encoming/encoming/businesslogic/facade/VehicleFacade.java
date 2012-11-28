@@ -74,4 +74,20 @@ public class VehicleFacade extends Facade<VehicleVo> {
             }
         }
         }
+     
+     public void updateStatus(Object status, Object id) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx = em.getTransaction();
+            tx.begin();
+            ((VehicleService) service).updateStatus(status, id, em);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em != null && tx != null) {
+                tx.rollback();
+            }
+        }     
+}
+
 }

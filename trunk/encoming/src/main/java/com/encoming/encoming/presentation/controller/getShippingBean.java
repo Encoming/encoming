@@ -82,9 +82,12 @@ public class getShippingBean implements Serializable{
     
     public void operateShipping(){
         
+      
        System.out.println("entra en operate shipping");
        find();
-        
+       if(vehiculoVo.getStatus().equals("En Ruta")){
+       FacadeFactory.getInstance().getVehicleFacade().updateStatus("Disponible", this);
+       
        ShippingFacade shipFac =  FacadeFactory.getInstance().getShippingFacade();
        List<ShippingVo> ShippingVoList = shipFac.findToLess(idPoint, vehiculoVo.getIdVehicle());
        
@@ -94,6 +97,8 @@ public class getShippingBean implements Serializable{
        }
        FacadeFactory.getInstance().getVehicleFacade().updatePoint(idPoint, vehiculoVo.getIdVehicle());
        }
+    }
+        
 }
        /* 
         filteredShipList.clear();

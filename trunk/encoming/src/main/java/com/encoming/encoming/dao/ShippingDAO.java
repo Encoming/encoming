@@ -90,8 +90,8 @@ public class ShippingDAO implements IDAO<Shipping> {
     
     public List<Shipping> findTosend(Object idVehicle, EntityManager em){
         
-        Query q = em.createQuery("SELECT ship FROM Shipping ship WHERE  "
-                + "ship.vehicle:= idVehicle AND ship.sendedDate"
+        Query q = em.createQuery("SELECT ship FROM Shipping ship WHERE "
+                + "ship.vehicle.idVehicle =:idVehicle AND ship.sendedDate"
                 + " IS NULL").setParameter("idVehicle", idVehicle);
         return (List<Shipping>) q.getResultList();      
         

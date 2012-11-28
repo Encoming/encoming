@@ -88,7 +88,12 @@ public class VehicleDAO implements IDAO<Vehicle> {
             }
     public List<Vehicle> getListByPoint(Object idPoint, EntityManager em){
         Query query = em.createQuery("SELECT veh FROM Vehicle veh WHERE"
-                + " veh.point.idPoint =: idpoint").setParameter("idpoint",idPoint);
+                + " veh.point.idPoint =:idpoint").setParameter("idpoint",idPoint);
         return (List<Vehicle>)query.getResultList();
     }
+    public void updateStatus(Object status, Object id, EntityManager em){
+    em.createQuery("UPDATE Vehicle veh SET veh.status =:statuss WHERE veh.idVehicle =:idveh")
+            .setParameter("idveh", id).setParameter("statuss", status)
+            .executeUpdate();
+            }
     }

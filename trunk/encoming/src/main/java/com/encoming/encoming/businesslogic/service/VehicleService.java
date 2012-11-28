@@ -127,4 +127,8 @@ public class VehicleService implements IService<VehicleVo> {
             }
             return voList;
         }
+        
+        public void updateStatus(Object status, Object id, EntityManager em) {      
+        DAOFactory.getInstance().getVehicleDAO().updateStatus(status, id, em);
+                 }
 }
