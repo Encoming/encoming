@@ -9,8 +9,10 @@ import com.encoming.encoming.vo.VehicleVo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
@@ -20,7 +22,7 @@ import javax.faces.model.SelectItem;
  */
 @ManagedBean
 @RequestScoped
-public class VehicleBean implements Serializable{
+public class VehicleBean implements Serializable {
 
     private List<SelectItem> models;
     private ArrayList<String> tipos;
@@ -357,7 +359,17 @@ public class VehicleBean implements Serializable{
         vehicleVo.setStatus(getStatus());
         vehicleVo.setType(getType());
         System.out.println("asigna el vo completo");
-        FacadeFactory.getInstance().getVehicleFacade().persist(vehicleVo);
+        try {
+            FacadeFactory.getInstance().getVehicleFacade().persist(vehicleVo);
+            addMessage("El vehículo se ha guardado");
+        } catch (Exception e) {
+            addMessage("No se pudo guardar el vehículo");
+        }
         System.out.println("puede persistir");
+    }
+    
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }

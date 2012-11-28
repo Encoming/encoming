@@ -13,6 +13,7 @@
 
     <ui:define name="content">
         <p:panel header="Administración de Vehículos">
+            <p:growl id="informacion"/>
 
             <style type="text/css">
                 .ui-growl {
@@ -158,7 +159,7 @@
                 <p:message id="pointMessage" for="point"/>
 
                 <div class="form-actions">
-                    <h:commandButton action="#{vehicleBean.addVehicle(actionEvent)}" value="Guardar"/>
+                    <h:commandButton action="#{vehicleBean.addVehicle(actionEvent)}" value="Guardar" update="informacion"/>
                 </div>
             </h:form>
 
