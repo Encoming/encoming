@@ -48,14 +48,14 @@
 
                     <h:selectOneMenu id="type" required="true" value="#{vehicleBean.type}"
                                      validatorMessage="Selecciona un tipo de Vehículo">
-                        <f:selectItem itemLabel="--Tipo de vehículo--" itemValue="" />
+                        <f:selectItem itemLabel="--Tipo de vehículo--" itemValue="a" />
                         <f:selectItem itemLabel="Camioneta" itemValue="Camioneta" />
-                        <f:selectItem itemLabel="Camión Con Carrocería Furgón" itemValue="Furgón" />
+                        <f:selectItem itemLabel="Camión Con Carrocería Furgón" itemValue="Furgon" />
                         <f:selectItem itemLabel="Portacontenedor" itemValue="Portacontenedor" />
                         <f:selectItem itemLabel="Recolector" itemValue="Recolector" />
                         <f:selectItem itemLabel="Reparto" itemValue="Reparto" />
-                        <f:selectItem itemLabel="Tractocamión" itemValue="Tractocamión" />
-                        <f:validateLength minimum="1" />
+                        <f:selectItem itemLabel="Tractocamión" itemValue="Tractocamion" />
+                        <f:validateLength minimum="2" />
                     </h:selectOneMenu>
                     <h:selectOneMenu id="manufacturer" required="true" value="#{vehicleBean.manufacturer}"
                                      validatorMessage="Selecciona un fabricante">

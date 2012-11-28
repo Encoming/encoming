@@ -70,8 +70,8 @@ public class ShippingDAO implements IDAO<Shipping> {
     
     public List<Shipping> findToLess(Object point, Object idVehicle, EntityManager em){
         
-        Query q = em.createQuery("SELECT ship FROM Shipping ship WHERE ship.route.destinationCity =:city AND"
-                + " ship.vehicle =: idVehicle AND ship.arrivedDate IS NULL").setParameter("city", point).setParameter("idVehicle", idVehicle);
+        Query q = em.createQuery("SELECT ship FROM Shipping ship WHERE ship.route.destinationPoint.idPoint =:city AND"
+                + " ship.vehicle.idVehicle =:idVehicle AND ship.arrivedDate IS NULL").setParameter("city", point).setParameter("idVehicle", idVehicle);
         return (List<Shipping>) q.getResultList();        
     }
    
