@@ -45,19 +45,19 @@
 
                 <h:panelGrid columns="2" styleClass="grid">
 
-                    <h:selectOneMenu id="type" value="#{vehicleBean.type}"
-                                     requiredMessage="Selecciona un tipo de Vehículo">
+                    <h:selectOneMenu id="type" required="true" value="#{vehicleBean.type}"
+                                     validatorMessage="Selecciona un tipo de Vehículo">
                         <f:selectItem itemLabel="--Tipo de vehículo--" itemValue="" />
                         <f:selectItem itemLabel="Camioneta" itemValue="Camioneta" />
-                        <f:selectItem itemLabel="Camión Con Carrocería Furgón" itemValue="Camión Con Carrocería Furgón" />
+                        <f:selectItem itemLabel="Camión Con Carrocería Furgón" itemValue="Furgón" />
                         <f:selectItem itemLabel="Portacontenedor" itemValue="Portacontenedor" />
                         <f:selectItem itemLabel="Recolector" itemValue="Recolector" />
                         <f:selectItem itemLabel="Reparto" itemValue="Reparto" />
                         <f:selectItem itemLabel="Tractocamión" itemValue="Tractocamión" />
-                        <f:validateLongRange minimum="1" />
+                        <f:validateLength minimum="1" />
                     </h:selectOneMenu>
-                    <h:selectOneMenu id="manufacturer" value="#{vehicleBean.manufacturer}"
-                                     requiredMessage="Selecciona un fabricante">
+                    <h:selectOneMenu id="manufacturer" required="true" value="#{vehicleBean.manufacturer}"
+                                     validatorMessage="Selecciona un fabricante">
                         <f:selectItem itemLabel="--Tipo de Fabricante--" itemValue="" />
                         <f:selectItem itemLabel="Mercedes Benz" itemValue="Mercedes Benz" />
                         <f:selectItem itemLabel="Agrale" itemValue="Agrale" />
@@ -88,14 +88,14 @@
                         <f:selectItem itemLabel="Kenworth" itemValue="Kenworth" />
                         <f:selectItem itemLabel="Kia" itemValue="Kia" />
                         <f:selectItem itemLabel="Ssangyong" itemValue="Ssangyong" />
-                        <f:validateLongRange minimum="1" />
+                        <f:validateLength minimum="1" />
                     </h:selectOneMenu>
                     
                     <p:message id="typeMessage" for="type" />
                     <p:message id="manufacturerMessage" for="manufacturer" />
                     
-                    <h:selectOneMenu id="model" value="#{vehicleBean.model}"
-                                     requiredMessage="Selecciona un modelo">
+                    <h:selectOneMenu id="model" required="true" value="#{vehicleBean.model}"
+                                     validatorMessage="Selecciona un modelo">
                         <f:selectItem itemLabel="--Modelo del Vehículo--" itemValue="" />
                         <f:selectItem itemLabel="2000" itemValue="2000" />
                         <f:selectItem itemLabel="2001" itemValue="2001" />
@@ -113,17 +113,23 @@
                         <f:selectItem itemLabel="2013" itemValue="2013" />
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
-
-                    <h:inputText id="capacityIT" label="Capacidad" required="true" 
-                                 requiredMessage="¡La capacidad debe estar entre 10 y 50!" value="#{vehicleBean.capacity} ">
-                        <f:validateDoubleRange minimum="10" maximum="50"/>
-                    </h:inputText>
+                    
+                    <h:selectOneMenu id="capacity" required="true" value="#{vehicleBean.capacity}"
+                                     validatorMessage="Selecciona la capacidad del vehículo">
+                        <f:selectItem itemLabel="--Capacidad del Vehículo--" itemValue="" />
+                        <f:selectItem itemLabel="0,5 Toneladas" itemValue="0,5 Ton" />
+                        <f:selectItem itemLabel="1 Tonelada" itemValue="1 Ton" />
+                        <f:selectItem itemLabel="2 Toneladas" itemValue="2 Ton" />
+                        <f:selectItem itemLabel="3 Toneladas" itemValue="3 Ton" />
+                        <f:selectItem itemLabel="4 Toneladas" itemValue="4 Ton" />
+                        <f:selectItem itemLabel="5 Toneladas" itemValue="5 Ton" />
+                        <f:validateLength minimum="1" />
+                    </h:selectOneMenu>
                     
                     <p:message id="modelMessage" for="model" />
-                    <p:message id="capacityMessage" for="capacityIT"/>
+                    <p:message id="capacityMessage" for="capacity"/>
 
                 </h:panelGrid>
-                <p:watermark for="capacityIT" value="Capacidad" />
 
                 <!--<p:watermark for="driverIT" value="Conductor" />
                 <p:inputText id="driverIT" label="Conductor" required="false" value="#{vehicleBean.idDriver}"></p:inputText>-->
