@@ -22,7 +22,7 @@
                         <button  class="btn btn-success" href="#tab1" data-toggle="tab">Inicio</button>
                         <button  class="btn btn-success" href="#tab2" data-toggle="tab">¿Quiénes Somos?</button>
                         <button  class="btn btn-success" href="#tab3" data-toggle="tab">Nuestras Sucursales</button>
-                        <button  class="btn btn-success" href="#tab4" data-toggle="tab">Nuestros Precios</button>
+                        <button  class="btn btn-success" href="#tab4" data-toggle="tab">ESTADO DE UN ENVÍO</button>
                     </div>
                 </div>
                 <div>
@@ -55,7 +55,7 @@
                                         </f:facet>  
 
                                         <p:column id="nameColumn" 
-                                                  headerText="Ubicacion" sortBy="#{pointVo.name}" 
+                                                  headerText="Ubicación:" sortBy="#{pointVo.name}" 
                                                   filterBy="#{pointVo.name}" filterMatchMode="startsWith">  
                                             <h:outputText value="#{pointVo.name}" />  
                                         </p:column>  
@@ -67,23 +67,23 @@
                         </div>
                         <div class="tab-pane" id="tab4">
 
-                            <p:panel header="Informaci&oacute;n de envios">
+                            <p:panel header="Estado de un Envío">
                                 <style type="text/css">
                                     .ui-growl {
                                         top: 10%
                                     }
                                 </style>
                                 <div class="hero-unit span5 offset1">
-                                    <h2><big>Informaci&oacute;n de Envios:</big></h2>
+                                    <h2><big>Estado de un Envío:</big></h2>
                                     <p:separator/>
                                     <h:form>
                                         <h:panelGroup>
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <h:outputLabel id="welcomeOut" value="Numero de Env&iacute;o : "/>
-                                                    <p:inputText id="welcome" label="Numero de envio"
+                                                    <h:outputLabel id="welcomeOut" value="Código del Envío: "/>
+                                                    <p:inputText id="welcome" label="Código del Envío"
                                                                  required="true" value="#{getShippingInfoBean.idShipping}"></p:inputText>
-                                                    <p:watermark for="welcome" value="N&uacute;mero de envio" />
+                                                    <p:watermark for="welcome" value="Código del Envío" />
 
                                                 </div>
                                             </div>
