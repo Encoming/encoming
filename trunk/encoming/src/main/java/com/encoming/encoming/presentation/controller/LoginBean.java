@@ -69,10 +69,13 @@ public class LoginBean implements Serializable{
             user.setPersonidPerson(login.getPersonidPerson());
             user.setLoggedIn(true);
             return "success";
-        } else {
+        } else {        
             FacesContext.getCurrentInstance().addMessage(
-                    "loginForm:idUser", new FacesMessage(
-                    "¡Id de usuario o contraseña inválidos!"));
+                    "loginForm:username", new FacesMessage(
+                    "Nombre de usuario o contraseña inválidos"));
+            FacesContext.getCurrentInstance().addMessage(
+                    "loginForm:password", new FacesMessage(
+                    "Nombre de usuario o contraseña inválidos"));
             return "failure";
         }
     }

@@ -56,14 +56,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand">ENCOMING</a>
+                    
+                    <a class="brand" href="#{request.contextPath}/index.xhtml">ENCOMING</a>
 
                     <div class="nav-collapse">
                         <ui:fragment rendered="#{administratorBean.loggedIn}">
                             <ul class="nav pull-left">
-                                <li><a href="#">Encomiendas</a></li>
-                                <li><a href="#">Sucursales</a></li>
-                                <li><a href="#">Vehículos</a></li>
+                                <li><a href="#{request.contextPath}/createEncoming.xhtml">Encomiendas</a></li>
+                                <li><a href="#{request.contextPath}/adminPoints.xhtml">Sucursales</a></li>
+                                <li><a href="#{request.contextPath}/adminVehicles.xhtml">Vehículos</a></li>
                             </ul> 
                             <ul class="nav pull-right">
                                 <li class="dropdown">
@@ -84,7 +85,7 @@
                             </ul>
 
                             <form class="navbar-search pull-right">
-                                <input type="text" class="search-query" placeholder="Buscar"/>
+                                <input type="text" class="search-query" placeholder="Buscar estado de un envío"/>
                                 <button type="submit" class="btn"><i class="icon-search" /></button>
                             </form>
                         </ui:fragment>          

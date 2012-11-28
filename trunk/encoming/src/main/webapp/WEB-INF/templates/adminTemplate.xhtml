@@ -56,15 +56,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand">ENCOMING</a>
+                    </a>                    
+
+                    <a class="brand" href="#{request.contextPath}/index.xhtml">ENCOMING</a>
 
                     <div class="nav-collapse">
                         <ui:fragment rendered="#{administratorBean.loggedIn}">
                             <ul class="nav pull-left">
-                                <li><a href="/createEncoming.xhtml">Encomiendas</a></li>
-                                <li><a href="/adminPoints.xhtml">Sucursales</a></li>
-                                <li><a href="/adminVehicles.xhtml">Vehículos</a></li>
+                                <li><a href="#{request.contextPath}/createEncoming.xhtml">Encomiendas</a></li>
+                                <li><a href="#{request.contextPath}/adminPoints.xhtml">Sucursales</a></li>
+                                <li><a href="#{request.contextPath}/adminVehicles.xhtml">Vehículos</a></li>
                             </ul> 
                             <ul class="nav pull-right">
                                 <li class="dropdown">
@@ -85,7 +86,7 @@
                             </ul>
 
                             <form class="navbar-search pull-right">
-                                <input type="text" class="search-query" placeholder="Buscar"/>
+                                <input type="text" class="search-query" placeholder="Buscar estado de un envío"/>
                                 <button type="submit" class="btn"><i class="icon-search" /></button>
                             </form>
                         </ui:fragment>          
@@ -102,29 +103,31 @@
                                 <f:view>
                                     <h:form>   
                                         <p:menu> 
-                                            <p:submenu label="ENVÍOS" >  
+                                            <p:submenu label="ENVÍOS" >
                                                 <p:menuitem value="Crear Encomienda" icon="ui-icon-document" action="/createEncoming.xhtml" ajax ="false"/>  
-                                                <p:menuitem value="Recibir Encomienda" icon="ui-icon-document" action="/getShipping" ajax ="false"/>
+                                                <p:menuitem value="Recibir Encomienda" icon="ui-icon-document" action="/getShipping.xhtml" ajax ="false"/>
                                             </p:submenu>
 
                                             <p:submenu label="PERSONAL" >  
-                                                <p:menuitem value="Nuevo Empleado" icon="ui-icon-document" action="/adminEmployee" ajax ="false"/>
-                                                <p:menuitem value="Ver Empleados" icon="ui-icon-arrowthick-1-s" action="/seeEmployes" ajax ="false"/>
+                                                <p:menuitem value="Nuevo Empleado" icon="ui-icon-document" action="/adminEmployee.xhtml" ajax ="false"/>
+                                                <p:menuitem value="Ver Empleados" icon="ui-icon-arrowthick-1-s" action="/seeEmployees.xhtml" ajax ="false"/>
                                             </p:submenu>  
 
                                             <p:submenu label="SUCURSALES">  
                                                 <p:menuitem value="Agregar Sucursal" icon="ui-icon-home" action="/adminPoints.xhtml" ajax ="false"/>  
-                                                <p:menuitem value="Generar Rutas" icon="ui-icon-arrowthick-1-s" action="/adminRoutes.xhtml" ajax ="true"/>
+                                                <p:menuitem value="Generar Rutas" icon="ui-icon-arrowthick-1-s" action="/adminRoutes.html" ajax ="false"/>
                                             </p:submenu>  
 
-                                            <p:submenu label="VEHÍCULOS">  
-                                                <p:menuitem value="Nuevo Vehículo" icon="ui-icon-document" action="/adminVehicles" ajax ="false"/>   
+                                            <p:submenu label="VEHÍCULOS"> 
+                                                <p:menuitem value="Despachar Vehículo" icon="ui-icon-document" action="/sendVehicle.xhtml" ajax ="false"/>
+                                                <p:menuitem value="Nuevo Vehículo" icon="ui-icon-document" action="/adminVehicles.xhtml" ajax ="false"/>
+                                                <p:menuitem value="Ver Vehículos" icon="ui-icon-document" action="/seeVehicles.xhtml" ajax ="false"/>
                                             </p:submenu>
                                         </p:menu>  
                                     </h:form>
                                 </f:view>
                             </div>
-                            <div d="content" class="span9 offset0">                         
+                            <div id="content" class="span9 offset0">                         
                                 <ui:insert name="content">
 
                                 </ui:insert>            
