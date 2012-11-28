@@ -44,32 +44,51 @@
                             "NUESTRAS SUCURSALES"
                         </div>
                         <div class="tab-pane" id="tab4">
-                            <h:form>
-                                <p:dataTable var="Costs">
-                                    <p:column headerText="Ciudad de Origen">
-                                        <h:outputText value=""/>
-                                    </p:column>
 
-                                    <p:column headerText="Ciudad de Destino">
-                                        <h:outputText value="" />
-                                    </p:column>
+                            <p:panel header="Informaci&oacute;n de envios">
+                                <style type="text/css">
+                                    .ui-growl {
+                                        top: 10%
+                                    }
+                                </style>
+                                <div class="hero-unit span5 offset1">
+                                    <h2><big>Informaci&oacute;n de Envios:</big></h2>
+                                    <p:separator/>
+                                    <h:form>
+                                        <h:panelGroup>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <h:outputLabel id="welcomeOut" value="Numero de Env&iacute;o : "/>
+                                                    <p:inputText id="welcome" label="Numero de envio"
+                                                                 required="true" value="#{getShippingInfoBean.idShipping}"></p:inputText>
+                                                    <p:watermark for="welcome" value="N&uacute;mero de envio" />
 
-                                    <p:column headerText="Número de Km.">
-                                        <h:outputText value="" />
-                                    </p:column>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <h:outputText value="#{getShippingInfoBean.status}" />  
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <h:commandButton action="#{getShippingInfoBean.findStatus()}" value="Enviar"/>
+                                            </div>
+                                        </h:panelGroup>
+                                    </h:form>
+                                </div>
+                            </p:panel>
 
-                                    <p:column headerText="Costo del envío">
-                                        <h:outputText value="" />
-                                    </p:column>
-                                </p:dataTable>
-                            </h:form>
+
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="hero-unit offset2 span10" style="background-color: #000">
-            
+
         </div>
         <div class="row">
             <div class="span0">

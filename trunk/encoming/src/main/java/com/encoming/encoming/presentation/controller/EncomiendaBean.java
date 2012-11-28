@@ -1,4 +1,4 @@
-
+package com.encoming.encoming.presentation.controller;
 import com.encoming.encoming.businesslogic.facade.EncomingFacade;
 import com.encoming.encoming.businesslogic.facade.FacadeFactory;
 import com.encoming.encoming.businesslogic.facade.PersonFacade;
@@ -14,6 +14,14 @@ import com.encoming.encoming.vo.PointVo;
 import com.encoming.encoming.vo.ShippingVo;
 import com.encoming.encoming.vo.InvoiceVo;
 import com.encoming.encoming.vo.RouteVo;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +35,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -71,7 +81,60 @@ public class EncomiendaBean {
         return fecha2;
 
     }
+    
+      public void printPdf(ActionEvent evt) {
+       System.out.println("ENTRA EN EL METODO PRINT");
 
+        try {
+            String directorioArchivos;
+            ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            directorioArchivos = ctx.getRealPath("/") + "invoices";
+            String name1 = directorioArchivos + "/document-report.pdf";
+            Document invoice = new Document();
+            PdfWriter.getInstance(invoice, new FileOutputStream(name1));
+
+            invoice.open();
+            invoice.add(new Paragraph("DATOS DEL CLIENTE\n"));
+            invoice.add(new Paragraph("Documento: " + getIdPerson()));
+            invoice.add(new Paragraph("Nombre: " + getName()));
+            invoice.add(new Paragraph("Apellido: " + getLastNames()));
+            invoice.add(new Paragraph("E-mail: " + getMail()));
+            invoice.add(new Paragraph("Teléfono: " + getPhone()));
+            invoice.add(new Paragraph("Dirección: " + getAdress()));
+            invoice.add(new Paragraph("DATOS DE LA ENCOMIENDA\n"));
+            invoice.add(new Paragraph("Ciudad de Origen: " + getOriginCity()));
+            invoice.add(new Paragraph("Ciudad de Destino: " + getDestinationCity()));
+            invoice.add(new Paragraph("Peso: " + getWeigth()));
+            invoice.add(new Paragraph("Tipo: " + getType()));
+            invoice.add(new Paragraph("Volumen: " + getVolume()));
+            invoice.add(new Paragraph("Prioridad: " + getPriority()));
+            invoice.add(new Paragraph("DATOS DEL DESTINATARIO\n"));
+            invoice.add(new Paragraph("Documento: " + getIdReceiver()));
+            invoice.add(new Paragraph("Nombre: " + getNameReceiver()));
+            invoice.add(new Paragraph("Apellido: " + getLastNamesReceiver()));
+            invoice.add(new Paragraph("E-mail: " + getMailReceiver()));
+            invoice.add(new Paragraph("Teléfono: " + getPhoneReceiver()));
+            invoice.add(new Paragraph("Dirección: " + getAdressReceiver()));
+            invoice.close();
+
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+            response.setContentType("application/pdf");
+            response.setHeader("Content-disposition",
+                    "inline=filename=" + name1);
+            try {
+                response.getOutputStream().write(getBytesFromFile(new File(name1)));
+                response.getOutputStream().flush();
+                response.getOutputStream().close();
+                context.responseComplete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+      
     public void addPerson(ActionEvent actionEvent) {
 //        Persona que envia el paquete
         PersonVo personVo = new PersonVo();
@@ -560,18 +623,44 @@ public class EncomiendaBean {
     }
 
     public Double calculateCost(EncomingVo encomingVo, Integer idRoute) {
-        String type = encomingVo.getType();
+        String type1 = encomingVo.getType();
         Float weight = encomingVo.getWeight();
         Double costo = 2000.00;
-        if (type.equals("Caja")) {
+        if (type1.equals("Caja")) {
             costo = weight * 1.12;
         }
-        if (type.equals("Sobre")) {
+        if (type1.equals("Sobre")) {
             costo = weight * 1.07;
         }
-        if (type.equals("Otro")) {
+        if (type1.equals("Otro")) {
             costo = weight * 1.17;
         }
         return costo;
+    }
+    
+    
+
+
+    public static byte[] getBytesFromFile(File file) throws IOException {
+        long length = file.length();
+        if (length > Integer.MAX_VALUE) {
+            throw new IOException("File is too large!");
+        }
+        byte[] bytes = new byte[(int) length];
+        int offset = 0;
+        int numRead = 0;
+        InputStream is = new FileInputStream(file);
+        try {
+            while (offset < bytes.length
+                    && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+                offset += numRead;
+            }
+        } finally {
+            is.close();
+        }
+        if (offset < bytes.length) {
+            throw new IOException("No se pudo leer completamente el archivo " + file.getName());
+        }
+        return bytes;
     }
 }
