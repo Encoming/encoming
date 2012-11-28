@@ -37,7 +37,7 @@ private String status = "";
             status += "Aun no ha sido despachado";
         }
             
-        }catch(NullPointerException e){
+        }catch(Exception e){
             status  = "Numero de Envio Inválido";
         }
         
