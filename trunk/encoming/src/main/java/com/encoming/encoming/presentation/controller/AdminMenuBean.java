@@ -61,4 +61,8 @@ public class AdminMenuBean implements Serializable{
         page = "/seeEmployees.xhtml";
     }
     
+    public void sendVehicle(){
+        page = "/sendVehicle.xhtml";
+    }
+    
 }
