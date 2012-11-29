@@ -26,7 +26,7 @@
                     <h:selectOneMenu id="point" required="true" value="#{sendVehicleBean.idPoint}"
                                      requiredMessage="Selecciona un Punto:"
                                      valueChangeListener="#{sendVehicleBean.updateVehicle}" onchange="submit()">
-                        <f:selectItem itemLabel=""/>
+                        <f:selectItem itemLabel="--Seleccione un punto--" itemValue="" />
                         <f:selectItems value="#{pointBean.points}"/>
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
@@ -34,7 +34,7 @@
                         
                         <h:selectOneMenu id="vehicle" required="true" value="#{sendVehicleBean.idVehicle}"
                                      requiredMessage="Selecciona un Vehiculo:" >
-                        <f:selectItem itemLabel=""/>
+                        <f:selectItem itemLabel="--Selecciona un vehículo--" itemValue=""/>
                         <f:selectItems value="#{sendVehicleBean.vehicles}"/>
                         <f:validateLongRange minimum="1" />
                     </h:selectOneMenu>
