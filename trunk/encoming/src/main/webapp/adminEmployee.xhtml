@@ -26,8 +26,10 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="idPerson" required="true" value="#{addEmployeeBean.idPerson}"
-                                                     requiredMessage="Por favor completa este campo">
-                                            <f:validateLongRange minimum="999999" maximum="99999999999"/>
+                                                     requiredMessage="Por favor verifique el documento"
+                                                     validatorMessage="Por favor verifique el documento">
+                                            <f:validateLength minimum="1"/>
+                                            <f:validateLongRange minimum="999999" maximum="9999999999"/>
                                         </h:inputText>
                                         <p:watermark for="idPerson" value="Id" />
                                         <p:message id="idPersonMessage" for="idPerson" />
@@ -35,8 +37,8 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <h:inputText id="name" required="true" value="#{addEmployeeBean.name}"
-                                                     requiredMessage="Por favor completa este campo">
+                                        <h:inputText id="name" value="#{addEmployeeBean.name}"
+                                                     validatorMessage="Por verifique el nombre">
                                             <f:validateLength minimum="4" />
                                         </h:inputText>
                                         <p:watermark for="name" value="Nombre" />
@@ -45,8 +47,8 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <h:inputText id="lastName" required="true" value="#{addEmployeeBean.lastName}"
-                                                     requiredMessage="Por favor completa este campo">
+                                        <h:inputText id="lastName" value="#{addEmployeeBean.lastName}"
+                                                     validatorMessage="Por favor verifique el apellido">
                                             <f:validateLength minimum="4" />
                                         </h:inputText>
                                         <p:watermark for="lastName" value="Apellido" />
@@ -55,8 +57,8 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <h:inputText id="mail" required="true" value="#{addEmployeeBean.mail}"
-                                                     requiredMessage="Por favor completa este campo">
+                                        <h:inputText id="mail" value="#{addEmployeeBean.mail}"
+                                                     validatorMessage="Por favor verifique el correo electronico">
                                             <f:validator validatorId="emailValidatorBean" />
                                         </h:inputText>
                                         <p:watermark for="mail" value="Email" />
@@ -76,8 +78,8 @@
 
                                 <div class="control-group">
                                     <div class="controls">
-                                        <h:inputText id="adress" required="true" value="#{addEmployeeBean.adress}"
-                                                     requiredMessage="Por favor completa este campo">
+                                        <h:inputText id="adress" value="#{addEmployeeBean.adress}"
+                                                     validatorMessage="Por favor verifique la direccion">
                                             <f:validateLength minimum="8" />
                                         </h:inputText>
                                         <p:watermark for="adress" value="Direcci&oacute;n" />
@@ -88,8 +90,9 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="idAdministrator" required="true" value="#{addEmployeeBean.idAdministrator}"
-                                                     requiredMessage="Por favor completa este campo">
-                                            <f:validateLongRange minimum="0" maximum="99999999"/>
+                                                     requiredMessage="Por favor verifique el id del nuevo administrador"
+                                                     validatorMessage="Por favor verifique el id del nuevo administrador">
+                                            <f:validateLongRange minimum="1" maximum="99999999"/>
                                         </h:inputText>
                                         <p:watermark for="idAdministrator" value="Id de Administrador" />
                                         <p:message id="idAdministratorMessage" for="idAdministrator" />
@@ -97,8 +100,8 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <h:inputText id="username" required="true" value="#{addEmployeeBean.username}"
-                                                     requiredMessage="Por favor completa este campo">
+                                        <h:inputText id="username" value="#{addEmployeeBean.username}"
+                                                     validatorMessage="Por favor verifique el nombre del usuario">
                                             <f:validateLength minimum="4" />
                                         </h:inputText>
                                         <p:watermark for="username" value="Nombre de Usuario" />
@@ -107,7 +110,7 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <h:inputSecret id="password" required="true" requiredMessage="Por favor completa este campo" 
+                                        <h:inputSecret id="password" required="true" requiredMessage="Por favor verifique este campo" 
                                                        value="#{addEmployeeBean.password}"
                                                        feedback="true" promptLabel="Usa una contraseña segura" inline="true" 
                                                        weakLabel="Debil" goodLabel="Buena" strongLabel="Segura" 
@@ -150,7 +153,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="idPersonDriver" required="true" value="#{addDriverEmployeeBean.idPerson}"
-                                                     requiredMessage="Por favor completa este campo">
+                                                     requiredMessage="Por favor verifique el documento"
+                                                     validatorMessage="Por favor verifique el documento">
                                             <f:validateLongRange minimum="9999999" maximum="999999999"/>
                                         </h:inputText>
                                         <p:watermark for="idPersonDriver" value="Id" />
@@ -160,7 +164,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="nameDriver" required="true" value="#{addDriverEmployeeBean.name}"
-                                                     requiredMessage="Por favor completa este campo">
+                                                     requiredMessage="Por favor verifique el nombre del conductor"
+                                                     validatorMessage="Por favor verifique el nombre del conductor">
                                             <f:validateLength minimum="4" />
                                         </h:inputText>
                                         <p:watermark for="nameDriver" value="Nombre" />
@@ -170,7 +175,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="lastNameDriver" required="true" value="#{addDriverEmployeeBean.lastName}"
-                                                     requiredMessage="Por favor completa este campo">
+                                                     requiredMessage="Por favor verifique el apellido del conductor"
+                                                     validatorMessage="Por favor verifique el apellido del conductor">
                                             <f:validateLength minimum="3" />
                                         </h:inputText>
                                         <p:watermark for="lastNameDriver" value="Apellido" />
@@ -179,8 +185,8 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <h:inputText id="mailDriver" required="true" value="#{addDriverEmployeeBean.mail}"
-                                                     requiredMessage="Por favor completa este campo">
+                                        <h:inputText id="mailDriver" value="#{addDriverEmployeeBean.mail}"
+                                                     validatorMessage="Por favor verifique el correo del conductor">
                                             <f:validator validatorId="emailValidatorBean" />
                                         </h:inputText>
                                         <p:watermark for="mailDriver" value="Email" />
@@ -201,7 +207,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="adressDriver" required="true" value="#{addDriverEmployeeBean.adress}"
-                                                     requiredMessage="Por favor completa este campo">
+                                                     requiredMessage="Por favor verifique la direcion del conductor"
+                                                     validatorMessage="Por favor verifique la direcion del conductor">
                                             <f:validateLength minimum="8" />
                                         </h:inputText>
                                         <p:watermark for="adressDriver" value="Direcci&oacute;n" />
@@ -211,7 +218,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="idDriver" required="true" value="#{addDriverEmployeeBean.idDriver}"
-                                                     requiredMessage="Por favor completa este campo">
+                                                     requiredMessage="Por favor verifique el codigo del conductor"
+                                                     validatorMessage="Por favor verifique el codigo del conductor">
                                             <f:validateLongRange minimum="0" maximum="99999999"/>
                                         </h:inputText>
                                         <p:watermark for="idDriver" value="Codigo de Conductor" />
@@ -221,7 +229,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="licenseDriver" required="true" value="#{addDriverEmployeeBean.license}"
-                                                     requiredMessage="Por favor completa este campo">
+                                                     requiredMessage="Por favor verifique la licencia del conductor"
+                                                     validatorMessage="Por favor verifique la licencia del conductor">
                                             <f:validateLength minimum="5"/>
                                         </h:inputText>
                                         <p:watermark for="licenseDriver" value="Licencia" />
@@ -251,7 +260,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <h:inputText id="idPersonToDelete" required="true" value="#{removeEmployeeBean.id}"
-                                                     requiredMessage="Por favor completa este campo">
+                                                     requiredMessage="Por favor completa este campo"
+                                                     validatorMessage="Por favor verifique el documento ingresado">
                                             <f:validateLongRange minimum="9999999" maximum="999999999"/>
                                         </h:inputText>                                            
                                         <p:watermark for="idPersonToDelete" value="Id" />
